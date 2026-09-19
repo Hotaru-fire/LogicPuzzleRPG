@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cuee6q5gpxd0a"]
+
+[node name="Control" type="Control" unique_id=663025662]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1432440334]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 645.0
+
+[node name="Title" type="Label" parent="." unique_id=2089675298]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1130729272]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 138.0
+offset_right = 246.0
+offset_bottom = 158.0
+columns = 4
+
+[node name="card1" type="Button" parent="GridContainer" unique_id=993321646]
+layout_mode = 2
+
+[node name="card2" type="Button" parent="GridContainer" unique_id=2023107711]
+layout_mode = 2
+
+[node name="card3" type="Button" parent="GridContainer" unique_id=1689891119]
+layout_mode = 2
+
+[node name="card4" type="Button" parent="GridContainer" unique_id=2107619156]
+layout_mode = 2
+
+[node name="card5" type="Button" parent="GridContainer" unique_id=1563301451]
+layout_mode = 2
+
+[node name="card6" type="Button" parent="GridContainer" unique_id=2132674535]
+layout_mode = 2
+
+[node name="card7" type="Button" parent="GridContainer" unique_id=405998665]
+layout_mode = 2
+
+[node name="card8" type="Button" parent="GridContainer" unique_id=251494470]
+layout_mode = 2

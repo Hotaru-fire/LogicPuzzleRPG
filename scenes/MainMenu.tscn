@@ -1,0 +1,253 @@
+[gd_scene format=3 uid="uid://bdsivuyavqdvr"]
+
+[ext_resource type="Script" uid="uid://cxyh21ercegvg" path="res://scripts/main_menu.gd" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://crl342bsdd14a" path="res://assets/pixel-npc/Zeth.png" id="2_l72w3"]
+[ext_resource type="Texture2D" uid="uid://dbnsk85c34l5v" path="res://assets/full-npc/Olla(F).png" id="3_826wr"]
+[ext_resource type="Texture2D" uid="uid://clb3la10iga00" path="res://assets/pixel-npc/Mark.png" id="4_ucygd"]
+[ext_resource type="Texture2D" uid="uid://bf2mcwdvxjrva" path="res://assets/full-npc/Chole(F).png" id="5_mipys"]
+
+[node name="MainMenu" type="Control" unique_id=103979169]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqorp")
+
+[node name="Background" type="ColorRect" parent="." unique_id=643655408]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1489114928]
+layout_mode = 0
+offset_left = 373.0
+offset_top = 82.0
+offset_right = 719.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 48
+text = "MEMORY QUEST"
+
+[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=104099738]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 202.0
+offset_right = 811.0
+offset_bottom = 338.0
+
+[node name="PlayButton" type="Button" parent="MenuButtons" unique_id=1162743061]
+layout_mode = 2
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="MenuButtons" unique_id=737137823]
+layout_mode = 2
+text = "Settings"
+
+[node name="LeaderBoardButton" type="Button" parent="MenuButtons" unique_id=361621552]
+layout_mode = 2
+text = "Leader board"
+
+[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=538055842]
+layout_mode = 2
+text = "Quit"
+
+[node name="PlayPanel" type="Panel" parent="." unique_id=616255464]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerNameLabel" type="Label" parent="PlayPanel" unique_id=652482545]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 358.0
+offset_right = 195.0
+offset_bottom = 381.0
+text = "Enter Your Name"
+
+[node name="PlayerNameInput" type="LineEdit" parent="PlayPanel" unique_id=13378727]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 390.0
+offset_right = 221.0
+offset_bottom = 421.0
+placeholder_text = "Enter player name..."
+
+[node name="Choose Your Character" type="Label" parent="PlayPanel" unique_id=2130715182]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CharacterSelect" type="HBoxContainer" parent="PlayPanel" unique_id=1364989309]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 365.0
+offset_top = 362.0
+offset_right = 712.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Knight" type="Button" parent="PlayPanel/CharacterSelect" unique_id=1817366843]
+layout_mode = 2
+text = "Knight"
+
+[node name="Mage" type="Button" parent="PlayPanel/CharacterSelect" unique_id=368069195]
+layout_mode = 2
+text = "Mage"
+
+[node name="Rogue" type="Button" parent="PlayPanel/CharacterSelect" unique_id=498843656]
+layout_mode = 2
+text = "Rogue"
+
+[node name="Archer" type="Button" parent="PlayPanel/CharacterSelect" unique_id=824013213]
+layout_mode = 2
+text = "Archer"
+
+[node name="StartButton" type="Button" parent="PlayPanel" unique_id=598042672]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 455.0
+offset_right = 556.0
+offset_bottom = 486.0
+text = "Start Game
+"
+
+[node name="Avatars" type="HBoxContainer" parent="PlayPanel" unique_id=319324869]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 43.0
+offset_right = 900.0
+offset_bottom = 250.0
+
+[node name="KnightPortrait" type="VBoxContainer" parent="PlayPanel/Avatars" unique_id=359512125]
+layout_mode = 2
+
+[node name="KnightTextureRect" type="TextureRect" parent="PlayPanel/Avatars/KnightPortrait" unique_id=1459517896]
+custom_minimum_size = Vector2(150, 180)
+layout_mode = 2
+texture = ExtResource("2_l72w3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KnightLbl" type="Label" parent="PlayPanel/Avatars/KnightPortrait" unique_id=2139801131]
+layout_mode = 2
+text = "Knight"
+horizontal_alignment = 1
+
+[node name="Mage" type="VBoxContainer" parent="PlayPanel/Avatars" unique_id=2129361842]
+layout_mode = 2
+
+[node name="MageTextureRect" type="TextureRect" parent="PlayPanel/Avatars/Mage" unique_id=145411504]
+custom_minimum_size = Vector2(150, 180)
+layout_mode = 2
+texture = ExtResource("3_826wr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MageLbl" type="Label" parent="PlayPanel/Avatars/Mage" unique_id=662735756]
+layout_mode = 2
+text = "Mage"
+horizontal_alignment = 1
+
+[node name="Rogue" type="VBoxContainer" parent="PlayPanel/Avatars" unique_id=1345618801]
+layout_mode = 2
+
+[node name="RogueTextureRect" type="TextureRect" parent="PlayPanel/Avatars/Rogue" unique_id=1480921374]
+custom_minimum_size = Vector2(150, 180)
+layout_mode = 2
+texture = ExtResource("4_ucygd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RogueLbl" type="Label" parent="PlayPanel/Avatars/Rogue" unique_id=1147508891]
+layout_mode = 2
+text = "Rogue"
+horizontal_alignment = 1
+
+[node name="Archer" type="VBoxContainer" parent="PlayPanel/Avatars" unique_id=1083354737]
+layout_mode = 2
+
+[node name="ArcherTextureRect" type="TextureRect" parent="PlayPanel/Avatars/Archer" unique_id=700631085]
+custom_minimum_size = Vector2(150, 180)
+layout_mode = 2
+texture = ExtResource("5_mipys")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Archerlbl" type="Label" parent="PlayPanel/Avatars/Archer" unique_id=787744788]
+layout_mode = 2
+text = "Archer"
+horizontal_alignment = 1
+
+[node name="Backbtn" type="Button" parent="PlayPanel" unique_id=680635178]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 453.0
+offset_right = 632.0
+offset_bottom = 484.0
+text = "Back
+"
+
+[node name="WarningLbl" type="Label" parent="PlayPanel" unique_id=700335583]
+layout_mode = 0
+offset_left = 366.0
+offset_top = 559.0
+offset_right = 743.0
+offset_bottom = 582.0
+text = "Please enter player name and choose a charater!"
+
+[node name="SettingsPanel" type="Panel" parent="." unique_id=2142508164]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MusicLbl" type="Label" parent="SettingsPanel" unique_id=1888792299]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Music Volume"
+
+[node name="MusicVolume" type="HSlider" parent="SettingsPanel" unique_id=897403935]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 16.0
+value = 50.0
+
+[node name="OverallLbl" type="Label" parent="SettingsPanel" unique_id=1057069350]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="OverallVolume" type="HSlider" parent="SettingsPanel" unique_id=724303321]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 16.0
+value = 50.0
+
+[node name="BackButton" type="Button" parent="SettingsPanel" unique_id=172986553]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PlayPanel/CharacterSelect/Knight" to="." method="_on_character_1_pressed"]
+[connection signal="pressed" from="PlayPanel/CharacterSelect/Mage" to="." method="_on_character_2_pressed"]
+[connection signal="pressed" from="PlayPanel/CharacterSelect/Rogue" to="." method="_on_character_3_pressed"]
+[connection signal="pressed" from="PlayPanel/CharacterSelect/Archer" to="." method="_on_character_4_pressed"]
+[connection signal="pressed" from="PlayPanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PlayPanel/Backbtn" to="." method="_on_button_pressed"]
