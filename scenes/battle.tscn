@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://ckvr7y5f7qqpa"]
+
+[ext_resource type="Texture2D" uid="uid://bip345ax75anr" path="res://icon.svg" id="1_ip7xm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnaqn"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f3m5i"]
+
+[node name="battle" type="Control" unique_id=1440125070]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="ColorRect" parent="." unique_id=20220021]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="EnemyArea" type="Control" parent="." unique_id=47436930]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemySprite" type="TextureRect" parent="EnemyArea" unique_id=1928062958]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 12.0
+offset_right = 471.0
+offset_bottom = 108.0
+texture = ExtResource("1_ip7xm")
+expand_mode = 1
+
+[node name="EnemyName" type="Label" parent="EnemyArea" unique_id=154757467]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 116.0
+offset_right = 448.0
+offset_bottom = 139.0
+text = "Nick"
+label_settings = SubResource("LabelSettings_tnaqn")
+
+[node name="healthbar" type="ProgressBar" parent="EnemyArea" unique_id=652161633]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 132.0
+offset_right = 465.0
+offset_bottom = 159.0
+
+[node name="PlayerArea" type="Control" parent="." unique_id=1294306951]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerSprite" type="TextureRect" parent="PlayerArea" unique_id=1038030970]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 28.816002
+anchor_bottom = 16.172
+offset_left = 685.0
+offset_top = 323.0
+offset_right = -427.64014
+offset_bottom = -283.88
+texture = SubResource("ViewportTexture_f3m5i")
+
+[node name="PlayerName" type="Label" parent="PlayerArea" unique_id=1852430449]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 370.0
+offset_right = 729.0
+offset_bottom = 393.0
+text = "Player"
+
+[node name="PlayerHpbar" type="ProgressBar" parent="PlayerArea" unique_id=1998720519]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 393.0
+offset_right = 725.0
+offset_bottom = 432.0
+
+[node name="BattleMessage" type="Label" parent="." unique_id=1173384312]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.24100001
+anchor_bottom = 0.42600003
+offset_left = 437.0
+offset_top = 445.0
+offset_right = 338.36798
+offset_bottom = 191.952
+text = "\"Attack na ka nimeroy\""
+
+[node name="Puzzlebtn" type="Button" parent="." unique_id=1342182480]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 471.0
+offset_right = 577.0
+offset_bottom = 502.0
+text = "Solve puzzle"
+flat = true
