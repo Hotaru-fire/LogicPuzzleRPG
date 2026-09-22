@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dt2vrbpm5j8hq"
+path="res://.godot/imported/dungeon_discovery.wav-f6d793e55efd08403dbf7bb622e3df2f.sample"
+
+[deps]
+
+source_file="res://assets/extra assets/sound effects/dungeon_discovery.wav"
+dest_files=["res://.godot/imported/dungeon_discovery.wav-f6d793e55efd08403dbf7bb622e3df2f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

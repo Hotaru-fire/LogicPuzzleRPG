@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://btk4gwjs1k35f"]
+
+[ext_resource type="Script" uid="uid://cn6ty6v08fghs" path="res://scripts/player.gd" id="1_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://jo6gc2ih8n17" path="res://assets/golden_aura.png" id="2_tuyoq"]
+[ext_resource type="SpriteFrames" uid="uid://7do7syl1lw2q" path="res://resources/Knight.tres" id="3_fjrip"]
+[ext_resource type="AudioStream" uid="uid://ctq6lqp2823jp" path="res://assets/extra assets/sound effects/hit_00.wav" id="4_smehm"]
+[ext_resource type="AudioStream" uid="uid://blnm0h4s45gvn" path="res://assets/my game assets/sound effects/hit_player.wav" id="5_ur7pv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4mrxx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnaqn"]
+size = Vector2(80, 50)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4mrxx"]
+radius = 21.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnaqn"]
+radius = 50.0
+
+[node name="player" type="CharacterBody2D" unique_id=1523946503 groups=["player"]]
+script = ExtResource("1_qlg0r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1961081730]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1896801454]
+shape = SubResource("CircleShape2D_4mrxx")
+
+[node name="GoldenAura" type="Sprite2D" parent="." unique_id=359729809]
+visible = false
+texture = ExtResource("2_tuyoq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=855709923]
+visible = false
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(1, 0, 0.38431373, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1449709973]
+zoom = Vector2(3, 3)
+
+[node name="Knight" type="AnimatedSprite2D" parent="." unique_id=905762716]
+position = Vector2(-1.5000001, 1.5)
+scale = Vector2(0.874, 0.936)
+sprite_frames = ExtResource("3_fjrip")
+animation = &"attack_down"
+frame = 6
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=920107369]
+position = Vector2(1, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=830654161]
+shape = SubResource("RectangleShape2D_tnaqn")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1092638844]
+stream = ExtResource("4_smehm")
+
+[node name="PlayerHurtArea" type="Area2D" parent="." unique_id=250695672]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtArea" unique_id=1198014381]
+position = Vector2(-3, 8)
+shape = SubResource("CapsuleShape2D_4mrxx")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=1692430487]
+stream = ExtResource("5_ur7pv")
+
+[node name="Skill1Area" type="Area2D" parent="." unique_id=917960562]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skill1Area" unique_id=1194157332]
+shape = SubResource("CircleShape2D_tnaqn")

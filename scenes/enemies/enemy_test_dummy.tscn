@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cpefs0p1mujsv"]
+
+[ext_resource type="Script" uid="uid://dniliknmeybg5" path="res://scripts/enemy_test_dummy.gd" id="1_7mfyv"]
+[ext_resource type="SpriteFrames" uid="uid://b84837gmiodtn" path="res://resources/Archer.tres" id="2_l0j4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3m5i"]
+size = Vector2(28, 36)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnaqn"]
+radius = 150.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jor0a"]
+size = Vector2(27, 27.5)
+
+[node name="EnemyTestDummy" type="CharacterBody2D" unique_id=1621196981 groups=["enemies"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_7mfyv")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=184240917 groups=["enemies"]]
+sprite_frames = ExtResource("2_l0j4o")
+animation = &"walk_right"
+frame_progress = 0.8887172
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=883507679]
+position = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_f3m5i")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1957866765]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1505757348]
+shape = SubResource("CircleShape2D_tnaqn")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=120618685]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1972337733]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_jor0a")
