@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3qds7pii3bv2"
+path="res://.godot/imported/unlock_door.wav-b4ab7bd09a19c09eea76925fb356e1c3.sample"
+
+[deps]
+
+source_file="res://assets/my game assets/sound effects/unlock_door.wav"
+dest_files=["res://.godot/imported/unlock_door.wav-b4ab7bd09a19c09eea76925fb356e1c3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

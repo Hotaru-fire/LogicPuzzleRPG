@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://crwpedt26jvyc"
+path="res://.godot/imported/bars_open.wav-2176d3ca16e270fa90ea08c8c20bf255.sample"
+
+[deps]
+
+source_file="res://assets/my game assets/sound effects/bars_open.wav"
+dest_files=["res://.godot/imported/bars_open.wav-2176d3ca16e270fa90ea08c8c20bf255.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

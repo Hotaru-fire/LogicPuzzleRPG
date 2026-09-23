@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ci77d2din4htm"
+path="res://.godot/imported/catch.wav-e1c48e86560038efe03b0a626a7248aa.sample"
+
+[deps]
+
+source_file="res://assets/extra assets/sound effects/catch.wav"
+dest_files=["res://.godot/imported/catch.wav-e1c48e86560038efe03b0a626a7248aa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
