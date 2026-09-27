@@ -30,19 +30,13 @@ var base_defense := 10
 @onready var hit_sound = $HitSound
 @onready var hurt_sound = $HurtSound
 
-# ==========================================
 # A KNIGHT'S OATH
-# ==========================================
-
 var honor := 0
 var max_honor := 6
 var honor_cooldown := 0.0
 var honor_max_timer := 0.0
 
-# ==========================================
 # SKILL COOLDOWNS
-# ==========================================
-
 var skill_1_cooldown := 0.0
 var skill_2_cooldown := 0.0
 var skill_3_cooldown := 0.0
@@ -55,19 +49,17 @@ var skill_3_max_cooldown := 30.0
 
 var skill_3_active := false
 var skill_3_duration := 0.0
-# ==========================================
-# SKILL 2
-# ==========================================
 
+# SKILL 2
 var skill_2_active := false
 var skill_2_duration := 0.0
 var skill_2_heal_timer := 0.0
 
-# ==========================================
-# READY
-# ==========================================
 
+# READY
 func _ready():
+
+	print("PLAYER SELECTED CHARACTER: ", PlayerData.selected_character)
 
 	if PlayerData.selected_character == 1:
 		knight.sprite_frames = preload("res://resources/Knight.tres")
@@ -75,8 +67,27 @@ func _ready():
 	elif PlayerData.selected_character == 4:
 		knight.sprite_frames = preload("res://resources/Archer.tres")
 
-	hp = max_hp
-	mana = max_mana
+	print("SpriteFrames currently loaded: ", knight.sprite_frames.resource_path)
+	print("Current animation: ", knight.animation)
+	print("Current frame: ", knight.frame)
+	
+	if PlayerData.has_save_data:
+
+		hp = PlayerData.saved_hp
+		mana = PlayerData.saved_mana
+		global_position = PlayerData.saved_position
+
+		print("SAVE DATA APPLIED")
+		print("HP: ", hp)
+		print("Mana: ", mana)
+		print("Position: ", global_position)
+
+	else:
+
+		hp = max_hp
+		mana = max_mana
+
+	update_attack_area()
 
 	update_attack_area()
 
@@ -440,9 +451,12 @@ func skill_3():
 	var bonus_percent = honor * skill_3_bonus_per_honor
 	var bonus_multiplier = bonus_percent / 100.0
 
-	attack = base_attack * (1.0 + bonus_multiplier)
-	defense = base_defense * (1.0 + bonus_multiplier)
-
+	#attack = base_attack * (1.0 + bonus_multiplier)
+	#defense = base_defense * (1.0 + bonus_multiplier)
+	
+	attack = round(base_attack * (1.0 + bonus_multiplier))
+	defense = round(base_defense * (1.0 + bonus_multiplier))
+	
 	print("Skill 3 used!")
 	print("Honor: ", honor)
 	print("Attack: ", attack)

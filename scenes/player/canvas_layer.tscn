@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://bxvtryatcs7nw"]
+
+[ext_resource type="Script" uid="uid://cv4tlpntwaqg5" path="res://scripts/player_hud.gd" id="1_pstgf"]
+[ext_resource type="Script" uid="uid://dgdibaxuw0m1u" path="res://scripts/stats_panel.gd" id="2_q6doy"]
+[ext_resource type="Script" uid="uid://cfyogfkg5ndcv" path="res://scripts/skill_bar.gd" id="3_6y6km"]
+[ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/pause_menu.gd" id="3_y6yk7"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=2026103625]
+process_mode = 3
+
+[node name="PlayerHUD" type="Control" parent="." unique_id=144883577]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pstgf")
+player_path = NodePath("../../player")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD" unique_id=2005985061]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerHUD/MarginContainer" unique_id=272647407]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1188415104]
+modulate = Color(1, 0.1764706, 0.25490198, 1)
+layout_mode = 2
+text = "HP: 200 / 200"
+
+[node name="HPBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1464122780]
+layout_mode = 2
+max_value = 200.0
+value = 200.0
+
+[node name="ManaLabel" type="Label" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1162617037]
+modulate = Color(0.21568628, 0.25882354, 1, 1)
+layout_mode = 2
+text = "Mana: 100 / 100"
+
+[node name="ManaBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=875106025]
+layout_mode = 2
+value = 100.0
+
+[node name="StatsPanel" type="Panel" parent="." unique_id=707532621]
+visible = false
+custom_minimum_size = Vector2(250, 160)
+custom_maximum_size = Vector2(500, 600)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 373.0
+offset_top = 21.0
+offset_right = -279.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_q6doy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel" unique_id=101596096]
+layout_mode = 0
+offset_left = 19.0
+offset_right = 102.0
+offset_bottom = 293.0
+
+[node name="Title" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2039946484]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=630093777]
+layout_mode = 2
+text = "HP"
+
+[node name="ManaLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2015377860]
+layout_mode = 2
+text = "MANA"
+
+[node name="AttackLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=832559459]
+layout_mode = 2
+text = "ATTACK"
+
+[node name="DefenseLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=585897626]
+layout_mode = 2
+text = "DEFENSE"
+
+[node name="StrengthLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1248612816]
+layout_mode = 2
+text = "STRENGTH"
+
+[node name="SkillsTitle" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2143586578]
+layout_mode = 2
+
+[node name="Skill1Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1605589170]
+layout_mode = 2
+
+[node name="Skill2Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1211506351]
+layout_mode = 2
+
+[node name="Skill3Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=54443139]
+layout_mode = 2
+
+[node name="PassiveLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=233218249]
+layout_mode = 2
+
+[node name="PauseMenu" type="Panel" parent="." unique_id=1074780976]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_right = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_y6yk7")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu" unique_id=2068402848]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -101.0
+offset_right = 175.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=1967223312]
+layout_mode = 2
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=1855455817]
+layout_mode = 2
+text = "Settings"
+
+[node name="SaveQuitButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=779128420]
+layout_mode = 2
+text = "Save & Quit"
+
+[node name="SettingsPanel" type="Panel" parent="." unique_id=1067861833]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SkillBar" type="Panel" parent="." unique_id=3105315]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_6y6km")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkillBar" unique_id=2114328607]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Skill1" type="Button" parent="SkillBar/HBoxContainer" unique_id=724956297]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "R"
+
+[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill1" unique_id=1226119152]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skill2" type="Button" parent="SkillBar/HBoxContainer" unique_id=932846196]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "E"
+
+[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill2" unique_id=125305430]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skill3" type="Button" parent="SkillBar/HBoxContainer" unique_id=1157337910]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "Q"
+
+[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill3" unique_id=1120409378]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PauseMenu/VBoxContainer2/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer2/SaveQuitButton" to="PauseMenu" method="_on_save_quit_button_pressed"]

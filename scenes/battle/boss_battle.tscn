@@ -1,0 +1,271 @@
+[gd_scene format=3 uid="uid://ddpus7v81v41s"]
+
+[ext_resource type="Script" uid="uid://c4hu1vchk478a" path="res://scripts/boss_battle.gd" id="1_cofk1"]
+[ext_resource type="Texture2D" uid="uid://bfhxnlhnso6qh" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_1.png" id="2_rwkxn"]
+[ext_resource type="Texture2D" uid="uid://c80rcccagay7l" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_2.png" id="3_1bdwa"]
+[ext_resource type="Texture2D" uid="uid://6ocyfw0c7da2" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_3.png" id="4_4bx7l"]
+[ext_resource type="Texture2D" uid="uid://bxpjbgl0ucnwl" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_4.png" id="5_q4cpj"]
+[ext_resource type="Texture2D" uid="uid://cdn66w0re0n30" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_5.png" id="6_h4ctp"]
+[ext_resource type="Texture2D" uid="uid://p02apbt3wi7q" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_6.png" id="7_k3u2n"]
+[ext_resource type="Texture2D" uid="uid://cbtc303whvulo" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_7.png" id="8_riv4a"]
+[ext_resource type="Texture2D" uid="uid://juqonx2vt0cf" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_8.png" id="9_i0eq8"]
+[ext_resource type="Texture2D" uid="uid://gn14krbbv11y" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_9.png" id="10_n03hg"]
+[ext_resource type="Texture2D" uid="uid://cp7pwt02fmh2k" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_10.png" id="11_mhg3t"]
+[ext_resource type="Texture2D" uid="uid://dhmweonv1o2tc" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_11.png" id="12_dtvtb"]
+[ext_resource type="Texture2D" uid="uid://ca2gmygopflod" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_12.png" id="13_17bid"]
+[ext_resource type="Texture2D" uid="uid://bubt32q6vcs6u" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_13.png" id="14_4lhr0"]
+[ext_resource type="Texture2D" uid="uid://bw5hq2ktt7bmo" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_14.png" id="15_x88uq"]
+[ext_resource type="Texture2D" uid="uid://cntaycjjk6wbe" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_15.png" id="16_s6emo"]
+[ext_resource type="Texture2D" uid="uid://d2j5ifn4qnex" path="res://assets/my game assets/mino_v1.1_free/animations/atk_1/atk_1_16.png" id="17_7ysqn"]
+[ext_resource type="Texture2D" uid="uid://ur5q5mgeurgc" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_1.png" id="18_u6ho3"]
+[ext_resource type="Texture2D" uid="uid://7j0bp482xals" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_2.png" id="19_ocwch"]
+[ext_resource type="Texture2D" uid="uid://cxbi73blt6ba7" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_3.png" id="20_gl3i5"]
+[ext_resource type="Texture2D" uid="uid://ciuqhstdnl60k" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_4.png" id="21_hame6"]
+[ext_resource type="Texture2D" uid="uid://dqk18l35bepmn" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_5.png" id="22_ykgib"]
+[ext_resource type="Texture2D" uid="uid://crpn05idroy3u" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_6.png" id="23_vqhpv"]
+[ext_resource type="Texture2D" uid="uid://cgh8ekvvvjb4" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_7.png" id="24_qmhyf"]
+[ext_resource type="Texture2D" uid="uid://btp25hv30txi0" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_8.png" id="25_42csi"]
+[ext_resource type="Texture2D" uid="uid://ccm0dow2usjag" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_9.png" id="26_xhkkm"]
+[ext_resource type="Texture2D" uid="uid://duyaaibbmg374" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_10.png" id="27_gmw0j"]
+[ext_resource type="Texture2D" uid="uid://dic8xohmjjg1y" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_11.png" id="28_hawvf"]
+[ext_resource type="Texture2D" uid="uid://c68d21eyacc7t" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_12.png" id="29_w5mp3"]
+[ext_resource type="Texture2D" uid="uid://bvw5a3ae1tph0" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_13.png" id="30_7s2hq"]
+[ext_resource type="Texture2D" uid="uid://hyg8i8u8mel2" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_14.png" id="31_u61nj"]
+[ext_resource type="Texture2D" uid="uid://dk4jtikmq5g2k" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_15.png" id="32_ebpuo"]
+[ext_resource type="Texture2D" uid="uid://cavvqovchiir1" path="res://assets/my game assets/mino_v1.1_free/animations/idle/idle_16.png" id="33_vrtt4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgwk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rwkxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1bdwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4bx7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q4cpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h4ctp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k3u2n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_riv4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i0eq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_n03hg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mhg3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dtvtb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_17bid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4lhr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_x88uq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s6emo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7ysqn")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_u6ho3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ocwch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_gl3i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_hame6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ykgib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_vqhpv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qmhyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_42csi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_xhkkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_gmw0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_hawvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_w5mp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_7s2hq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_u61nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ebpuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_vrtt4")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkwwr"]
+bg_color = Color(0.85882354, 0.24705882, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnaqn"]
+bg_color = Color(0.98039216, 0.26666668, 0, 1)
+
+[node name="BossBattle" type="Node2D" unique_id=1885786285]
+script = ExtResource("1_cofk1")
+
+[node name="Bacgkround" type="Control" parent="." unique_id=70456788]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(105, 105)
+
+[node name="ColorRect" type="ColorRect" parent="Bacgkround" unique_id=64599996]
+layout_mode = 0
+offset_left = -0.028572083
+offset_right = 11.15238
+offset_bottom = 6.180952
+color = Color(0, 0, 0, 1)
+
+[node name="Boss" type="CharacterBody2D" parent="." unique_id=1251106604]
+position = Vector2(12, 28)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Boss" unique_id=147290924]
+position = Vector2(592, 222)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xgwk2")
+animation = &"attack"
+frame = 15
+frame_progress = 1.0
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=215328875]
+
+[node name="BossUI" type="Control" parent="CanvasLayer" unique_id=1773388784]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.0
+offset_right = 47.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="BossHPBar" type="ProgressBar" parent="CanvasLayer/BossUI" unique_id=2136670167]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.5
+offset_top = 42.5
+offset_right = 78.5
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_dkwwr")
+max_value = 500.0
+value = 500.0
+
+[node name="BossNameLabel" type="Label" parent="CanvasLayer/BossUI" unique_id=1202555182]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 105.0
+offset_bottom = 43.0
+text = "MINOTAUR"
+
+[node name="PlayerUI" type="VBoxContainer" parent="CanvasLayer" unique_id=695587697]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1135.0
+offset_top = -160.0
+offset_right = -862.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerHPBar" type="ProgressBar" parent="CanvasLayer/PlayerUI" unique_id=1154104448]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_tnaqn")
+max_value = 200.0
+value = 200.0
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer" unique_id=218934118]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -157.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "PLAYER TURN"
+
+[node name="Actions" type="Control" parent="CanvasLayer" unique_id=2062466195]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/Actions" unique_id=1977223433]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -115.0
+offset_right = 63.0
+offset_bottom = -62.0
+text = "ATTACk"
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=1304847233]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/Actions/AttackButton" to="." method="_on_attack_button_pressed"]

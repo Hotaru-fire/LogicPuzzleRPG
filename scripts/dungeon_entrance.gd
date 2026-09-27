@@ -11,4 +11,4 @@ func _on_body_entered(body):
 
 		print("Player entered dungeon!")
 
-		SceneTransition.change_scene("res://scenes/dungeon_1.tscn")
+		SceneTransition.change_scene("res://scenes/maps/dungeon_1.tscn")
