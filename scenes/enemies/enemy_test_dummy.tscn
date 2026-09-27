@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpefs0p1mujsv"]
 
 [ext_resource type="Script" uid="uid://dniliknmeybg5" path="res://scripts/enemy_test_dummy.gd" id="1_7mfyv"]
-[ext_resource type="SpriteFrames" uid="uid://b84837gmiodtn" path="res://resources/Archer.tres" id="2_l0j4o"]
+[ext_resource type="SpriteFrames" uid="uid://b84837gmiodtn" path="res://resources/Goblin.tres" id="2_l0j4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3m5i"]
 size = Vector2(28, 36)

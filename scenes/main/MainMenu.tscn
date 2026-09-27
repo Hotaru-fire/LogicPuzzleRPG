@@ -40,6 +40,10 @@ offset_top = 202.0
 offset_right = 811.0
 offset_bottom = 338.0
 
+[node name="LoadgameButton" type="Button" parent="MenuButtons" unique_id=515339212]
+layout_mode = 2
+text = "Load Game"
+
 [node name="PlayButton" type="Button" parent="MenuButtons" unique_id=1162743061]
 layout_mode = 2
 text = "Play"
@@ -52,7 +56,7 @@ text = "Settings"
 layout_mode = 2
 text = "Leader board"
 
-[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=538055842]
+[node name="SaveQuitButton" type="Button" parent="MenuButtons" unique_id=538055842]
 layout_mode = 2
 text = "Quit"
 
@@ -242,9 +246,10 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
+[connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]
 [connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuButtons/SaveQuitButton" to="." method="_on_save_quit_button_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Knight" to="." method="_on_character_1_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Mage" to="." method="_on_character_2_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Rogue" to="." method="_on_character_3_pressed"]

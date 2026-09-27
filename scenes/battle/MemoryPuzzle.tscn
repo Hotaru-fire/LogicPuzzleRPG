@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cuee6q5gpxd0a"]
+
+[ext_resource type="Script" uid="uid://b7igse3a6y67o" path="res://scripts/memory_puzzle.gd" id="1_p527o"]
+
+[node name="MemoryPuzzle" type="Control" unique_id=663025662]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p527o")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1432440334]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 8.0
+offset_right = 1185.0
+offset_bottom = 653.0
+color = Color(0, 0, 0, 1)
+
+[node name="PuzzleUI" type="Control" parent="." unique_id=1847548320]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="PuzzleUI" unique_id=1990040414]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 11.0
+offset_right = 643.0
+offset_bottom = 34.0
+text = "MEMORY CHALLENGE"
+
+[node name="InstructionLabel" type="Label" parent="PuzzleUI" unique_id=1671871431]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 88.0
+offset_right = 687.0
+offset_bottom = 111.0
+text = "Memorize the sequence!"
+
+[node name="SequenceDisplay" type="HBoxContainer" parent="PuzzleUI" unique_id=125958122]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 107.0
+offset_right = 596.0
+offset_bottom = 147.0
+scale = Vector2(2, 2)
+
+[node name="SymbolLabels" type="Label" parent="PuzzleUI/SequenceDisplay" unique_id=2009962587]
+layout_mode = 2
+text = "SYMBOLS"
+
+[node name="AnswerArea" type="HBoxContainer" parent="PuzzleUI" unique_id=953031890]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 431.0
+offset_right = 608.0
+offset_bottom = 471.0
+scale = Vector2(2, 2)
+
+[node name="Button1" type="Button" parent="PuzzleUI/AnswerArea" unique_id=108488706]
+layout_mode = 2
+text = "S1"
+
+[node name="Button2" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1207058575]
+layout_mode = 2
+text = "s2"
+
+[node name="Button3" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1014809249]
+layout_mode = 2
+text = "s3"
+
+[node name="Button4" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1131711948]
+layout_mode = 2
+text = "s4"
+
+[node name="Button5" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1635634626]
+layout_mode = 2
+text = "s5"
+
+[node name="TimerBar" type="ProgressBar" parent="PuzzleUI" unique_id=617010598]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 43.0
+offset_right = 885.0
+offset_bottom = 70.0
+
+[node name="TimeLabel" type="Label" parent="PuzzleUI" unique_id=1764818264]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 14.0
+offset_right = 942.0
+offset_bottom = 37.0
+text = "Time: 4.2"
+
+[node name="ResultLabel" type="Label" parent="PuzzleUI" unique_id=2087219779]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 323.0
+offset_right = 649.0
+offset_bottom = 346.0
+text = "CORRECT!"
+
+[node name="PuzzleTimer" type="Timer" parent="." unique_id=29257182]
+wait_time = 0.1

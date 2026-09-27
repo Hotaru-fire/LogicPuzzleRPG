@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var hp := 500
+var hp := 20
 
 @export var speed := 50.0
 @export var damage := 10
