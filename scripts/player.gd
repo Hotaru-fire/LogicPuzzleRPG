@@ -11,16 +11,6 @@ var last_direction := Vector2.DOWN
 var is_attacking := false
 
 # ==========================================
-# FOOTSTEPS
-# ==========================================
-
-@onready var footstep_sound = $FootstepSound
-
-var footstep_timer := 0.0
-@export var footstep_interval := 0.35
-
-
-# ==========================================
 # CHARACTER STATS
 # ==========================================
 
@@ -66,10 +56,7 @@ var skill_2_duration := 0.0
 var skill_2_heal_timer := 0.0
 
 
-# ==========================================
 # READY
-# ==========================================
-
 func _ready():
 
 	print("PLAYER SELECTED CHARACTER: ", PlayerData.selected_character)
@@ -109,7 +96,7 @@ func _ready():
 # MOVEMENT
 # ==========================================
 
-func _physics_process(delta):
+func _physics_process(_delta):
 
 	var direction = Input.get_vector(
 		"move_left",
@@ -121,26 +108,6 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 
-
-	# ==========================================
-	# FOOTSTEPS
-	# ==========================================
-
-	if direction != Vector2.ZERO and not is_attacking:
-
-		footstep_timer -= delta
-
-		if footstep_timer <= 0:
-
-			footstep_sound.play()
-
-			footstep_timer = footstep_interval
-
-	else:
-
-		footstep_timer = 0.0
-
-
 	# CANCEL ATTACK IF PLAYER MOVES
 
 	if is_attacking and direction != Vector2.ZERO:
@@ -150,12 +117,10 @@ func _physics_process(delta):
 		last_direction = direction
 		update_attack_area()
 
-
 	# If still attacking, don't play walking/idle animation
 
 	if is_attacking:
 		return
-
 
 	# Normal movement
 
@@ -177,7 +142,6 @@ func _physics_process(delta):
 				knight.play("walk_down")
 			else:
 				knight.play("walk_up")
-
 
 	# Idle
 
@@ -234,7 +198,6 @@ func take_damage(amount):
 	if hp <= 0:
 		die()
 
-
 func flash_red():
 
 	knight.modulate = Color.RED
@@ -242,8 +205,7 @@ func flash_red():
 	await get_tree().create_timer(0.15).timeout
 
 	knight.modulate = Color.WHITE
-
-
+	
 # ==========================================
 # HEAL
 # ==========================================
@@ -258,8 +220,7 @@ func heal(amount):
 	flash_green()
 	
 	print("Player HP: ", hp, "/", max_hp)
-
-
+	
 func flash_green():
 
 	knight.modulate = Color.GREEN
@@ -267,7 +228,6 @@ func flash_green():
 	await get_tree().create_timer(0.15).timeout
 
 	knight.modulate = Color.WHITE
-
 
 func gain_honor():
 
@@ -282,8 +242,7 @@ func gain_honor():
 	honor_cooldown = 1.0
 
 	print("Honor: ", honor, "/", max_honor)
-
-
+	
 # ==========================================
 # USE MANA
 # ==========================================
@@ -386,21 +345,17 @@ func basic_attack():
 	else:
 		knight.play("attack_up")
 
-
 	# Deal damage
 
 	var enemies = attack_area.get_overlapping_bodies()
 
+
 	for enemy in enemies:
 
 		if enemy.is_in_group("enemies"):
-
 			enemy.take_damage(attack)
-
 			hit_sound.play()
-
 			gain_honor()
-
 
 	# Wait for the animation duration
 
@@ -408,11 +363,9 @@ func basic_attack():
 
 	await get_tree().create_timer(animation_length).timeout
 
-
 	# Stop attacking
 
 	is_attacking = false
-
 
 	# Return to idle animation
 
@@ -497,6 +450,9 @@ func skill_3():
 	
 	var bonus_percent = honor * skill_3_bonus_per_honor
 	var bonus_multiplier = bonus_percent / 100.0
+
+	#attack = base_attack * (1.0 + bonus_multiplier)
+	#defense = base_defense * (1.0 + bonus_multiplier)
 	
 	attack = round(base_attack * (1.0 + bonus_multiplier))
 	defense = round(base_defense * (1.0 + bonus_multiplier))
@@ -526,8 +482,7 @@ func _process(delta):
 
 	if honor_cooldown < 0:
 		honor_cooldown = 0
-
-
+		
 	# Honor maximum duration
 
 	if honor == max_honor:
@@ -540,7 +495,6 @@ func _process(delta):
 			honor_max_timer = 0.0
 
 			print("Honor reset!")
-
 
 	# Passive mana regen
 
@@ -556,7 +510,6 @@ func _process(delta):
 		if mana >= max_mana:
 			mana = max_mana
 
-
 	# Skill cooldowns
 
 	if skill_1_cooldown > 0:
@@ -571,7 +524,6 @@ func _process(delta):
 	skill_1_cooldown = max(skill_1_cooldown, 0)
 	skill_2_cooldown = max(skill_2_cooldown, 0)
 	skill_3_cooldown = max(skill_3_cooldown, 0)
-
 
 	# Skill 2 duration and healing
 
@@ -589,7 +541,6 @@ func _process(delta):
 
 			heal(heal_amount)
 
-
 		if skill_2_duration <= 0:
 
 			skill_2_duration = 0
@@ -597,8 +548,7 @@ func _process(delta):
 			skill_2_heal_timer = 0.0
 
 			print("Skill 2 ended!")
-
-
+			
 	if skill_3_active:
 
 		skill_3_duration -= delta
