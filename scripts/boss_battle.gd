@@ -20,8 +20,14 @@ var player_turn := true
 @onready var boss_ui = $CanvasLayer/BossUI
 @onready var player_ui = $CanvasLayer/PlayerUI
 @onready var actions = $CanvasLayer/Actions
+@onready var dodge_popup = $CanvasLayer/DodgePopup
+@onready var dodge_battle = $CanvasLayer/DodgePopup/DodgeBattle
+
+
 
 func _ready():
+	dodge_battle.player_hit.connect(_on_dodge_player_hit)
+	
 	boss_hp_bar.max_value = boss_max_hp
 	boss_hp_bar.value = boss_hp
 
@@ -31,6 +37,18 @@ func _ready():
 	boss_sprite.play("idle")
 	
 	update_turn_ui()
+
+
+func _on_dodge_player_hit():
+	print("Boss attack hit the player!")
+
+	player_hp -= 10
+	player_hp = max(player_hp, 0)
+
+	player_hp_bar.value = player_hp
+
+	if player_hp <= 0:
+		player_defeated()
 
 
 func update_turn_ui():
@@ -60,33 +78,50 @@ func _on_attack_button_pressed() -> void:
 
 	current_puzzle.puzzle_finished.connect(_on_puzzle_finished)
 
-
 func boss_turn():
-	print("BOSS TURN")
 
-	boss_sprite.play("attack")
+	print("ENEMY TURN")
 
-	await boss_sprite.animation_finished
+	# Start the dodge sequence
+	start_dodge_phase()
 
-	var damage := 10
-	player_hp -= damage
 
-	if player_hp < 0:
-		player_hp = 0
+func start_dodge_phase():
 
-	player_hp_bar.value = player_hp
+	print("Starting Boss dodge phase!")
 
-	print("Boss dealt ", damage, " damage")
-	print("Player HP: ", player_hp)
+	# Disable normal battle controls
+	attack_button.disabled = true
+	actions.visible = false
 
-	if player_hp <= 0:
-		player_defeated()
-		return
+	# Keep the boss and player UI visible
+	boss_ui.visible = true
+	player_ui.visible = true
+	turn_label.visible = true
 
-	boss_sprite.play("idle")
+	turn_label.text = "DODGE!"
+
+	# Show the entire DodgePopup
+	dodge_popup.visible = true
+
+	# Start the dodge game inside the popup
+	dodge_battle.start_boss_dodge()
+
+	# Wait until the dodge sequence finishes
+	await dodge_battle.dodge_finished
+
+	# Hide the entire DodgePopup
+	dodge_popup.visible = false
+
+	# Return to normal battle
+	turn_label.text = "PLAYER TURN"
+
+	actions.visible = true
 
 	player_turn = true
+
 	update_turn_ui()
+
 
 func damage_boss(amount):
 	boss_hp -= amount

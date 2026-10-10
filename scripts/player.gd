@@ -11,6 +11,16 @@ var last_direction := Vector2.DOWN
 var is_attacking := false
 
 # ==========================================
+# FOOTSTEPS
+# ==========================================
+
+@onready var footstep_sound = $FootstepSound
+
+var footstep_timer := 0.0
+@export var footstep_interval := 0.35
+
+
+# ==========================================
 # CHARACTER STATS
 # ==========================================
 
@@ -56,7 +66,10 @@ var skill_2_duration := 0.0
 var skill_2_heal_timer := 0.0
 
 
+# ==========================================
 # READY
+# ==========================================
+
 func _ready():
 
 	print("PLAYER SELECTED CHARACTER: ", PlayerData.selected_character)
@@ -96,7 +109,7 @@ func _ready():
 # MOVEMENT
 # ==========================================
 
-func _physics_process(_delta):
+func _physics_process(delta):
 
 	var direction = Input.get_vector(
 		"move_left",
@@ -108,6 +121,26 @@ func _physics_process(_delta):
 	velocity = direction * speed
 	move_and_slide()
 
+
+	# ==========================================
+	# FOOTSTEPS
+	# ==========================================
+
+	if direction != Vector2.ZERO and not is_attacking:
+
+		footstep_timer -= delta
+
+		if footstep_timer <= 0:
+
+			footstep_sound.play()
+
+			footstep_timer = footstep_interval
+
+	else:
+
+		footstep_timer = 0.0
+
+
 	# CANCEL ATTACK IF PLAYER MOVES
 
 	if is_attacking and direction != Vector2.ZERO:
@@ -117,10 +150,12 @@ func _physics_process(_delta):
 		last_direction = direction
 		update_attack_area()
 
+
 	# If still attacking, don't play walking/idle animation
 
 	if is_attacking:
 		return
+
 
 	# Normal movement
 
@@ -142,6 +177,7 @@ func _physics_process(_delta):
 				knight.play("walk_down")
 			else:
 				knight.play("walk_up")
+
 
 	# Idle
 
@@ -198,6 +234,7 @@ func take_damage(amount):
 	if hp <= 0:
 		die()
 
+
 func flash_red():
 
 	knight.modulate = Color.RED
@@ -205,7 +242,8 @@ func flash_red():
 	await get_tree().create_timer(0.15).timeout
 
 	knight.modulate = Color.WHITE
-	
+
+
 # ==========================================
 # HEAL
 # ==========================================
@@ -220,7 +258,8 @@ func heal(amount):
 	flash_green()
 	
 	print("Player HP: ", hp, "/", max_hp)
-	
+
+
 func flash_green():
 
 	knight.modulate = Color.GREEN
@@ -228,6 +267,7 @@ func flash_green():
 	await get_tree().create_timer(0.15).timeout
 
 	knight.modulate = Color.WHITE
+
 
 func gain_honor():
 
@@ -242,7 +282,8 @@ func gain_honor():
 	honor_cooldown = 1.0
 
 	print("Honor: ", honor, "/", max_honor)
-	
+
+
 # ==========================================
 # USE MANA
 # ==========================================
@@ -308,19 +349,11 @@ func _input(event):
 	if event.is_action_pressed("open_stats"):
 		stats_panel.visible = not stats_panel.visible
 
-	if event.is_action_pressed("skill_1"):
-		skill_1()
-
-	if event.is_action_pressed("skill_2"):
-		skill_2()
-
-	if event.is_action_pressed("skill_3"):
-		skill_3()
-
 
 # ==========================================
 # BASIC ATTACK
 # ==========================================
+
 
 func basic_attack():
 
@@ -345,27 +378,32 @@ func basic_attack():
 	else:
 		knight.play("attack_up")
 
-	# Deal damage
+
+	# Check for enemies inside AttackArea
 
 	var enemies = attack_area.get_overlapping_bodies()
-
 
 	for enemy in enemies:
 
 		if enemy.is_in_group("enemies"):
-			enemy.take_damage(attack)
-			hit_sound.play()
-			gain_honor()
 
-	# Wait for the animation duration
+			print("Enemy hit!")
+			print("Enemy: ", enemy.name)
+
+			# Battle scene will be added later.
+
+
+	# Wait for the attack animation duration
 
 	var animation_length = knight.sprite_frames.get_frame_count(knight.animation) / knight.sprite_frames.get_animation_speed(knight.animation)
 
 	await get_tree().create_timer(animation_length).timeout
 
+
 	# Stop attacking
 
 	is_attacking = false
+
 
 	# Return to idle animation
 
@@ -382,187 +420,28 @@ func basic_attack():
 		knight.play("idle_up")
 
 
-# ==========================================
-# SKILL 1 - R
-# ==========================================
+	# Wait for the animation duration
 
-func skill_1():
+	var attack_animation_length = knight.sprite_frames.get_frame_count(knight.animation) / knight.sprite_frames.get_animation_speed(knight.animation)
 
-	if skill_1_cooldown > 0:
-		print("Skill 1 is on cooldown!")
-		return
-
-	skill_1_cooldown = skill_1_max_cooldown
-
-	print("Skill 1 used!")
-	print("Cooldown: ", skill_1_cooldown)
-
-	var enemies = skill_1_area.get_overlapping_bodies()
-
-	print("Enemies in Skill 1 area: ", enemies.size())
-
-	for enemy in enemies:
-
-		if enemy.is_in_group("enemies"):
-			enemy.take_damage(attack)
+	await get_tree().create_timer(attack_animation_length).timeout
 
 
-# ==========================================
-# SKILL 2 - E
-# ==========================================
+	# Stop attacking
 
-func skill_2():
-
-	if skill_2_cooldown > 0:
-		print("Skill 2 is on cooldown!")
-		return
-
-	skill_2_cooldown = skill_2_max_cooldown
-
-	skill_2_active = true
-	skill_2_duration = 10.0
-	skill_2_heal_timer = 0.0
-
-	print("Skill 2 activated!")
-	print("Healing duration: ", skill_2_duration)
+	is_attacking = false
 
 
-# ==========================================
-# SKILL 3 - Q
-# ==========================================
+	# Return to idle animation
 
-func skill_3():
+	if last_direction.x > 0:
+		knight.play("idle_right")
 
-	if skill_3_cooldown > 0:
-		print("Skill 3 is on cooldown!")
-		return
+	elif last_direction.x < 0:
+		knight.play("idle_left")
 
-	if honor == 0:
-		print("Not enough Honor!")
-		return
+	elif last_direction.y > 0:
+		knight.play("idle_down")
 
-	skill_3_cooldown = skill_3_max_cooldown
-
-	skill_3_active = true
-	skill_3_duration = 10.0
-	
-	golden_aura.visible = true
-	
-	var bonus_percent = honor * skill_3_bonus_per_honor
-	var bonus_multiplier = bonus_percent / 100.0
-
-	#attack = base_attack * (1.0 + bonus_multiplier)
-	#defense = base_defense * (1.0 + bonus_multiplier)
-	
-	attack = round(base_attack * (1.0 + bonus_multiplier))
-	defense = round(base_defense * (1.0 + bonus_multiplier))
-	
-	print("Skill 3 used!")
-	print("Honor: ", honor)
-	print("Attack: ", attack)
-	print("Defense: ", defense)
-
-
-# ==========================================
-# MANA REGEN
-# ==========================================
-
-var mana_timer := 0.0
-
-
-# ==========================================
-# PROCESS
-# ==========================================
-
-func _process(delta):
-
-	# A Knight's Oath cooldown
-
-	honor_cooldown -= delta
-
-	if honor_cooldown < 0:
-		honor_cooldown = 0
-		
-	# Honor maximum duration
-
-	if honor == max_honor:
-
-		honor_max_timer += delta
-
-		if honor_max_timer >= 3.0:
-
-			honor = 0
-			honor_max_timer = 0.0
-
-			print("Honor reset!")
-
-	# Passive mana regen
-
-	mana_timer += delta
-
-	if mana_timer >= 1.0:
-
-		mana_timer = 0.0
-
-		if mana < max_mana:
-			mana += 5
-
-		if mana >= max_mana:
-			mana = max_mana
-
-	# Skill cooldowns
-
-	if skill_1_cooldown > 0:
-		skill_1_cooldown -= delta
-
-	if skill_2_cooldown > 0:
-		skill_2_cooldown -= delta
-
-	if skill_3_cooldown > 0:
-		skill_3_cooldown -= delta
-
-	skill_1_cooldown = max(skill_1_cooldown, 0)
-	skill_2_cooldown = max(skill_2_cooldown, 0)
-	skill_3_cooldown = max(skill_3_cooldown, 0)
-
-	# Skill 2 duration and healing
-
-	if skill_2_active:
-
-		skill_2_duration -= delta
-
-		skill_2_heal_timer += delta
-
-		if skill_2_heal_timer >= 1.0:
-
-			skill_2_heal_timer = 0.0
-
-			var heal_amount = defense * 0.5
-
-			heal(heal_amount)
-
-		if skill_2_duration <= 0:
-
-			skill_2_duration = 0
-			skill_2_active = false
-			skill_2_heal_timer = 0.0
-
-			print("Skill 2 ended!")
-			
-	if skill_3_active:
-
-		skill_3_duration -= delta
-
-		if skill_3_duration <= 0:
-
-			skill_3_duration = 0
-			skill_3_active = false
-
-			attack = base_attack
-			defense = base_defense
-			
-			golden_aura.visible = false
-			
-			print("Skill 3 ended!")
-			print("Attack returned to: ", attack)
-			print("Defense returned to: ", defense)
+	else:
+		knight.play("idle_up")

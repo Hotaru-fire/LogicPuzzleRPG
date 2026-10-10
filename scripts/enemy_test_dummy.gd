@@ -7,6 +7,10 @@ var hp := 20
 @export var attack_cooldown := 1.0
 @export var attack_range := 45.0
 
+# BATTLE SCENE
+@export var battle_scene: PackedScene
+var battle_started := false
+
 @onready var detection_area = $DetectionArea
 @onready var attack_area = $AttackArea
 @onready var animated_sprite = $EnemySprite
@@ -21,8 +25,13 @@ var facing_direction := Vector2.DOWN
 
 
 func _physics_process(delta):
+
 	attack_timer -= delta
 	wander_timer -= delta
+
+	# Don't continue enemy behavior after battle starts
+	if battle_started:
+		return
 
 	# Find the player
 	var detected_bodies = detection_area.get_overlapping_bodies()
@@ -38,6 +47,7 @@ func _physics_process(delta):
 	# =========================
 	# CHASE PLAYER
 	# =========================
+
 	if player != null:
 
 		var direction = player.global_position - global_position
@@ -49,7 +59,7 @@ func _physics_process(delta):
 		# Determine which direction the enemy is facing
 		facing_direction = get_4_direction(direction)
 
-		# Move the attack area in front of the enemy
+		# Move attack area in front of enemy
 		update_attack_area()
 
 		if distance > attack_range:
@@ -72,7 +82,9 @@ func _physics_process(delta):
 	# =========================
 	# WANDER
 	# =========================
+
 	else:
+
 		wander()
 
 
@@ -197,16 +209,58 @@ func attack_player():
 
 		if body.is_in_group("player"):
 
-			body.take_damage(damage)
+			print("Enemy detected player!")
+			print("Player: ", body.name)
 
-			print("Enemy attacked player!")
+			# Start battle
+			start_battle()
 
 			break
 
 
 # =========================
+# START BATTLE
+# =========================
+
+
+func start_battle():
+
+	if battle_started:
+		return
+
+	battle_started = true
+
+	print("Starting battle with ", name)
+
+	velocity = Vector2.ZERO
+
+	# Save this Goblin's information
+	BattleData.enemy = self
+	BattleData.enemy_name = name
+	BattleData.enemy_hp = hp
+	BattleData.enemy_damage = damage
+
+	# Save the player's position
+	if player:
+		BattleData.return_position = player.global_position
+
+	# Save the current dungeon scene
+	BattleData.return_scene = get_tree().current_scene.scene_file_path
+
+	# Open the battle scene
+	if battle_scene:
+
+		get_tree().change_scene_to_packed(battle_scene)
+
+	else:
+
+		print("ERROR: Battle Scene has not been assigned!")
+
+
+# =========================
 # TAKE DAMAGE
 # =========================
+
 func flash_red():
 
 	$EnemySprite.modulate = Color.RED
@@ -214,22 +268,23 @@ func flash_red():
 	await get_tree().create_timer(0.15).timeout
 
 	$EnemySprite.modulate = Color.WHITE
-	
+
+
 func take_damage(amount):
 
-	hp -= amount
+	if battle_started:
+		return
 
-	flash_red()
-	
-	print("Enemy HP: ", hp, "/ 100")
+	print("Enemy was hit by player!")
 
-	if hp <= 0:
-		die()
+	# Start battle instead of dealing normal damage
+	start_battle()
 
 
 # =========================
 # DIE
 # =========================
+
 
 func die():
 

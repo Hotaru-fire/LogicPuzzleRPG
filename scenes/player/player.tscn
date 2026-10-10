@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btk4gwjs1k35f"]
 
 [ext_resource type="Script" uid="uid://cn6ty6v08fghs" path="res://scripts/player.gd" id="1_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://i8kyspehi3xj" path="res://assets/SFx/final-walk.wav" id="2_75vfm"]
 [ext_resource type="Texture2D" uid="uid://jo6gc2ih8n17" path="res://assets/golden_aura.png" id="2_tuyoq"]
 [ext_resource type="SpriteFrames" uid="uid://7do7syl1lw2q" path="res://resources/Knight.tres" id="3_fjrip"]
 [ext_resource type="AudioStream" uid="uid://ctq6lqp2823jp" path="res://assets/extra assets/sound effects/hit_00.wav" id="4_smehm"]
@@ -20,6 +21,9 @@ radius = 50.0
 
 [node name="player" type="CharacterBody2D" unique_id=1523946503 groups=["player"]]
 script = ExtResource("1_qlg0r")
+
+[node name="FootstepSound" type="AudioStreamPlayer2D" parent="." unique_id=6466026]
+stream = ExtResource("2_75vfm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1961081730]
 

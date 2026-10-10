@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://orpmdfhmqxxj" path="res://assets/extra assets/sprites/dungeon_entrance.png" id="2_s5d3o"]
 [ext_resource type="PackedScene" uid="uid://btk4gwjs1k35f" path="res://scenes/player/player.tscn" id="3_dnf87"]
 [ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/Archer.tres" id="4_tlanf"]
-[ext_resource type="PackedScene" uid="uid://cpefs0p1mujsv" path="res://scenes/enemies/enemy_test_dummy.tscn" id="5_x3aai"]
 [ext_resource type="PackedScene" uid="uid://bxvtryatcs7nw" path="res://scenes/player/canvas_layer.tscn" id="6_yicuf"]
 [ext_resource type="Script" uid="uid://fdinw8g5y2vb" path="res://scripts/dungeon_entrance.gd" id="7_trjxu"]
 [ext_resource type="PackedScene" uid="uid://8qq4g0kf6ymw" path="res://scenes/map resource/map_borders.tscn" id="8_aqth2"]
@@ -597,23 +596,19 @@ tile_set = SubResource("TileSet_tgdkp")
 collision_layer = 3
 collision_mask = 3
 
-[node name="Knight" parent="player" index="5" unique_id=905762716]
+[node name="Knight" parent="player" index="6" unique_id=905762716]
 sprite_frames = ExtResource("4_tlanf")
 animation = &"attack_left"
 frame = 0
 frame_progress = 0.0
 
-[node name="AttackArea" parent="player" index="6" unique_id=920107369]
+[node name="AttackArea" parent="player" index="7" unique_id=920107369]
 visible = false
-
-[node name="EnemyTestDummy" parent="." unique_id=1621196981 instance=ExtResource("5_x3aai")]
-position = Vector2(-115, -87)
 
 [node name="RespawnPoint" type="Marker2D" parent="." unique_id=1218003743]
 position = Vector2(0, 1)
 
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("6_yicuf")]
-process_mode = 3
 
 [node name="PauseMenu" parent="CanvasLayer" index="2" unique_id=1074780976]
 custom_maximum_size = Vector2(7, -1)
@@ -660,6 +655,5 @@ position = Vector2(-1029.1951, 59.10634)
 shape = SubResource("RectangleShape2D_f3m5i")
 
 [editable path="player"]
-[editable path="EnemyTestDummy"]
 [editable path="CanvasLayer"]
 [editable path="MapBorders"]
