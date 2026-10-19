@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvvsfdm5nvals"]
 
-[ext_resource type="Script" uid="uid://dgp3ekucttwy4" path="res://scripts/scene_transition.gd" id="1_0wykx"]
+[ext_resource type="Script" uid="uid://dgp3ekucttwy4" path="res://scripts/dungeon/scene_transition.gd" id="1_0wykx"]
 
 [sub_resource type="Animation" id="Animation_ovque"]
 length = 0.001

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bxvtryatcs7nw"]
 
-[ext_resource type="Script" uid="uid://cv4tlpntwaqg5" path="res://scripts/player_hud.gd" id="1_pstgf"]
-[ext_resource type="Script" uid="uid://dgdibaxuw0m1u" path="res://scripts/stats_panel.gd" id="2_q6doy"]
-[ext_resource type="Script" uid="uid://cfyogfkg5ndcv" path="res://scripts/skill_bar.gd" id="3_6y6km"]
-[ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/pause_menu.gd" id="3_y6yk7"]
+[ext_resource type="Script" uid="uid://cv4tlpntwaqg5" path="res://scripts/player/features/player_hud.gd" id="1_pstgf"]
+[ext_resource type="Script" uid="uid://dgdibaxuw0m1u" path="res://scripts/player/features/stats_panel.gd" id="2_q6doy"]
+[ext_resource type="Script" uid="uid://cfyogfkg5ndcv" path="res://scripts/player/features/skill_bar.gd" id="3_6y6km"]
+[ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/ui/pause_menu.gd" id="3_y6yk7"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=2026103625]
 process_mode = 3

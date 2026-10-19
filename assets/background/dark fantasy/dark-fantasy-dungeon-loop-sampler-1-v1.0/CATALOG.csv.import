@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1i7jiir8iwax"
+
+[deps]
+
+files=["res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.slug.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.display.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.environment.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.recommended.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1920x1080.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1920x1080.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1600x900.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1600x900.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1280x720.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1280x720.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.960x540.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.960x540.translation"]
+
+source_file="res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.csv"
+dest_files=["res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.slug.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.display.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.environment.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.recommended.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1920x1080.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1920x1080.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1600x900.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1600x900.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1280x720.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.1280x720.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.png.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.960x540.translation", "res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/CATALOG.960x540.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

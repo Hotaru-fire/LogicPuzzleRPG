@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://860trlwqrbom"]
+
+[ext_resource type="Script" uid="uid://e5wtfnrtmcit" path="res://scripts/enemies/boss/minotaur.gd" id="1_or4ms"]
+[ext_resource type="SpriteFrames" uid="uid://dr2yr0scrgn8y" path="res://resources/mobs/Minotaur.tres" id="2_h7qcg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1diop"]
+height = 47.099987
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lmm3c"]
+
+[node name="Minotaur" type="CharacterBody2D" unique_id=1209421943]
+script = ExtResource("1_or4ms")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=356385715]
+sprite_frames = ExtResource("2_h7qcg")
+animation = &"idle"
+frame_progress = 0.44324064
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=782771412]
+position = Vector2(0, 5)
+scale = Vector2(1.443149, 1.2564025)
+shape = SubResource("CapsuleShape2D_1diop")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=2103448805]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1511054948 groups=["boss"]]
+position = Vector2(0, 5)
+scale = Vector2(3.2546027, 3.095935)
+shape = SubResource("CircleShape2D_lmm3c")

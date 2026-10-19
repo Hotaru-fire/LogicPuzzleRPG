@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://csjpobvk3bkx0"
+
+[deps]
+
+files=["res://assets/Characters/enemies/minotaur/new/credits/credits.notes.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.authors.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.licenses.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.urls.translation"]
+
+source_file="res://assets/Characters/enemies/minotaur/new/credits/credits.csv"
+dest_files=["res://assets/Characters/enemies/minotaur/new/credits/credits.notes.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.authors.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.licenses.translation", "res://assets/Characters/enemies/minotaur/new/credits/credits.urls.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,137 @@
+﻿# Dark Fantasy Dungeon Loops
+# Single-Entity Commercial Asset License v1.0
+
+Effective date: 2026-08-31
+
+This license applies to the Dark Fantasy Dungeon Loops asset package and any official sampler distributed with this license.
+
+By downloading, copying, or using the Licensed Assets, the Licensee accepts this license. If the Licensee does not accept it, the Licensee must not use the Licensed Assets and should seek any available refund under the applicable marketplace or payment-provider rules.
+
+## 1. Parties and definitions
+
+**Licensor** means the publisher identified on the marketplace product page, order record, or download page from which the Licensed Assets were lawfully obtained.
+
+**Licensee** means either:
+
+1. the individual who lawfully obtained the Licensed Assets for their own work; or
+2. one legal entity on whose behalf the Licensed Assets were lawfully obtained.
+
+One acquisition covers one Licensee. It does not cover unrelated companies, clients, affiliates, subsidiaries, parent companies, or separate legal entities unless the Licensor expressly agrees in writing.
+
+**Licensed Assets** means the image files, atlases, metadata, catalog files, and related documentation supplied in the package. Store previews and marketing images are not Licensed Assets unless the package expressly identifies them as reusable files.
+
+**End Product** means a game, application, website, video, stream, broadcast, printed work, presentation, advertisement, or other finished work in which the Licensed Assets are incorporated as part of a larger creative or functional work and are not offered as standalone reusable assets.
+
+**Source Files** means the Licensed Assets, or modified versions of them, in a form that can reasonably be extracted and reused as game assets, stock media, templates, or a competing asset pack.
+
+## 2. License grant
+
+Subject to this license, the Licensor grants the Licensee a non-exclusive, worldwide, perpetual, royalty-free license to:
+
+- use the Licensed Assets in any number of personal or commercial End Products;
+- resize, recolor, crop, combine, animate, retouch, or otherwise modify the Licensed Assets for those End Products;
+- reproduce and distribute the Licensed Assets only as incorporated into an End Product;
+- use incorporated versions of the Licensed Assets in screenshots, trailers, advertisements, store pages, social posts, streams, documentation, and other promotion for an End Product; and
+- allow end users to access and use the End Product in the ordinary way intended by that End Product.
+
+No additional royalty or attribution payment is required after lawful acquisition.
+
+## 3. Team and contractor access
+
+Employees and contractors may access the Source Files only when all of the following are true:
+
+- they are working for the Licensee on the Licensee's End Product;
+- access is limited to what is reasonably necessary for that work;
+- they are bound by confidentiality or work-for-hire terms that prohibit independent reuse or redistribution; and
+- they delete or return every copy of the Source Files when their work ends or access is no longer necessary.
+
+The Licensee remains responsible for compliance by every person given access.
+
+The Licensee may create an End Product for a client. The client may receive and distribute the finished End Product, but the client must obtain a separate license before receiving Source Files or an editable project that exposes the Licensed Assets for future reuse outside the delivered End Product.
+
+## 4. Attribution
+
+Attribution is appreciated but not required. Suggested optional credit:
+
+`Dark Fantasy Dungeon Loops assets by the publisher listed on the product page`
+
+## 5. Restrictions
+
+The Licensee must not, and must not permit another person to:
+
+- sell, sublicense, share, gift, upload, publish, or redistribute the Source Files as standalone assets;
+- include the Source Files in an asset pack, stock-media library, template, starter kit, source-code repository, shared drive, public repository, or competing product;
+- distribute a modification whose primary value is still the reusable asset itself rather than a larger End Product;
+- make the Source Files available through an editor, generator, avatar maker, item builder, modding kit, or similar tool when users can export or recover the assets for unrelated reuse;
+- use the Source Files, or identifiable modified versions, as training data, fine-tuning data, evaluation data, retrieval data, or reference input for a generative-AI or machine-learning system without separate written permission from the Licensor;
+- mint or sell a Licensed Asset as a standalone NFT, token image, blockchain collectible, or substantially equivalent standalone item;
+- register or claim a Licensed Asset as an exclusive trademark, design right, copyright, or other exclusive right;
+- represent that the Licensee created, commissioned, or exclusively owns the underlying asset pack; or
+- use the Licensed Assets in a way that violates applicable law or knowingly infringes another person's rights.
+
+The Licensed Assets may appear inside a genuine game or application that uses blockchain technology, provided they are incorporated into the larger End Product and are not sold, exposed, or distributed as standalone reusable assets or token images.
+
+## 6. Technical protection and ordinary extraction
+
+The Licensee must not intentionally expose the Source Files for reuse. Ordinary inclusion in a compiled game, packaged application, video, or website does not violate this license merely because a technically skilled person might extract files from the End Product.
+
+No particular encryption, digital-rights-management system, or anti-extraction technology is required.
+
+## 7. Ownership, AI-assisted production, and non-exclusivity
+
+The Licensor retains all rights in the Licensed Assets that are not expressly granted by this license.
+
+The Licensed Assets were produced with generative-AI assistance and substantial human selection, editing, organization, packaging, and quality control. The license is non-exclusive. Similar or independently generated content may exist, and the Licensee receives no promise of visual exclusivity.
+
+The Licensor represents that, to the best of the Licensor's knowledge, no unauthorized third-party reference image, protected character, franchise name, logo, or named-artist imitation request was used in producing this package. This statement is not a guarantee that no third party will ever assert a claim.
+
+## 8. Transfer
+
+The Licensee may transfer this license only as part of a bona fide sale, merger, or transfer of substantially all of the business or project that uses the Licensed Assets, and only if:
+
+- the successor accepts this license in writing;
+- the original Licensee retains no Source Files except legally required archival records that are not used; and
+- the transfer does not split one license among multiple independent entities.
+
+Any other transfer requires the Licensor's written permission.
+
+## 9. Updates and support
+
+The Licensor may provide corrections, replacements, or updates, but has no obligation to provide future content, compatibility work, customization, or ongoing support unless separately promised in writing.
+
+An update supplied as part of the same product is governed by this license unless the update includes a different license that the Licensee expressly accepts.
+
+## 10. Refunds
+
+Refunds are handled under the rules of the marketplace or payment provider through which the Licensed Assets were obtained, together with any mandatory rights under applicable law. This license does not reduce non-waivable consumer rights.
+
+## 11. Disclaimer
+
+Except for the express statement in Section 7 and to the maximum extent permitted by applicable law, the Licensed Assets are provided "as is" and "as available." The Licensor does not promise that the Licensed Assets are unique, error-free, suitable for every engine or platform, or fit for a particular project.
+
+The Licensee is responsible for testing file formats, transparency, scaling, compression, filtering, performance, accessibility, and suitability in the Licensee's actual End Product.
+
+## 12. Limitation of liability
+
+To the maximum extent permitted by applicable law, the Licensor is not liable for indirect, incidental, special, consequential, exemplary, or lost-profit damages arising from the Licensed Assets or this license.
+
+To the maximum extent permitted by applicable law, the Licensor's total aggregate liability relating to the Licensed Assets is limited to the amount the Licensee paid for the Licensed Assets. This limitation does not apply where liability cannot legally be excluded or limited, including liability arising from fraud or willful misconduct where applicable law so provides.
+
+## 13. Termination for breach
+
+This license terminates if the Licensee materially breaches it and does not cure the breach within 14 days after receiving written notice from the Licensor.
+
+Deliberate standalone redistribution, resale, sublicensing, or unauthorized AI-training use may be treated as an incurable breach and may result in immediate termination.
+
+After termination, the Licensee must stop new use of the Licensed Assets and delete the Source Files. End Products lawfully distributed before termination may remain available unless they themselves violate this license or applicable law.
+
+## 14. Severability and complete agreement
+
+If a provision is unenforceable, it will be limited or removed only to the minimum extent necessary, and the remaining provisions will continue.
+
+This license, together with the product page's accurate description of the supplied files and any mandatory marketplace terms, is the complete license for the Licensed Assets. A marketplace's transaction, payment, or refund rules do not expand the Licensee's rights to redistribute the Source Files.
+
+## 15. Contact
+
+Questions or requests for a broader license should be sent through the contact method shown on the marketplace product page.
+
