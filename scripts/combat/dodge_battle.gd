@@ -84,7 +84,6 @@ func _physics_process(delta):
 			attack.position += direction * 200 * delta
 
 
-
 func _on_attack_body_entered(body):
 	if body.name == "Player":
 		print("HEART HIT!")

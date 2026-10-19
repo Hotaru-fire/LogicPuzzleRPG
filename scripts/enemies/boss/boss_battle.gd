@@ -23,8 +23,7 @@ var boss_hit_effect_running := false
 @onready var boss_sprite: AnimatedSprite2D = $Boss/AnimatedSprite2D
 @onready var player_sprite: AnimatedSprite2D = $player/AnimatedSprite2D
 
-@onready var player_name_label: Label = \
-	$CanvasLayer/PlayerUI/PlayerNameLabel
+@onready var player_name_label: Label = $CanvasLayer/PlayerUI/PlayerNameLabel
 
 @onready var boss_ui = $CanvasLayer/BossUI
 @onready var player_ui = $CanvasLayer/PlayerUI
@@ -34,7 +33,7 @@ var boss_hit_effect_running := false
 @onready var dodge_battle = $CanvasLayer/DodgePopup/DodgeBattle
 
 
-func _ready():
+func _ready() -> void:
 	dodge_battle.player_hit.connect(_on_dodge_player_hit)
 
 	boss_hp_bar.max_value = boss_max_hp
@@ -45,6 +44,8 @@ func _ready():
 
 	player_name_label.text = Session.username
 
+	load_selected_character()
+
 	boss_sprite.play("idle")
 	player_sprite.play("idle_right")
 
@@ -53,7 +54,7 @@ func _ready():
 	update_turn_ui()
 
 
-func update_turn_ui():
+func update_turn_ui() -> void:
 	if battle_ended:
 		attack_button.disabled = true
 		return
@@ -85,7 +86,7 @@ func _on_attack_button_pressed() -> void:
 	current_puzzle.puzzle_finished.connect(_on_puzzle_finished)
 
 
-func _on_puzzle_finished(success: bool):
+func _on_puzzle_finished(success: bool) -> void:
 	if battle_ended:
 		return
 
@@ -96,15 +97,12 @@ func _on_puzzle_finished(success: bool):
 		current_puzzle = null
 
 	if success:
-		# Wait one second before the player attacks.
 		await get_tree().create_timer(1.0).timeout
 
 		if battle_ended:
 			return
 
 		player_sprite.play("attack_right")
-
-		# Wait for the non-looping attack animation to finish.
 		await player_sprite.animation_finished
 
 		if battle_ended:
@@ -133,7 +131,7 @@ func _on_puzzle_finished(success: bool):
 		boss_turn()
 
 
-func damage_boss(amount: int):
+func damage_boss(amount: int) -> void:
 	if battle_ended:
 		return
 
@@ -149,7 +147,7 @@ func damage_boss(amount: int):
 		boss_hit_effect()
 
 
-func boss_hit_effect():
+func boss_hit_effect() -> void:
 	if boss_hit_effect_running or battle_ended:
 		return
 
@@ -164,7 +162,7 @@ func boss_hit_effect():
 	boss_hit_effect_running = false
 
 
-func boss_turn():
+func boss_turn() -> void:
 	if battle_ended:
 		return
 
@@ -172,7 +170,7 @@ func boss_turn():
 	start_dodge_phase()
 
 
-func start_dodge_phase():
+func start_dodge_phase() -> void:
 	if battle_ended:
 		return
 
@@ -202,21 +200,18 @@ func start_dodge_phase():
 	update_turn_ui()
 
 
-func _on_dodge_player_hit():
+func _on_dodge_player_hit() -> void:
 	if battle_ended:
 		return
 
 	print("Boss attack hit the player!")
 
-	# Delay the boss's attack animation by one second.
 	await get_tree().create_timer(1.0).timeout
 
 	if battle_ended:
 		return
 
 	boss_sprite.play("attack")
-
-	# Apply the damage after the attack animation.
 	await boss_sprite.animation_finished
 
 	if battle_ended:
@@ -235,13 +230,11 @@ func _on_dodge_player_hit():
 		await player_defeated()
 
 
-func player_hit_effect():
+func player_hit_effect() -> void:
 	if player_hit_effect_running:
 		return
 
 	player_hit_effect_running = true
-
-	# Brief red flash when the player takes damage.
 	player_sprite.modulate = Color(1.0, 0.15, 0.15)
 
 	await get_tree().create_timer(0.2).timeout
@@ -252,7 +245,8 @@ func player_hit_effect():
 	player_hit_effect_running = false
 
 
-func boss_defeated():
+
+func boss_defeated() -> void:
 	if battle_ended:
 		return
 
@@ -264,13 +258,38 @@ func boss_defeated():
 	attack_button.disabled = true
 	actions.visible = false
 
-	# Wait one second, then play the boss's hurt animation.
+	# Record the boss completion and final battle HP.
+	PlayerData.saved_boss_completed = true
+	PlayerData.saved_hp = player_hp
+	PlayerData.saved_current_scene = BattleData.return_scene
+	PlayerData.saved_position = BattleData.return_position
+
+	# Count the boss kill and save progress.
+	Session.record_boss_kill(100)
+
+	print("TOTAL BOSSES KILLED: ", Session.bosses_killed)
+	print("TOTAL MOBS DEFEATED: ", Session.mobs_defeated)
+	print("BOSS COMPLETED: ", PlayerData.saved_boss_completed)
+
+	if Session.is_logged_in():
+		print("Saving boss progress to database...")
+		GameAPI.save_progress()
+	else:
+		print("WARNING: Not logged in. Boss progress was not saved.")
+
 	await get_tree().create_timer(1.0).timeout
 
-	boss_sprite.play("hurt")
+	if not is_instance_valid(self):
+		return
+
+	if is_instance_valid(boss_sprite):
+		if boss_sprite.sprite_frames.has_animation("hurt"):
+			boss_sprite.play("hurt")
+		else:
+			boss_sprite.stop()
 
 
-func player_defeated():
+func player_defeated() -> void:
 	if battle_ended:
 		return
 
@@ -282,14 +301,13 @@ func player_defeated():
 	attack_button.disabled = true
 	actions.visible = false
 
-	# Wait one second, then play the player's hurt animation.
 	await get_tree().create_timer(1.0).timeout
 
 	player_sprite.modulate = Color.WHITE
 	player_sprite.play("hurt")
 
 
-func load_selected_character():
+func load_selected_character() -> void:
 	match PlayerData.selected_character:
 		1:
 			player_sprite.sprite_frames = preload("res://resources/player characters/Knight.tres")

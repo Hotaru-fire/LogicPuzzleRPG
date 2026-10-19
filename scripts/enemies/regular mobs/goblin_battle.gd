@@ -308,6 +308,7 @@ func player_hit_effect():
 	player_hit_effect_running = false
 
 
+
 func enemy_defeated():
 	if battle_ended:
 		return
@@ -335,28 +336,44 @@ func enemy_defeated():
 		else:
 			boss_sprite.stop()
 
-	# Count this goblin kill only once.
+	# Count this kill only once.
 	if not BattleData.kill_counted:
 		BattleData.kill_counted = true
+
 		Session.dungeon_enemies_defeated += 1
 		Session.record_mob_kill(10)
 
+		print(
+			"DUNGEON KILLS: ",
+			Session.dungeon_enemies_defeated,
+			"/10"
+		)
+
+		print(
+			"TOTAL MOBS DEFEATED: ",
+			Session.mobs_defeated
+		)
+
+		# Save the updated counters to MariaDB.
+		if Session.is_logged_in():
+			print("Saving dungeon kill count to database...")
+			GameAPI.save_progress()
+		else:
+			print("WARNING: Not logged in; kill count was not saved.")
+
 	BattleData.enemy_defeated = true
 
-	print(
-		"Dungeon kills: ",
-		Session.dungeon_enemies_defeated,
-		"/10"
-	)
-
-	# Allow the defeated animation to display.
 	await get_tree().create_timer(1.0).timeout
 
-	# ALWAYS return to the dungeon.
-	# DungeonManager will spawn the Minotaur at 10 kills.
+	if not is_instance_valid(self):
+		return
+
 	print("Returning to dungeon: ", BattleData.return_scene)
 
-	get_tree().change_scene_to_file(BattleData.return_scene)
+	if not BattleData.return_scene.is_empty():
+		get_tree().change_scene_to_file(BattleData.return_scene)
+	else:
+		push_error("Cannot return to dungeon: BattleData.return_scene is empty!")
 
 
 func player_defeated():
