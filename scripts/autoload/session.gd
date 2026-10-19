@@ -8,17 +8,17 @@ var level: int = 1
 var player_exp: int = 0
 var gold: int = 0
 
-# Global statistics across scenes
 var score: int = 0
 var mobs_defeated: int = 0
 var dungeon_enemies_defeated: int = 0
 var bosses_killed: int = 0
 
+
 func is_logged_in() -> bool:
 	return user_id > 0
 
 
-func clear_session():
+func clear_session() -> void:
 	user_id = -1
 	username = ""
 	selected_character = ""
@@ -30,7 +30,8 @@ func clear_session():
 	bosses_killed = 0
 	dungeon_enemies_defeated = 0
 
-func record_mob_kill(points: int = 10):
+
+func record_mob_kill(points: int = 10) -> void:
 	mobs_defeated += 1
 	score += points
 
@@ -38,7 +39,7 @@ func record_mob_kill(points: int = 10):
 	print("Current score: ", score)
 
 
-func record_boss_kill(points: int = 100):
+func record_boss_kill(points: int = 100) -> void:
 	bosses_killed += 1
 	score += points
 

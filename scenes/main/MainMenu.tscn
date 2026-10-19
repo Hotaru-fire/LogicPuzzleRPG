@@ -219,13 +219,15 @@ offset_left = 366.0
 offset_top = 559.0
 offset_right = 743.0
 offset_bottom = 582.0
-text = "Please enter player name and choose a charater!"
+text = "Please choose your character."
 
 [node name="SettingsPanel" type="Panel" parent="." unique_id=2142508164]
 visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 391.0
+offset_top = 435.0
+offset_right = 431.0
+offset_bottom = 475.0
 
 [node name="MusicLbl" type="Label" parent="SettingsPanel" unique_id=1888792299]
 layout_mode = 0
@@ -255,6 +257,38 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
+
+[node name="ConfirmationPanel" type="PanelContainer" parent="." unique_id=2028277804]
+visible = false
+layout_mode = 0
+offset_left = 370.0
+offset_top = 192.0
+offset_right = 770.0
+offset_bottom = 372.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPanel" unique_id=1574268302]
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="ConfirmationPanel/VBoxContainer" unique_id=975306469]
+custom_minimum_size = Vector2(380, 120)
+layout_mode = 2
+text = "This will delete existing save file"
+autowrap_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ConfirmationPanel/VBoxContainer" unique_id=1980096885]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=2005446772]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 2
+text = "Continue"
+
+[node name="CancelButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=1954112095]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 2
+text = "Cancel"
 
 [connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]

@@ -1,7 +1,7 @@
 
 extends CharacterBody2D
 
-@export var follow_speed: float = 150.0
+@export var follow_speed: float = 200.0
 @export var follow_distance: float = 35.0
 @export var interaction_distance: float = 60.0
 @export var heal_amount: int = 50

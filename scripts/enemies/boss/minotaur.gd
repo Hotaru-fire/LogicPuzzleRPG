@@ -1,10 +1,10 @@
-
 extends CharacterBody2D
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var boss_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var battle_started := false
+
 
 func _ready() -> void:
 	print("Minotaur is ready!")
@@ -14,6 +14,7 @@ func _ready() -> void:
 			boss_sprite.play("idle")
 
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
+
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	print("Something entered Minotaur detection: ", body.name)
@@ -28,7 +29,10 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	battle_started = true
 	print("Player detected! Starting boss battle!")
 
+	BattleData.return_position = body.global_position
+	BattleData.return_scene = get_tree().current_scene.scene_file_path
+
 	get_tree().call_deferred(
-	"change_scene_to_file",
-	"res://scenes/battle/boss_battle.tscn"
-)
+		"change_scene_to_file",
+		"res://scenes/battle/boss_battle.tscn"
+	)

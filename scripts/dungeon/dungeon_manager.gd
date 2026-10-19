@@ -1,4 +1,3 @@
-
 extends Node
 
 @export var enemy_scene: PackedScene
@@ -18,15 +17,12 @@ var minotaur_instance: CharacterBody2D = null
 @onready var boss_spawn_point: Marker2D = $"../BossSpawnPoints/BossSpawnPoint"
 
 
-# ON LOAD
-func _ready():
+func _ready() -> void:
 	print("DungeonManager is ready!")
 
 	enemies_defeated = Session.dungeon_enemies_defeated
-
 	update_enemy_counter()
 
-	# Restore the player's saved dungeon position.
 	await get_tree().process_frame
 
 	var player = get_parent().get_node_or_null("player")
@@ -34,23 +30,29 @@ func _ready():
 	if player != null:
 		print("Saved return position: ", BattleData.return_position)
 
+		# On a database load, player.gd restores PlayerData.saved_position.
+		# Only use BattleData.return_position when a battle supplied it.
 		if BattleData.return_position != Vector2.ZERO:
 			player.global_position = BattleData.return_position
-			print("Restored player position: ", player.global_position)
+
+			print("Restored battle return position: ", player.global_position)
 	else:
 		push_error("DungeonManager could not find the player!")
 
-	# If the player already defeated 10 enemies, spawn the boss.
+	# Do not spawn the Minotaur again after its defeat has been saved.
+	if PlayerData.saved_boss_completed:
+		print("Boss already completed. No Minotaur will be spawned.")
+		return
+
 	if enemies_defeated >= max_enemies_to_defeat:
 		spawn_minotaur()
 		return
 
-	# Otherwise, spawn the regular dungeon enemies.
 	for i in range(max_active_enemies):
 		spawn_enemy()
 
 
-func update_enemy_counter():
+func update_enemy_counter() -> void:
 	if count_enemy_label == null:
 		return
 
@@ -62,9 +64,8 @@ func update_enemy_counter():
 	count_enemy_label.show()
 
 
-# SPAWN MINOTAUR BOSS
-func spawn_minotaur():
-	if minotaur_spawned:
+func spawn_minotaur() -> void:
+	if minotaur_spawned or PlayerData.saved_boss_completed:
 		return
 
 	minotaur_spawned = true
@@ -77,24 +78,22 @@ func spawn_minotaur():
 
 	minotaur_instance = MINOTAUR_SCENE.instantiate()
 
-	# Add the boss to the dungeon scene.
 	get_parent().add_child(minotaur_instance)
-
-	# Place the boss at the marker's global position.
 	minotaur_instance.global_position = boss_spawn_point.global_position
 
 	print("Minotaur spawned at: ", minotaur_instance.global_position)
 
 
-# ENEMY SPAWN
-func spawn_enemy():
+func spawn_enemy() -> void:
 	if enemies_defeated >= max_enemies_to_defeat:
 		return
 
 	if active_enemies >= max_active_enemies:
 		return
 
-	var enemy = enemy_scene.instantiate()
+	if enemy_scene == null:
+		push_error("DungeonManager enemy_scene has not been assigned!")
+		return
 
 	var spawn_points = $"../EnemySpawnPoints".get_children()
 
@@ -102,6 +101,7 @@ func spawn_enemy():
 		push_warning("No enemy spawn points found!")
 		return
 
+	var enemy = enemy_scene.instantiate()
 	var spawn_point = spawn_points.pick_random()
 
 	get_parent().add_child.call_deferred(enemy)
@@ -113,15 +113,16 @@ func spawn_enemy():
 	print("Active enemies: ", active_enemies)
 
 
-# ENEMY DEATH COUNTER
-func enemy_defeated():
+func enemy_defeated() -> void:
 	print("DEBUG: enemy_defeated called")
 	print("DEBUG: Current count = ", enemies_defeated)
 	print("DEBUG: Session count = ", Session.dungeon_enemies_defeated)
 
 	enemies_defeated += 1
 	Session.dungeon_enemies_defeated = enemies_defeated
-
+	print("DUNGEON COUNT: ", enemies_defeated)
+	print("SESSION DUNGEON COUNT: ", Session.dungeon_enemies_defeated)
+	print("LOGGED IN: ", Session.is_logged_in())
 	active_enemies = max(active_enemies - 1, 0)
 
 	Session.record_mob_kill(10)
@@ -133,11 +134,12 @@ func enemy_defeated():
 
 	update_enemy_counter()
 
-	# Spawn the Minotaur instead of immediately starting the boss battle.
+	if Session.is_logged_in():
+		GameAPI.save_progress()
+
 	if enemies_defeated >= max_enemies_to_defeat:
 		print("DEBUG: Boss threshold reached!")
 		spawn_minotaur()
 		return
 
-	# Continue spawning regular enemies until the threshold is reached.
 	spawn_enemy()
