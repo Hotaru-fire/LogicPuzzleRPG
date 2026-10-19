@@ -1,0 +1,5 @@
+index,slug,display_name,size,role,width,height,seam_mae,internal_median_mae,internal_p90_mae,internal_p95_mae,seam_to_median_ratio,seam_to_p90_ratio,cut_x,edge_width,core_width,cut_fraction_actual,output_sha256
+1,torchlit_stone_corridor,Torchlit Stone Corridor,1920x1080,convenience upscale,1920,1080,1.339506,2.368827,3.688642,4.328457,0.565472,0.363143,1011,230,67,0.526563,3fc7e61e20e7247ef34361e081a31b59aa3b7b4dfd06a01643023a190578c3fd
+1,torchlit_stone_corridor,Torchlit Stone Corridor,1600x900,recommended runtime master,1600,900,1.579259,2.721482,4.250444,5.024926,0.580294,0.371552,842,192,56,0.52625,ae1101bf7a46c2daffddda2596e64457292bd8ab4125ed669d86d6779bb8a25e
+1,torchlit_stone_corridor,Torchlit Stone Corridor,1280x720,runtime export,1280,720,1.795833,3.03287,4.709815,5.619537,0.592123,0.381296,674,154,45,0.526563,af7389774a8926bb47cc9ac583b73a9324ad6c05f4d490f2a0637581d7c9a2d2
+1,torchlit_stone_corridor,Torchlit Stone Corridor,960x540,lightweight runtime export,960,540,1.990741,3.370988,5.169753,6.103148,0.590551,0.385075,515,115,34,0.536458,172ed9c2854bd85f471536a65b4e827de0b97a0c2a39a32a03c8541c941aa52b

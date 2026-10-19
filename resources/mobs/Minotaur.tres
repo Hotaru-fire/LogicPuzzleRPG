@@ -1,0 +1,76 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dr2yr0scrgn8y"]
+
+[ext_resource type="Texture2D" uid="uid://des58trsun0v2" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/1.png" id="1_g3b0w"]
+[ext_resource type="Texture2D" uid="uid://j4cfsowhrewo" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/2.png" id="2_uus2i"]
+[ext_resource type="Texture2D" uid="uid://d2m8t8o66kigh" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/3.png" id="3_rjaad"]
+[ext_resource type="Texture2D" uid="uid://d4m4ohf7e80fi" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/4.png" id="4_x70a0"]
+[ext_resource type="Texture2D" uid="uid://bvopja67g2v2w" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/5.png" id="5_xl48k"]
+[ext_resource type="Texture2D" uid="uid://8mp64hymbnht" path="res://assets/Characters/enemies/minotaur/new/custom/slash_oversize/left/6.png" id="6_wjq1u"]
+[ext_resource type="Texture2D" uid="uid://nc55q54qem2h" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/1.png" id="7_m1cw6"]
+[ext_resource type="Texture2D" uid="uid://bklp8yvq4x23g" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/2.png" id="8_adgor"]
+[ext_resource type="Texture2D" uid="uid://hgqib4iohlkb" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/3.png" id="9_rutp3"]
+[ext_resource type="Texture2D" uid="uid://df4c7hw82r02" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/4.png" id="10_nwlft"]
+[ext_resource type="Texture2D" uid="uid://dci4umbac40ej" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/5.png" id="11_g0lhx"]
+[ext_resource type="Texture2D" uid="uid://dsfr5vsl6agbe" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/6.png" id="12_2gof4"]
+[ext_resource type="Texture2D" uid="uid://d1rax2vw5dw1i" path="res://assets/Characters/enemies/minotaur/new/standard/idle/left/1.png" id="13_k02sm"]
+[ext_resource type="Texture2D" uid="uid://qw26xt85ir7" path="res://assets/Characters/enemies/minotaur/new/standard/idle/left/2.png" id="14_mbl76"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g3b0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uus2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rjaad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x70a0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xl48k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wjq1u")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_m1cw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_adgor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rutp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nwlft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_g0lhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2gof4")
+}],
+"loop": 1,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_k02sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mbl76")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

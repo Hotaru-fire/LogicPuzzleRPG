@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://btk4gwjs1k35f"]
 
-[ext_resource type="Script" uid="uid://cn6ty6v08fghs" path="res://scripts/player.gd" id="1_qlg0r"]
+[ext_resource type="Script" uid="uid://cn6ty6v08fghs" path="res://scripts/player/features/player.gd" id="1_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://i8kyspehi3xj" path="res://assets/SFx/final-walk.wav" id="2_75vfm"]
-[ext_resource type="Texture2D" uid="uid://jo6gc2ih8n17" path="res://assets/golden_aura.png" id="2_tuyoq"]
-[ext_resource type="SpriteFrames" uid="uid://7do7syl1lw2q" path="res://resources/Knight.tres" id="3_fjrip"]
+[ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="4_75vfm"]
 [ext_resource type="AudioStream" uid="uid://ctq6lqp2823jp" path="res://assets/extra assets/sound effects/hit_00.wav" id="4_smehm"]
-[ext_resource type="AudioStream" uid="uid://blnm0h4s45gvn" path="res://assets/my game assets/sound effects/hit_player.wav" id="5_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://blnm0h4s45gvn" path="res://assets/main/sound effects/hit_player.wav" id="5_ur7pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mrxx"]
 
@@ -30,10 +29,6 @@ stream = ExtResource("2_75vfm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1896801454]
 shape = SubResource("CircleShape2D_4mrxx")
 
-[node name="GoldenAura" type="Sprite2D" parent="." unique_id=359729809]
-visible = false
-texture = ExtResource("2_tuyoq")
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=855709923]
 visible = false
 offset_left = -16.0
@@ -46,12 +41,10 @@ color = Color(1, 0, 0.38431373, 1)
 zoom = Vector2(3, 3)
 
 [node name="Knight" type="AnimatedSprite2D" parent="." unique_id=905762716]
-position = Vector2(-1.5000001, 1.5)
+position = Vector2(-1.5, 0.5)
 scale = Vector2(0.874, 0.936)
-sprite_frames = ExtResource("3_fjrip")
-animation = &"attack_down"
-frame = 6
-frame_progress = 1.0
+sprite_frames = ExtResource("4_75vfm")
+animation = &"attack_right"
 speed_scale = 2.0
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=920107369]

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dl585sv2hink7"]
+
+[ext_resource type="Script" uid="uid://ceogegmk11sjg" path="res://scripts/NPC/Priestess/priestess.gd" id="1_7oucj"]
+[ext_resource type="SpriteFrames" uid="uid://2ihdqb8kugum" path="res://resources/NPC/Priestess.tres" id="2_rbdsx"]
+
+[node name="Priestess" type="CharacterBody2D" unique_id=1074553048]
+script = ExtResource("1_7oucj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=85378888]
+sprite_frames = ExtResource("2_rbdsx")
+animation = &"walk_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2127734593]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=519021135]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1681722281]

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://xq30w1pjo3kk"]
 
-[ext_resource type="Script" uid="uid://ct2n26v43tb65" path="res://scripts/dodge_battle.gd" id="1_k5oij"]
-[ext_resource type="Script" uid="uid://5licyugdgs7t" path="res://scenes/battle/dodge_player.gd" id="2_f6jn0"]
-[ext_resource type="Texture2D" uid="uid://bhjy4wynhye6j" path="res://assets/Pixel RPG Health Bars - Classic Hearts/Hearts/Heart-Full.png" id="2_tqplk"]
+[ext_resource type="Script" uid="uid://ct2n26v43tb65" path="res://scripts/combat/dodge_battle.gd" id="1_k5oij"]
+[ext_resource type="Script" uid="uid://5licyugdgs7t" path="res://scripts/combat/dodge_player.gd" id="2_f6jn0"]
+[ext_resource type="Texture2D" uid="uid://bhjy4wynhye6j" path="res://assets/ui/Pixel RPG Health Bars - Classic Hearts/Hearts/Heart-Full.png" id="2_tqplk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0d1l"]
 size = Vector2(16, 14)
@@ -30,17 +30,19 @@ script = ExtResource("1_k5oij")
 
 [node name="Background" type="ColorRect" parent="." unique_id=924949525]
 layout_mode = 1
-offset_top = 300.0
-offset_right = 1152.0
+offset_left = 1.0
+offset_top = 402.0
+offset_right = 1155.0
 offset_bottom = 648.0
 color = Color(0.8495601, 1.9974261e-06, 3.85046e-07, 1)
 
 [node name="BattleBox" type="Panel" parent="." unique_id=1143470734]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 330.0
-offset_right = 1000.0
-offset_bottom = 610.0
+offset_left = 298.0
+offset_top = 418.0
+offset_right = 1148.0
+offset_bottom = 698.0
+scale = Vector2(0.7233396, 0.7523981)
 
 [node name="Player" type="CharacterBody2D" parent="BattleBox" unique_id=1853939787]
 position = Vector2(425, 140)

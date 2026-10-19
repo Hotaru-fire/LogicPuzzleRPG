@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dh4wm64xtmyry"]
+
+[ext_resource type="Script" uid="uid://djvw55lq48pou" path="res://scripts/database/login_register.gd" id="1_8x1u8"]
+
+[node name="LoginRegister" type="Control" unique_id=1157974621]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8x1u8")
+
+[node name="Background" type="ColorRect" parent="." unique_id=296581278]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11765846, 0.11765846, 0.11765846, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2096099373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1900031486]
+custom_minimum_size = Vector2(420, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=725032808]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1263918405]
+layout_mode = 2
+text = "WELCOME, ADVENTURER"
+horizontal_alignment = 1
+
+[node name="UsernameInput" type="LineEdit" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=135248137]
+layout_mode = 2
+placeholder_text = "Username"
+
+[node name="PasswordInput" type="LineEdit" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1131545092]
+layout_mode = 2
+placeholder_text = "Password"
+secret = true
+
+[node name="ConfirmPasswordInput" type="LineEdit" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1607752860]
+visible = false
+layout_mode = 2
+placeholder_text = "Confirm Password"
+secret = true
+
+[node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2098940152]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1331021826]
+layout_mode = 2
+text = "Login"
+
+[node name="SwitchModeButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=791127426]
+layout_mode = 2
+text = "Create an account"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1424706617]
