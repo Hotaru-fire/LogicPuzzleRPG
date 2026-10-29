@@ -36,6 +36,7 @@ func save_game():
 
 func _on_save_quit_button_pressed():
 	save_game()
+	Session.stop_gameplay_time()
 
 	if Session.is_logged_in():
 		if GameAPI.save_progress():

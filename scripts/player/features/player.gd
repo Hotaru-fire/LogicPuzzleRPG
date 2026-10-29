@@ -4,7 +4,6 @@ extends CharacterBody2D
 
 @onready var knight = $Knight
 @onready var attack_area = $AttackArea
-@onready var skill_1_area = $Skill1Area
 
 var last_direction := Vector2.DOWN
 var is_attacking := false
@@ -17,10 +16,18 @@ var footstep_timer := 0.0
 @export var footstep_interval := 0.35
 
 # CHARACTER STATS
-@export var max_hp := 200
+var max_hp: int:
+	get:
+		return PlayerData.current_max_hp
+	set(value):
+		PlayerData.set_max_hp(value)
 @export var max_mana := 100
 
-var hp := 200
+var hp: int:
+	get:
+		return PlayerData.current_hp
+	set(value):
+		PlayerData.set_current_hp(value)
 var mana := 100
 
 @export var attack := 30
@@ -29,6 +36,7 @@ var mana := 100
 
 var base_attack := 30
 var base_defense := 10
+var death_processed := false
 
 @onready var hit_sound = $HitSound
 @onready var hurt_sound = $HurtSound
@@ -80,10 +88,9 @@ func _ready() -> void:
 		if PlayerData.saved_max_hp > 0:
 			max_hp = PlayerData.saved_max_hp
 
+		hp = PlayerData.saved_hp
 		attack = PlayerData.saved_attack
 		defense = PlayerData.saved_defense
-
-		hp = clampi(PlayerData.saved_hp, 0, max_hp)
 
 		# Mana is not loaded from the database.
 		mana = max_mana
@@ -96,13 +103,17 @@ func _ready() -> void:
 			print("PLAYER POSITION AFTER RESTORE: ", global_position)
 
 	else:
-		hp = max_hp
+		if PlayerData.current_max_hp < 1:
+			PlayerData.reset_health()
 		mana = max_mana
 
 	update_attack_area()
 
 
 func _physics_process(delta: float) -> void:
+	if death_processed:
+		return
+
 	var direction = Input.get_vector(
 		"move_left",
 		"move_right",
@@ -171,8 +182,11 @@ func update_attack_area() -> void:
 
 
 func take_damage(amount: int) -> void:
+	if death_processed:
+		return
+
 	var actual_damage = max(amount - defense, 1)
-	hp -= actual_damage
+	hp = maxi(hp - actual_damage, 0)
 
 	flash_red()
 	hurt_sound.play()
@@ -181,6 +195,8 @@ func take_damage(amount: int) -> void:
 
 	if hp <= 0:
 		die()
+	else:
+		_persist_health()
 
 
 func flash_red() -> void:
@@ -192,11 +208,20 @@ func flash_red() -> void:
 
 
 func heal(amount: int) -> void:
+	if death_processed:
+		return
+
 	hp += amount
-	hp = min(hp, max_hp)
+	hp = mini(hp, max_hp)
 
 	flash_green()
 	print("Player HP: ", hp, "/", max_hp)
+	_persist_health()
+
+
+func _persist_health() -> void:
+	if Session.is_logged_in():
+		GameAPI.save_progress()
 
 
 func flash_green() -> void:
@@ -231,28 +256,22 @@ func use_mana(amount: int) -> bool:
 
 
 func die() -> void:
-	print("Player died!")
-	hp = 0
-
-	await get_tree().create_timer(2.0).timeout
-	respawn()
-
-
-func respawn() -> void:
-	var respawn_point = get_parent().get_node_or_null("RespawnPoint")
-
-	if respawn_point == null:
-		push_error("RespawnPoint was not found!")
+	if death_processed:
 		return
 
-	global_position = respawn_point.global_position
-	hp = max_hp
-	mana = max_mana
+	death_processed = true
+	print("Player died!")
+	hp = 0
+	velocity = Vector2.ZERO
+	is_attacking = false
+	set_physics_process(false)
+	set_process_input(false)
+	Session.begin_player_death()
 
-	print("Player respawned!")
 
-
-@onready var stats_panel = $"../CanvasLayer/StatsPanel"
+@onready var stats_panel: Control = get_node_or_null(
+	"../CanvasLayer/StatsPanel"
+)
 
 
 func _input(event: InputEvent) -> void:
@@ -260,7 +279,8 @@ func _input(event: InputEvent) -> void:
 		basic_attack()
 
 	if event.is_action_pressed("open_stats"):
-		stats_panel.visible = not stats_panel.visible
+		if is_instance_valid(stats_panel):
+			stats_panel.visible = not stats_panel.visible
 
 
 func basic_attack() -> void:

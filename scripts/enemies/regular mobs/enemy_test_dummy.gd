@@ -4,12 +4,16 @@ var hp := 20
 
 @export var speed := 50.0
 @export var damage := 10
+@export var exp_reward := 25
+@export var gold_reward := 8
+@export var score_reward := 10
 @export var attack_cooldown := 1.0
 @export var attack_range := 45.0
 
 # BATTLE SCENE
 @export var battle_scene: PackedScene
 var battle_started := false
+var death_processed := false
 
 @onready var detection_area = $DetectionArea
 @onready var attack_area = $AttackArea
@@ -231,6 +235,9 @@ func start_battle():
 	battle_started = true
 	BattleData.enemy_defeated = false
 	BattleData.kill_counted = false
+	BattleData.enemy_is_dungeon = (
+		get_tree().get_first_node_in_group("dungeon_manager") != null
+	)
 	
 	print("Starting battle with ", name)
 
@@ -241,6 +248,9 @@ func start_battle():
 	BattleData.enemy_name = name
 	BattleData.enemy_hp = hp
 	BattleData.enemy_damage = damage
+	BattleData.enemy_exp_reward = exp_reward
+	BattleData.enemy_gold_reward = gold_reward
+	BattleData.enemy_score_reward = score_reward
 
 	# Save the player's position
 	if player:
@@ -289,14 +299,28 @@ func take_damage(_amount):
 
 
 func die():
+	if death_processed:
+		return
+
+	death_processed = true
 	print("ENEMY DEFEATED!")
 
 	var dungeon_manager = get_tree().get_first_node_in_group("dungeon_manager")
 
 	if dungeon_manager != null:
 		print("DungeonManager found!")
-		dungeon_manager.enemy_defeated()
+		dungeon_manager.enemy_defeated(
+			exp_reward,
+			gold_reward,
+			score_reward
+		)
 	else:
-		print("ERROR: DungeonManager group not found!")
+		Session.record_normal_mob_kill(
+			exp_reward,
+			gold_reward,
+			score_reward
+		)
+		if Session.is_logged_in():
+			GameAPI.save_progress()
 
 	queue_free()

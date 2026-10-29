@@ -11253,6 +11253,9 @@ position = Vector2(0, 1)
 
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("6_yicuf")]
 
+[node name="StatsPanel" parent="CanvasLayer" index="1" unique_id=707532621]
+visible = false
+
 [node name="PauseMenu" parent="CanvasLayer" index="2" unique_id=1074780976]
 custom_maximum_size = Vector2(7, -1)
 

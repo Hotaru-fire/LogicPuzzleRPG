@@ -272,6 +272,7 @@ func disable_buttons():
 
 func start_countdown():
 	time_left = puzzle_time
+	puzzle_started_msec = Time.get_ticks_msec()
 
 	puzzle_timer.wait_time = puzzle_time
 	timer_bar.max_value = puzzle_time

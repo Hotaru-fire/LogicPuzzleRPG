@@ -6,13 +6,18 @@ const API_URL := "http://127.0.0.1/rpg_api/game_data.php"
 
 var http_request: HTTPRequest
 var request_pending := false
-var queued_payload: Dictionary = {}
+var queued_payloads: Array[Dictionary] = []
 var current_request_action := ""
+var current_playtime_seconds := 0
+var current_playtime_elapsed_msec := 0
+var current_request_checkpoint: Dictionary = {}
+var current_request_user_id := -1
 
 
 func _ready() -> void:
 	http_request = HTTPRequest.new()
 	http_request.process_mode = Node.PROCESS_MODE_ALWAYS
+	http_request.timeout = 10.0
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
 
@@ -42,8 +47,52 @@ func load_save() -> bool:
 	})
 
 
+func get_leaderboard() -> bool:
+	return _send_request({
+		"action": "get_leaderboard"
+	})
+
+
+func save_checkpoint() -> bool:
+	var snapshot := create_progress_snapshot()
+	if snapshot.is_empty():
+		return false
+	snapshot.erase("_unsaved_playtime_msec")
+	if not Session.validate_checkpoint(snapshot):
+		push_error("Checkpoint snapshot is missing valid save data.")
+		return false
+
+	if not Session.is_logged_in():
+		return Session.cache_offline_checkpoint(snapshot)
+
+	return _send_request({
+		"action": "save_checkpoint",
+		"checkpoint": snapshot
+	})
+
+
+func load_checkpoint() -> bool:
+	return _send_request({
+		"action": "load_checkpoint"
+	})
+
+
+func record_death() -> bool:
+	return _send_request({
+		"action": "record_death"
+	})
+
+
 
 func save_progress() -> bool:
+	var payload := create_progress_snapshot()
+	if payload.is_empty():
+		return false
+	payload["action"] = "save_progress"
+	return _send_request(payload)
+
+
+func create_progress_snapshot() -> Dictionary:
 	var character_class := Session.selected_character
 
 	if character_class.is_empty():
@@ -72,10 +121,25 @@ func save_progress() -> bool:
 	if current_scene_path.contains("/battle/"):
 		if BattleData.return_scene.is_empty():
 			push_error("SAVE: Battle scene has no recorded return scene.")
-			return false
+			return {}
 
 		scene_path = BattleData.return_scene
 		save_position = BattleData.return_position
+		PlayerData.saved_max_hp = maxi(
+			int(
+				_get_property(
+					current_scene,
+					"player_max_hp",
+					PlayerData.saved_max_hp
+				)
+			),
+			1
+		)
+		PlayerData.saved_hp = clampi(
+			int(_get_property(current_scene, "player_hp", PlayerData.saved_hp)),
+			0,
+			PlayerData.saved_max_hp
+		)
 		print("SAVE: Using battle return position: ", save_position)
 	else:
 		var player := _find_player_in_current_scene()
@@ -86,7 +150,7 @@ func save_progress() -> bool:
 				"SAVE: No player found in the current scene; "
 				+ "database save was not sent."
 			)
-			return false
+			return {}
 
 		print("SAVE: Player node path: ", player.get_path())
 		print("SAVE: Player global position: ", player.global_position)
@@ -109,9 +173,9 @@ func save_progress() -> bool:
 
 	PlayerData.saved_position = save_position
 	PlayerData.saved_current_scene = scene_path
+	var playtime_snapshot := Session.get_playtime_snapshot()
 
-	var payload := {
-		"action": "save_progress",
+	var snapshot := {
 		"character_class": character_class,
 		"level": Session.level,
 		"exp": Session.player_exp,
@@ -126,9 +190,12 @@ func save_progress() -> bool:
 		"first_puzzle_clear_time": Session.first_puzzle_clear_time,
 		"puzzle_time_improvement": Session.puzzle_time_improvement,
 		"puzzles_cleared": Session.puzzles_cleared,
-		"playtime_seconds": 0,
-		"hp": PlayerData.saved_hp,
-		"max_hp": PlayerData.saved_max_hp,
+		"playtime_seconds": playtime_snapshot["playtime_seconds"],
+		"_unsaved_playtime_msec": playtime_snapshot[
+			"unsaved_playtime_msec"
+		],
+		"hp": PlayerData.current_hp,
+		"max_hp": PlayerData.current_max_hp,
 		"attack": PlayerData.saved_attack,
 		"defense": PlayerData.saved_defense,
 		"current_scene": scene_path,
@@ -139,10 +206,9 @@ func save_progress() -> bool:
 		"player_position_y": save_position.y
 	}
 
-	print("SAVE: Final payload player_position_x = ", payload["player_position_x"])
-	print("SAVE: Final payload player_position_y = ", payload["player_position_y"])
-
-	return _send_request(payload)
+	print("SAVE: Final payload player_position_x = ", snapshot["player_position_x"])
+	print("SAVE: Final payload player_position_y = ", snapshot["player_position_y"])
+	return snapshot
 
 
 func record_score(final_score: int) -> bool:
@@ -191,20 +257,45 @@ func _send_request(payload: Dictionary) -> bool:
 		return false
 
 	payload["user_id"] = Session.user_id
+	payload["auth_token"] = Session.auth_token
 
-	if request_pending:
-		queued_payload = payload.duplicate(true)
+	if request_pending or not queued_payloads.is_empty():
+		var queued_copy := payload.duplicate(true)
+		var action := str(payload.get("action", ""))
+
+		if action == "save_progress" and not queued_payloads.is_empty():
+			var last_index := queued_payloads.size() - 1
+			if str(queued_payloads[last_index].get("action", "")) == action:
+				queued_payloads[last_index] = queued_copy
+				return true
+
+		queued_payloads.append(queued_copy)
 		return true
 
 	return _start_request(payload)
 
 
 func _start_request(payload: Dictionary) -> bool:
+	var request_payload := payload.duplicate(true)
+	current_playtime_seconds = int(
+		request_payload.get("playtime_seconds", 0)
+	)
+	current_playtime_elapsed_msec = int(
+		request_payload.get("_unsaved_playtime_msec", 0)
+	)
+	request_payload.erase("_unsaved_playtime_msec")
+
 	var headers := PackedStringArray([
 		"Content-Type: application/json"
 	])
 
 	current_request_action = str(payload.get("action", ""))
+	current_request_checkpoint = {}
+	current_request_user_id = int(payload.get("user_id", -1))
+	if current_request_action == "save_checkpoint":
+		var checkpoint: Variant = payload.get("checkpoint", {})
+		if checkpoint is Dictionary:
+			current_request_checkpoint = checkpoint.duplicate(true)
 	request_pending = true
 	print(
 		"HTTP REQUEST: action=",
@@ -217,7 +308,7 @@ func _start_request(payload: Dictionary) -> bool:
 		API_URL,
 		headers,
 		HTTPClient.METHOD_POST,
-		JSON.stringify(payload)
+		JSON.stringify(request_payload)
 	)
 
 	if error != OK:
@@ -229,13 +320,21 @@ func _start_request(payload: Dictionary) -> bool:
 			error
 		)
 
+		var failed_action := current_request_action
+		if failed_action == "save_progress":
+			push_error(
+				"Progress save request could not start. Error: "
+				+ str(error)
+			)
+		current_request_action = ""
+		current_request_checkpoint.clear()
+		current_request_user_id = -1
 		response_received.emit(
 			false,
 			"Could not send the game-data request.",
-			{"action": current_request_action}
+			{"action": failed_action}
 		)
 
-		current_request_action = ""
 		_send_queued_request()
 		return false
 
@@ -266,11 +365,15 @@ func _on_request_completed(
 
 	if result != HTTPRequest.RESULT_SUCCESS:
 		print("HTTP REQUEST FAILED: action=", completed_action)
+		if completed_action == "save_progress":
+			push_error("Progress save failed: cannot reach the server.")
 		response_received.emit(
 			false,
 			"Cannot reach the server.",
 			{"action": completed_action}
 		)
+		current_request_checkpoint.clear()
+		current_request_user_id = -1
 		_send_queued_request()
 		return
 
@@ -285,12 +388,18 @@ func _on_request_completed(
 	if parse_error != OK or not (json.data is Dictionary):
 		print("JSON PARSE ERROR: ", json.get_error_message())
 		print("JSON ERROR LINE: ", json.get_error_line())
+		if completed_action == "save_progress":
+			push_error("Progress save failed: invalid server response.")
 
 		response_received.emit(
 			false,
 			"Invalid server response.",
 			{"action": completed_action}
 		)
+		current_request_checkpoint.clear()
+		current_request_user_id = -1
+		current_playtime_seconds = 0
+		current_playtime_elapsed_msec = 0
 		_send_queued_request()
 		return
 
@@ -302,6 +411,25 @@ func _on_request_completed(
 
 	if response_code < 200 or response_code >= 300:
 		success = false
+	if not success and completed_action == "save_progress":
+		push_error("Progress save failed: " + message)
+
+	if success and completed_action == "save_progress":
+		Session.confirm_playtime_saved(
+			current_playtime_seconds,
+			current_playtime_elapsed_msec
+		)
+	elif success and completed_action == "save_checkpoint":
+		if not Session.accept_checkpoint(
+			current_request_checkpoint,
+			current_request_user_id
+		):
+			push_error(
+				"Server saved a checkpoint that failed local validation."
+			)
+
+	current_request_checkpoint.clear()
+	current_request_user_id = -1
 
 	print("DATABASE RESPONSE: ", message)
 	print("DATABASE SUCCESS: ", success)
@@ -317,16 +445,26 @@ func _on_request_completed(
 			")"
 		)
 
+	current_playtime_seconds = 0
+	current_playtime_elapsed_msec = 0
 	response_received.emit(success, message, data)
 
 	_send_queued_request()
 
 
 func _send_queued_request() -> void:
-	if queued_payload.is_empty():
+	if request_pending or queued_payloads.is_empty():
 		return
 
-	var payload := queued_payload.duplicate(true)
-	queued_payload.clear()
+	var payload: Dictionary = queued_payloads.pop_front()
+
+	if str(payload.get("action", "")) == "save_progress":
+		var playtime_snapshot := Session.get_playtime_snapshot()
+		payload["playtime_seconds"] = playtime_snapshot[
+			"playtime_seconds"
+		]
+		payload["_unsaved_playtime_msec"] = playtime_snapshot[
+			"unsaved_playtime_msec"
+		]
 
 	_start_request(payload)
