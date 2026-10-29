@@ -89,7 +89,12 @@ func _ready() -> void:
 		mana = max_mana
 
 		if not restoring_battle_position:
+			print("HAS SAVE DATA: ", PlayerData.has_save_data)
+			print("SAVED POSITION FROM DATABASE: ", PlayerData.saved_position)
+			print("PLAYER POSITION BEFORE RESTORE: ", global_position)
 			global_position = PlayerData.saved_position
+			print("PLAYER POSITION AFTER RESTORE: ", global_position)
+
 	else:
 		hp = max_hp
 		mana = max_mana

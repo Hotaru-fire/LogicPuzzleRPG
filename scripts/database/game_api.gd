@@ -12,6 +12,7 @@ var current_request_action := ""
 
 func _ready() -> void:
 	http_request = HTTPRequest.new()
+	http_request.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
 
@@ -41,6 +42,7 @@ func load_save() -> bool:
 	})
 
 
+
 func save_progress() -> bool:
 	var character_class := Session.selected_character
 
@@ -58,38 +60,57 @@ func save_progress() -> bool:
 	var scene_path := PlayerData.saved_current_scene
 	var save_position := PlayerData.saved_position
 	var current_scene := get_tree().current_scene
+	var current_scene_path := ""
 
 	if current_scene != null:
-		scene_path = current_scene.scene_file_path
+		current_scene_path = current_scene.scene_file_path
+		if not current_scene_path.is_empty():
+			scene_path = current_scene_path
 
-	if scene_path.contains("/battle/") and not BattleData.return_scene.is_empty():
+	print("SAVE: Current scene path: ", current_scene_path)
+
+	if current_scene_path.contains("/battle/"):
+		if BattleData.return_scene.is_empty():
+			push_error("SAVE: Battle scene has no recorded return scene.")
+			return false
+
 		scene_path = BattleData.return_scene
-
-		if BattleData.return_position != Vector2.ZERO:
-			save_position = BattleData.return_position
+		save_position = BattleData.return_position
+		print("SAVE: Using battle return position: ", save_position)
 	else:
 		var player := _find_player_in_current_scene()
+		print("SAVE: Player found: ", player != null)
 
-		if player != null:
-			save_position = player.global_position
+		if player == null:
+			push_error(
+				"SAVE: No player found in the current scene; "
+				+ "database save was not sent."
+			)
+			return false
 
-			PlayerData.saved_hp = int(
-				_get_property(player, "hp", PlayerData.saved_hp)
-			)
-			PlayerData.saved_max_hp = int(
-				_get_property(player, "max_hp", PlayerData.saved_max_hp)
-			)
-			PlayerData.saved_attack = int(
-				_get_property(player, "attack", PlayerData.saved_attack)
-			)
-			PlayerData.saved_defense = int(
-				_get_property(player, "defense", PlayerData.saved_defense)
-			)
+		print("SAVE: Player node path: ", player.get_path())
+		print("SAVE: Player global position: ", player.global_position)
+		save_position = player.global_position
+
+		PlayerData.saved_hp = int(
+			_get_property(player, "hp", PlayerData.saved_hp)
+		)
+		PlayerData.saved_max_hp = int(
+			_get_property(player, "max_hp", PlayerData.saved_max_hp)
+		)
+		PlayerData.saved_attack = int(
+			_get_property(player, "attack", PlayerData.saved_attack)
+		)
+		PlayerData.saved_defense = int(
+			_get_property(player, "defense", PlayerData.saved_defense)
+		)
+
+	print("SAVE: save_position: ", save_position)
 
 	PlayerData.saved_position = save_position
 	PlayerData.saved_current_scene = scene_path
 
-	return _send_request({
+	var payload := {
 		"action": "save_progress",
 		"character_class": character_class,
 		"level": Session.level,
@@ -99,6 +120,12 @@ func save_progress() -> bool:
 		"mobs_defeated": Session.mobs_defeated,
 		"dungeon_enemies_defeated": Session.dungeon_enemies_defeated,
 		"bosses_killed": Session.bosses_killed,
+		"total_deaths": Session.total_deaths,
+		"puzzle_clear_time": Session.puzzle_clear_time,
+		"best_puzzle_clear_time": Session.best_puzzle_clear_time,
+		"first_puzzle_clear_time": Session.first_puzzle_clear_time,
+		"puzzle_time_improvement": Session.puzzle_time_improvement,
+		"puzzles_cleared": Session.puzzles_cleared,
 		"playtime_seconds": 0,
 		"hp": PlayerData.saved_hp,
 		"max_hp": PlayerData.saved_max_hp,
@@ -110,7 +137,12 @@ func save_progress() -> bool:
 		"equipment": PlayerData.saved_equipment,
 		"player_position_x": save_position.x,
 		"player_position_y": save_position.y
-	})
+	}
+
+	print("SAVE: Final payload player_position_x = ", payload["player_position_x"])
+	print("SAVE: Final payload player_position_y = ", payload["player_position_y"])
+
+	return _send_request(payload)
 
 
 func record_score(final_score: int) -> bool:
@@ -174,6 +206,12 @@ func _start_request(payload: Dictionary) -> bool:
 
 	current_request_action = str(payload.get("action", ""))
 	request_pending = true
+	print(
+		"HTTP REQUEST: action=",
+		current_request_action,
+		" user_id=",
+		payload.get("user_id", "missing")
+	)
 
 	var error := http_request.request(
 		API_URL,
@@ -184,6 +222,12 @@ func _start_request(payload: Dictionary) -> bool:
 
 	if error != OK:
 		request_pending = false
+		print(
+			"HTTP REQUEST FAILED TO START: action=",
+			current_request_action,
+			" error=",
+			error
+		)
 
 		response_received.emit(
 			false,
@@ -195,6 +239,7 @@ func _start_request(payload: Dictionary) -> bool:
 		_send_queued_request()
 		return false
 
+	print("HTTP REQUEST STARTED: action=", current_request_action)
 	return true
 
 
@@ -208,8 +253,19 @@ func _on_request_completed(
 
 	var completed_action := current_request_action
 	current_request_action = ""
+	print(
+		"HTTP REQUEST COMPLETED: action=",
+		completed_action,
+		" result=",
+		result,
+		" response_code=",
+		response_code,
+		" transport_succeeded=",
+		result == HTTPRequest.RESULT_SUCCESS
+	)
 
 	if result != HTTPRequest.RESULT_SUCCESS:
+		print("HTTP REQUEST FAILED: action=", completed_action)
 		response_received.emit(
 			false,
 			"Cannot reach the server.",
@@ -218,10 +274,18 @@ func _on_request_completed(
 		_send_queued_request()
 		return
 
+	var response_text: String = body.get_string_from_utf8()
+
+	print("HTTP RESPONSE CODE: ", response_code)
+	print("RAW PHP RESPONSE: ", response_text)
+
 	var json := JSON.new()
-	var parse_error := json.parse(body.get_string_from_utf8())
+	var parse_error := json.parse(response_text)
 
 	if parse_error != OK or not (json.data is Dictionary):
+		print("JSON PARSE ERROR: ", json.get_error_message())
+		print("JSON ERROR LINE: ", json.get_error_line())
+
 		response_received.emit(
 			false,
 			"Invalid server response.",
@@ -242,6 +306,16 @@ func _on_request_completed(
 	print("DATABASE RESPONSE: ", message)
 	print("DATABASE SUCCESS: ", success)
 	print("RESPONSE DATA: ", data)
+	if completed_action == "save_progress":
+		print("SAVE RESPONSE: ", message, " | success=", success)
+	elif completed_action == "load_save":
+		print(
+			"LOAD RESPONSE POSITION: (",
+			data.get("player_position_x", "missing"),
+			", ",
+			data.get("player_position_y", "missing"),
+			")"
+		)
 
 	response_received.emit(success, message, data)
 

@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://clb3la10iga00" path="res://assets/npc/pixel-npc/Mark.png" id="4_ucygd"]
 [ext_resource type="Texture2D" uid="uid://bf2mcwdvxjrva" path="res://assets/npc/full-npc/Chole(F).png" id="5_mipys"]
 
+[sub_resource type="Theme" id="Theme_tnaqn"]
+
 [node name="MainMenu" type="Control" unique_id=103979169]
 layout_mode = 3
 anchors_preset = 15
@@ -258,34 +260,47 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
-[node name="ConfirmationPanel" type="PanelContainer" parent="." unique_id=2028277804]
+[node name="ConfirmationPanel" type="PanelContainer" parent="." unique_id=1199361404]
 visible = false
-layout_mode = 0
-offset_left = 370.0
-offset_top = 192.0
-offset_right = 770.0
-offset_bottom = 372.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -80.0
+offset_right = 190.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPanel" unique_id=1574268302]
-custom_minimum_size = Vector2(400, 160)
+[node name="ColorRect" type="ColorRect" parent="ConfirmationPanel" unique_id=1164834230]
 layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_tnaqn")
+color = Color(0, 0, 0, 1)
 
-[node name="MessageLabel" type="Label" parent="ConfirmationPanel/VBoxContainer" unique_id=975306469]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPanel" unique_id=612957201]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MessageLabel" type="Label" parent="ConfirmationPanel/VBoxContainer" unique_id=1162209498]
 custom_minimum_size = Vector2(380, 120)
 layout_mode = 2
 text = "This will delete existing save file"
 autowrap_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="ConfirmationPanel/VBoxContainer" unique_id=1980096885]
+[node name="ButtonContainer" type="HBoxContainer" parent="ConfirmationPanel/VBoxContainer" unique_id=1920219816]
 custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=2005446772]
+[node name="ContinueButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=547890306]
 custom_minimum_size = Vector2(120, 35)
 layout_mode = 2
 text = "Continue"
 
-[node name="CancelButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=1954112095]
+[node name="CancelButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=178472133]
 custom_minimum_size = Vector2(120, 35)
 layout_mode = 2
 text = "Cancel"
@@ -293,6 +308,7 @@ text = "Cancel"
 [connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuButtons/LeaderBoardButton" to="." method="_on_leader_board_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SaveQuitButton" to="." method="_on_save_quit_button_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Knight" to="." method="_on_character_1_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Mage" to="." method="_on_character_2_pressed"]

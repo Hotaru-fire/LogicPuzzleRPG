@@ -173,11 +173,18 @@ func _on_start_button_pressed() -> void:
 	PlayerData.selected_character = selected_character
 	Session.selected_character = get_character_name(selected_character)
 
-	# Reset old local save data in memory.
+	# Reset old saved player data.
 	PlayerData.has_save_data = false
 	PlayerData.saved_position = Vector2.ZERO
 	PlayerData.saved_hp = 0
 	PlayerData.saved_mana = 0
+	PlayerData.saved_current_scene = "res://scenes/maps/world.tscn"
+	PlayerData.saved_boss_completed = false
+	PlayerData.saved_inventory = "[]"
+	PlayerData.saved_equipment = "{}"
+
+	# Reset progress and analytics for the new game.
+	Session.reset_game_progress()
 
 	# Delete the old local save file.
 	if FileAccess.file_exists("user://savegame.json"):
@@ -304,6 +311,8 @@ func _on_delete_save_confirmation_canceled() -> void:
 # DATABASE RESPONSES
 # --------------------------------------------------
 
+
+
 func _on_game_api_response_received(
 	success: bool,
 	message: String,
@@ -333,7 +342,6 @@ func _on_game_api_response_received(
 				new_game_stage = "confirming_save"
 				_show_confirmation_panel()
 			else:
-				# No database save exists; proceed to character selection.
 				waiting_for_new_game_flow = false
 				new_game_stage = ""
 				_open_character_selection()
@@ -358,7 +366,6 @@ func _on_game_api_response_received(
 			waiting_for_new_game_flow = false
 			new_game_stage = ""
 
-			# Select a character before creating the new save.
 			_open_character_selection()
 			return
 
@@ -377,79 +384,155 @@ func _on_game_api_response_received(
 			_launch_new_game()
 			return
 
+		"load_save":
+			if new_game_stage != "loading_save":
+				return
 
-# --------------------------------------------------
-# LOAD GAME — PRESERVED FROM YOUR ORIGINAL CODE
-# --------------------------------------------------
+			waiting_for_new_game_flow = false
+			new_game_stage = ""
 
+			if not success:
+				print("Failed to load database save: ", message)
+				return
+
+			if not bool(data.get("has_save", false)):
+				print("No database save found for this account.")
+				return
+
+			if (
+				not data.has("player_position_x")
+				or not data.has("player_position_y")
+			):
+				push_error("Loaded save response is missing player coordinates.")
+				return
+
+			# Restore analytics.
+			Session.load_analytics(data)
+
+			# Restore character selection.
+			Session.selected_character = str(
+				data.get("character_class", "")
+			)
+
+			PlayerData.selected_character = match_character_id(
+				Session.selected_character
+			)
+			PlayerData.player_name = Session.username
+
+			# Restore player position and scene.
+			print(
+				"LOAD: Response position fields: x=",
+				data.get("player_position_x", "missing"),
+				" y=",
+				data.get("player_position_y", "missing")
+			)
+			PlayerData.saved_position = Vector2(
+				float(data.get("player_position_x", 0.0)),
+				float(data.get("player_position_y", 0.0))
+			)
+			print("LOAD: PlayerData.saved_position: ", PlayerData.saved_position)
+
+			PlayerData.saved_current_scene = str(
+				data.get(
+					"current_scene",
+					"res://scenes/maps/world.tscn"
+				)
+			)
+
+			# Restore health and combat stats.
+			PlayerData.saved_hp = int(data.get("hp", 200))
+			PlayerData.saved_max_hp = int(data.get("max_hp", 200))
+			PlayerData.saved_attack = int(data.get("attack", 30))
+			PlayerData.saved_defense = int(data.get("defense", 10))
+
+			# Restore inventory and equipment.
+			PlayerData.saved_inventory = str(
+				data.get("inventory", "[]")
+			)
+			PlayerData.saved_equipment = str(
+				data.get("equipment", "{}")
+			)
+
+			# Restore boss completion.
+			PlayerData.saved_boss_completed = bool(
+				data.get("boss_completed", false)
+			)
+
+			# Restore session progress.
+			Session.level = int(data.get("level", 1))
+			Session.player_exp = int(data.get("exp", 0))
+			Session.gold = int(data.get("gold", 0))
+			Session.score = int(data.get("score", 0))
+			Session.mobs_defeated = int(
+				data.get("mobs_defeated", 0)
+			)
+			Session.dungeon_enemies_defeated = int(
+				data.get("dungeon_enemies_defeated", 0)
+			)
+			Session.bosses_killed = int(
+				data.get("bosses_killed", 0)
+			)
+
+			# Tell the player script to apply the saved data.
+			PlayerData.has_save_data = true
+
+			# Validate the saved scene before loading it.
+			
+			var saved_scene: String = PlayerData.saved_current_scene
+
+			# Fix the old saved world scene path.
+			if saved_scene == "res://scenes/world.tscn":
+				saved_scene = "res://scenes/maps/world.tscn"
+				PlayerData.saved_current_scene = saved_scene
+
+			if not ResourceLoader.exists(saved_scene):
+				PlayerData.has_save_data = false
+				print("Saved scene does not exist: ", saved_scene)
+				return
+
+
+			print("Database save loaded successfully.")
+			print("Character: ", Session.selected_character)
+			print("Level: ", Session.level)
+			print("Saved scene: ", saved_scene)
+			print("Saved position: ", PlayerData.saved_position)
+			print("Player HP: ", PlayerData.saved_hp)
+			print("Total deaths: ", Session.total_deaths)
+			print("Puzzles cleared: ", Session.puzzles_cleared)
+
+			# A database load must not be overridden by a previous battle's return state.
+			BattleData.return_scene = ""
+			BattleData.return_position = Vector2.ZERO
+
+			var error: Error = get_tree().change_scene_to_file(
+				saved_scene
+			)
+
+			if error != OK:
+				PlayerData.has_save_data = false
+				print("Failed to change to saved scene. Error: ", error)
+
+			return
+
+
+# LOAD GAME 
 func _on_loadgame_button_pressed() -> void:
-	# Check whether the local save file exists.
-	if not FileAccess.file_exists("user://savegame.json"):
-		print("NO SAVE FILE FOUND")
+	if not Session.is_logged_in():
+		print("Please log in to load your account save.")
 		return
 
-	# Open the local save file.
-	var file = FileAccess.open(
-		"user://savegame.json",
-		FileAccess.READ
-	)
-
-	if file == null:
-		print("FAILED TO OPEN SAVE FILE")
+	if waiting_for_new_game_flow:
 		return
 
-	# Read JSON data.
-	var save_data = JSON.parse_string(file.get_as_text())
-	file.close()
+	waiting_for_new_game_flow = true
+	new_game_stage = "loading_save"
 
-	if save_data == null or not (save_data is Dictionary):
-		print("FAILED TO READ SAVE DATA")
-		return
+	print("Loading save from database...")
 
-	print("SAVE DATA LOADED: ", save_data)
-
-	# Load player name.
-	PlayerData.player_name = Session.username
-
-	# Load character.
-	PlayerData.selected_character = int(
-		save_data.get("character", 0)
-	)
-
-	Session.selected_character = get_character_name(
-		PlayerData.selected_character
-	)
-
-	# Load player position.
-	PlayerData.saved_position = Vector2(
-		float(save_data.get("player_position_x", 0.0)),
-		float(save_data.get("player_position_y", 0.0))
-	)
-
-	# Load HP and mana.
-	PlayerData.saved_hp = int(save_data.get("hp", 0))
-	PlayerData.saved_mana = int(save_data.get("mana", 0))
-
-	# Tell the Player script to apply the saved data.
-	PlayerData.has_save_data = true
-
-	print("Player Name: ", PlayerData.player_name)
-	print("Character: ", PlayerData.selected_character)
-	print("Position: ", PlayerData.saved_position)
-	print("HP: ", PlayerData.saved_hp)
-	print("Mana: ", PlayerData.saved_mana)
-
-	# Load the saved scene.
-	var saved_scene = str(
-		save_data.get("scene", "res://scenes/maps/world.tscn")
-	)
-
-	if not ResourceLoader.exists(saved_scene):
-		print("SAVED SCENE DOES NOT EXIST: ", saved_scene)
-		return
-
-	print("Loading Scene: ", saved_scene)
-	get_tree().change_scene_to_file(saved_scene)
+	if not GameAPI.load_save():
+		waiting_for_new_game_flow = false
+		new_game_stage = ""
+		print("Could not start database load request.")
 
 
 # Support either existing Quit button signal name.
@@ -459,3 +542,28 @@ func _on_save_quit_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func match_character_id(character_name: String) -> int:
+	match character_name:
+		"Knight":
+			return 1
+		"Mage":
+			return 2
+		"Thief":
+			return 3
+		"Archer":
+			return 4
+		_:
+			return 0
+
+
+func _on_leader_board_button_pressed() -> void:
+	print("LEADERBOARDS BUTTON CLICKED!")
+
+	var error = get_tree().change_scene_to_file(
+		"res://scenes/main/leaderboards.tscn"
+	)
+
+	if error != OK:
+		push_error("Failed to open Leaderboards. Error: " + str(error))

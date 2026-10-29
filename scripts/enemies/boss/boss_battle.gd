@@ -301,7 +301,21 @@ func player_defeated() -> void:
 	attack_button.disabled = true
 	actions.visible = false
 
+	# Record this death once.
+	Session.record_death()
+
+	# Save the defeated state and analytics.
+	PlayerData.saved_hp = 0
+
+	if Session.is_logged_in():
+		GameAPI.save_progress()
+	else:
+		print("WARNING: Death recorded locally but not saved to database.")
+
 	await get_tree().create_timer(1.0).timeout
+
+	if not is_instance_valid(self):
+		return
 
 	player_sprite.modulate = Color.WHITE
 	player_sprite.play("hurt")
