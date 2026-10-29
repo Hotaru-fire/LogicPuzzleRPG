@@ -36,9 +36,22 @@ func save_game():
 
 func _on_save_quit_button_pressed():
 	save_game()
+
+	if Session.is_logged_in():
+		if GameAPI.save_progress():
+			var response: Array = await GameAPI.response_received
+			while str(response[2].get("action", "")) != "save_progress":
+				response = await GameAPI.response_received
+
+			if bool(response[0]):
+				print("DATABASE SAVE COMPLETED: ", response[1])
+			else:
+				push_error("DATABASE SAVE FAILED: " + str(response[1]))
+		else:
+			push_error("DATABASE SAVE COULD NOT BE STARTED.")
+
 	get_tree().paused = false
 	visible = false
-	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main/MainMenu.tscn")
 
 

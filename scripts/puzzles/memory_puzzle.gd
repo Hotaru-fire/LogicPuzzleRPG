@@ -1,4 +1,3 @@
-
 extends Control
 
 signal puzzle_finished(success: bool)
@@ -12,6 +11,10 @@ var player_answer = []
 
 var puzzle_time := 10.0
 var time_left := 10.0
+# Puzzle analytics
+var puzzle_started_msec: int = 0
+var puzzle_elapsed_seconds: float = 0.0
+var puzzle_clear_recorded: bool = false
 
 @export var player_move_speed: float = 200.0
 
@@ -77,6 +80,17 @@ func _process(delta: float) -> void:
 			player_moving_right = false
 			player.visible = false
 
+			# Record analytics only once per successful puzzle.
+			if not puzzle_clear_recorded:
+				puzzle_clear_recorded = true
+
+				Session.record_puzzle_clear(
+					puzzle_elapsed_seconds
+				)
+
+				if Session.is_logged_in():
+					GameAPI.save_progress()
+
 			# Tell BossBattle the successful puzzle is finished.
 			puzzle_finished.emit(true)
 
@@ -86,7 +100,9 @@ func start_puzzle():
 	puzzle_active = true
 	player_moving_right = false
 	player_answer.clear()
-
+	puzzle_started_msec = 0
+	puzzle_elapsed_seconds = 0.0
+	puzzle_clear_recorded = false
 	result_label.text = ""
 
 	# Keep the position set in MemoryPuzzle.tscn.
@@ -191,6 +207,13 @@ func puzzle_solved():
 		return
 
 	puzzle_success = true
+
+	puzzle_elapsed_seconds = (
+		float(Time.get_ticks_msec() - puzzle_started_msec) / 1000.0
+	)
+
+	print("PUZZLE ANSWER TIME: ", puzzle_elapsed_seconds, " seconds")
+
 	puzzle_active = false
 
 	puzzle_timer.stop()
@@ -255,6 +278,7 @@ func start_countdown():
 	timer_bar.value = time_left
 
 	time_label.text = "Time: " + str(int(time_left))
+	puzzle_started_msec = Time.get_ticks_msec()
 
 	puzzle_timer.start()
 

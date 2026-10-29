@@ -22,6 +22,13 @@ if (!is_array($data)) {
 $action = $data["action"] ?? "";
 $user_id = filter_var($data["user_id"] ?? null, FILTER_VALIDATE_INT);
 
+error_log(
+    "[game_data] request action="
+    . (is_scalar($action) ? (string)$action : "invalid")
+    . " user_id="
+    . ($user_id === false || $user_id === null ? "invalid" : (string)$user_id)
+);
+
 if (!$user_id || $user_id < 1) {
     respond(false, "Invalid user ID.");
 }
@@ -175,6 +182,13 @@ try {
         $position_x = $data["player_position_x"] ?? null;
         $position_y = $data["player_position_y"] ?? null;
 
+        error_log(
+            "[game_data] save_progress received coordinates user_id="
+            . $user_id
+            . " x=" . json_encode($position_x)
+            . " y=" . json_encode($position_y)
+        );
+
         if (
             !is_numeric($position_x) ||
             !is_numeric($position_y) ||
@@ -223,6 +237,13 @@ try {
                 player_position_y = VALUES(player_position_y)"
         );
 
+        error_log(
+            "[game_data] save_progress before SQL user_id="
+            . $user_id
+            . " x=" . (string)(float)$position_x
+            . " y=" . (string)(float)$position_y
+        );
+
         $stmt->execute([
             $user_id,
             $character,
@@ -246,6 +267,12 @@ try {
             (float)$position_y
         ]);
 
+        error_log(
+            "[game_data] save_progress SQL succeeded user_id="
+            . $user_id
+            . " affected_rows=" . $stmt->rowCount()
+        );
+
         respond(true, "Progress saved.");
     }
 
@@ -267,11 +294,21 @@ try {
         $save = $stmt->fetch();
 
         if ($save === false) {
+            error_log(
+                "[game_data] load_save found no row for user_id=" . $user_id
+            );
             respond(true, "No save found yet.", [
                 "has_save" => false,
                 "save" => null
             ]);
         }
+
+        error_log(
+            "[game_data] load_save coordinates user_id="
+            . $user_id
+            . " x=" . (string)$save["player_position_x"]
+            . " y=" . (string)$save["player_position_y"]
+        );
 
         // Return saved fields at the top level for Godot.
         $save["has_save"] = true;
@@ -305,7 +342,12 @@ try {
     respond(false, "Unknown action.");
 
 } catch (Throwable $e) {
-    error_log($e->getMessage());
+    error_log(
+        "[game_data] request failed action="
+        . (is_scalar($action) ? (string)$action : "invalid")
+        . " user_id=" . (string)$user_id
+        . " error=" . $e->getMessage()
+    );
     http_response_code(500);
 
     respond(false, "Server error. Check the PHP error log.");
