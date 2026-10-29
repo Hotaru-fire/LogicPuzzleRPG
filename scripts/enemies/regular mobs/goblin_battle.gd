@@ -10,8 +10,16 @@ var enemy_hp := 20
 var enemy_damage := 10
 
 # PLAYER DATA
-var player_max_hp := 200
-var player_hp := player_max_hp
+var player_max_hp: int:
+	get:
+		return PlayerData.current_max_hp
+	set(value):
+		PlayerData.set_max_hp(value)
+var player_hp: int:
+	get:
+		return PlayerData.current_hp
+	set(value):
+		PlayerData.set_current_hp(value)
 
 # BATTLE STATE
 var player_turn := true
@@ -42,6 +50,8 @@ func _ready():
 	# Connect the dodge battle signal.
 	if not dodge_battle.player_hit.is_connected(_on_dodge_player_hit):
 		dodge_battle.player_hit.connect(_on_dodge_player_hit)
+	if not PlayerData.health_changed.is_connected(_on_player_health_changed):
+		PlayerData.health_changed.connect(_on_player_health_changed)
 
 	# Load the selected player's sprite frames.
 	load_selected_character()
@@ -60,8 +70,7 @@ func _ready():
 	boss_hp_bar.value = enemy_hp
 
 	# Configure player HP bar.
-	player_hp_bar.max_value = player_max_hp
-	player_hp_bar.value = player_hp
+	_on_player_health_changed(player_hp, player_max_hp)
 
 	# Display the player's username.
 	player_name_label.text = Session.username
@@ -280,7 +289,6 @@ func _on_dodge_player_hit():
 
 	# Apply the goblin's configured damage.
 	player_hp = max(player_hp - enemy_damage, 0)
-	player_hp_bar.value = player_hp
 
 	print("Player HP: ", player_hp)
 
@@ -289,6 +297,13 @@ func _on_dodge_player_hit():
 
 	if player_hp <= 0:
 		await player_defeated()
+	elif Session.is_logged_in():
+		GameAPI.save_progress()
+
+
+func _on_player_health_changed(current_hp: int, maximum_hp: int) -> void:
+	player_hp_bar.max_value = maximum_hp
+	player_hp_bar.value = current_hp
 
 
 func player_hit_effect():
@@ -340,23 +355,27 @@ func enemy_defeated():
 	if not BattleData.kill_counted:
 		BattleData.kill_counted = true
 
-		Session.dungeon_enemies_defeated += 1
-		Session.record_mob_kill(10)
-
-		print(
-			"DUNGEON KILLS: ",
-			Session.dungeon_enemies_defeated,
-			"/10"
-		)
-
-		print(
-			"TOTAL MOBS DEFEATED: ",
-			Session.mobs_defeated
-		)
+		if BattleData.enemy_is_dungeon:
+			Session.record_dungeon_enemy_kill(
+				BattleData.enemy_exp_reward,
+				BattleData.enemy_gold_reward,
+				BattleData.enemy_score_reward
+			)
+			print(
+				"DUNGEON KILLS: ",
+				Session.dungeon_enemies_defeated,
+				"/10"
+			)
+		else:
+			Session.record_normal_mob_kill(
+				BattleData.enemy_exp_reward,
+				BattleData.enemy_gold_reward,
+				BattleData.enemy_score_reward
+			)
 
 		# Save the updated counters to MariaDB.
 		if Session.is_logged_in():
-			print("Saving dungeon kill count to database...")
+			print("Saving enemy kill and reward data to database...")
 			GameAPI.save_progress()
 		else:
 			print("WARNING: Not logged in; kill count was not saved.")
@@ -389,17 +408,7 @@ func player_defeated():
 
 	attack_button.disabled = true
 	actions.visible = false
-
-	# Wait one second before the player's hurt animation.
-	await get_tree().create_timer(1.0).timeout
-
-	if is_instance_valid(player_sprite):
-		player_sprite.modulate = Color.WHITE
-
-		if player_sprite.sprite_frames.has_animation("hurt"):
-			player_sprite.play("hurt")
-		else:
-			player_sprite.stop()
+	Session.begin_player_death()
 
 
 func load_selected_character():

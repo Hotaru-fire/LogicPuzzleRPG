@@ -7,8 +7,16 @@ var current_puzzle = null
 var boss_max_hp := 500
 var boss_hp := boss_max_hp
 
-var player_max_hp := 200
-var player_hp := player_max_hp
+var player_max_hp: int:
+	get:
+		return PlayerData.current_max_hp
+	set(value):
+		PlayerData.set_max_hp(value)
+var player_hp: int:
+	get:
+		return PlayerData.current_hp
+	set(value):
+		PlayerData.set_current_hp(value)
 
 var player_turn := true
 var battle_ended := false
@@ -34,13 +42,15 @@ var boss_hit_effect_running := false
 
 
 func _ready() -> void:
-	dodge_battle.player_hit.connect(_on_dodge_player_hit)
+	if not dodge_battle.player_hit.is_connected(_on_dodge_player_hit):
+		dodge_battle.player_hit.connect(_on_dodge_player_hit)
+	if not PlayerData.health_changed.is_connected(_on_player_health_changed):
+		PlayerData.health_changed.connect(_on_player_health_changed)
 
 	boss_hp_bar.max_value = boss_max_hp
 	boss_hp_bar.value = boss_hp
 
-	player_hp_bar.max_value = player_max_hp
-	player_hp_bar.value = player_hp
+	_on_player_health_changed(player_hp, player_max_hp)
 
 	player_name_label.text = Session.username
 
@@ -220,7 +230,6 @@ func _on_dodge_player_hit() -> void:
 	boss_sprite.play("idle")
 
 	player_hp = max(player_hp - 10, 0)
-	player_hp_bar.value = player_hp
 
 	player_hit_effect()
 
@@ -228,6 +237,13 @@ func _on_dodge_player_hit() -> void:
 
 	if player_hp <= 0:
 		await player_defeated()
+	elif Session.is_logged_in():
+		GameAPI.save_progress()
+
+
+func _on_player_health_changed(current_hp: int, maximum_hp: int) -> void:
+	player_hp_bar.max_value = maximum_hp
+	player_hp_bar.value = current_hp
 
 
 func player_hit_effect() -> void:
@@ -265,7 +281,7 @@ func boss_defeated() -> void:
 	PlayerData.saved_position = BattleData.return_position
 
 	# Count the boss kill and save progress.
-	Session.record_boss_kill(100)
+	Session.record_boss_kill()
 
 	print("TOTAL BOSSES KILLED: ", Session.bosses_killed)
 	print("TOTAL MOBS DEFEATED: ", Session.mobs_defeated)
@@ -301,24 +317,7 @@ func player_defeated() -> void:
 	attack_button.disabled = true
 	actions.visible = false
 
-	# Record this death once.
-	Session.record_death()
-
-	# Save the defeated state and analytics.
-	PlayerData.saved_hp = 0
-
-	if Session.is_logged_in():
-		GameAPI.save_progress()
-	else:
-		print("WARNING: Death recorded locally but not saved to database.")
-
-	await get_tree().create_timer(1.0).timeout
-
-	if not is_instance_valid(self):
-		return
-
-	player_sprite.modulate = Color.WHITE
-	player_sprite.play("hurt")
+	Session.begin_player_death()
 
 
 func load_selected_character() -> void:

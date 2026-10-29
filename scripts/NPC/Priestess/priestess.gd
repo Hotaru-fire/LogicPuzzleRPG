@@ -153,7 +153,10 @@ func heal_player() -> void:
 			maximum_hp - current_hp
 		)
 
-		player.set("hp", current_hp + restored_hp)
+		if player.has_method("heal"):
+			player.call("heal", restored_hp)
+		else:
+			player.set("hp", current_hp + restored_hp)
 
 		print(
 			"Priestess: May the light restore you. Restored ",

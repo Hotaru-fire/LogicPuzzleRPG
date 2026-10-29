@@ -92,9 +92,16 @@ try {
 
         $update->execute(["user_id" => $user["user_id"]]);
 
+        $auth_token = hash_hmac(
+            "sha256",
+            "rpg-game-data:" . $user["user_id"],
+            $user["password_hash"]
+        );
+
         respond(true, "Login successful!", [
             "user_id" => (int) $user["user_id"],
-            "username" => $user["username"]
+            "username" => $user["username"],
+            "auth_token" => $auth_token
         ]);
 
     } else {

@@ -15,9 +15,6 @@ size = Vector2(80, 50)
 radius = 21.0
 height = 54.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tnaqn"]
-radius = 50.0
-
 [node name="player" type="CharacterBody2D" unique_id=1523946503 groups=["player"]]
 script = ExtResource("1_qlg0r")
 
@@ -68,11 +65,3 @@ shape = SubResource("CapsuleShape2D_4mrxx")
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=1692430487]
 stream = ExtResource("5_ur7pv")
-
-[node name="Skill1Area" type="Area2D" parent="." unique_id=917960562]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Skill1Area" unique_id=1194157332]
-shape = SubResource("CircleShape2D_tnaqn")

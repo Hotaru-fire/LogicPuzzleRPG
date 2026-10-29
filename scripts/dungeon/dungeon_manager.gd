@@ -36,6 +36,10 @@ func _ready() -> void:
 			player.global_position = BattleData.return_position
 
 			print("Restored battle return position: ", player.global_position)
+
+		BattleData.return_scene = ""
+		BattleData.return_position = Vector2.ZERO
+		call_deferred("_save_dungeon_entry_checkpoint")
 	else:
 		push_error("DungeonManager could not find the player!")
 
@@ -50,6 +54,26 @@ func _ready() -> void:
 
 	for i in range(max_active_enemies):
 		spawn_enemy()
+
+
+func _save_dungeon_entry_checkpoint() -> void:
+	if not GameAPI.save_checkpoint():
+		if Session.is_logged_in():
+			push_error("Could not start saving the dungeon checkpoint.")
+		return
+
+	if not Session.is_logged_in():
+		print("Dungeon checkpoint cached for this offline session.")
+		return
+
+	var response: Array
+	while true:
+		response = await GameAPI.response_received
+		if str(response[2].get("action", "")) == "save_checkpoint":
+			break
+
+	if not bool(response[0]):
+		push_error("Dungeon checkpoint save failed: " + str(response[1]))
 
 
 func update_enemy_counter() -> void:
@@ -113,23 +137,25 @@ func spawn_enemy() -> void:
 	print("Active enemies: ", active_enemies)
 
 
-func enemy_defeated() -> void:
+func enemy_defeated(
+	exp_reward: int,
+	gold_reward: int,
+	score_reward: int
+) -> void:
 	print("DEBUG: enemy_defeated called")
-	print("DEBUG: Current count = ", enemies_defeated)
-	print("DEBUG: Session count = ", Session.dungeon_enemies_defeated)
-
-	enemies_defeated += 1
-	Session.dungeon_enemies_defeated = enemies_defeated
+	Session.record_dungeon_enemy_kill(
+		exp_reward,
+		gold_reward,
+		score_reward
+	)
+	enemies_defeated = Session.dungeon_enemies_defeated
 	print("DUNGEON COUNT: ", enemies_defeated)
 	print("SESSION DUNGEON COUNT: ", Session.dungeon_enemies_defeated)
 	print("LOGGED IN: ", Session.is_logged_in())
 	active_enemies = max(active_enemies - 1, 0)
 
-	Session.record_mob_kill(10)
-
 	print("Dungeon kills: ", enemies_defeated, "/", max_enemies_to_defeat)
 	print("Active enemies: ", active_enemies)
-	print("Global mob kills: ", Session.mobs_defeated)
 	print("Global score: ", Session.score)
 
 	update_enemy_counter()

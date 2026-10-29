@@ -177,6 +177,7 @@ func _on_start_button_pressed() -> void:
 	PlayerData.has_save_data = false
 	PlayerData.saved_position = Vector2.ZERO
 	PlayerData.saved_hp = 0
+	PlayerData.reset_health()
 	PlayerData.saved_mana = 0
 	PlayerData.saved_current_scene = "res://scenes/maps/world.tscn"
 	PlayerData.saved_boss_completed = false
@@ -221,6 +222,7 @@ func _launch_new_game() -> void:
 	print("NEW GAME STARTED")
 	print("Player Name: ", PlayerData.player_name)
 	print("Character: ", PlayerData.selected_character)
+	Session.start_gameplay_time()
 
 	waiting_for_new_game_flow = false
 	new_game_stage = ""
@@ -228,9 +230,12 @@ func _launch_new_game() -> void:
 	existing_save_found = false
 	confirmation_panel.hide()
 
-	get_tree().change_scene_to_file(
+	var error := get_tree().change_scene_to_file(
 		"res://scenes/maps/world.tscn"
 	)
+	if error != OK:
+		Session.stop_gameplay_time()
+		push_error("Failed to start a new game. Error: " + str(error))
 
 
 # --------------------------------------------------
@@ -442,6 +447,10 @@ func _on_game_api_response_received(
 			# Restore health and combat stats.
 			PlayerData.saved_hp = int(data.get("hp", 200))
 			PlayerData.saved_max_hp = int(data.get("max_hp", 200))
+			PlayerData.set_health(
+				PlayerData.saved_hp,
+				PlayerData.saved_max_hp
+			)
 			PlayerData.saved_attack = int(data.get("attack", 30))
 			PlayerData.saved_defense = int(data.get("defense", 10))
 
@@ -459,18 +468,40 @@ func _on_game_api_response_received(
 			)
 
 			# Restore session progress.
-			Session.level = int(data.get("level", 1))
-			Session.player_exp = int(data.get("exp", 0))
-			Session.gold = int(data.get("gold", 0))
-			Session.score = int(data.get("score", 0))
-			Session.mobs_defeated = int(
-				data.get("mobs_defeated", 0)
+			Session.level = clampi(
+				int(data.get("level", 1)),
+				1,
+				Session.MAX_COUNTER
 			)
-			Session.dungeon_enemies_defeated = int(
-				data.get("dungeon_enemies_defeated", 0)
+			Session.player_exp = clampi(
+				int(data.get("exp", 0)),
+				0,
+				Session.MAX_SAVED_INT
 			)
-			Session.bosses_killed = int(
-				data.get("bosses_killed", 0)
+			Session.gold = clampi(
+				int(data.get("gold", 0)),
+				0,
+				Session.MAX_SAVED_INT
+			)
+			Session.score = clampi(
+				int(data.get("score", 0)),
+				0,
+				Session.MAX_SAVED_INT
+			)
+			Session.mobs_defeated = clampi(
+				int(data.get("mobs_defeated", 0)),
+				0,
+				Session.MAX_COUNTER
+			)
+			Session.dungeon_enemies_defeated = clampi(
+				int(data.get("dungeon_enemies_defeated", 0)),
+				0,
+				Session.MAX_SIGNED_COUNTER
+			)
+			Session.bosses_killed = clampi(
+				int(data.get("bosses_killed", 0)),
+				0,
+				Session.MAX_SIGNED_COUNTER
 			)
 
 			# Tell the player script to apply the saved data.
@@ -489,6 +520,8 @@ func _on_game_api_response_received(
 				PlayerData.has_save_data = false
 				print("Saved scene does not exist: ", saved_scene)
 				return
+
+			Session.start_gameplay_time()
 
 
 			print("Database save loaded successfully.")
@@ -510,6 +543,7 @@ func _on_game_api_response_received(
 
 			if error != OK:
 				PlayerData.has_save_data = false
+				Session.stop_gameplay_time()
 				print("Failed to change to saved scene. Error: ", error)
 
 			return

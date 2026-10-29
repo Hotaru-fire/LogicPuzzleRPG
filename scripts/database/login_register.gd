@@ -111,18 +111,16 @@ func _on_request_completed(result, response_code, _headers, body):
 	submit_button.disabled = false
 	switch_mode_button.disabled = false
 
-	var raw_response = body.get_string_from_utf8()
-
 	print("HTTP request result: ", result)
 	print("HTTP status code: ", response_code)
-	print("Raw server response: ", raw_response)
+	var response_text: String = body.get_string_from_utf8()
 
 	if result != HTTPRequest.RESULT_SUCCESS:
 		message_label.text = "Cannot reach server. Check XAMPP."
 		return
 
 	var json = JSON.new()
-	var parse_error = json.parse(raw_response)
+	var parse_error = json.parse(response_text)
 
 	if parse_error != OK:
 		message_label.text = "Server returned invalid JSON. Check Output."
@@ -150,17 +148,37 @@ func _on_request_completed(result, response_code, _headers, body):
 	if response.get("success", false):
 		if not is_register_mode:
 			# Store the logged-in user's information
-			Session.user_id = int(response.get("user_id", -1))
+			var authenticated_user_id := int(response.get("user_id", -1))
+			if authenticated_user_id != Session.user_id:
+				Session.checkpoint_data.clear()
+				Session.checkpoint_user_id = -1
+				Session.reset_game_progress()
+				Session.selected_character = ""
+				PlayerData.has_save_data = false
+				PlayerData.selected_character = 0
+				PlayerData.player_name = ""
+				PlayerData.saved_position = Vector2.ZERO
+				PlayerData.saved_hp = 0
+				PlayerData.saved_max_hp = PlayerData.DEFAULT_MAX_HP
+				PlayerData.saved_attack = 30
+				PlayerData.saved_defense = 10
+				PlayerData.saved_current_scene = "res://scenes/maps/world.tscn"
+				PlayerData.saved_boss_completed = false
+				PlayerData.saved_inventory = "[]"
+				PlayerData.saved_equipment = "{}"
+				PlayerData.reset_health()
+			Session.user_id = authenticated_user_id
 			Session.username = str(response.get("username", ""))
+			Session.auth_token = str(response.get("auth_token", ""))
 
 			print("Logged in user ID: ", Session.user_id)
 			print("Logged in username: ", Session.username)
 
 			# Change to the world scene after successful login
-			if Session.user_id > 0:
+			if Session.is_logged_in():
 				get_tree().change_scene_to_file(WORLD_SCENE)
 			else:
-				message_label.text = "Login response did not contain a valid user ID."
+				message_label.text = "Login response did not contain valid account credentials."
 		else:
 			# Registration succeeded; return to login mode
 			is_register_mode = false
