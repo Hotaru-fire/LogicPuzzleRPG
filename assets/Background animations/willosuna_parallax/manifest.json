@@ -1,0 +1,330 @@
+{
+ "pack": "Pixel Parallax Backgrounds",
+ "view_size": [
+  320,
+  180
+ ],
+ "layer_size": [
+  640,
+  180
+ ],
+ "scale_folders": {
+  "x1": 1,
+  "x4": 4
+ },
+ "seamless": "every layer tiles horizontally; repeat every 640 px (x1)",
+ "times": [
+  "dawn",
+  "day",
+  "sunset",
+  "night"
+ ],
+ "same_layout_every_time": true,
+ "backgrounds": [
+  {
+   "scene": "forest",
+   "title": "Forest",
+   "time": "dawn",
+   "w": 640,
+   "h": 180,
+   "flat": "backgrounds/forest/dawn/forest_dawn_flat.png",
+   "layers": [
+    {
+     "file": "backgrounds/forest/dawn/layers/00_sky.png",
+     "name": "sky",
+     "scroll_scale": 0.0,
+     "autoscroll_px_per_s": 0,
+     "z": 0
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/01_clouds.png",
+     "name": "clouds",
+     "scroll_scale": 0.13,
+     "autoscroll_px_per_s": -6,
+     "z": 1
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/02_mountains.png",
+     "name": "mountains",
+     "scroll_scale": 0.24,
+     "autoscroll_px_per_s": 0,
+     "z": 2
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/03_hills.png",
+     "name": "hills",
+     "scroll_scale": 0.38,
+     "autoscroll_px_per_s": 0,
+     "z": 3
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/04_fog.png",
+     "name": "fog",
+     "scroll_scale": 0.56,
+     "autoscroll_px_per_s": -10,
+     "z": 4
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/05_trees.png",
+     "name": "trees",
+     "scroll_scale": 0.77,
+     "autoscroll_px_per_s": 0,
+     "z": 5
+    },
+    {
+     "file": "backgrounds/forest/dawn/layers/06_foreground.png",
+     "name": "foreground",
+     "scroll_scale": 1.0,
+     "autoscroll_px_per_s": 0,
+     "z": 6
+    }
+   ]
+  },
+  {
+   "scene": "forest",
+   "title": "Forest",
+   "time": "day",
+   "w": 640,
+   "h": 180,
+   "flat": "backgrounds/forest/day/forest_day_flat.png",
+   "layers": [
+    {
+     "file": "backgrounds/forest/day/layers/00_sky.png",
+     "name": "sky",
+     "scroll_scale": 0.0,
+     "autoscroll_px_per_s": 0,
+     "z": 0
+    },
+    {
+     "file": "backgrounds/forest/day/layers/01_clouds.png",
+     "name": "clouds",
+     "scroll_scale": 0.13,
+     "autoscroll_px_per_s": -6,
+     "z": 1
+    },
+    {
+     "file": "backgrounds/forest/day/layers/02_mountains.png",
+     "name": "mountains",
+     "scroll_scale": 0.24,
+     "autoscroll_px_per_s": 0,
+     "z": 2
+    },
+    {
+     "file": "backgrounds/forest/day/layers/03_hills.png",
+     "name": "hills",
+     "scroll_scale": 0.38,
+     "autoscroll_px_per_s": 0,
+     "z": 3
+    },
+    {
+     "file": "backgrounds/forest/day/layers/04_fog.png",
+     "name": "fog",
+     "scroll_scale": 0.56,
+     "autoscroll_px_per_s": -10,
+     "z": 4
+    },
+    {
+     "file": "backgrounds/forest/day/layers/05_trees.png",
+     "name": "trees",
+     "scroll_scale": 0.77,
+     "autoscroll_px_per_s": 0,
+     "z": 5
+    },
+    {
+     "file": "backgrounds/forest/day/layers/06_foreground.png",
+     "name": "foreground",
+     "scroll_scale": 1.0,
+     "autoscroll_px_per_s": 0,
+     "z": 6
+    }
+   ]
+  },
+  {
+   "scene": "forest",
+   "title": "Forest",
+   "time": "sunset",
+   "w": 640,
+   "h": 180,
+   "flat": "backgrounds/forest/sunset/forest_sunset_flat.png",
+   "layers": [
+    {
+     "file": "backgrounds/forest/sunset/layers/00_sky.png",
+     "name": "sky",
+     "scroll_scale": 0.0,
+     "autoscroll_px_per_s": 0,
+     "z": 0
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/01_clouds.png",
+     "name": "clouds",
+     "scroll_scale": 0.13,
+     "autoscroll_px_per_s": -6,
+     "z": 1
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/02_mountains.png",
+     "name": "mountains",
+     "scroll_scale": 0.24,
+     "autoscroll_px_per_s": 0,
+     "z": 2
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/03_hills.png",
+     "name": "hills",
+     "scroll_scale": 0.38,
+     "autoscroll_px_per_s": 0,
+     "z": 3
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/04_fog.png",
+     "name": "fog",
+     "scroll_scale": 0.56,
+     "autoscroll_px_per_s": -10,
+     "z": 4
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/05_trees.png",
+     "name": "trees",
+     "scroll_scale": 0.77,
+     "autoscroll_px_per_s": 0,
+     "z": 5
+    },
+    {
+     "file": "backgrounds/forest/sunset/layers/06_foreground.png",
+     "name": "foreground",
+     "scroll_scale": 1.0,
+     "autoscroll_px_per_s": 0,
+     "z": 6
+    }
+   ]
+  },
+  {
+   "scene": "forest",
+   "title": "Forest",
+   "time": "night",
+   "w": 640,
+   "h": 180,
+   "flat": "backgrounds/forest/night/forest_night_flat.png",
+   "layers": [
+    {
+     "file": "backgrounds/forest/night/layers/00_sky.png",
+     "name": "sky",
+     "scroll_scale": 0.0,
+     "autoscroll_px_per_s": 0,
+     "z": 0
+    },
+    {
+     "file": "backgrounds/forest/night/layers/01_clouds.png",
+     "name": "clouds",
+     "scroll_scale": 0.13,
+     "autoscroll_px_per_s": -6,
+     "z": 1
+    },
+    {
+     "file": "backgrounds/forest/night/layers/02_mountains.png",
+     "name": "mountains",
+     "scroll_scale": 0.24,
+     "autoscroll_px_per_s": 0,
+     "z": 2
+    },
+    {
+     "file": "backgrounds/forest/night/layers/03_hills.png",
+     "name": "hills",
+     "scroll_scale": 0.38,
+     "autoscroll_px_per_s": 0,
+     "z": 3
+    },
+    {
+     "file": "backgrounds/forest/night/layers/04_fog.png",
+     "name": "fog",
+     "scroll_scale": 0.56,
+     "autoscroll_px_per_s": -10,
+     "z": 4
+    },
+    {
+     "file": "backgrounds/forest/night/layers/05_trees.png",
+     "name": "trees",
+     "scroll_scale": 0.77,
+     "autoscroll_px_per_s": 0,
+     "z": 5
+    },
+    {
+     "file": "backgrounds/forest/night/layers/06_foreground.png",
+     "name": "foreground",
+     "scroll_scale": 1.0,
+     "autoscroll_px_per_s": 0,
+     "z": 6
+    }
+   ]
+  }
+ ],
+ "overlays": [
+  {
+   "name": "snow",
+   "frames": 16,
+   "w": 320,
+   "h": 180,
+   "fps": 12,
+   "loop": true,
+   "tileable": "both axes",
+   "sheet": "overlays/snow_sheet.png",
+   "sheet_columns": 4,
+   "frames_folder": "overlays/snow/",
+   "description": "falling snow, use over winter or any night"
+  },
+  {
+   "name": "fireflies",
+   "frames": 16,
+   "w": 320,
+   "h": 180,
+   "fps": 12,
+   "loop": true,
+   "tileable": "both axes",
+   "sheet": "overlays/fireflies_sheet.png",
+   "sheet_columns": 4,
+   "frames_folder": "overlays/fireflies/",
+   "description": "blinking fireflies for forest, swamp and meadow nights"
+  }
+ ],
+ "tilesets": [
+  {
+   "scene": "forest",
+   "file": "tiles/forest_tileset.png",
+   "tile": 16,
+   "columns": 4,
+   "rows": 4,
+   "order": [
+    "top_left",
+    "top",
+    "top_right",
+    "platform_left",
+    "left",
+    "center",
+    "right",
+    "platform_middle",
+    "bottom_left",
+    "bottom",
+    "bottom_right",
+    "platform_right",
+    "deco_grass",
+    "deco_rock",
+    "deco_flower",
+    "deco_bush"
+   ]
+  }
+ ],
+ "engines": {
+  "godot": {
+   "scenes": [
+    "willosuna_parallax/godot/scenes/forest.tscn"
+   ],
+   "version": "4.3+"
+  },
+  "unity": {
+   "scripts": [
+    "willosuna_parallax/unity/ParallaxLayer.cs",
+    "willosuna_parallax/unity/DayNightBlend.cs"
+   ]
+  }
+ }
+}

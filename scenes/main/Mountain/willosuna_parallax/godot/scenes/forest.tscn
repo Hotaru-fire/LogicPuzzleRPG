@@ -1,0 +1,329 @@
+[gd_scene load_steps=31 format=3]
+
+[ext_resource type="Script" path="res://willosuna_parallax/godot/day_night.gd" id="s1"]
+[ext_resource type="Script" path="res://willosuna_parallax/godot/demo_camera.gd" id="s2"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/00_sky.png" id="t1"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/01_clouds.png" id="t2"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/02_mountains.png" id="t3"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/03_hills.png" id="t4"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/04_fog.png" id="t5"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/05_trees.png" id="t6"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/dawn/layers/06_foreground.png" id="t7"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/00_sky.png" id="t8"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/01_clouds.png" id="t9"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/02_mountains.png" id="t10"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/03_hills.png" id="t11"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/04_fog.png" id="t12"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/05_trees.png" id="t13"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/day/layers/06_foreground.png" id="t14"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/00_sky.png" id="t15"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/01_clouds.png" id="t16"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/02_mountains.png" id="t17"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/03_hills.png" id="t18"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/04_fog.png" id="t19"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/05_trees.png" id="t20"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/sunset/layers/06_foreground.png" id="t21"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/00_sky.png" id="t22"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/01_clouds.png" id="t23"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/02_mountains.png" id="t24"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/03_hills.png" id="t25"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/04_fog.png" id="t26"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/05_trees.png" id="t27"]
+[ext_resource type="Texture2D" path="res://willosuna_parallax/x1/backgrounds/forest/night/layers/06_foreground.png" id="t28"]
+
+[node name="Forest" type="Node2D"]
+texture_filter = 1
+script = ExtResource("s1")
+
+[node name="dawn" type="CanvasGroup" parent="."]
+
+[node name="00_sky" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/00_sky"]
+texture = ExtResource("t1")
+centered = false
+
+[node name="01_clouds" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.13, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-6, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/01_clouds"]
+texture = ExtResource("t2")
+centered = false
+
+[node name="02_mountains" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.24, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/02_mountains"]
+texture = ExtResource("t3")
+centered = false
+
+[node name="03_hills" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.38, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/03_hills"]
+texture = ExtResource("t4")
+centered = false
+
+[node name="04_fog" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.56, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/04_fog"]
+texture = ExtResource("t5")
+centered = false
+
+[node name="05_trees" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(0.77, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/05_trees"]
+texture = ExtResource("t6")
+centered = false
+
+[node name="06_foreground" type="Parallax2D" parent="dawn"]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="dawn/06_foreground"]
+texture = ExtResource("t7")
+centered = false
+
+[node name="day" type="CanvasGroup" parent="."]
+
+[node name="00_sky" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/00_sky"]
+texture = ExtResource("t8")
+centered = false
+
+[node name="01_clouds" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.13, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-6, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/01_clouds"]
+texture = ExtResource("t9")
+centered = false
+
+[node name="02_mountains" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.24, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/02_mountains"]
+texture = ExtResource("t10")
+centered = false
+
+[node name="03_hills" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.38, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/03_hills"]
+texture = ExtResource("t11")
+centered = false
+
+[node name="04_fog" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.56, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/04_fog"]
+texture = ExtResource("t12")
+centered = false
+
+[node name="05_trees" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(0.77, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/05_trees"]
+texture = ExtResource("t13")
+centered = false
+
+[node name="06_foreground" type="Parallax2D" parent="day"]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="day/06_foreground"]
+texture = ExtResource("t14")
+centered = false
+
+[node name="sunset" type="CanvasGroup" parent="."]
+
+[node name="00_sky" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/00_sky"]
+texture = ExtResource("t15")
+centered = false
+
+[node name="01_clouds" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.13, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-6, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/01_clouds"]
+texture = ExtResource("t16")
+centered = false
+
+[node name="02_mountains" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.24, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/02_mountains"]
+texture = ExtResource("t17")
+centered = false
+
+[node name="03_hills" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.38, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/03_hills"]
+texture = ExtResource("t18")
+centered = false
+
+[node name="04_fog" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.56, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/04_fog"]
+texture = ExtResource("t19")
+centered = false
+
+[node name="05_trees" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(0.77, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/05_trees"]
+texture = ExtResource("t20")
+centered = false
+
+[node name="06_foreground" type="Parallax2D" parent="sunset"]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="sunset/06_foreground"]
+texture = ExtResource("t21")
+centered = false
+
+[node name="night" type="CanvasGroup" parent="."]
+
+[node name="00_sky" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/00_sky"]
+texture = ExtResource("t22")
+centered = false
+
+[node name="01_clouds" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.13, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-6, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/01_clouds"]
+texture = ExtResource("t23")
+centered = false
+
+[node name="02_mountains" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.24, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/02_mountains"]
+texture = ExtResource("t24")
+centered = false
+
+[node name="03_hills" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.38, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/03_hills"]
+texture = ExtResource("t25")
+centered = false
+
+[node name="04_fog" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.56, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/04_fog"]
+texture = ExtResource("t26")
+centered = false
+
+[node name="05_trees" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(0.77, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/05_trees"]
+texture = ExtResource("t27")
+centered = false
+
+[node name="06_foreground" type="Parallax2D" parent="night"]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(0, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="night/06_foreground"]
+texture = ExtResource("t28")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 90)
+zoom = Vector2(4, 4)
+script = ExtResource("s2")

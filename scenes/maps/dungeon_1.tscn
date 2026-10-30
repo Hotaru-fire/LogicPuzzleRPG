@@ -764,6 +764,9 @@ animation = &"attack_left"
 
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("7_p8efk")]
 
+[node name="StatsPanel" parent="CanvasLayer" index="1" unique_id=707532621]
+visible = false
+
 [node name="VBoxContainer2" parent="CanvasLayer/PauseMenu" parent_id_path=PackedInt32Array(2026103625, 1074780976) index="0" unique_id=2068402848]
 anchors_preset = 0
 anchor_left = 0.0
