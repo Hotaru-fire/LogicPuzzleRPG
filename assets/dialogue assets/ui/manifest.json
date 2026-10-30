@@ -1,0 +1,113 @@
+{
+  "pack": "Cozy UI Kit Lite",
+  "version": "2.0",
+  "pieces": 26,
+  "nine_slice_border_px_x1": 6,
+  "full_pack": "https://willosuna.itch.io/cozy-ui-kit",
+  "files": {
+    "bars/bar_fill_blue": {
+      "x1": "x1/bars/bar_fill_blue.png",
+      "x4": "x4/bars/bar_fill_blue.png"
+    },
+    "bars/bar_fill_red": {
+      "x1": "x1/bars/bar_fill_red.png",
+      "x4": "x4/bars/bar_fill_red.png"
+    },
+    "bars/bar_frame": {
+      "x1": "x1/bars/bar_frame.png",
+      "x4": "x4/bars/bar_frame.png"
+    },
+    "buttons/button_orange_hover": {
+      "x1": "x1/buttons/button_orange_hover.png",
+      "x4": "x4/buttons/button_orange_hover.png"
+    },
+    "buttons/button_orange_normal": {
+      "x1": "x1/buttons/button_orange_normal.png",
+      "x4": "x4/buttons/button_orange_normal.png"
+    },
+    "buttons/button_orange_pressed": {
+      "x1": "x1/buttons/button_orange_pressed.png",
+      "x4": "x4/buttons/button_orange_pressed.png"
+    },
+    "controls/checkbox_off": {
+      "x1": "x1/controls/checkbox_off.png",
+      "x4": "x4/controls/checkbox_off.png"
+    },
+    "controls/checkbox_on": {
+      "x1": "x1/controls/checkbox_on.png",
+      "x4": "x4/controls/checkbox_on.png"
+    },
+    "controls/toggle_off": {
+      "x1": "x1/controls/toggle_off.png",
+      "x4": "x4/controls/toggle_off.png"
+    },
+    "controls/toggle_on": {
+      "x1": "x1/controls/toggle_on.png",
+      "x4": "x4/controls/toggle_on.png"
+    },
+    "icons/heart_empty": {
+      "x1": "x1/icons/heart_empty.png",
+      "x4": "x4/icons/heart_empty.png"
+    },
+    "icons/heart_full": {
+      "x1": "x1/icons/heart_full.png",
+      "x4": "x4/icons/heart_full.png"
+    },
+    "icons/heart_half": {
+      "x1": "x1/icons/heart_half.png",
+      "x4": "x4/icons/heart_half.png"
+    },
+    "input/gamepad/button_a_normal": {
+      "x1": "x1/input/gamepad/button_a_normal.png",
+      "x4": "x4/input/gamepad/button_a_normal.png"
+    },
+    "input/gamepad/button_b_normal": {
+      "x1": "x1/input/gamepad/button_b_normal.png",
+      "x4": "x4/input/gamepad/button_b_normal.png"
+    },
+    "input/keyboard/key_a_normal": {
+      "x1": "x1/input/keyboard/key_a_normal.png",
+      "x4": "x4/input/keyboard/key_a_normal.png"
+    },
+    "input/keyboard/key_d_normal": {
+      "x1": "x1/input/keyboard/key_d_normal.png",
+      "x4": "x4/input/keyboard/key_d_normal.png"
+    },
+    "input/keyboard/key_e_normal": {
+      "x1": "x1/input/keyboard/key_e_normal.png",
+      "x4": "x4/input/keyboard/key_e_normal.png"
+    },
+    "input/keyboard/key_esc_normal": {
+      "x1": "x1/input/keyboard/key_esc_normal.png",
+      "x4": "x4/input/keyboard/key_esc_normal.png"
+    },
+    "input/keyboard/key_s_normal": {
+      "x1": "x1/input/keyboard/key_s_normal.png",
+      "x4": "x4/input/keyboard/key_s_normal.png"
+    },
+    "input/keyboard/key_space_normal": {
+      "x1": "x1/input/keyboard/key_space_normal.png",
+      "x4": "x4/input/keyboard/key_space_normal.png"
+    },
+    "input/keyboard/key_w_normal": {
+      "x1": "x1/input/keyboard/key_w_normal.png",
+      "x4": "x4/input/keyboard/key_w_normal.png"
+    },
+    "markers/quest_available": {
+      "x1": "x1/markers/quest_available.png",
+      "x4": "x4/markers/quest_available.png"
+    },
+    "panels/dialogue_box": {
+      "x1": "x1/panels/dialogue_box.png",
+      "x4": "x4/panels/dialogue_box.png"
+    },
+    "panels/panel_medium": {
+      "x1": "x1/panels/panel_medium.png",
+      "x4": "x4/panels/panel_medium.png"
+    },
+    "speech/bubble_talk_left": {
+      "x1": "x1/speech/bubble_talk_left.png",
+      "x4": "x4/speech/bubble_talk_left.png"
+    }
+  }
+}

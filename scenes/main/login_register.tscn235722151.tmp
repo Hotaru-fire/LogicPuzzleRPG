@@ -1,0 +1,1081 @@
+[gd_scene format=3 uid="uid://dh4wm64xtmyry"]
+
+[ext_resource type="Script" uid="uid://djvw55lq48pou" path="res://scripts/database/login_register.gd" id="1_8x1u8"]
+[ext_resource type="Script" uid="uid://du3vn7r0mp7jb" path="res://scripts/ui/parallax_background.gd" id="2_ckjjb"]
+[ext_resource type="Texture2D" uid="uid://cw14tan7ko23t" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/00_sky.png" id="2_d0nti"]
+[ext_resource type="Texture2D" uid="uid://ckoo8kx8ep18p" path="res://assets/dialogue assets/ui/x4/panels/panel_medium.png" id="2_etgfe"]
+[ext_resource type="Texture2D" uid="uid://docivp1h4er0x" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/01_clouds.png" id="3_ckjjb"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="3_s7053"]
+[ext_resource type="Texture2D" uid="uid://2hitvgqmdy2q" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/02_mountains.png" id="4_of2id"]
+[ext_resource type="Texture2D" uid="uid://q1slwpbp2qb7" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/03_hills.png" id="5_b0idg"]
+[ext_resource type="Texture2D" uid="uid://ceuia8olhab07" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/04_fog.png" id="6_5fpei"]
+[ext_resource type="Texture2D" uid="uid://shjcg417fewe" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/05_trees.png" id="7_3w8e4"]
+[ext_resource type="Texture2D" uid="uid://yhkwpm1kswsg" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/dawn/layers/06_foreground.png" id="8_q58w3"]
+[ext_resource type="Texture2D" uid="uid://db5arvmvl82uq" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/00_sky.png" id="9_4v10k"]
+[ext_resource type="Texture2D" uid="uid://c7p45xkkc3oav" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/01_clouds.png" id="10_uurmd"]
+[ext_resource type="Texture2D" uid="uid://bvs51n3xg4mjs" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/02_mountains.png" id="11_tyeuc"]
+[ext_resource type="Texture2D" uid="uid://y32p4lqjtpsr" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/03_hills.png" id="12_5k600"]
+[ext_resource type="Texture2D" uid="uid://c6hgsii6wv1ef" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/04_fog.png" id="13_bi82r"]
+[ext_resource type="Texture2D" uid="uid://ynkvybvrvf1q" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/05_trees.png" id="14_tvqfb"]
+[ext_resource type="Texture2D" uid="uid://bbiew253snvtj" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/day/layers/06_foreground.png" id="15_a6wh6"]
+[ext_resource type="Texture2D" uid="uid://c8oesxhv833q5" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/00_sky.png" id="16_6lggd"]
+[ext_resource type="Texture2D" uid="uid://bloyenoddeuwr" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/01_clouds.png" id="17_twppm"]
+[ext_resource type="Texture2D" uid="uid://0it7fwqqsra5" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/02_mountains.png" id="18_mvvvt"]
+[ext_resource type="Texture2D" uid="uid://bmiixgpye1kkf" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/03_hills.png" id="19_8d2s4"]
+[ext_resource type="Texture2D" uid="uid://5rn0mdovngnh" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/04_fog.png" id="20_5iyny"]
+[ext_resource type="Texture2D" uid="uid://ctkeswrh300ht" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/05_trees.png" id="21_18exw"]
+[ext_resource type="Texture2D" uid="uid://yqcd1a7esyif" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/sunset/layers/06_foreground.png" id="22_h0ywc"]
+[ext_resource type="Texture2D" uid="uid://lww1ir0r316w" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/00_sky.png" id="23_vlkk5"]
+[ext_resource type="Texture2D" uid="uid://dymsnc4dreo12" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/01_clouds.png" id="24_kpwbf"]
+[ext_resource type="Texture2D" uid="uid://x6b4wqumwtar" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/02_mountains.png" id="25_gpdlp"]
+[ext_resource type="Texture2D" uid="uid://c1fg1vwkjgirk" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/03_hills.png" id="26_n2chb"]
+[ext_resource type="Texture2D" uid="uid://5wxlbt8pux2t" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/04_fog.png" id="27_8wybn"]
+[ext_resource type="Texture2D" uid="uid://dpvavrfdul33j" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/05_trees.png" id="28_huxb4"]
+[ext_resource type="Texture2D" uid="uid://c1xi11yv48uth" path="res://assets/Background animations/willosuna_parallax/x1/backgrounds/forest/night/layers/06_foreground.png" id="29_767rg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tnaqn"]
+texture = ExtResource("2_etgfe")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[node name="LoginRegister" type="Control" unique_id=1157974621]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8x1u8")
+
+[node name="ParallaxBackground" type="Control" parent="." unique_id=886354713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ckjjb")
+
+[node name="Dawn" type="Control" parent="ParallaxBackground" unique_id=189183798]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sky" type="Control" parent="ParallaxBackground/Dawn" unique_id=610230236]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Sky" unique_id=1158076554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_d0nti")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Sky" unique_id=858568444]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_d0nti")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Clouds" type="Control" parent="ParallaxBackground/Dawn" unique_id=287694179]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Clouds" unique_id=536368101]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ckjjb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Clouds" unique_id=1111377246]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ckjjb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Mountains" type="Control" parent="ParallaxBackground/Dawn" unique_id=942679343]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Mountains" unique_id=1816317368]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_of2id")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Mountains" unique_id=132948458]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_of2id")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Hills" type="Control" parent="ParallaxBackground/Dawn" unique_id=1646854437]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Hills" unique_id=332406886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_b0idg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Hills" unique_id=1517926586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_b0idg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Fog" type="Control" parent="ParallaxBackground/Dawn" unique_id=1501789451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Fog" unique_id=658635036]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_5fpei")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Fog" unique_id=1786164973]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_5fpei")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Trees" type="Control" parent="ParallaxBackground/Dawn" unique_id=2078195565]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Trees" unique_id=2095419853]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_3w8e4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Trees" unique_id=1590671786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_3w8e4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Foreground" type="Control" parent="ParallaxBackground/Dawn" unique_id=1914475844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Dawn/Foreground" unique_id=992397480]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_q58w3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Dawn/Foreground" unique_id=1342649578]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_q58w3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Day" type="Control" parent="ParallaxBackground" unique_id=614499402]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sky" type="Control" parent="ParallaxBackground/Day" unique_id=1105383667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Sky" unique_id=901681482]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_4v10k")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Sky" unique_id=1138422426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_4v10k")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Clouds" type="Control" parent="ParallaxBackground/Day" unique_id=286861660]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Clouds" unique_id=709439238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_uurmd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Clouds" unique_id=981469955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_uurmd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Mountains" type="Control" parent="ParallaxBackground/Day" unique_id=288796391]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Mountains" unique_id=1911726191]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_tyeuc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Mountains" unique_id=1461691928]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_tyeuc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Hills" type="Control" parent="ParallaxBackground/Day" unique_id=1116640723]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Hills" unique_id=2041800643]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_5k600")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Hills" unique_id=68075649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_5k600")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Fog" type="Control" parent="ParallaxBackground/Day" unique_id=1988909846]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Fog" unique_id=2123042868]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_bi82r")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Fog" unique_id=282014838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_bi82r")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Trees" type="Control" parent="ParallaxBackground/Day" unique_id=633012008]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Trees" unique_id=2064845845]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_tvqfb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Trees" unique_id=367484606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_tvqfb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Foreground" type="Control" parent="ParallaxBackground/Day" unique_id=734966594]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Day/Foreground" unique_id=2042664614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_a6wh6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Day/Foreground" unique_id=1496714495]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_a6wh6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Sunset" type="Control" parent="ParallaxBackground" unique_id=762422112]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sky" type="Control" parent="ParallaxBackground/Sunset" unique_id=1045642665]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Sky" unique_id=705905537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_6lggd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Sky" unique_id=778134987]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_6lggd")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Clouds" type="Control" parent="ParallaxBackground/Sunset" unique_id=2085264517]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Clouds" unique_id=734232228]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_twppm")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Clouds" unique_id=1057211014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_twppm")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Mountains" type="Control" parent="ParallaxBackground/Sunset" unique_id=689903462]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Mountains" unique_id=1372460756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_mvvvt")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Mountains" unique_id=115718254]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_mvvvt")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Hills" type="Control" parent="ParallaxBackground/Sunset" unique_id=89125067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Hills" unique_id=1220895320]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_8d2s4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Hills" unique_id=2106502217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_8d2s4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Fog" type="Control" parent="ParallaxBackground/Sunset" unique_id=263990148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Fog" unique_id=1949837708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_5iyny")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Fog" unique_id=1288222204]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_5iyny")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Trees" type="Control" parent="ParallaxBackground/Sunset" unique_id=2069700671]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Trees" unique_id=1764500513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("21_18exw")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Trees" unique_id=391772418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("21_18exw")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Foreground" type="Control" parent="ParallaxBackground/Sunset" unique_id=247368895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Sunset/Foreground" unique_id=1078535615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_h0ywc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Sunset/Foreground" unique_id=930048364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_h0ywc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Night" type="Control" parent="ParallaxBackground" unique_id=1847881243]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sky" type="Control" parent="ParallaxBackground/Night" unique_id=94156075]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Sky" unique_id=1407127401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("23_vlkk5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Sky" unique_id=1620497495]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("23_vlkk5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Clouds" type="Control" parent="ParallaxBackground/Night" unique_id=1307129203]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Clouds" unique_id=1728362049]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_kpwbf")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Clouds" unique_id=773074738]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_kpwbf")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Mountains" type="Control" parent="ParallaxBackground/Night" unique_id=1934591235]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Mountains" unique_id=745817348]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("25_gpdlp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Mountains" unique_id=7337336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("25_gpdlp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Hills" type="Control" parent="ParallaxBackground/Night" unique_id=1304636886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Hills" unique_id=2026231096]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_n2chb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Hills" unique_id=793805750]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_n2chb")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Fog" type="Control" parent="ParallaxBackground/Night" unique_id=1707498299]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Fog" unique_id=57807630]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("27_8wybn")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Fog" unique_id=1922188497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("27_8wybn")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Trees" type="Control" parent="ParallaxBackground/Night" unique_id=331848387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Trees" unique_id=1062890754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_huxb4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Trees" unique_id=1346041966]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_huxb4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Foreground" type="Control" parent="ParallaxBackground/Night" unique_id=657645896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LayerA" type="TextureRect" parent="ParallaxBackground/Night/Foreground" unique_id=927463807]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("29_767rg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LayerB" type="TextureRect" parent="ParallaxBackground/Night/Foreground" unique_id=1294945220]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("29_767rg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2096099373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1900031486]
+custom_minimum_size = Vector2(420, 400)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tnaqn")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=156575985]
+layout_mode = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 57
+theme_override_constants/margin_right = 42
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=725032808]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1263918405]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_s7053")
+text = "WELCOME, ADVENTURER"
+horizontal_alignment = 1
+
+[node name="UsernameInput" type="LineEdit" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=135248137]
+layout_mode = 2
+placeholder_text = "Username"
+
+[node name="PasswordInput" type="LineEdit" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1131545092]
+layout_mode = 2
+placeholder_text = "Password"
+secret = true
+
+[node name="ConfirmPasswordInput" type="LineEdit" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1607752860]
+visible = false
+layout_mode = 2
+placeholder_text = "Confirm Password"
+secret = true
+
+[node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2098940152]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1331021826]
+layout_mode = 2
+text = "Login"
+
+[node name="SwitchModeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=791127426]
+layout_mode = 2
+text = "Create an account"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1424706617]

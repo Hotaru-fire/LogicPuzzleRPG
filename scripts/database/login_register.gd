@@ -10,13 +10,13 @@ var logged_in_user_id: int = -1
 var logged_in_username := ""
 
 @onready var http_request: HTTPRequest = $HTTPRequest
-@onready var title_label: Label = $CenterContainer/PanelContainer/VBoxContainer/TitleLabel
-@onready var username_input: LineEdit = $CenterContainer/PanelContainer/VBoxContainer/UsernameInput
-@onready var password_input: LineEdit = $CenterContainer/PanelContainer/VBoxContainer/PasswordInput
-@onready var confirm_password_input: LineEdit = $CenterContainer/PanelContainer/VBoxContainer/ConfirmPasswordInput
-@onready var message_label: Label = $CenterContainer/PanelContainer/VBoxContainer/MessageLabel
-@onready var submit_button: Button = $CenterContainer/PanelContainer/VBoxContainer/SubmitButton
-@onready var switch_mode_button: Button = $CenterContainer/PanelContainer/VBoxContainer/SwitchModeButton
+@onready var title_label: Label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TitleLabel
+@onready var username_input: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/UsernameInput
+@onready var password_input: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PasswordInput
+@onready var confirm_password_input: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ConfirmPasswordInput
+@onready var message_label: Label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MessageLabel
+@onready var submit_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SubmitButton
+@onready var switch_mode_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SwitchModeButton
 
 
 func _ready():

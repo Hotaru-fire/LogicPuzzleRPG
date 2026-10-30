@@ -1,0 +1,19 @@
+; Demo project: open this folder with Godot 4.3 or newer.
+
+config_version=5
+
+[application]
+
+config/name="Willosuna Pixel Parallax Backgrounds"
+run/main_scene="res://willosuna_parallax/godot/scenes/forest.tscn"
+config/features=PackedStringArray("4.3")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

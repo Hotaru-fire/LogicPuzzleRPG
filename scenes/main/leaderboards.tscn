@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dohs6eb7kd5sq"]
 
-[ext_resource type="FontFile" uid="uid://c5vadbmr6ktn3" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="1_k1hxs"]
+[ext_resource type="FontFile" uid="uid://c5vadbmr6ktn3" path="res://assets/fonts/Cinzel/Cinzel-VariableFont_wght.ttf" id="1_k1hxs"]
 [ext_resource type="Script" uid="uid://ba8epx84xpl84" path="res://scripts/ui/leaderboards.gd" id="1_utcwe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptxvi"]
