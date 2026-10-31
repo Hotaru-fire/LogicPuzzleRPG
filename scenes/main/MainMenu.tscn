@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bdsivuyavqdvr"]
 
-[ext_resource type="Script" uid="uid://cxyh21ercegvg" path="res://scripts/main_menu.gd" id="1_yqorp"]
-[ext_resource type="Texture2D" uid="uid://crl342bsdd14a" path="res://assets/pixel-npc/Zeth.png" id="2_l72w3"]
-[ext_resource type="Texture2D" uid="uid://dbnsk85c34l5v" path="res://assets/full-npc/Olla(F).png" id="3_826wr"]
-[ext_resource type="Texture2D" uid="uid://clb3la10iga00" path="res://assets/pixel-npc/Mark.png" id="4_ucygd"]
-[ext_resource type="Texture2D" uid="uid://bf2mcwdvxjrva" path="res://assets/full-npc/Chole(F).png" id="5_mipys"]
+[ext_resource type="Script" uid="uid://cxyh21ercegvg" path="res://scripts/ui/main_menu.gd" id="1_yqorp"]
+[ext_resource type="VideoStream" uid="uid://cx434lb5k1i6j" path="res://assets/video/BG-Video.ogv" id="2_blefk"]
+[ext_resource type="Texture2D" uid="uid://crl342bsdd14a" path="res://assets/npc/pixel-npc/Zeth.png" id="2_l72w3"]
+[ext_resource type="Texture2D" uid="uid://dbnsk85c34l5v" path="res://assets/npc/full-npc/Olla(F).png" id="3_826wr"]
+[ext_resource type="Texture2D" uid="uid://clb3la10iga00" path="res://assets/npc/pixel-npc/Mark.png" id="4_ucygd"]
+[ext_resource type="Texture2D" uid="uid://bf2mcwdvxjrva" path="res://assets/npc/full-npc/Chole(F).png" id="5_mipys"]
+
+[sub_resource type="Theme" id="Theme_tnaqn"]
 
 [node name="MainMenu" type="Control" unique_id=103979169]
 layout_mode = 3
@@ -15,11 +18,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqorp")
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1649817517]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -223.0
+offset_right = 581.0
+offset_bottom = 801.0
+stream = ExtResource("2_blefk")
+autoplay = true
+loop = true
+
+[node name="VideoStreamPlayer2" type="VideoStreamPlayer" parent="." unique_id=1534785611]
+layout_mode = 0
+offset_left = 573.0
+offset_top = -216.0
+offset_right = 1149.0
+offset_bottom = 808.0
+stream = ExtResource("2_blefk")
+autoplay = true
+loop = true
+
 [node name="Background" type="ColorRect" parent="." unique_id=643655408]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -9.0
+offset_right = -19.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -40,13 +68,13 @@ offset_top = 202.0
 offset_right = 811.0
 offset_bottom = 338.0
 
-[node name="LoadgameButton" type="Button" parent="MenuButtons" unique_id=515339212]
-layout_mode = 2
-text = "Load Game"
-
 [node name="PlayButton" type="Button" parent="MenuButtons" unique_id=1162743061]
 layout_mode = 2
 text = "Play"
+
+[node name="LoadgameButton" type="Button" parent="MenuButtons" unique_id=515339212]
+layout_mode = 2
+text = "Load Game"
 
 [node name="SettingsButton" type="Button" parent="MenuButtons" unique_id=737137823]
 layout_mode = 2
@@ -54,7 +82,7 @@ text = "Settings"
 
 [node name="LeaderBoardButton" type="Button" parent="MenuButtons" unique_id=361621552]
 layout_mode = 2
-text = "Leader board"
+text = "Leaderboard"
 
 [node name="SaveQuitButton" type="Button" parent="MenuButtons" unique_id=538055842]
 layout_mode = 2
@@ -65,22 +93,6 @@ visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="PlayerNameLabel" type="Label" parent="PlayPanel" unique_id=652482545]
-layout_mode = 0
-offset_left = 62.0
-offset_top = 358.0
-offset_right = 195.0
-offset_bottom = 381.0
-text = "Enter Your Name"
-
-[node name="PlayerNameInput" type="LineEdit" parent="PlayPanel" unique_id=13378727]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 390.0
-offset_right = 221.0
-offset_bottom = 421.0
-placeholder_text = "Enter player name..."
 
 [node name="Choose Your Character" type="Label" parent="PlayPanel" unique_id=2130715182]
 layout_mode = 0
@@ -209,13 +221,15 @@ offset_left = 366.0
 offset_top = 559.0
 offset_right = 743.0
 offset_bottom = 582.0
-text = "Please enter player name and choose a charater!"
+text = "Please choose your character."
 
 [node name="SettingsPanel" type="Panel" parent="." unique_id=2142508164]
 visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 391.0
+offset_top = 435.0
+offset_right = 431.0
+offset_bottom = 475.0
 
 [node name="MusicLbl" type="Label" parent="SettingsPanel" unique_id=1888792299]
 layout_mode = 0
@@ -246,9 +260,55 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back"
 
-[connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]
+[node name="ConfirmationPanel" type="PanelContainer" parent="." unique_id=1199361404]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -80.0
+offset_right = 190.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ConfirmationPanel" unique_id=1164834230]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_tnaqn")
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationPanel" unique_id=612957201]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MessageLabel" type="Label" parent="ConfirmationPanel/VBoxContainer" unique_id=1162209498]
+custom_minimum_size = Vector2(380, 120)
+layout_mode = 2
+text = "This will delete existing save file"
+autowrap_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ConfirmationPanel/VBoxContainer" unique_id=1920219816]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=547890306]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 2
+text = "Continue"
+
+[node name="CancelButton" type="Button" parent="ConfirmationPanel/VBoxContainer/ButtonContainer" unique_id=178472133]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 2
+text = "Cancel"
+
 [connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuButtons/LeaderBoardButton" to="." method="_on_leader_board_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SaveQuitButton" to="." method="_on_save_quit_button_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Knight" to="." method="_on_character_1_pressed"]
 [connection signal="pressed" from="PlayPanel/CharacterSelect/Mage" to="." method="_on_character_2_pressed"]

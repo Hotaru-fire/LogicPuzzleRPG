@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d0c6n478mh2bp"
+
+[deps]
+
+files=["res://assets/Characters/Priestess/credits/credits.notes.translation", "res://assets/Characters/Priestess/credits/credits.authors.translation", "res://assets/Characters/Priestess/credits/credits.licenses.translation", "res://assets/Characters/Priestess/credits/credits.urls.translation"]
+
+source_file="res://assets/Characters/Priestess/credits/credits.csv"
+dest_files=["res://assets/Characters/Priestess/credits/credits.notes.translation", "res://assets/Characters/Priestess/credits/credits.authors.translation", "res://assets/Characters/Priestess/credits/credits.licenses.translation", "res://assets/Characters/Priestess/credits/credits.urls.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LogicalPuzzlerpg"
-run/main_scene="uid://bdsivuyavqdvr"
+run/main_scene="uid://dh4wm64xtmyry"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 PlayerData="*uid://b5oedrsuisqql"
 SceneTransition="*uid://bvvsfdm5nvals"
+BattleData="*uid://bnqq5shnll7tv"
+Session="*uid://bs6mdbulvqmq6"
+GameAPI="*uid://dv8faasy1lc6e"
 
 [display]
 
@@ -80,6 +83,11 @@ move_right={
 basic_attack={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

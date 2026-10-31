@@ -1,0 +1,21 @@
+[
+  {
+    "index": 1,
+    "slug": "torchlit_stone_corridor",
+    "display_name": "Torchlit Stone Corridor",
+    "environment": "Stone Dungeon",
+    "recommended_runtime_file": "PNG/1600x900/01_torchlit_stone_corridor_1600x900.png",
+    "png_1920x1080": "PNG/1920x1080/01_torchlit_stone_corridor_1920x1080.png",
+    "1920x1080_role": "convenience upscale",
+    "1920x1080_seam_to_p90_ratio": 0.363143,
+    "png_1600x900": "PNG/1600x900/01_torchlit_stone_corridor_1600x900.png",
+    "1600x900_role": "recommended runtime master",
+    "1600x900_seam_to_p90_ratio": 0.371552,
+    "png_1280x720": "PNG/1280x720/01_torchlit_stone_corridor_1280x720.png",
+    "1280x720_role": "runtime export",
+    "1280x720_seam_to_p90_ratio": 0.381296,
+    "png_960x540": "PNG/960x540/01_torchlit_stone_corridor_960x540.png",
+    "960x540_role": "lightweight runtime export",
+    "960x540_seam_to_p90_ratio": 0.385075
+  }
+]

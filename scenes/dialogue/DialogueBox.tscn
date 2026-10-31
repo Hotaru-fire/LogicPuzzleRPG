@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://d2vqebc8wg7vg"]
+
+[ext_resource type="Script" uid="uid://0h5dgbopxovh" path="res://scripts/Dialogue Box/dialogue_box.gd" id="1_qtmnj"]
+[ext_resource type="Texture2D" uid="uid://bptb4q66cfssx" path="res://assets/dialogue assets/ui/x4/panels/dialogue_box.png" id="1_wc62f"]
+[ext_resource type="Texture2D" uid="uid://dpuc0t1yfb7ux" path="res://assets/npc/full-npc/Emma(F).png" id="2_jj3q6"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="3_gbb6a"]
+[ext_resource type="FontFile" uid="uid://cyxjm36ca8e7y" path="res://assets/fonts/Nunito/Nunito-VariableFont_wght.ttf" id="3_jj3q6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f3m5i"]
+texture = ExtResource("1_wc62f")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gbb6a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuoto"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtmnj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch5tr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shq2c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4seae"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="DialogueBox" type="Control" unique_id=737193392]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qtmnj")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=169890292]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -211.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_f3m5i")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1231142630]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2039561211]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=960044832]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 19
+
+[node name="Portrait" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1609293019]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_jj3q6")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1442752309]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1892871988]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_gbb6a")
+theme_override_font_sizes/font_size = 20
+text = "NPC NAME"
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1991134389]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 19
+
+[node name="DialogueCard" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2" unique_id=1150018769]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(969, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_gbb6a")
+
+[node name="DialogueText" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2/DialogueCard" unique_id=476350087]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_jj3q6")
+theme_override_fonts/bold_font = ExtResource("3_jj3q6")
+text = "DISPLAYED TEXT"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1849210538]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=758373804]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jj3q6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iuoto")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qtmnj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ch5tr")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_shq2c")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4seae")
+text = "Continue"

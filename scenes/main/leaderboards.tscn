@@ -1,0 +1,775 @@
+[gd_scene format=3 uid="uid://dohs6eb7kd5sq"]
+
+[ext_resource type="FontFile" uid="uid://c5vadbmr6ktn3" path="res://assets/fonts/Cinzel/Cinzel-VariableFont_wght.ttf" id="1_k1hxs"]
+[ext_resource type="Script" uid="uid://ba8epx84xpl84" path="res://scripts/ui/leaderboards.gd" id="1_utcwe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptxvi"]
+bg_color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.4392157, 0.32941177, 0.65882355, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y632b"]
+bg_color = Color(0.4392157, 0.32941177, 0.65882355, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1hxs"]
+bg_color = Color(0.27058825, 0.2, 0.37254903, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utcwe"]
+bg_color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvrrk"]
+bg_color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.4392157, 0.32941177, 0.65882355, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b45uc"]
+bg_color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4392157, 0.32941177, 0.65882355, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnaqn"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.09019608, 0.09411765, 0.15294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3m5i"]
+bg_color = Color(0.12941177, 0.11764706, 0.19607843, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jor0a"]
+bg_color = Color(0.12941177, 0.11764706, 0.19607843, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg7cm"]
+bg_color = Color(0.12941177, 0.11764706, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kspuw"]
+bg_color = Color(0.12941177, 0.11764706, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0d1l"]
+bg_color = Color(0.12941177, 0.11764706, 0.19607843, 1)
+border_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qyre"]
+bg_color = Color(0.2873643, 0.26659766, 0.4072746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vt8lh"]
+bg_color = Color(0.72156864, 0.5254902, 0.043137256, 1)
+
+[node name="Leaderboards" type="Control" unique_id=1405132123]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_utcwe")
+
+[node name="Background" type="ColorRect" parent="." unique_id=2020980024]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=404671382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="MainMargin" unique_id=1239078569]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="MainMargin/MainVBox" unique_id=686669152]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MainMargin/MainVBox/Header" unique_id=496439941]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_font_sizes/font_size = 34
+text = "MEMORY QUEST"
+
+[node name="NavigationBar" type="HBoxContainer" parent="MainMargin/MainVBox" unique_id=1642951738]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AnalyticsButton" type="Button" parent="MainMargin/MainVBox/NavigationBar" unique_id=477023431]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_pressed_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_hover_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ptxvi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y632b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_k1hxs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_utcwe")
+text = "USER ANALYTICS"
+
+[node name="LeaderboardsButton" type="Button" parent="MainMargin/MainVBox/NavigationBar" unique_id=1074457938]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_pressed_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_hover_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fvrrk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y632b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_k1hxs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_utcwe")
+text = "LEADERBOARDS"
+
+[node name="BackButton" type="Button" parent="MainMargin/MainVBox/NavigationBar" unique_id=1053068058]
+custom_minimum_size = Vector2(110, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_pressed_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_colors/font_hover_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b45uc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y632b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_k1hxs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_utcwe")
+text = "BACK"
+
+[node name="Content" type="Control" parent="MainMargin/MainVBox" unique_id=1915737800]
+layout_mode = 2
+
+[node name="AnalyticsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=958808145]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -574.5
+offset_top = -14.0
+offset_right = 574.5
+offset_bottom = 542.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="AnalyticsPanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll" unique_id=1823505650]
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tnaqn")
+
+[node name="AnalyticsVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel" unique_id=1490817117]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="AnalyticsTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=1923826425]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_font_sizes/font_size = 34
+text = "USER ANALYTICS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerInfoCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=437697845]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3m5i")
+
+[node name="PlayerInfo" type="HBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlayerInfoCard" unique_id=734194650]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="UsernameLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlayerInfoCard/PlayerInfo" unique_id=525963171]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Name"
+
+[node name="CharacterClassLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlayerInfoCard/PlayerInfo" unique_id=222225548]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.77254903, 0.7137255, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Class"
+
+[node name="LastUpdatedLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlayerInfoCard/PlayerInfo" unique_id=247041110]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6901961, 0.65882355, 0.77254903, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Last Update"
+
+[node name="StatsCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=855598086]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="StatsGrid" type="GridContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard" unique_id=1045108795]
+layout_mode = 2
+theme_override_constants/h_separation = 86
+columns = 4
+
+[node name="ScoreCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid" unique_id=1587621512]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="ScoreVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ScoreCard" unique_id=968689059]
+layout_mode = 2
+
+[node name="ScoreTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ScoreCard/ScoreVBox" unique_id=472839580]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "TOTAL SCORE"
+
+[node name="ScoreValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ScoreCard/ScoreVBox" unique_id=2134635095]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="LevelCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid" unique_id=1826034807]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="LevelVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/LevelCard" unique_id=1044161479]
+layout_mode = 2
+
+[node name="LevelTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/LevelCard/LevelVBox" unique_id=791578973]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "LEVEL"
+
+[node name="LevelValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/LevelCard/LevelVBox" unique_id=27843932]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="ExpCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid" unique_id=702931104]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="EnemiesVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ExpCard" unique_id=1393199105]
+layout_mode = 2
+
+[node name="EnemiesTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ExpCard/EnemiesVBox" unique_id=408569128]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "ENEMIES DEFEATED"
+
+[node name="EnemiesValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ExpCard/EnemiesVBox" unique_id=1440896730]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="GoldCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid" unique_id=477989693]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="GoldVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/GoldCard" unique_id=2010992345]
+layout_mode = 2
+
+[node name="GoldTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/GoldCard/GoldVBox" unique_id=1851834174]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "GOLD"
+
+[node name="GoldValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/GoldCard/GoldVBox" unique_id=590730934]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="CombatPanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=340911008]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="CombatVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel" unique_id=782510587]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CombatTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox" unique_id=966386816]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "COMBAT RECORD"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox" unique_id=492923947]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="MobsDefeatedCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer" unique_id=1577325211]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/MobsDefeatedCard" unique_id=1499119158]
+layout_mode = 2
+
+[node name="MobsDefeatedLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/MobsDefeatedCard/HBoxContainer" unique_id=1265208057]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Enemies Defeated"
+
+[node name="MobsDefeatedValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/MobsDefeatedCard/HBoxContainer" unique_id=1122339723]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.92156863, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="DungeonEnemiesCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer" unique_id=390853931]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/DungeonEnemiesCard" unique_id=1983925017]
+layout_mode = 2
+
+[node name="DungeonEnemiesLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/DungeonEnemiesCard/HBoxContainer" unique_id=801012188]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Dungeon Enemies Defeated"
+
+[node name="DungeonEnemiesValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/DungeonEnemiesCard/HBoxContainer" unique_id=1337413901]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="BossesKilledCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer" unique_id=1886084301]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesKilledCard" unique_id=1555500458]
+layout_mode = 2
+
+[node name="BossesKilledLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesKilledCard/HBoxContainer" unique_id=502536656]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Bosses Killed"
+
+[node name="BossesKilledValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesKilledCard/HBoxContainer" unique_id=1153485058]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="BossesCompletedCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer" unique_id=577345201]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesCompletedCard" unique_id=262032359]
+layout_mode = 2
+
+[node name="BossCompletedLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesCompletedCard/HBoxContainer" unique_id=294132683]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Bosses Completed"
+
+[node name="BossesCompletedValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/BossesCompletedCard/HBoxContainer" unique_id=2051464782]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="TotalDeathsCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer" unique_id=340542448]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/TotalDeathsCard" unique_id=1044533759]
+layout_mode = 2
+
+[node name="TotalDeathsLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/TotalDeathsCard/HBoxContainer" unique_id=322099400]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Total Deaths"
+
+[node name="TotalDeathsValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CombatPanel/CombatVBox/HBoxContainer/TotalDeathsCard/HBoxContainer" unique_id=113237647]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="CharacterPanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=1903326474]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="CharacterVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel" unique_id=688595799]
+layout_mode = 2
+
+[node name="CharacterTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox" unique_id=59892308]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "CHARACTER DETAILS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox" unique_id=16913061]
+layout_mode = 2
+theme_override_constants/separation = 257
+
+[node name="HPCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer" unique_id=561847883]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/HPCard" unique_id=207654271]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/HPCard/HBoxContainer" unique_id=82286786]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "HP"
+
+[node name="HealthValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/HPCard/HBoxContainer" unique_id=1081510694]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="ATKCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer" unique_id=820183428]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/ATKCard" unique_id=1017898298]
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/ATKCard/VBoxContainer" unique_id=1147744086]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "ATTACK"
+
+[node name="AttackValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/ATKCard/VBoxContainer" unique_id=627225477]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="DEFCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer" unique_id=760398728]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEFCard" unique_id=117718192]
+layout_mode = 2
+
+[node name="DefenseLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEFCard/VBoxContainer" unique_id=1062808563]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "DEFENSE"
+
+[node name="DefenseValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEFCard/VBoxContainer" unique_id=1727452717]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="DEATHCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer" unique_id=209529945]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEATHCard" unique_id=1469188516]
+layout_mode = 2
+
+[node name="DeathsLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEATHCard/VBoxContainer" unique_id=1030916049]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "DEATHS"
+
+[node name="DeathsValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/CharacterPanel/CharacterVBox/HBoxContainer/DEATHCard/VBoxContainer" unique_id=1617484714]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="PlaytimePanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=1780359585]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="PlaytimeVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel" unique_id=1542350787]
+layout_mode = 2
+
+[node name="PlaytimeTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox" unique_id=1470642453]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "PLAYTIME"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox" unique_id=1467582249]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox/HBoxContainer" unique_id=813480674]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox/HBoxContainer/PanelContainer" unique_id=1851711842]
+layout_mode = 2
+
+[node name="PlaytimeLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox/HBoxContainer/PanelContainer/HBoxContainer" unique_id=507468359]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Playtime"
+
+[node name="PlaytimeValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PlaytimePanel/PlaytimeVBox/HBoxContainer/PanelContainer/HBoxContainer" unique_id=2009513001]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="PuzzleRecordPanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox" unique_id=1454629509]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="PuzzleRecordVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel" unique_id=171678293]
+layout_mode = 2
+
+[node name="PuzzleRecordTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox" unique_id=1165343586]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "PUZZLE RECORD"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox" unique_id=1411724262]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="PuzzlesClearedCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer" unique_id=1519640619]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/PuzzlesClearedCard" unique_id=1295900523]
+layout_mode = 2
+
+[node name="PuzzlesClearedLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/PuzzlesClearedCard/VBoxContainer" unique_id=1124114948]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "PuzzlesCleared"
+
+[node name="PuzzlesClearedValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/PuzzlesClearedCard/VBoxContainer" unique_id=735715224]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="FirstClearCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer" unique_id=99673802]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/FirstClearCard" unique_id=162239926]
+layout_mode = 2
+
+[node name="FirstClearTimeLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/FirstClearCard/VBoxContainer" unique_id=1957516729]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "First Clear Time"
+
+[node name="FirstClearTimeValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/FirstClearCard/VBoxContainer" unique_id=816229941]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="LatestClearCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer" unique_id=746573647]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/LatestClearCard" unique_id=585531077]
+layout_mode = 2
+
+[node name="LatestClearTimeLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/LatestClearCard/VBoxContainer" unique_id=1483613681]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Latest Clear Time"
+
+[node name="LatestClearTimeValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/LatestClearCard/VBoxContainer" unique_id=282303214]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="BestClearCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer" unique_id=121591852]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/BestClearCard" unique_id=1846909012]
+layout_mode = 2
+
+[node name="BestClearTimeLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/BestClearCard/VBoxContainer" unique_id=271139967]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Best Clear Time"
+
+[node name="BestClearTimeValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/BestClearCard/VBoxContainer" unique_id=1560789193]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="TimeImprovementCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer" unique_id=429865306]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/TimeImprovementCard" unique_id=473444290]
+layout_mode = 2
+
+[node name="TimeImprovementLabel" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/TimeImprovementCard/VBoxContainer" unique_id=661621079]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "Time Improvement"
+
+[node name="TimeImprovementvalue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/PuzzleRecordPanel/PuzzleRecordVBox/HBoxContainer/TimeImprovementCard/VBoxContainer" unique_id=131182230]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="LeaderboardsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=569304602]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -578.5
+offset_right = 581.5
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="LeaderboardsPanel" type="PanelContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll" unique_id=259729205]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kspuw")
+
+[node name="LeaderboardsVBox" type="VBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel" unique_id=1835916049]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="LeaderboardsTitle" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox" unique_id=1722753745]
+custom_minimum_size = Vector2(1149, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("1_k1hxs")
+theme_override_font_sizes/font_size = 34
+text = "Leaderboards"
+horizontal_alignment = 1
+
+[node name="SummaryCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox" unique_id=1271771521]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f0d1l")
+
+[node name="LeaderboardSummary" type="HBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard" unique_id=145429880]
+layout_mode = 2
+theme_override_constants/separation = 250
+alignment = 1
+
+[node name="PlayersCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary" unique_id=577534093]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qyre")
+
+[node name="PlayersVBox" type="HBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/PlayersCard" unique_id=1012456637]
+layout_mode = 2
+
+[node name="TotalPlayersLabel" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/PlayersCard/PlayersVBox" unique_id=340751635]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "REGISTERED PLAYERS"
+
+[node name="TotalPlayersValue" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/PlayersCard/PlayersVBox" unique_id=803571397]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="RankCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary" unique_id=1895076328]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qyre")
+
+[node name="RankVBox2" type="HBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/RankCard" unique_id=776720001]
+layout_mode = 2
+
+[node name="MyRankLabel" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/RankCard/RankVBox2" unique_id=683716903]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "MY RANK"
+
+[node name="MyRankValue" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/SummaryCard/LeaderboardSummary/RankCard/RankVBox2" unique_id=891363817]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "0"
+
+[node name="TableCard" type="PanelContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox" unique_id=873889443]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vt8lh")
+
+[node name="TableHeader" type="HBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/TableCard" unique_id=1893517021]
+layout_mode = 2
+theme_override_constants/separation = 300
+alignment = 1
+
+[node name="RankHeader" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/TableCard/TableHeader" unique_id=627472893]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "RANK"
+
+[node name="UsernameHeader" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/TableCard/TableHeader" unique_id=947901641]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "PLAYER"
+
+[node name="ScoreHeader" type="Label" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/TableCard/TableHeader" unique_id=723031256]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k1hxs")
+text = "SCORE"
+
+[node name="PlayerScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox" unique_id=1267787804]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="PlayerRows" type="VBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/PlayerScroll" unique_id=208691213]
+layout_mode = 2
+alignment = 1
+
+[node name="StatusLabel" type="Label" parent="MainMargin/MainVBox" unique_id=1591901595]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="MainMargin/MainVBox/NavigationBar/AnalyticsButton" to="." method="_on_analytics_button_pressed"]
+[connection signal="pressed" from="MainMargin/MainVBox/NavigationBar/LeaderboardsButton" to="." method="_on_leaderboards_button_pressed"]
+[connection signal="pressed" from="MainMargin/MainVBox/NavigationBar/BackButton" to="." method="_on_back_button_pressed"]

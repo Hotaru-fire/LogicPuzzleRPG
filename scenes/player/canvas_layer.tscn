@@ -1,9 +1,64 @@
 [gd_scene format=3 uid="uid://bxvtryatcs7nw"]
 
-[ext_resource type="Script" uid="uid://cv4tlpntwaqg5" path="res://scripts/player_hud.gd" id="1_pstgf"]
-[ext_resource type="Script" uid="uid://dgdibaxuw0m1u" path="res://scripts/stats_panel.gd" id="2_q6doy"]
-[ext_resource type="Script" uid="uid://cfyogfkg5ndcv" path="res://scripts/skill_bar.gd" id="3_6y6km"]
-[ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/pause_menu.gd" id="3_y6yk7"]
+[ext_resource type="Script" uid="uid://cv4tlpntwaqg5" path="res://scripts/player/features/player_hud.gd" id="1_pstgf"]
+[ext_resource type="Script" uid="uid://dgdibaxuw0m1u" path="res://scripts/player/features/stats_panel.gd" id="2_q6doy"]
+[ext_resource type="Texture2D" uid="uid://ckoo8kx8ep18p" path="res://assets/dialogue assets/ui/x4/panels/panel_medium.png" id="2_y6yk7"]
+[ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/ui/pause_menu.gd" id="3_y6yk7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6yk7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7cgu"]
+bg_color = Color(1, 0.20392157, 0.10980392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etgfe"]
+texture = ExtResource("2_y6yk7")
+texture_margin_left = 35.0
+texture_margin_top = 35.0
+texture_margin_right = 35.0
+texture_margin_bottom = 35.0
+expand_margin_left = 25.0
+expand_margin_right = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3m5i"]
+bg_color = Color(0.09019608, 0.09411765, 0.15294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16078432, 0.14117648, 0.23529412, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jor0a"]
+bg_color = Color(0.09019608, 0.09411765, 0.15294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.27058825, 0.2509804, 0.32156864, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg7cm"]
+bg_color = Color(0.09019608, 0.09411765, 0.15294118, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.27058825, 0.2509804, 0.32156864, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=2026103625]
 process_mode = 3
@@ -29,23 +84,19 @@ modulate = Color(1, 0.1764706, 0.25490198, 1)
 layout_mode = 2
 text = "HP: 200 / 200"
 
-[node name="HPBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1464122780]
+[node name="HPBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1987068147]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.972549, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_y6yk7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j7cgu")
 max_value = 200.0
 value = 200.0
-
-[node name="ManaLabel" type="Label" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1162617037]
-modulate = Color(0.21568628, 0.25882354, 1, 1)
-layout_mode = 2
-text = "Mana: 100 / 100"
-
-[node name="ManaBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=875106025]
-layout_mode = 2
-value = 100.0
+show_percentage = false
 
 [node name="StatsPanel" type="Panel" parent="." unique_id=707532621]
 visible = false
-custom_minimum_size = Vector2(250, 160)
+custom_minimum_size = Vector2(520, 620)
 custom_maximum_size = Vector2(500, 600)
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,51 +107,248 @@ offset_right = -279.0
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_etgfe")
 script = ExtResource("2_q6doy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel" unique_id=101596096]
+[node name="MarginContainer" type="MarginContainer" parent="StatsPanel" unique_id=1865947885]
 layout_mode = 0
-offset_left = 19.0
-offset_right = 102.0
-offset_bottom = 293.0
+offset_right = 500.0
+offset_bottom = 600.0
+theme_override_constants/margin_top = 19
 
-[node name="Title" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2039946484]
+[node name="MainVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer" unique_id=101596096]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="StatsPanel/MarginContainer/MainVBox" unique_id=2039946484]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "CHARACTER STATUS"
+horizontal_alignment = 1
+
+[node name="HeaderLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1033197683]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.03137255, 0, 0, 1)
+text = "PLAYER PROFILE "
+
+[node name="OverviewGrid" type="GridContainer" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1999063943]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 4
+columns = 2
+
+[node name="LevelCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid" unique_id=819949364]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3m5i")
+
+[node name="HBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/LevelCard" unique_id=208567577]
 layout_mode = 2
 
-[node name="HPLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=630093777]
+[node name="StatTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/LevelCard/HBox" unique_id=1527685155]
 layout_mode = 2
-text = "HP"
+text = "LEVEL"
+horizontal_alignment = 1
 
-[node name="ManaLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2015377860]
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/LevelCard/HBox" unique_id=995741883]
 layout_mode = 2
-text = "MANA"
+text = "0"
+horizontal_alignment = 1
 
-[node name="AttackLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=832559459]
+[node name="GoldCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid" unique_id=1785847579]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3m5i")
+
+[node name="HBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/GoldCard" unique_id=819847510]
+layout_mode = 2
+
+[node name="StatTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/GoldCard/HBox" unique_id=50037328]
+layout_mode = 2
+text = "GOLD"
+horizontal_alignment = 1
+
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/GoldCard/HBox" unique_id=620719163]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid" unique_id=840596937]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3m5i")
+
+[node name="HBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/ScoreCard" unique_id=461742608]
+layout_mode = 2
+
+[node name="StatTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/ScoreCard/HBox" unique_id=692400888]
+layout_mode = 2
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/ScoreCard/HBox" unique_id=361629074]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlaytimeCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid" unique_id=822384967]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3m5i")
+
+[node name="HBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/PlaytimeCard" unique_id=1441307763]
+layout_mode = 2
+
+[node name="StatTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/PlaytimeCard/HBox" unique_id=616555665]
+layout_mode = 2
+text = "PLAYTIME"
+horizontal_alignment = 1
+
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/OverviewGrid/PlaytimeCard/HBox" unique_id=1572812989]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="EXPCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1117844613]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jor0a")
+
+[node name="EXPSection" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/EXPCard" unique_id=585441181]
+layout_mode = 2
+
+[node name="EXPHeader" type="HBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/EXPCard/EXPSection" unique_id=976529984]
+layout_mode = 2
+
+[node name="EXPLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/EXPCard/EXPSection/EXPHeader" unique_id=138515768]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9098039, 0.77254903, 0.42745098, 1)
+text = "EXPERIENCE"
+
+[node name="EXPValueLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/EXPCard/EXPSection/EXPHeader" unique_id=643976183]
+layout_mode = 2
+text = "0"
+
+[node name="EXPProgressBar" type="ProgressBar" parent="StatsPanel/MarginContainer/MainVBox/EXPCard/EXPSection" unique_id=192584365]
+layout_mode = 2
+show_percentage = false
+
+[node name="NextLevelLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/EXPCard/EXPSection" unique_id=2144352676]
+layout_mode = 2
+text = "NEXT LEVEL"
+
+[node name="CombatTitleLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1842114626]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.03137255, 0, 0, 1)
+text = "COMBAT STATS"
+
+[node name="CombatGrid" type="GridContainer" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1909723717]
+layout_mode = 2
+columns = 2
+
+[node name="CurrentHPCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid" unique_id=1311987510]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="CardVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/CurrentHPCard" unique_id=1500643058]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/CurrentHPCard/CardVBox" unique_id=1103535683]
+layout_mode = 2
+text = "CURRENT HP"
+
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/CurrentHPCard/CardVBox" unique_id=1371018681]
+layout_mode = 2
+text = "0"
+
+[node name="MaxHPCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid" unique_id=1820796972]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="CardVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/MaxHPCard" unique_id=684672503]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/MaxHPCard/CardVBox" unique_id=1324197436]
+layout_mode = 2
+text = "MAX HP"
+
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/MaxHPCard/CardVBox" unique_id=909801824]
+layout_mode = 2
+text = "0"
+
+[node name="AttackCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid" unique_id=1480134106]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="CardVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/AttackCard" unique_id=342925778]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/AttackCard/CardVBox" unique_id=1440355211]
 layout_mode = 2
 text = "ATTACK"
 
-[node name="DefenseLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=585897626]
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/AttackCard/CardVBox" unique_id=1185358783]
+layout_mode = 2
+text = "0"
+
+[node name="DefenseCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid" unique_id=2108625149]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="CardVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/DefenseCard" unique_id=190605005]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/DefenseCard/CardVBox" unique_id=2022320663]
 layout_mode = 2
 text = "DEFENSE"
 
-[node name="StrengthLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1248612816]
+[node name="StatValue" type="Label" parent="StatsPanel/MarginContainer/MainVBox/CombatGrid/DefenseCard/CardVBox" unique_id=1987536052]
 layout_mode = 2
-text = "STRENGTH"
+text = "0"
 
-[node name="SkillsTitle" type="Label" parent="StatsPanel/VBoxContainer" unique_id=2143586578]
+[node name="BattleRecordLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox" unique_id=528825807]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "BATTLE RECORDS"
+
+[node name="BattleCard" type="PanelContainer" parent="StatsPanel/MarginContainer/MainVBox" unique_id=1409813608]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg7cm")
+
+[node name="BattleRecordVBox" type="VBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/BattleCard" unique_id=1980274191]
 layout_mode = 2
 
-[node name="Skill1Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1605589170]
+[node name="MobsDefearedRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox" unique_id=984795389]
 layout_mode = 2
 
-[node name="Skill2Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=1211506351]
+[node name="StatNameLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/MobsDefearedRow" unique_id=254759769]
+layout_mode = 2
+text = "Normal Mobs Defeated"
+
+[node name="StatValueLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/MobsDefearedRow" unique_id=385990322]
+layout_mode = 2
+text = "0"
+
+[node name="DungeonEnemiesRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox" unique_id=1897678382]
 layout_mode = 2
 
-[node name="Skill3Label" type="Label" parent="StatsPanel/VBoxContainer" unique_id=54443139]
+[node name="StatNameLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/DungeonEnemiesRow" unique_id=1729564786]
+layout_mode = 2
+text = "Dungeon Enemies Defeated"
+
+[node name="StatValueLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/DungeonEnemiesRow" unique_id=1362322457]
+layout_mode = 2
+text = "0"
+
+[node name="BossCompletedRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox" unique_id=135129369]
 layout_mode = 2
 
-[node name="PassiveLabel" type="Label" parent="StatsPanel/VBoxContainer" unique_id=233218249]
+[node name="StatNameLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/BossCompletedRow" unique_id=1941775104]
 layout_mode = 2
+text = "Bosses Defeated"
+
+[node name="StatValueLabel" type="Label" parent="StatsPanel/MarginContainer/MainVBox/BattleCard/BattleRecordVBox/BossCompletedRow" unique_id=2084646434]
+layout_mode = 2
+text = "0"
 
 [node name="PauseMenu" type="Panel" parent="." unique_id=1074780976]
 process_mode = 3
@@ -145,66 +393,6 @@ text = "Save & Quit"
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="SkillBar" type="Panel" parent="." unique_id=3105315]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("3_6y6km")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SkillBar" unique_id=2114328607]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Skill1" type="Button" parent="SkillBar/HBoxContainer" unique_id=724956297]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "R"
-
-[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill1" unique_id=1226119152]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Skill2" type="Button" parent="SkillBar/HBoxContainer" unique_id=932846196]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "E"
-
-[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill2" unique_id=125305430]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Skill3" type="Button" parent="SkillBar/HBoxContainer" unique_id=1157337910]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "Q"
-
-[node name="Label" type="Label" parent="SkillBar/HBoxContainer/Skill3" unique_id=1120409378]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer2/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer2/SaveQuitButton" to="PauseMenu" method="_on_save_quit_button_pressed"]

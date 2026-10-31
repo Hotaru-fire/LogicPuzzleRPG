@@ -1,0 +1,163 @@
+<?php
+header("Content-Type: application/json; charset=UTF-8");
+
+function respond($success, $message, $extra = []) {
+    echo json_encode(array_merge([
+        "success" => $success,
+        "message" => $message
+    ], $extra));
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    respond(false, "POST requests only.");
+}
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (!is_array($data)) {
+    respond(false, "Invalid JSON request.");
+}
+
+$action = $data["action"] ?? "";
+$user_id = filter_var(
+    $data["user_id"] ?? null,
+    FILTER_VALIDATE_INT
+);
+
+if (!$user_id || $user_id < 1) {
+    respond(false, "Invalid user ID.");
+}
+
+try {
+    $pdo = new PDO(
+        "mysql:host=127.0.0.1;dbname=rpg_database;charset=utf8mb4",
+        "root",
+        "",
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+
+    $check = $pdo->prepare(
+        "SELECT user_id FROM users WHERE user_id = ?"
+    );
+    $check->execute([$user_id]);
+
+    if (!$check->fetch()) {
+        respond(false, "User account not found.");
+    }
+
+    if ($action === "save_character") {
+        $character = $data["character_class"] ?? "";
+
+        $allowed = ["Knight", "Mage", "Thief", "Archer"];
+
+        if (!in_array($character, $allowed, true)) {
+            respond(false, "Invalid character choice.");
+        }
+
+        $stmt = $pdo->prepare(
+            "INSERT INTO player_saves (user_id, character_class)
+             VALUES (?, ?)
+             ON DUPLICATE KEY UPDATE
+             character_class = VALUES(character_class)"
+        );
+        $stmt->execute([$user_id, $character]);
+
+        respond(true, "Character choice saved.");
+
+    } elseif ($action === "save_progress") {
+        $fields = [
+            "level" => "level",
+            "exp" => "exp",
+            "gold" => "gold",
+            "score" => "score",
+            "mobs_defeated" => "mobs_defeated",
+            "playtime_seconds" => "playtime_seconds"
+        ];
+
+        $values = [];
+
+        foreach ($fields as $key => $column) {
+            $value = filter_var(
+                $data[$key] ?? 0,
+                FILTER_VALIDATE_INT
+            );
+
+            if ($value === false || $value < 0) {
+                respond(false, "Invalid value for " . $key . ".");
+            }
+
+            $values[$column] = $value;
+        }
+
+        $stmt = $pdo->prepare(
+            "INSERT INTO player_saves
+                (user_id, level, exp, gold, score,
+                 mobs_defeated, playtime_seconds)
+             VALUES (?, ?, ?, ?, ?, ?, ?)
+             ON DUPLICATE KEY UPDATE
+                level = VALUES(level),
+                exp = VALUES(exp),
+                gold = VALUES(gold),
+                score = VALUES(score),
+                mobs_defeated = VALUES(mobs_defeated),
+                playtime_seconds = VALUES(playtime_seconds)"
+        );
+
+        $stmt->execute([
+            $user_id,
+            $values["level"],
+            $values["exp"],
+            $values["gold"],
+            $values["score"],
+            $values["mobs_defeated"],
+            $values["playtime_seconds"]
+        ]);
+
+        respond(true, "Progress saved.");
+
+    } elseif ($action === "load_save") {
+        $stmt = $pdo->prepare(
+            "SELECT character_class, level, exp, gold, score,
+                    mobs_defeated, playtime_seconds
+             FROM player_saves WHERE user_id = ?"
+        );
+        $stmt->execute([$user_id]);
+        $save = $stmt->fetch();
+
+        if (!$save) {
+            respond(true, "No save found yet.", ["save" => null]);
+        }
+
+        respond(true, "Save loaded.", ["save" => $save]);
+
+    } elseif ($action === "record_score") {
+        $score = filter_var(
+            $data["score"] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
+        if ($score === false || $score < 0) {
+            respond(false, "Invalid score.");
+        }
+
+        $stmt = $pdo->prepare(
+            "INSERT INTO score_records (user_id, score)
+             VALUES (?, ?)"
+        );
+        $stmt->execute([$user_id, $score]);
+
+        respond(true, "Score recorded.");
+
+    } else {
+        respond(false, "Unknown action.");
+    }
+
+} catch (Throwable $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    respond(false, "Server error. Check the PHP error log.");
+}

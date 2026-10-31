@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://dere56sq0ttng"]
 
-[ext_resource type="Texture2D" uid="uid://cpmm5c0v3jw8e" path="res://assets/my game assets/sprites/dungeon.png" id="1_vswnb"]
-[ext_resource type="Texture2D" uid="uid://c6qf5mttlx4cg" path="res://assets/my game assets/sprites/dungeon_props.png" id="2_muhqo"]
+[ext_resource type="Texture2D" uid="uid://cpmm5c0v3jw8e" path="res://assets/main/sprites/dungeon.png" id="1_vswnb"]
+[ext_resource type="Texture2D" uid="uid://c6qf5mttlx4cg" path="res://assets/main/sprites/dungeon_props.png" id="2_muhqo"]
 [ext_resource type="PackedScene" uid="uid://8qq4g0kf6ymw" path="res://scenes/map resource/map_borders.tscn" id="3_bqwq4"]
-[ext_resource type="Script" uid="uid://dhudu5ku15k8o" path="res://scripts/dungeon_manager.gd" id="4_1mfiv"]
+[ext_resource type="Script" uid="uid://dhudu5ku15k8o" path="res://scripts/dungeon/dungeon_manager.gd" id="4_1mfiv"]
 [ext_resource type="PackedScene" uid="uid://cpefs0p1mujsv" path="res://scenes/enemies/enemy_test_dummy.tscn" id="5_4ya0r"]
 [ext_resource type="PackedScene" uid="uid://btk4gwjs1k35f" path="res://scenes/player/player.tscn" id="6_ls1xk"]
 [ext_resource type="PackedScene" uid="uid://bxvtryatcs7nw" path="res://scenes/player/canvas_layer.tscn" id="7_p8efk"]
@@ -704,6 +704,8 @@ size = Vector2(1152, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3a3m1"]
 size = Vector2(1172, 36)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnaqn"]
+
 [node name="Dungeon1" type="Node2D" unique_id=1561035224]
 
 [node name="overworld" type="TileMapLayer" parent="." unique_id=627931727]
@@ -723,6 +725,14 @@ shape = SubResource("RectangleShape2D_3a3m1")
 
 [node name="DungeonSpawn" type="Marker2D" parent="." unique_id=1590434670]
 position = Vector2(218, 160)
+
+[node name="BossSpawnPoints" type="Area2D" parent="." unique_id=441058853]
+position = Vector2(1073, 325)
+
+[node name="BossSpawnPoint" type="Marker2D" parent="BossSpawnPoints" unique_id=453829555]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSpawnPoints" unique_id=716631503]
+shape = SubResource("CircleShape2D_tnaqn")
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=1795505144]
 position = Vector2(235, 177)
@@ -749,7 +759,13 @@ enemy_scene = ExtResource("5_4ya0r")
 [node name="player" parent="." unique_id=1523946503 instance=ExtResource("6_ls1xk")]
 position = Vector2(220, 121)
 
+[node name="Knight" parent="player" index="5" unique_id=905762716]
+animation = &"attack_left"
+
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("7_p8efk")]
+
+[node name="StatsPanel" parent="CanvasLayer" index="1" unique_id=707532621]
+visible = false
 
 [node name="VBoxContainer2" parent="CanvasLayer/PauseMenu" parent_id_path=PackedInt32Array(2026103625, 1074780976) index="0" unique_id=2068402848]
 anchors_preset = 0

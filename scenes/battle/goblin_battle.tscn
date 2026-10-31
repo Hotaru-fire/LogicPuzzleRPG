@@ -1,0 +1,240 @@
+[gd_scene format=3 uid="uid://b6citd36snblj"]
+
+[ext_resource type="Script" uid="uid://daacjbas72s70" path="res://scripts/enemies/regular mobs/goblin_battle.gd" id="1_530g3"]
+[ext_resource type="Texture2D" uid="uid://dq62oxwq4gsf3" path="res://assets/Characters/enemies/goblin/standard/thrust/left/1.png" id="2_6bn7l"]
+[ext_resource type="Texture2D" uid="uid://58mywu267fi7" path="res://assets/Characters/enemies/goblin/standard/thrust/left/2.png" id="3_btg7e"]
+[ext_resource type="Texture2D" uid="uid://cnsiyqas4f1cr" path="res://assets/Characters/enemies/goblin/standard/thrust/left/3.png" id="4_qkhqn"]
+[ext_resource type="PackedScene" uid="uid://xq30w1pjo3kk" path="res://scenes/battle/dodge_battle.tscn" id="4_wqyp1"]
+[ext_resource type="Texture2D" uid="uid://cu633bja1mwqu" path="res://assets/Characters/enemies/goblin/standard/thrust/left/4.png" id="5_pn3n7"]
+[ext_resource type="Texture2D" uid="uid://d3xuamp4r3ch5" path="res://assets/Characters/enemies/goblin/standard/thrust/left/5.png" id="6_shikl"]
+[ext_resource type="Texture2D" uid="uid://be8cni5n0h32j" path="res://assets/Characters/enemies/goblin/standard/thrust/left/6.png" id="7_drm3p"]
+[ext_resource type="Texture2D" uid="uid://c67ta71foaxc8" path="res://assets/Characters/enemies/goblin/standard/thrust/left/7.png" id="8_ofetw"]
+[ext_resource type="Texture2D" uid="uid://bplae8rg68l02" path="res://assets/Characters/enemies/goblin/standard/thrust/left/8.png" id="9_vfowj"]
+[ext_resource type="Texture2D" uid="uid://dyoh1ly1eeiyp" path="res://assets/Characters/enemies/goblin/standard/hurt/up/1.png" id="10_bwbn1"]
+[ext_resource type="Texture2D" uid="uid://cu12ih7q4v2bp" path="res://assets/Characters/enemies/goblin/standard/hurt/up/2.png" id="11_ja255"]
+[ext_resource type="Texture2D" uid="uid://biuxfyomg4itw" path="res://assets/Characters/enemies/goblin/standard/hurt/up/3.png" id="12_sncqg"]
+[ext_resource type="Texture2D" uid="uid://bltsph7te2hke" path="res://assets/Characters/enemies/goblin/standard/hurt/up/4.png" id="13_4vjmb"]
+[ext_resource type="Texture2D" uid="uid://b3fio6wmjo4q5" path="res://assets/Characters/enemies/goblin/standard/hurt/up/5.png" id="14_flvoe"]
+[ext_resource type="Texture2D" uid="uid://beicl2pqqq5as" path="res://assets/Characters/enemies/goblin/standard/hurt/up/6.png" id="15_np07i"]
+[ext_resource type="Texture2D" uid="uid://cipj0fgr3qxja" path="res://assets/Characters/enemies/goblin/standard/idle/left/1.png" id="16_m3a3i"]
+[ext_resource type="Texture2D" uid="uid://dao8thlnjrjep" path="res://assets/Characters/enemies/goblin/standard/idle/left/2.png" id="17_pvudi"]
+[ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="18_hqhq0"]
+[ext_resource type="Texture2D" uid="uid://b64tdjx51dvq" path="res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/PNG/960x540/01_torchlit_stone_corridor_960x540.png" id="20_btg7e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgwk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6bn7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_btg7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qkhqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pn3n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_shikl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_drm3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ofetw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vfowj")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_bwbn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ja255")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sncqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4vjmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_flvoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_np07i")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_m3a3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pvudi")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkwwr"]
+bg_color = Color(0.85882354, 0.24705882, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnaqn"]
+bg_color = Color(0.98039216, 0.26666668, 0, 1)
+
+[node name="BossBattle" type="Node2D" unique_id=1885786285]
+script = ExtResource("1_530g3")
+
+[node name="Boss" type="CharacterBody2D" parent="." unique_id=1251106604]
+position = Vector2(12, 28)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Boss" unique_id=147290924]
+position = Vector2(975, 270)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xgwk2")
+animation = &"idle"
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
+position = Vector2(86, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=975616720]
+position = Vector2(80, 280)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("18_hqhq0")
+animation = &"idle_right"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=215328875]
+
+[node name="BossUI" type="Control" parent="CanvasLayer" unique_id=1773388784]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.0
+offset_right = 47.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="BossHPBar" type="ProgressBar" parent="CanvasLayer/BossUI" unique_id=2136670167]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 67.0
+offset_top = 63.5
+offset_right = 259.0
+offset_bottom = 90.5
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_dkwwr")
+max_value = 500.0
+value = 500.0
+
+[node name="BossNameLabel" type="Label" parent="CanvasLayer/BossUI" unique_id=1202555182]
+layout_mode = 0
+offset_left = 207.5
+offset_top = 38.0
+offset_right = 294.5
+offset_bottom = 61.0
+text = "GOBLIN"
+
+[node name="PlayerUI" type="VBoxContainer" parent="CanvasLayer" unique_id=695587697]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1133.0
+offset_top = -521.0
+offset_right = -860.0
+offset_bottom = -467.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerHPBar" type="ProgressBar" parent="CanvasLayer/PlayerUI" unique_id=1154104448]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_tnaqn")
+max_value = 200.0
+value = 200.0
+
+[node name="PlayerNameLabel" type="Label" parent="CanvasLayer/PlayerUI" unique_id=725697663]
+layout_mode = 2
+text = "Name"
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer" unique_id=218934118]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -157.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "PLAYER TURN"
+
+[node name="Actions" type="Control" parent="CanvasLayer" unique_id=2062466195]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/Actions" unique_id=1977223433]
+layout_mode = 0
+offset_left = -529.0
+offset_top = -185.0
+offset_right = -430.0
+offset_bottom = -132.0
+text = "ATTACk"
+
+[node name="DodgePopup" type="Control" parent="CanvasLayer" unique_id=1361397767]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DodgeBattle" parent="CanvasLayer/DodgePopup" unique_id=1145142569 instance=ExtResource("4_wqyp1")]
+layout_mode = 1
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=1304847233]
+one_shot = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=64599996]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 401.0
+offset_right = 1150.0
+offset_bottom = 647.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1747988260]
+z_index = -2
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 539.0
+texture = ExtResource("20_btg7e")
+
+[connection signal="pressed" from="CanvasLayer/Actions/AttackButton" to="." method="_on_attack_button_pressed"]
