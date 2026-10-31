@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cwsiv0aparp8k" path="res://assets/map tileset/Hero spawn/Texture/TX Tileset Wall.png" id="9_55348"]
 [ext_resource type="Texture2D" uid="uid://dcap5cd2bh5ov" path="res://assets/map tileset/Hero spawn/Texture/TX Struct.png" id="9_trjxu"]
 [ext_resource type="Texture2D" uid="uid://bop24u44df2k1" path="res://assets/extra assets/sprites/dungeon.png" id="10_aqth2"]
+[ext_resource type="PackedScene" uid="uid://d2vqebc8wg7vg" path="res://scenes/dialogue/DialogueBox.tscn" id="13_aqth2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5be44"]
 texture = ExtResource("1_x3aai")
@@ -11245,16 +11246,18 @@ animation = &"attack_left"
 [node name="AttackArea" parent="player" index="6" unique_id=920107369]
 visible = false
 
-[node name="Priestess" parent="." unique_id=1074553048 instance=ExtResource("5_av32x")]
+[node name="Priestess" parent="." unique_id=1074553048 node_paths=PackedStringArray("dialogue_box") instance=ExtResource("5_av32x")]
 position = Vector2(-1596, 818)
+dialogue_box = NodePath("../UI/DialogueBox")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=365408794]
+
+[node name="DialogueBox" parent="UI" unique_id=737193392 instance=ExtResource("13_aqth2")]
 
 [node name="RespawnPoint" type="Marker2D" parent="." unique_id=1218003743]
 position = Vector2(0, 1)
 
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("6_yicuf")]
-
-[node name="StatsPanel" parent="CanvasLayer" index="1" unique_id=707532621]
-visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" index="2" unique_id=1074780976]
 custom_maximum_size = Vector2(7, -1)
@@ -11295,4 +11298,6 @@ position = Vector2(-1178.75, 162)
 shape = SubResource("RectangleShape2D_tnaqn")
 
 [editable path="player"]
+[editable path="Priestess"]
+[editable path="UI/DialogueBox"]
 [editable path="CanvasLayer"]

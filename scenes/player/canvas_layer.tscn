@@ -5,6 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://ckoo8kx8ep18p" path="res://assets/dialogue assets/ui/x4/panels/panel_medium.png" id="2_y6yk7"]
 [ext_resource type="Script" uid="uid://dd53potgesmva" path="res://scripts/ui/pause_menu.gd" id="3_y6yk7"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6yk7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7cgu"]
+bg_color = Color(1, 0.20392157, 0.10980392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etgfe"]
 texture = ExtResource("2_y6yk7")
 texture_margin_left = 35.0
@@ -74,21 +84,18 @@ modulate = Color(1, 0.1764706, 0.25490198, 1)
 layout_mode = 2
 text = "HP: 200 / 200"
 
-[node name="HPBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1464122780]
+[node name="HPBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1987068147]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.972549, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_y6yk7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j7cgu")
 max_value = 200.0
 value = 200.0
-
-[node name="ManaLabel" type="Label" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=1162617037]
-modulate = Color(0.21568628, 0.25882354, 1, 1)
-layout_mode = 2
-text = "Mana: 100 / 100"
-
-[node name="ManaBar" type="ProgressBar" parent="PlayerHUD/MarginContainer/VBoxContainer" unique_id=875106025]
-layout_mode = 2
-value = 100.0
+show_percentage = false
 
 [node name="StatsPanel" type="Panel" parent="." unique_id=707532621]
+visible = false
 custom_minimum_size = Vector2(520, 620)
 custom_maximum_size = Vector2(500, 600)
 anchors_preset = 15

@@ -1,4 +1,3 @@
-
 extends CharacterBody2D
 
 @export var follow_speed: float = 200.0
@@ -6,10 +5,27 @@ extends CharacterBody2D
 @export var interaction_distance: float = 60.0
 @export var heal_amount: int = 50
 
+# Drag UI/DialogueBox (the instance of DialogueBox.tscn) into this slot.
+# If left empty, the script looks for a node in the group "dialogue_box".
+@export var dialogue_box: Control
+@export var auto_start_tutorial: bool = false
+@export var start_tutorial_on_approach: bool = true
+@export var tutorial_start_delay: float = 0.5
+
+const TUTORIAL_LINES: Array = [
+	{"speaker": "Priestess", "text": "Welcome, traveler. Let me show you how to survive out here."},
+	{"speaker": "Priestess", "text": "Use WASD or the arrow keys to move."},
+	{"speaker": "Priestess", "text": "Press Space to attack. Press E to talk to me or interact."},
+	{"speaker": "Priestess", "text": "Talk to me any time if you need healing. May the light guide you."},
+]
+
 var player: Node2D = null
 var player_nearby: bool = false
 var dialogue_open: bool = false
 var facing_direction: String = "down"
+
+var tutorial_done: bool = false   # TODO: load/save this with your database save
+var _tutorial_running: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -20,7 +36,20 @@ func _ready() -> void:
 	if player == null:
 		push_warning("Priestess could not find a player in the 'player' group.")
 
+	# Fallback: find the dialogue box by group if the Inspector slot is empty.
+	if dialogue_box == null:
+		dialogue_box = get_tree().get_first_node_in_group("dialogue_box") as Control
+
+	if dialogue_box != null:
+		dialogue_box.dialogue_finished.connect(_on_dialogue_box_finished)
+	else:
+		push_warning("Priestess: dialogue_box is not assigned and no 'dialogue_box' group node was found.")
+
 	play_idle_animation()
+
+	if auto_start_tutorial and not tutorial_done and dialogue_box != null:
+		await get_tree().create_timer(tutorial_start_delay).timeout
+		start_tutorial()
 
 
 func _physics_process(_delta: float) -> void:
@@ -60,6 +89,10 @@ func _physics_process(_delta: float) -> void:
 		global_position.distance_to(player.global_position)
 		<= interaction_distance
 	)
+
+	# Start the tutorial the first time she reaches the player.
+	if start_tutorial_on_approach and not tutorial_done and player_nearby:
+		start_tutorial()
 
 
 func _input(event: InputEvent) -> void:
@@ -112,6 +145,39 @@ func play_walk_animation() -> void:
 		else:
 			play_idle_animation()
 
+
+# ---------------------------------------------------------------------------
+# Tutorial (uses the DialogueBox UI)
+# ---------------------------------------------------------------------------
+
+func start_tutorial() -> void:
+	print("start_tutorial called, dialogue_box = ", dialogue_box)
+
+	if dialogue_box == null or _tutorial_running:
+		return
+
+	_tutorial_running = true
+	tutorial_done = true
+	dialogue_open = true
+	velocity = Vector2.ZERO
+	face_player()
+
+	# The DialogueBox pauses the tree while it is open.
+	dialogue_box.start(TUTORIAL_LINES)
+
+
+func _on_dialogue_box_finished() -> void:
+	if not _tutorial_running:
+		return
+
+	_tutorial_running = false
+	dialogue_open = false
+	play_idle_animation()
+
+
+# ---------------------------------------------------------------------------
+# Interact menu ("Help" replays the controls tutorial in the dialogue box)
+# ---------------------------------------------------------------------------
 
 func open_dialogue() -> void:
 	dialogue_open = true
@@ -168,15 +234,19 @@ func heal_player() -> void:
 
 
 func show_help() -> void:
-	print(
-		"Priestess: Stay alert. Explore carefully ",
-		"and watch your health."
-	)
-	close_dialogue()
+	# Replay the controls tutorial in the dialogue box.
+	if dialogue_box != null:
+		start_tutorial()
+	else:
+		print(
+			"Priestess: Stay alert. Explore carefully ",
+			"and watch your health."
+		)
+		close_dialogue()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not dialogue_open:
+	if not dialogue_open or _tutorial_running:
 		return
 
 	if event.is_action_pressed("ui_cancel"):

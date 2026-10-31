@@ -92,29 +92,50 @@ func save_progress() -> bool:
 	return _send_request(payload)
 
 
+func _resolve_checkpoint_character_class() -> String:
+	if Session.selected_character in ["Knight", "Mage", "Thief", "Archer"]:
+		return Session.selected_character
+
+	match PlayerData.selected_character:
+		1:
+			return "Knight"
+		2:
+			return "Mage"
+		3:
+			return "Thief"
+		4:
+			return "Archer"
+		_:
+			return "Knight"
+
+
+func _resolve_checkpoint_scene_path(scene_path: String) -> String:
+	var resolved_scene_path := scene_path.strip_edges()
+	if resolved_scene_path.is_empty():
+		resolved_scene_path = PlayerData.saved_current_scene
+	if resolved_scene_path.is_empty():
+		resolved_scene_path = "res://scenes/maps/world.tscn"
+	if resolved_scene_path == "res://scenes/world.tscn":
+		resolved_scene_path = "res://scenes/maps/world.tscn"
+	if not resolved_scene_path.begins_with("res://") or not ResourceLoader.exists(
+		resolved_scene_path
+	):
+		return "res://scenes/maps/world.tscn"
+	return resolved_scene_path
+
+
 func create_progress_snapshot() -> Dictionary:
-	var character_class := Session.selected_character
+	var character_class := _resolve_checkpoint_character_class()
 
-	if character_class.is_empty():
-		match PlayerData.selected_character:
-			1:
-				character_class = "Knight"
-			2:
-				character_class = "Mage"
-			3:
-				character_class = "Thief"
-			4:
-				character_class = "Archer"
-
-	var scene_path := PlayerData.saved_current_scene
-	var save_position := PlayerData.saved_position
+	var scene_path := _resolve_checkpoint_scene_path(PlayerData.saved_current_scene)
+	var save_position: Vector2 = PlayerData.saved_position
 	var current_scene := get_tree().current_scene
 	var current_scene_path := ""
 
 	if current_scene != null:
 		current_scene_path = current_scene.scene_file_path
 		if not current_scene_path.is_empty():
-			scene_path = current_scene_path
+			scene_path = _resolve_checkpoint_scene_path(current_scene_path)
 
 	print("SAVE: Current scene path: ", current_scene_path)
 
@@ -173,11 +194,23 @@ func create_progress_snapshot() -> Dictionary:
 
 	PlayerData.saved_position = save_position
 	PlayerData.saved_current_scene = scene_path
-	var playtime_snapshot := Session.get_playtime_snapshot()
+	var playtime_snapshot: Dictionary = Session.get_playtime_snapshot()
+
+	var inventory_value := PlayerData.saved_inventory
+	if not (inventory_value is String) or inventory_value.strip_edges().is_empty():
+		inventory_value = "[]"
+
+	var equipment_value := PlayerData.saved_equipment
+	if not (equipment_value is String) or equipment_value.strip_edges().is_empty():
+		equipment_value = "{}"
+
+	var max_hp_value := maxi(PlayerData.current_max_hp, 1)
+	var hp_value := clampi(PlayerData.current_hp, 0, max_hp_value)
+	var level_value := maxi(Session.level, 1)
 
 	var snapshot := {
 		"character_class": character_class,
-		"level": Session.level,
+		"level": level_value,
 		"exp": Session.player_exp,
 		"gold": Session.gold,
 		"score": Session.score,
@@ -194,16 +227,16 @@ func create_progress_snapshot() -> Dictionary:
 		"_unsaved_playtime_msec": playtime_snapshot[
 			"unsaved_playtime_msec"
 		],
-		"hp": PlayerData.current_hp,
-		"max_hp": PlayerData.current_max_hp,
-		"attack": PlayerData.saved_attack,
-		"defense": PlayerData.saved_defense,
+		"hp": hp_value,
+		"max_hp": max_hp_value,
+		"attack": clampi(int(PlayerData.saved_attack), 0, 2147483647),
+		"defense": clampi(int(PlayerData.saved_defense), 0, 2147483647),
 		"current_scene": scene_path,
 		"boss_completed": PlayerData.saved_boss_completed,
-		"inventory": PlayerData.saved_inventory,
-		"equipment": PlayerData.saved_equipment,
-		"player_position_x": save_position.x,
-		"player_position_y": save_position.y
+		"inventory": inventory_value,
+		"equipment": equipment_value,
+		"player_position_x": float(save_position.x),
+		"player_position_y": float(save_position.y)
 	}
 
 	print("SAVE: Final payload player_position_x = ", snapshot["player_position_x"])
