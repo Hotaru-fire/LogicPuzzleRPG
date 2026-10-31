@@ -83,28 +83,46 @@ func _on_game_api_response_received(
 	status_label.hide()
 
 
+# Set this path to your gold bar's HBoxContainer (the one holding RANK / PLAYER / SCORE)
+@onready var header_row: HBoxContainer = $MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/TableCard/TableHeader
+
+
+const ROW_HEIGHT := 40.0
+const CELL_PADDING := 24.0
+
+
+func _add_cell(row: Control, text: String, header_cell: Control) -> void:
+	var label := Label.new()
+	label.text = text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.clip_text = false
+	label.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+	row.add_child(label)  # add first so the theme/font is applied before measuring
+
+	var text_width := label.get_minimum_size().x + CELL_PADDING
+	var width := maxf(header_cell.size.x, text_width)
+	var center_x := header_cell.global_position.x + header_cell.size.x * 0.5 - player_rows.global_position.x
+
+	label.position = Vector2(center_x - width * 0.5, 0.0)
+	label.size = Vector2(width, ROW_HEIGHT)
+
+
 func _add_row(rank: int, username: String, score: int) -> void:
-	var row := HBoxContainer.new()
+	var header_cells := header_row.get_children()
+	if header_cells.size() < 3:
+		push_error("Header row needs 3 children (rank, player, score).")
+		return
+
+	var row := Control.new()
+	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_theme_constant_override("separation", 20)
-
-	var rank_label := Label.new()
-	rank_label.text = str(rank)
-	rank_label.custom_minimum_size.x = 100.0
-	row.add_child(rank_label)
-
-	var username_label := Label.new()
-	username_label.text = username
-	username_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(username_label)
-
-	var score_label := Label.new()
-	score_label.text = str(score)
-	score_label.custom_minimum_size.x = 160.0
-	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	row.add_child(score_label)
-
+	row.clip_contents = false
 	player_rows.add_child(row)
+
+	_add_cell(row, str(rank), header_cells[0])
+	_add_cell(row, username, header_cells[1])
+	_add_cell(row, str(score), header_cells[2])
 
 
 func _clear_rows() -> void:

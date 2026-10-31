@@ -197,6 +197,7 @@ text = "BACK"
 layout_mode = 2
 
 [node name="AnalyticsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=958808145]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -659,7 +660,6 @@ theme_override_fonts/font = ExtResource("1_k1hxs")
 text = "0"
 
 [node name="LeaderboardsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=569304602]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -764,6 +764,7 @@ layout_mode = 2
 
 [node name="PlayerRows" type="VBoxContainer" parent="MainMargin/MainVBox/Content/LeaderboardsScroll/LeaderboardsPanel/LeaderboardsVBox/PlayerScroll" unique_id=208691213]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="StatusLabel" type="Label" parent="MainMargin/MainVBox" unique_id=1591901595]
