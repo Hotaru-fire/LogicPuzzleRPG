@@ -1,13 +1,21 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://b84837gmiodtn"]
 
 [ext_resource type="Texture2D" uid="uid://cp4il6cqux2cc" path="res://assets/Characters/enemies/goblin/standard/idle/down/1.png" id="1_edg4u"]
+[ext_resource type="Texture2D" uid="uid://dq62oxwq4gsf3" path="res://assets/Characters/enemies/goblin/standard/thrust/left/1.png" id="1_medxn"]
 [ext_resource type="Texture2D" uid="uid://ou028nuhqn1w" path="res://assets/Characters/enemies/goblin/standard/idle/down/2.png" id="2_j8lmu"]
+[ext_resource type="Texture2D" uid="uid://58mywu267fi7" path="res://assets/Characters/enemies/goblin/standard/thrust/left/2.png" id="2_xk7a2"]
 [ext_resource type="Texture2D" uid="uid://dyoh1ly1eeiyp" path="res://assets/Characters/enemies/goblin/standard/hurt/up/1.png" id="3_fg5ic"]
+[ext_resource type="Texture2D" uid="uid://cnsiyqas4f1cr" path="res://assets/Characters/enemies/goblin/standard/thrust/left/3.png" id="3_tuiv5"]
+[ext_resource type="Texture2D" uid="uid://cu633bja1mwqu" path="res://assets/Characters/enemies/goblin/standard/thrust/left/4.png" id="4_kll1b"]
 [ext_resource type="Texture2D" uid="uid://cu12ih7q4v2bp" path="res://assets/Characters/enemies/goblin/standard/hurt/up/2.png" id="4_ks7os"]
+[ext_resource type="Texture2D" uid="uid://d3xuamp4r3ch5" path="res://assets/Characters/enemies/goblin/standard/thrust/left/5.png" id="5_4fayc"]
 [ext_resource type="Texture2D" uid="uid://biuxfyomg4itw" path="res://assets/Characters/enemies/goblin/standard/hurt/up/3.png" id="5_a18h8"]
 [ext_resource type="Texture2D" uid="uid://bltsph7te2hke" path="res://assets/Characters/enemies/goblin/standard/hurt/up/4.png" id="6_8318f"]
+[ext_resource type="Texture2D" uid="uid://be8cni5n0h32j" path="res://assets/Characters/enemies/goblin/standard/thrust/left/6.png" id="6_htrrw"]
+[ext_resource type="Texture2D" uid="uid://c67ta71foaxc8" path="res://assets/Characters/enemies/goblin/standard/thrust/left/7.png" id="7_6uhum"]
 [ext_resource type="Texture2D" uid="uid://b3fio6wmjo4q5" path="res://assets/Characters/enemies/goblin/standard/hurt/up/5.png" id="7_vu03l"]
 [ext_resource type="Texture2D" uid="uid://beicl2pqqq5as" path="res://assets/Characters/enemies/goblin/standard/hurt/up/6.png" id="8_4d7st"]
+[ext_resource type="Texture2D" uid="uid://bplae8rg68l02" path="res://assets/Characters/enemies/goblin/standard/thrust/left/8.png" id="8_uxdsk"]
 [ext_resource type="Texture2D" uid="uid://cipj0fgr3qxja" path="res://assets/Characters/enemies/goblin/standard/idle/left/1.png" id="9_medxn"]
 [ext_resource type="Texture2D" uid="uid://dao8thlnjrjep" path="res://assets/Characters/enemies/goblin/standard/idle/left/2.png" id="10_xk7a2"]
 [ext_resource type="Texture2D" uid="uid://d2ihv3qiati3h" path="res://assets/Characters/enemies/goblin/standard/idle/right/1.png" id="11_tuiv5"]
@@ -55,10 +63,39 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_edg4u")
+"texture": ExtResource("1_medxn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_j8lmu")
+"texture": ExtResource("2_xk7a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tuiv5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kll1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4fayc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_htrrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6uhum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uxdsk")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_medxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xk7a2")
 }],
 "loop": 1,
 "name": &"default_Idle",
@@ -83,8 +120,19 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_4d7st")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_medxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xk7a2")
+}],
+"loop": 1,
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{

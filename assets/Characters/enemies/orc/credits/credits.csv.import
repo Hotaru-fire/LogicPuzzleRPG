@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bvr78qy1xasio"
+
+[deps]
+
+files=["res://assets/Characters/enemies/orc/credits/credits.notes.translation", "res://assets/Characters/enemies/orc/credits/credits.authors.translation", "res://assets/Characters/enemies/orc/credits/credits.licenses.translation", "res://assets/Characters/enemies/orc/credits/credits.urls.translation"]
+
+source_file="res://assets/Characters/enemies/orc/credits/credits.csv"
+dest_files=["res://assets/Characters/enemies/orc/credits/credits.notes.translation", "res://assets/Characters/enemies/orc/credits/credits.authors.translation", "res://assets/Characters/enemies/orc/credits/credits.licenses.translation", "res://assets/Characters/enemies/orc/credits/credits.urls.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

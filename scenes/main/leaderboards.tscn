@@ -197,7 +197,6 @@ text = "BACK"
 layout_mode = 2
 
 [node name="AnalyticsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=958808145]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -310,7 +309,7 @@ layout_mode = 2
 [node name="EnemiesTitle" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ExpCard/EnemiesVBox" unique_id=408569128]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_k1hxs")
-text = "ENEMIES DEFEATED"
+text = "EXPERIENCE (EXP)"
 
 [node name="EnemiesValue" type="Label" parent="MainMargin/MainVBox/Content/AnalyticsScroll/AnalyticsPanel/AnalyticsVBox/StatsCard/StatsGrid/ExpCard/EnemiesVBox" unique_id=1440896730]
 layout_mode = 2
@@ -660,6 +659,7 @@ theme_override_fonts/font = ExtResource("1_k1hxs")
 text = "0"
 
 [node name="LeaderboardsScroll" type="ScrollContainer" parent="MainMargin/MainVBox/Content" unique_id=569304602]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

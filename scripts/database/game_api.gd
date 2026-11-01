@@ -217,6 +217,8 @@ func create_progress_snapshot() -> Dictionary:
 		"mobs_defeated": Session.mobs_defeated,
 		"dungeon_enemies_defeated": Session.dungeon_enemies_defeated,
 		"bosses_killed": Session.bosses_killed,
+		"cleared_spawns": Session.cleared_spawns.duplicate(),
+		"tutorial_done": Session.tutorial_done,
 		"total_deaths": Session.total_deaths,
 		"puzzle_clear_time": Session.puzzle_clear_time,
 		"best_puzzle_clear_time": Session.best_puzzle_clear_time,

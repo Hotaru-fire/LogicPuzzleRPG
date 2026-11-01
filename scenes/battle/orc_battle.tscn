@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://dxtm02fgwr74n"]
+
+[ext_resource type="Script" uid="uid://crcvc4n5pmy8r" path="res://scripts/enemies/regular mobs/orc_battle.gd" id="1_vq0xi"]
+[ext_resource type="SpriteFrames" uid="uid://juo88sjisghb" path="res://resources/mobs/orc.tres" id="2_orc_frames"]
+[ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="18_fhkss"]
+[ext_resource type="PackedScene" uid="uid://xq30w1pjo3kk" path="res://scenes/battle/dodge_battle.tscn" id="19_gtsvk"]
+[ext_resource type="Texture2D" uid="uid://b64tdjx51dvq" path="res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/PNG/960x540/01_torchlit_stone_corridor_960x540.png" id="20_0u4tf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkwwr"]
+bg_color = Color(0.85882354, 0.24705882, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnaqn"]
+bg_color = Color(0.98039216, 0.26666668, 0, 1)
+
+[node name="BossBattle" type="Node2D" unique_id=1885786285]
+script = ExtResource("1_vq0xi")
+
+[node name="Boss" type="CharacterBody2D" parent="." unique_id=1251106604]
+position = Vector2(12, 28)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Boss" unique_id=147290924]
+position = Vector2(975, 270)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("2_orc_frames")
+animation = &"idle"
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
+position = Vector2(86, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=975616720]
+position = Vector2(80, 280)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("18_fhkss")
+animation = &"idle_right"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=215328875]
+
+[node name="BossUI" type="Control" parent="CanvasLayer" unique_id=1773388784]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.0
+offset_right = 47.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="BossHPBar" type="ProgressBar" parent="CanvasLayer/BossUI" unique_id=2136670167]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 67.0
+offset_top = 63.5
+offset_right = 259.0
+offset_bottom = 90.5
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_dkwwr")
+max_value = 500.0
+value = 500.0
+
+[node name="BossNameLabel" type="Label" parent="CanvasLayer/BossUI" unique_id=1202555182]
+layout_mode = 0
+offset_left = 207.5
+offset_top = 38.0
+offset_right = 294.5
+offset_bottom = 61.0
+text = "ORC"
+
+[node name="PlayerUI" type="VBoxContainer" parent="CanvasLayer" unique_id=695587697]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1133.0
+offset_top = -521.0
+offset_right = -860.0
+offset_bottom = -467.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayerHPBar" type="ProgressBar" parent="CanvasLayer/PlayerUI" unique_id=1154104448]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_tnaqn")
+max_value = 200.0
+value = 200.0
+
+[node name="PlayerNameLabel" type="Label" parent="CanvasLayer/PlayerUI" unique_id=725697663]
+layout_mode = 2
+text = "Name"
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer" unique_id=218934118]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -157.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "PLAYER TURN"
+
+[node name="Actions" type="Control" parent="CanvasLayer" unique_id=2062466195]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/Actions" unique_id=1977223433]
+layout_mode = 0
+offset_left = -529.0
+offset_top = -185.0
+offset_right = -430.0
+offset_bottom = -132.0
+text = "ATTACk"
+
+[node name="DodgePopup" type="Control" parent="CanvasLayer" unique_id=1361397767]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DodgeBattle" parent="CanvasLayer/DodgePopup" unique_id=1145142569 instance=ExtResource("19_gtsvk")]
+layout_mode = 1
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=1304847233]
+one_shot = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=64599996]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 401.0
+offset_right = 1150.0
+offset_bottom = 647.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1747988260]
+z_index = -2
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 539.0
+texture = ExtResource("20_0u4tf")
+
+[connection signal="pressed" from="CanvasLayer/Actions/AttackButton" to="." method="_on_attack_button_pressed"]

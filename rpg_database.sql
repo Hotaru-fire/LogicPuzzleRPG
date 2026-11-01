@@ -49,7 +49,15 @@ CREATE TABLE `player_saves` (
   `player_position_x` float NOT NULL DEFAULT 0,
   `player_position_y` float NOT NULL DEFAULT 0,
   `dungeon_enemies_defeated` int(11) NOT NULL DEFAULT 0,
-  `bosses_killed` int(11) NOT NULL DEFAULT 0
+  `bosses_killed` int(11) NOT NULL DEFAULT 0,
+  `total_deaths` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `puzzle_clear_time` double NOT NULL DEFAULT 0,
+  `puzzle_time_improvement` double NOT NULL DEFAULT 0,
+  `best_puzzle_clear_time` double NOT NULL DEFAULT 0,
+  `puzzles_cleared` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `first_puzzle_clear_time` double NOT NULL DEFAULT 0,
+  `cleared_spawns` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]' CHECK (json_valid(`cleared_spawns`)),
+  `tutorial_done` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

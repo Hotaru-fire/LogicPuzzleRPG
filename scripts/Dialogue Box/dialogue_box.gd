@@ -20,6 +20,7 @@ var _active := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS   # keep working while the game is paused
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	continue_label.pressed.connect(_advance_dialogue)
 	panel.hide()
 
 
@@ -66,7 +67,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _active or not event.is_action_pressed("ui_accept"):
 		return
 	get_viewport().set_input_as_handled()
+	_advance_dialogue()
 
+
+func _advance_dialogue() -> void:
+	if not _active:
+		return
 	if _typing:
 		# First press: finish the current line instantly
 		_tween.kill()

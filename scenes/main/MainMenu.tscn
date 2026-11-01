@@ -1208,14 +1208,20 @@ text = "Quit"
 
 [node name="PlayPanel" type="Panel" parent="." unique_id=616255464]
 visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Choose Your Character" type="Label" parent="PlayPanel" unique_id=2130715182]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 503.0
+offset_top = 15.0
+offset_right = 713.0
+offset_bottom = 38.0
+text = "CHOOSE YOUR CHARACTER"
 
 [node name="CharacterSelect" type="HBoxContainer" parent="PlayPanel" unique_id=1364989309]
 layout_mode = 1
@@ -1224,10 +1230,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 365.0
-offset_top = 362.0
-offset_right = 712.0
-offset_bottom = 412.0
+offset_left = -177.0
+offset_top = 12.0
+offset_right = 170.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
@@ -1334,11 +1340,12 @@ text = "Back
 "
 
 [node name="WarningLbl" type="Label" parent="PlayPanel" unique_id=700335583]
+visible = false
 layout_mode = 0
-offset_left = 366.0
-offset_top = 559.0
-offset_right = 743.0
-offset_bottom = 582.0
+offset_left = 427.0
+offset_top = 558.0
+offset_right = 804.0
+offset_bottom = 581.0
 text = "Please choose your character."
 
 [node name="SettingsPanel" type="Panel" parent="." unique_id=2142508164]

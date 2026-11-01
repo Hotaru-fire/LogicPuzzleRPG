@@ -1,267 +1,283 @@
 extends CharacterBody2D
 
-@export var follow_speed: float = 200.0
-@export var follow_distance: float = 35.0
+signal walk_completed
+
+@export var follow_speed: float = 100.0
+@export var follow_distance: float = 220.0
+@export var companion_follow_distance: float = 48.0
 @export var interaction_distance: float = 60.0
 @export var heal_amount: int = 50
-
-# Drag UI/DialogueBox (the instance of DialogueBox.tscn) into this slot.
-# If left empty, the script looks for a node in the group "dialogue_box".
 @export var dialogue_box: Control
 @export var auto_start_tutorial: bool = false
 @export var start_tutorial_on_approach: bool = true
 @export var tutorial_start_delay: float = 0.5
 
-const TUTORIAL_LINES: Array = [
-	{"speaker": "Priestess", "text": "Welcome, traveler. Let me show you how to survive out here."},
-	{"speaker": "Priestess", "text": "Use WASD or the arrow keys to move."},
-	{"speaker": "Priestess", "text": "Press Space to attack. Press E to talk to me or interact."},
-	{"speaker": "Priestess", "text": "Talk to me any time if you need healing. May the light guide you."},
-]
-
-var player: Node2D = null
-var player_nearby: bool = false
-var dialogue_open: bool = false
-var facing_direction: String = "down"
-
-var tutorial_done: bool = false   # TODO: load/save this with your database save
-var _tutorial_running: bool = false
+var player: Node2D
+var player_nearby := false
+var dialogue_open := false
+var tutorial_done := false
+var is_companion := false
+var facing_direction := "down"
+var _walking_to_target := false
+var _walk_target := Vector2.ZERO
+var _follower: Node2D
+var _following_player := false
+var _persistent_dialogue_layer: CanvasLayer
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Node2D
-
 	if player == null:
-		push_warning("Priestess could not find a player in the 'player' group.")
+		push_error("Priestess could not find a player in the 'player' group.")
 
-	# Fallback: find the dialogue box by group if the Inspector slot is empty.
-	if dialogue_box == null:
-		dialogue_box = get_tree().get_first_node_in_group("dialogue_box") as Control
-
-	if dialogue_box != null:
-		dialogue_box.dialogue_finished.connect(_on_dialogue_box_finished)
-	else:
-		push_warning("Priestess: dialogue_box is not assigned and no 'dialogue_box' group node was found.")
+	if dialogue_box != null and dialogue_box.has_signal("dialogue_finished"):
+		var finished_callback := Callable(self, "_on_dialogue_box_finished")
+		if not dialogue_box.is_connected(
+			"dialogue_finished",
+			finished_callback
+		):
+			dialogue_box.connect("dialogue_finished", finished_callback)
 
 	play_idle_animation()
 
-	if auto_start_tutorial and not tutorial_done and dialogue_box != null:
-		await get_tree().create_timer(tutorial_start_delay).timeout
-		start_tutorial()
-
 
 func _physics_process(_delta: float) -> void:
-	if player == null:
-		velocity = Vector2.ZERO
+	if _following_player:
+		if not is_instance_valid(player) or dialogue_open:
+			velocity = Vector2.ZERO
+			play_idle_animation()
+			move_and_slide()
+			return
+
+		player_nearby = global_position.distance_to(player.global_position) <= (
+			interaction_distance
+		)
+		var follow_direction := player.global_position - global_position
+		if follow_direction.length() <= companion_follow_distance:
+			velocity = Vector2.ZERO
+			play_idle_animation()
+		else:
+			follow_direction = follow_direction.normalized()
+			update_facing_from_direction(follow_direction)
+			velocity = follow_direction * follow_speed
+			play_walk_animation()
 		move_and_slide()
 		return
 
-	var distance_to_player: float = global_position.distance_to(
-		player.global_position
-	)
+	if player != null:
+		player_nearby = global_position.distance_to(player.global_position) <= (
+			interaction_distance
+		)
 
-	# Stop moving while the dialogue is open.
-	if dialogue_open:
-		velocity = Vector2.ZERO
-		face_player()
-		move_and_slide()
-		return
-
-	# Follow the player when they are far enough away.
-	if distance_to_player > follow_distance:
-		var direction: Vector2 = (
-			player.global_position - global_position
-		).normalized()
-
-		velocity = direction * follow_speed
-		update_facing_from_direction(direction)
-		play_walk_animation()
-	else:
+	if not _walking_to_target or dialogue_open:
 		velocity = Vector2.ZERO
 		play_idle_animation()
-
-	move_and_slide()
-
-	# Allow interaction only when the player is close enough.
-	player_nearby = (
-		global_position.distance_to(player.global_position)
-		<= interaction_distance
-	)
-
-	# Start the tutorial the first time she reaches the player.
-	if start_tutorial_on_approach and not tutorial_done and player_nearby:
-		start_tutorial()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and not event.is_echo():
-		if player_nearby and not dialogue_open:
-			open_dialogue()
-
-
-func face_player() -> void:
-	if player == null:
+		move_and_slide()
 		return
 
-	var direction: Vector2 = (
-		player.global_position - global_position
-	)
+	if not is_instance_valid(_follower):
+		_walking_to_target = false
+		velocity = Vector2.ZERO
+		play_idle_animation()
+		move_and_slide()
+		walk_completed.emit()
+		return
 
+	if global_position.distance_to(_walk_target) <= 8.0:
+		_walking_to_target = false
+		velocity = Vector2.ZERO
+		play_idle_animation()
+		move_and_slide()
+		walk_completed.emit()
+		return
+
+	if global_position.distance_to(_follower.global_position) > follow_distance:
+		velocity = Vector2.ZERO
+		play_idle_animation()
+		move_and_slide()
+		return
+
+	var direction := (_walk_target - global_position).normalized()
+	update_facing_from_direction(direction)
+	velocity = direction * follow_speed
+	play_walk_animation()
+	move_and_slide()
+
+
+func walk_to(target: Vector2, follower: Node2D) -> void:
+	if not is_instance_valid(follower):
+		push_error("Priestess.walk_to requires a valid follower.")
+		return
+
+	_walk_target = target
+	_follower = follower
+	_walking_to_target = true
+
+
+func become_companion(follower: Node2D, active_dialogue_box: Control) -> void:
+	if not is_instance_valid(follower):
+		push_error("Priestess.become_companion requires a valid player.")
+		return
+
+	player = follower
+	dialogue_box = active_dialogue_box
+	global_position = player.global_position + Vector2(-32.0, 0.0)
+	show()
+	is_companion = true
+	_following_player = true
+	_walking_to_target = false
+	add_to_group("priestess_companion")
+	_make_dialogue_persistent()
+
+	var tree := get_tree()
+	var scene_changed_callback := Callable(self, "_on_scene_changed")
+	if not tree.scene_changed.is_connected(scene_changed_callback):
+		tree.scene_changed.connect(scene_changed_callback)
+
+	if get_parent() != tree.root:
+		reparent(tree.root, true)
+		owner = null
+
+
+func _make_dialogue_persistent() -> void:
+	if not is_instance_valid(dialogue_box):
+		push_error("Priestess cannot become a companion without a DialogueBox.")
+		return
+
+	var root := get_tree().root
+	_persistent_dialogue_layer = root.get_node_or_null(
+		"PriestessDialogueLayer"
+	) as CanvasLayer
+	if _persistent_dialogue_layer == null:
+		_persistent_dialogue_layer = CanvasLayer.new()
+		_persistent_dialogue_layer.name = "PriestessDialogueLayer"
+		_persistent_dialogue_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+		root.add_child(_persistent_dialogue_layer)
+
+	if dialogue_box.get_parent() != _persistent_dialogue_layer:
+		dialogue_box.reparent(_persistent_dialogue_layer)
+		dialogue_box.owner = null
+
+
+func _on_scene_changed() -> void:
+	await get_tree().process_frame
+	if not is_inside_tree():
+		return
+
+	var current_player := get_tree().get_first_node_in_group("player") as Node2D
+	if current_player == null:
+		player = null
+		visible = false
+		velocity = Vector2.ZERO
+		return
+
+	player = current_player
+	global_position = player.global_position + Vector2(-32.0, 0.0)
+	show()
+	_following_player = true
+	face_toward(player.global_position)
+
+
+func face_toward(pos: Vector2) -> void:
+	var direction := pos - global_position
+	if direction == Vector2.ZERO:
+		return
 	update_facing_from_direction(direction)
 	play_idle_animation()
 
 
+func face_player() -> void:
+	if player != null:
+		face_toward(player.global_position)
+
+
 func update_facing_from_direction(direction: Vector2) -> void:
 	if abs(direction.x) > abs(direction.y):
-		if direction.x > 0.0:
-			facing_direction = "right"
-		else:
-			facing_direction = "left"
+		facing_direction = "right" if direction.x > 0.0 else "left"
 	else:
-		if direction.y > 0.0:
-			facing_direction = "down"
-		else:
-			facing_direction = "up"
+		facing_direction = "down" if direction.y > 0.0 else "up"
 
 
 func play_idle_animation() -> void:
-	var animation_name: String = "idle_" + facing_direction
-
-	if sprite.sprite_frames != null:
-		if sprite.sprite_frames.has_animation(animation_name):
-			if sprite.animation != animation_name:
-				sprite.play(animation_name)
+	var animation_name := "idle_" + facing_direction
+	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(
+		animation_name
+	):
+		if sprite.animation != animation_name:
+			sprite.play(animation_name)
 
 
 func play_walk_animation() -> void:
-	var animation_name: String = "walk_" + facing_direction
+	var animation_name := "walk_" + facing_direction
+	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(
+		animation_name
+	):
+		if sprite.animation != animation_name:
+			sprite.play(animation_name)
+	else:
+		play_idle_animation()
 
-	if sprite.sprite_frames != null:
-		if sprite.sprite_frames.has_animation(animation_name):
-			if sprite.animation != animation_name:
-				sprite.play(animation_name)
-		else:
-			play_idle_animation()
-
-
-# ---------------------------------------------------------------------------
-# Tutorial (uses the DialogueBox UI)
-# ---------------------------------------------------------------------------
 
 func start_tutorial() -> void:
-	print("start_tutorial called, dialogue_box = ", dialogue_box)
-
-	if dialogue_box == null or _tutorial_running:
-		return
-
-	_tutorial_running = true
-	tutorial_done = true
-	dialogue_open = true
-	velocity = Vector2.ZERO
-	face_player()
-
-	# The DialogueBox pauses the tree while it is open.
-	dialogue_box.start(TUTORIAL_LINES)
+	var manager := get_tree().get_first_node_in_group("tutorial_manager")
+	if manager != null and manager.has_method("start_tutorial"):
+		manager.call("start_tutorial")
 
 
 func _on_dialogue_box_finished() -> void:
-	if not _tutorial_running:
-		return
-
-	_tutorial_running = false
 	dialogue_open = false
 	play_idle_animation()
 
-
-# ---------------------------------------------------------------------------
-# Interact menu ("Help" replays the controls tutorial in the dialogue box)
-# ---------------------------------------------------------------------------
 
 func open_dialogue() -> void:
+	if not is_companion or dialogue_open:
+		return
+
 	dialogue_open = true
 	velocity = Vector2.ZERO
-
-	# Face the player without using a talking animation.
 	face_player()
-
-	print("Priestess: How may I help you?")
-	print("1. Heal me")
-	print("2. Help")
-	print("3. Never mind")
-	print("Press 1, 2, or 3 to choose an option.")
-
-
-func close_dialogue() -> void:
-	dialogue_open = false
-	play_idle_animation()
-
-
-func heal_player() -> void:
-	if player == null:
-		close_dialogue()
+	if not is_instance_valid(dialogue_box):
+		push_error("Priestess has no valid DialogueBox for interaction.")
+		dialogue_open = false
+		return
+	if not dialogue_box.has_method("start") or not dialogue_box.has_signal(
+		"dialogue_finished"
+	):
+		push_error("Priestess DialogueBox does not expose its dialogue API.")
+		dialogue_open = false
 		return
 
-	if not ("hp" in player) or not ("max_hp" in player):
-		print("Priestess: I cannot heal you right now.")
-		close_dialogue()
+	var name_label := dialogue_box.get_node_or_null("%NameLabel") as Label
+	if name_label == null:
+		push_error("Priestess DialogueBox is missing its name label.")
+		dialogue_open = false
 		return
 
-	var current_hp: int = int(player.get("hp"))
-	var maximum_hp: int = int(player.get("max_hp"))
-
-	if current_hp >= maximum_hp:
-		print("Priestess: Your health is already full.")
-	else:
-		var restored_hp: int = min(
-			heal_amount,
-			maximum_hp - current_hp
-		)
-
+	var message := "Your health is already full. Speak with me whenever you need aid."
+	var current_hp: int = PlayerData.current_hp
+	var maximum_hp: int = PlayerData.current_max_hp
+	if current_hp < maximum_hp:
+		var restored_hp: int = mini(heal_amount, maximum_hp - current_hp)
 		if player.has_method("heal"):
 			player.call("heal", restored_hp)
 		else:
-			player.set("hp", current_hp + restored_hp)
-
-		print(
-			"Priestess: May the light restore you. Restored ",
-			restored_hp,
-			" HP."
+			PlayerData.set_current_hp(current_hp + restored_hp)
+		message = "Of course, hero. May the light restore you. I healed %d HP." % (
+			restored_hp
 		)
 
-	close_dialogue()
+	name_label.text = "Priestess"
+	dialogue_box.call("start", [{"speaker": "Priestess", "text": message}])
+	await Signal(dialogue_box, "dialogue_finished")
 
 
-func show_help() -> void:
-	# Replay the controls tutorial in the dialogue box.
-	if dialogue_box != null:
-		start_tutorial()
-	else:
-		print(
-			"Priestess: Stay alert. Explore carefully ",
-			"and watch your health."
-		)
-		close_dialogue()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not dialogue_open or _tutorial_running:
-		return
-
-	if event.is_action_pressed("ui_cancel"):
-		close_dialogue()
-		get_viewport().set_input_as_handled()
-		return
-
-	if event is InputEventKey and event.pressed and not event.echo:
-		match event.keycode:
-			KEY_1:
-				heal_player()
-				get_viewport().set_input_as_handled()
-			KEY_2:
-				show_help()
-				get_viewport().set_input_as_handled()
-			KEY_3:
-				close_dialogue()
-				get_viewport().set_input_as_handled()
+func _input(event: InputEvent) -> void:
+	if (
+		event.is_action_pressed("interact")
+		and player_nearby
+		and is_companion
+		and not dialogue_open
+	):
+		open_dialogue()

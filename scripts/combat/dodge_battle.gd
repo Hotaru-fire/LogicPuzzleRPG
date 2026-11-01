@@ -40,7 +40,7 @@ func finish_dodge():
 
 	dodge_finished.emit()
 
-func spawn_attack(start_position: Vector2, direction: Vector2):
+func spawn_attack(start_position: Vector2, direction: Vector2, speed := 200.0):
 	var attack = Area2D.new()
 
 	attack.collision_layer = 2
@@ -71,6 +71,7 @@ func spawn_attack(start_position: Vector2, direction: Vector2):
 
 	attack.position = start_position
 	attack.set_meta("direction", direction)
+	attack.set_meta("speed", speed)
 
 	attacks.append(attack)
 
@@ -81,7 +82,8 @@ func _physics_process(delta):
 	for attack in attacks:
 		if is_instance_valid(attack):
 			var direction = attack.get_meta("direction")
-			attack.position += direction * 200 * delta
+			var speed = attack.get_meta("speed", 200.0)
+			attack.position += direction * speed * delta
 
 
 func _on_attack_body_entered(body):
@@ -240,3 +242,91 @@ func pattern_boss_aimed():
 	direction = (heart_position - spawn_position).normalized()
 
 	spawn_attack(spawn_position, direction)
+
+
+# =========================
+# ORC DODGE BATTLE
+# =========================
+
+func start_orc_dodge():
+	dodge_timer = dodge_duration
+	visible = true
+
+	$BattleBox/Player.position = Vector2(425, 140)
+
+	print("ORC DODGE STARTED!")
+
+	# Runs the countdown at the same time as the patterns
+	update_boss_timer()
+
+	while dodge_timer > 0:
+		var pattern = randi_range(1, 4)
+
+		match pattern:
+			1:
+				await pattern_orc_slam()
+			2:
+				await pattern_orc_wall_gap()
+			3:
+				await pattern_orc_shockwave()
+			4:
+				await pattern_orc_rage()
+
+		if dodge_timer > 0:
+			await get_tree().create_timer(0.5).timeout
+
+	finish_dodge()
+
+
+# SLAM: heavy, fast drops that land on wherever the heart is standing.
+# The last slam adds flankers so you can't just step sideways.
+func pattern_orc_slam():
+	for i in 3:
+		var x: float = $BattleBox/Player.position.x
+		spawn_attack(Vector2(x, 30), Vector2.DOWN, 350.0)
+
+		if i == 2:
+			spawn_attack(Vector2(x - 70, 30), Vector2.DOWN, 350.0)
+			spawn_attack(Vector2(x + 70, 30), Vector2.DOWN, 350.0)
+
+		await get_tree().create_timer(0.6).timeout
+
+
+# WALL: a slow wall of attacks sweeps in with a random gap to squeeze through.
+func pattern_orc_wall_gap():
+	var gap := randi_range(0, 6)
+
+	for i in 8:
+		if i == gap or i == gap + 1:
+			continue
+
+		spawn_attack(Vector2(820, 30 + i * 30), Vector2.LEFT, 150.0)
+
+	await get_tree().create_timer(1.2).timeout
+
+
+# SHOCKWAVE: two fans of attacks, the second one fills the gaps of the first.
+func pattern_orc_shockwave():
+	for angle in [-30, -15, 0, 15, 30]:
+		var dir = Vector2.LEFT.rotated(deg_to_rad(angle))
+		spawn_attack(Vector2(820, 140), dir, 170.0)
+
+	await get_tree().create_timer(0.8).timeout
+
+	for angle in [-22, -7, 7, 22]:
+		var dir = Vector2.LEFT.rotated(deg_to_rad(angle))
+		spawn_attack(Vector2(820, 140), dir, 170.0)
+
+	await get_tree().create_timer(0.6).timeout
+
+
+# RAGE: fast attacks from both sides at random heights.
+func pattern_orc_rage():
+	for i in 5:
+		var y_left := randf_range(50.0, 230.0)
+		var y_right := randf_range(50.0, 230.0)
+
+		spawn_attack(Vector2(30, y_left), Vector2.RIGHT, 320.0)
+		spawn_attack(Vector2(820, y_right), Vector2.LEFT, 320.0)
+
+		await get_tree().create_timer(0.35).timeout

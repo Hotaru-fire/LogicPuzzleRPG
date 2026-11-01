@@ -8,6 +8,7 @@ extends CharacterBody2D
 var last_direction := Vector2.DOWN
 var is_attacking := false
 var restoring_battle_position := false
+var can_move := true
 
 # FOOTSTEPS
 @onready var footstep_sound = $FootstepSound
@@ -114,6 +115,13 @@ func _physics_process(delta: float) -> void:
 	if death_processed:
 		return
 
+	if not can_move:
+		velocity = Vector2.ZERO
+		is_attacking = false
+		move_and_slide()
+		_play_idle_animation()
+		return
+
 	var direction = Input.get_vector(
 		"move_left",
 		"move_right",
@@ -160,14 +168,33 @@ func _physics_process(delta: float) -> void:
 				knight.play("walk_up")
 	else:
 		# IDLE
-		if last_direction.x > 0:
-			knight.play("idle_right")
-		elif last_direction.x < 0:
-			knight.play("idle_left")
-		elif last_direction.y > 0:
-			knight.play("idle_down")
-		else:
-			knight.play("idle_up")
+		_play_idle_animation()
+
+
+func face_toward(pos: Vector2) -> void:
+	var direction := pos - global_position
+	if direction == Vector2.ZERO:
+		return
+
+	if abs(direction.x) > abs(direction.y):
+		last_direction = Vector2.RIGHT if direction.x > 0.0 else Vector2.LEFT
+	else:
+		last_direction = Vector2.DOWN if direction.y > 0.0 else Vector2.UP
+
+	update_attack_area()
+	if not is_attacking:
+		_play_idle_animation()
+
+
+func _play_idle_animation() -> void:
+	if last_direction.x > 0:
+		knight.play("idle_right")
+	elif last_direction.x < 0:
+		knight.play("idle_left")
+	elif last_direction.y > 0:
+		knight.play("idle_down")
+	else:
+		knight.play("idle_up")
 
 
 func update_attack_area() -> void:
@@ -284,7 +311,7 @@ func _input(event: InputEvent) -> void:
 
 
 func basic_attack() -> void:
-	if is_attacking:
+	if is_attacking or not can_move:
 		return
 
 	is_attacking = true

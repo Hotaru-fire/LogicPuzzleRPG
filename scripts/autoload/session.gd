@@ -37,6 +37,8 @@ var score: int = 0
 var mobs_defeated: int = 0
 var dungeon_enemies_defeated: int = 0
 var bosses_killed: int = 0
+var cleared_spawns: Array[String] = []
+var tutorial_done := false
 
 var total_deaths: int = 0
 var puzzle_clear_time: float = 0.0
@@ -469,6 +471,17 @@ func record_normal_mob_kill(
 	print("Normal mobs defeated: ", mobs_defeated, " | score: ", score)
 
 
+func record_cleared_spawn(spawn_id: String) -> bool:
+	if spawn_id.is_empty():
+		push_error("Cannot record a cleared spawn with an empty spawn_id.")
+		return false
+	if cleared_spawns.has(spawn_id):
+		return false
+
+	cleared_spawns.append(spawn_id)
+	return true
+
+
 func record_dungeon_enemy_kill(
 	exp_reward: int = DUNGEON_ENEMY_EXP,
 	gold_reward: int = DUNGEON_ENEMY_GOLD,
@@ -560,6 +573,24 @@ func clear_session() -> void:
 
 
 func load_analytics(data: Dictionary) -> void:
+	if data.has("tutorial_done"):
+		tutorial_done = bool(data["tutorial_done"])
+
+	if data.has("cleared_spawns"):
+		var saved_spawns: Variant = data["cleared_spawns"]
+		if not (saved_spawns is Array):
+			push_error("Loaded cleared_spawns data is not an array.")
+		else:
+			cleared_spawns.clear()
+			for value in saved_spawns:
+				if not (value is String) or value.is_empty():
+					push_error(
+						"Loaded cleared_spawns contains an invalid spawn_id."
+					)
+					continue
+				if not cleared_spawns.has(value):
+					cleared_spawns.append(value)
+
 	total_deaths = clampi(int(data.get("total_deaths", 0)), 0, MAX_COUNTER)
 	puzzle_clear_time = maxf(float(data.get("puzzle_clear_time", 0.0)), 0.0)
 	best_puzzle_clear_time = maxf(
@@ -589,6 +620,8 @@ func reset_game_progress() -> void:
 	mobs_defeated = 0
 	dungeon_enemies_defeated = 0
 	bosses_killed = 0
+	cleared_spawns.clear()
+	tutorial_done = false
 	total_deaths = 0
 	puzzle_clear_time = 0.0
 	best_puzzle_clear_time = 0.0

@@ -372,7 +372,8 @@ try {
                 hp, max_hp, attack, defense, current_scene, boss_completed,
                 inventory, equipment, player_position_x, player_position_y,
                 total_deaths, puzzle_clear_time, puzzle_time_improvement,
-                best_puzzle_clear_time, puzzles_cleared, first_puzzle_clear_time
+                best_puzzle_clear_time, puzzles_cleared, first_puzzle_clear_time,
+                cleared_spawns, tutorial_done
              FROM player_saves
              WHERE user_id = ?
              LIMIT 1"
@@ -491,6 +492,16 @@ try {
             respond(false, "Invalid boss completion value.");
         }
 
+        $tutorial_done = filter_var(
+            $data["tutorial_done"] ?? ($existing["tutorial_done"] ?? false),
+            FILTER_VALIDATE_BOOLEAN,
+            FILTER_NULL_ON_FAILURE
+        );
+
+        if ($tutorial_done === null) {
+            respond(false, "Invalid tutorial completion value.");
+        }
+
         $scene = $data["current_scene"]
             ?? ($existing["current_scene"] ?? "res://scenes/maps/world.tscn");
 
@@ -540,6 +551,32 @@ try {
             respond(false, "Equipment must contain valid JSON.");
         }
 
+        $stored_cleared_spawns = json_decode(
+            $existing["cleared_spawns"] ?? "[]",
+            true
+        );
+        $cleared_spawns = array_key_exists("cleared_spawns", $data)
+            ? $data["cleared_spawns"]
+            : $stored_cleared_spawns;
+        if (!is_array($cleared_spawns) || count($cleared_spawns) > 1000) {
+            respond(false, "Invalid cleared spawn list.");
+        }
+
+        foreach ($cleared_spawns as $spawn_id) {
+            if (
+                !is_string($spawn_id) ||
+                trim($spawn_id) === "" ||
+                strlen($spawn_id) > 255
+            ) {
+                respond(false, "Invalid cleared spawn ID.");
+            }
+        }
+
+        $cleared_spawns_json = json_encode(
+            array_values(array_unique($cleared_spawns)),
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES
+        );
+
         $stmt = $pdo->prepare(
             "INSERT INTO player_saves (
                 user_id, character_class, level, exp, gold, score,
@@ -549,10 +586,10 @@ try {
                 player_position_x, player_position_y, total_deaths,
                 puzzle_clear_time, puzzle_time_improvement,
                 best_puzzle_clear_time, puzzles_cleared,
-                first_puzzle_clear_time
+                first_puzzle_clear_time, cleared_spawns, tutorial_done
             ) VALUES (
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?
             )
             ON DUPLICATE KEY UPDATE
                 character_class = VALUES(character_class),
@@ -579,7 +616,9 @@ try {
                 puzzle_time_improvement = VALUES(puzzle_time_improvement),
                 best_puzzle_clear_time = VALUES(best_puzzle_clear_time),
                 puzzles_cleared = VALUES(puzzles_cleared),
-                first_puzzle_clear_time = VALUES(first_puzzle_clear_time)"
+                first_puzzle_clear_time = VALUES(first_puzzle_clear_time),
+                cleared_spawns = VALUES(cleared_spawns),
+                tutorial_done = VALUES(tutorial_done)"
         );
 
         error_log(
@@ -615,7 +654,9 @@ try {
             $values["puzzle_time_improvement"],
             $values["best_puzzle_clear_time"],
             $values["puzzles_cleared"],
-            $values["first_puzzle_clear_time"]
+            $values["first_puzzle_clear_time"],
+            $cleared_spawns_json,
+            $tutorial_done ? 1 : 0
         ]);
 
         error_log(
@@ -640,7 +681,7 @@ try {
                player_position_x, player_position_y, total_deaths,
                puzzle_clear_time, puzzle_time_improvement,
                best_puzzle_clear_time, puzzles_cleared,
-               first_puzzle_clear_time
+               first_puzzle_clear_time, cleared_spawns, tutorial_done
             FROM player_saves
              WHERE user_id = ?
              LIMIT 1"
@@ -659,6 +700,15 @@ try {
             ]);
         }
 
+        $save["cleared_spawns"] = json_decode(
+            $save["cleared_spawns"] ?? "[]",
+            true
+        );
+        if (!is_array($save["cleared_spawns"])) {
+            respond(false, "Stored cleared spawn data is invalid.");
+        }
+        $save["cleared_spawns"] = array_values($save["cleared_spawns"]);
+
         error_log(
             "[game_data] load_save coordinates user_id="
             . $user_id
@@ -669,6 +719,7 @@ try {
         // Return saved fields at the top level for Godot.
         $save["has_save"] = true;
         $save["boss_completed"] = (bool)$save["boss_completed"];
+        $save["tutorial_done"] = (bool)$save["tutorial_done"];
 
         respond(true, "Save loaded.", $save);
     }
