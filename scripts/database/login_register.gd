@@ -15,8 +15,8 @@ var logged_in_username := ""
 @onready var password_input: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PasswordInput
 @onready var confirm_password_input: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ConfirmPasswordInput
 @onready var message_label: Label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MessageLabel
-@onready var submit_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SubmitButton
-@onready var switch_mode_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SwitchModeButton
+@onready var submit_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons/SubmitButton
+@onready var switch_mode_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons/SwitchModeButton
 
 
 func _ready():

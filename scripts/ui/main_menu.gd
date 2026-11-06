@@ -1,10 +1,20 @@
 extends Control
 
+const CARD_BACKGROUND := Color(0.035, 0.055, 0.09, 0.96)
+const CARD_BORDER := Color(0.30, 0.38, 0.49, 1.0)
+const CARD_SELECTED_BORDER := Color(0.79, 0.65, 0.39, 1.0)
+
 @onready var menu_buttons = $MenuButtons
 @onready var play_panel = $PlayPanel
 @onready var settings_panel = $SettingsPanel
 @onready var title = $Title
 @onready var warning_label = $PlayPanel/WarningLbl
+@onready var knight_card: PanelContainer = $PlayPanel/Avatars/KnightCard
+@onready var mage_card: PanelContainer = $PlayPanel/Avatars/MageCard
+@onready var archer_card: PanelContainer = $PlayPanel/Avatars/ArcherCard
+@onready var knight_sprite: AnimatedSprite2D = $PlayPanel/Avatars/KnightCard/KnightButton/KnightPortrait/PortraitArea/KnightSprite
+@onready var mage_sprite: AnimatedSprite2D = $PlayPanel/Avatars/MageCard/MageButton/Mage/PortraitArea/MageSprite
+@onready var archer_sprite: AnimatedSprite2D = $PlayPanel/Avatars/ArcherCard/ArcherButton/Archer/PortraitArea/ArcherSprite
 
 # Confirmation panel
 @onready var confirmation_panel: PanelContainer = $ConfirmationPanel
@@ -25,6 +35,7 @@ func _ready() -> void:
 	settings_panel.hide()
 	confirmation_panel.hide()
 	warning_label.hide()
+	_refresh_character_selection()
 
 	if not continue_button.pressed.is_connected(_on_delete_save_confirmation_confirmed):
 		continue_button.pressed.connect(_on_delete_save_confirmation_confirmed)
@@ -130,26 +141,83 @@ func _open_character_selection() -> void:
 # CHARACTER SELECTION BUTTONS
 # --------------------------------------------------
 
+func _refresh_character_selection() -> void:
+	_set_card_style(knight_card, selected_character == 1)
+	_set_card_style(mage_card, selected_character == 2)
+	_set_card_style(archer_card, selected_character == 4)
+
+	_set_portrait_animation(knight_sprite, selected_character == 1)
+	_set_portrait_animation(mage_sprite, selected_character == 2)
+	_set_portrait_animation(archer_sprite, selected_character == 4)
+
+
+func _set_card_style(card: PanelContainer, selected: bool) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = CARD_BACKGROUND
+	style.border_width_left = 3 if selected else 2
+	style.border_width_top = 3 if selected else 2
+	style.border_width_right = 3 if selected else 2
+	style.border_width_bottom = 3 if selected else 2
+	style.border_color = CARD_SELECTED_BORDER if selected else CARD_BORDER
+	style.corner_radius_top_left = 14
+	style.corner_radius_top_right = 14
+	style.corner_radius_bottom_right = 14
+	style.corner_radius_bottom_left = 14
+	style.content_margin_left = 0.0
+	style.content_margin_top = 0.0
+	style.content_margin_right = 0.0
+	style.content_margin_bottom = 0.0
+	card.add_theme_stylebox_override("panel", style)
+
+
+func _set_portrait_animation(
+	sprite: AnimatedSprite2D,
+	selected: bool
+) -> void:
+	if sprite.sprite_frames == null:
+		push_error("Character portrait has no SpriteFrames resource.")
+		return
+
+	if selected:
+		if sprite.sprite_frames.has_animation(&"walk_down"):
+			sprite.play(&"walk_down")
+			return
+		push_error("Character portrait has no walk_down animation.")
+		return
+
+	for idle_animation in [&"idle", &"Idle", &"idle_down"]:
+		if sprite.sprite_frames.has_animation(idle_animation):
+			sprite.play(idle_animation)
+			return
+
+	push_error("Character portrait has no available idle animation.")
+
+
+func _set_selected_character(character_id: int) -> void:
+	selected_character = character_id
+	_refresh_character_selection()
+
+
 func _on_character_1_pressed() -> void:
-	selected_character = 1
+	_set_selected_character(1)
 	print("Selected Knight")
 	print("Character value is now: ", selected_character)
 
 
 func _on_character_2_pressed() -> void:
-	selected_character = 2
+	_set_selected_character(2)
 	print("Selected Mage")
 	print("Character value is now: ", selected_character)
 
 
 func _on_character_3_pressed() -> void:
-	selected_character = 3
+	_set_selected_character(3)
 	print("Selected Thief")
 	print("Character value is now: ", selected_character)
 
 
 func _on_character_4_pressed() -> void:
-	selected_character = 4
+	_set_selected_character(4)
 	print("Selected Archer")
 	print("Character value is now: ", selected_character)
 

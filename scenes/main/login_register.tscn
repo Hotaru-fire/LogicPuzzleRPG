@@ -40,6 +40,66 @@ texture_margin_top = 1.0
 texture_margin_right = 1.0
 texture_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckjjb"]
+bg_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_of2id"]
+bg_color = Color(0.6627451, 0.5372549, 0.3137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0idg"]
+bg_color = Color(0.8509804, 0.7411765, 0.5294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94509804, 0.89411765, 0.77254903, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fpei"]
+bg_color = Color(0.50980395, 0.47058824, 0.34509805, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6392157, 0.5921569, 0.47058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3w8e4"]
+bg_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="LoginRegister" type="Control" unique_id=1157974621]
 layout_mode = 3
 anchors_preset = 15
@@ -1037,9 +1097,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_tnaqn")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=156575985]
 layout_mode = 2
-theme_override_constants/margin_left = 45
+theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 57
-theme_override_constants/margin_right = 42
+theme_override_constants/margin_right = 70
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=725032808]
 layout_mode = 2
@@ -1068,17 +1128,43 @@ placeholder_text = "Confirm Password"
 secret = true
 
 [node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2098940152]
+custom_minimum_size = Vector2(10, 75)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0.05490196, 0.05490196, 1)
 theme_override_fonts/font = ExtResource("3_s7053")
 text = "Message"
+autowrap_mode = 3
 
-[node name="SubmitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1331021826]
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=896723581]
 layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SubmitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons" unique_id=1331021826]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ckjjb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_of2id")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b0idg")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5fpei")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3w8e4")
 text = "Login"
 
-[node name="SwitchModeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=791127426]
+[node name="SwitchModeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons" unique_id=791127426]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ckjjb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_of2id")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b0idg")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5fpei")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3w8e4")
 text = "Create an account"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1424706617]

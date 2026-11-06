@@ -14958,10 +14958,7 @@ y_sort_enabled = true
 position = Vector2(-1741, 815)
 
 [node name="Knight" parent="player" index="5" unique_id=905762716]
-animation = &"attack_left"
-
-[node name="AttackArea" parent="player" index="6" unique_id=920107369]
-visible = false
+animation = &"idle_right"
 
 [node name="Priestess" parent="." unique_id=1074553048 node_paths=PackedStringArray("dialogue_box") instance=ExtResource("5_av32x")]
 position = Vector2(-1596, 818)
@@ -14989,10 +14986,7 @@ position = Vector2(0, 1)
 
 [node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("6_yicuf")]
 
-[node name="PauseMenu" parent="CanvasLayer" index="2" unique_id=1074780976]
-custom_maximum_size = Vector2(7, -1)
-
-[node name="VBoxContainer2" parent="CanvasLayer/PauseMenu" index="0" unique_id=2068402848]
+[node name="VBoxContainer2" parent="CanvasLayer/PauseMenu" parent_id_path=PackedInt32Array(2026103625, 1989148584) index="0" unique_id=2068402848]
 custom_minimum_size = Vector2(17, 0)
 
 [node name="DungeonEntrance" type="Area2D" parent="." unique_id=817363813]

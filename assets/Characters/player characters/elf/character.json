@@ -1,0 +1,1103 @@
+{
+  "version": 2,
+  "bodyType": "female",
+  "selections": {
+    "body": {
+      "itemId": "body",
+      "subId": null,
+      "variant": "",
+      "recolor": "light",
+      "name": "Body Color (light)"
+    },
+    "head": {
+      "itemId": "heads_human_female",
+      "subId": null,
+      "variant": "",
+      "recolor": "light",
+      "name": "Human Female (light)"
+    },
+    "expression": {
+      "itemId": "face_neutral",
+      "subId": null,
+      "variant": "",
+      "recolor": "light",
+      "name": "Neutral (light)"
+    },
+    "shadow": {
+      "itemId": "shadow",
+      "subId": null,
+      "variant": "",
+      "recolor": "brown",
+      "name": "Shadow (brown)"
+    },
+    "ears": {
+      "itemId": "head_ears_elven",
+      "subId": null,
+      "variant": "",
+      "recolor": "light",
+      "name": "Elven ears (light)"
+    },
+    "ammo": {
+      "itemId": "weapon_ranged_bow_arrow",
+      "subId": null,
+      "variant": "arrow",
+      "recolor": "",
+      "name": "Ammo (arrow)"
+    },
+    "weapon": {
+      "itemId": "weapon_ranged_bow_great",
+      "subId": null,
+      "variant": "light",
+      "recolor": "",
+      "name": "Great (light)"
+    },
+    "hair": {
+      "itemId": "hair_relm_ponytail",
+      "subId": null,
+      "variant": "",
+      "recolor": "blonde",
+      "name": "Relm w/Ponytail (blonde)"
+    },
+    "clothes": {
+      "itemId": "torso_clothes_longsleeve",
+      "subId": null,
+      "variant": "",
+      "recolor": "slate",
+      "name": "Longsleeve (slate)"
+    },
+    "cape": {
+      "itemId": "cape_solid",
+      "subId": null,
+      "variant": "",
+      "recolor": "walnut",
+      "name": "Solid (walnut)"
+    },
+    "cape_trim": {
+      "itemId": "cape_trim",
+      "subId": null,
+      "variant": "",
+      "recolor": "brown",
+      "name": "Cape Trim (brown)"
+    },
+    "quiver": {
+      "itemId": "quiver",
+      "subId": null,
+      "variant": "quiver",
+      "recolor": "",
+      "name": "Quiver (quiver)"
+    },
+    "legs": {
+      "itemId": "legs_shorts",
+      "subId": null,
+      "variant": "",
+      "recolor": "green",
+      "name": "Shorts (green)"
+    },
+    "belt": {
+      "itemId": "belt_leather",
+      "subId": null,
+      "variant": "charcoal",
+      "recolor": "",
+      "name": "Leather Belt (charcoal)"
+    },
+    "bauldron": {
+      "itemId": "bauldron",
+      "subId": null,
+      "variant": "",
+      "recolor": "walnut",
+      "name": "Bauldron (walnut)"
+    },
+    "wrists": {
+      "itemId": "wrists_cuffs",
+      "subId": null,
+      "variant": "",
+      "recolor": "charcoal",
+      "name": "Cuffs (charcoal)"
+    },
+    "shoes": {
+      "itemId": "feet_boots_revised",
+      "subId": null,
+      "variant": "",
+      "recolor": "leather",
+      "name": "Revised Boots (leather)"
+    }
+  },
+  "selectedAnimation": "walk",
+  "showTransparencyGrid": true,
+  "applyTransparencyMask": false,
+  "matchBodyColorEnabled": true,
+  "compactDisplay": false,
+  "enabledLicenses": {
+    "CC0": true,
+    "CC-BY-SA": true,
+    "CC-BY": true,
+    "OGA-BY": true,
+    "GPL": true
+  },
+  "enabledAnimations": {
+    "spellcast": false,
+    "thrust": false,
+    "walk": false,
+    "slash": false,
+    "shoot": false,
+    "hurt": false,
+    "climb": false,
+    "idle": false,
+    "jump": false,
+    "sit": false,
+    "emote": false,
+    "run": false,
+    "watering": false,
+    "combat": false,
+    "1h_slash": false,
+    "1h_backslash": false,
+    "1h_halfslash": false
+  },
+  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#sex=female&body=Body_Color_light&head=Human_Female_light&expression=Neutral_light&shadow=Shadow_brown&ears=Elven_ears_light&ammo=Ammo_arrow&weapon=Great_light&hair=Relm_w%2FPonytail_blonde&clothes=Longsleeve_slate&cape=Solid_walnut&cape_trim=Cape_Trim_brown&quiver=Quiver_quiver&legs=Shorts_green&belt=Leather_Belt_charcoal&bauldron=Bauldron_walnut&wrists=Cuffs_charcoal&shoes=Revised_Boots_leather",
+  "layers": [
+    {
+      "itemId": "weapon_ranged_bow_great",
+      "name": "Great (light)",
+      "variant": "light",
+      "recolors": null,
+      "zPos": -1,
+      "layerNum": 1,
+      "yPos": 512,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "weapon/ranged/bow/great/universal/background/walk/light.png"
+      },
+      "supportedAnimations": [
+        "walk",
+        "shoot",
+        "hurt"
+      ]
+    },
+    {
+      "itemId": "shadow",
+      "name": "Shadow (brown)",
+      "variant": "",
+      "recolors": {
+        "shadow": "brown"
+      },
+      "zPos": 0,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "shadow/adult/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "cape_solid",
+      "name": "Solid (walnut)",
+      "variant": "",
+      "recolors": {
+        "cape": "walnut"
+      },
+      "zPos": 5,
+      "layerNum": 2,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "cape/solid/bg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle"
+      ]
+    },
+    {
+      "itemId": "quiver",
+      "name": "Quiver (quiver)",
+      "variant": "quiver",
+      "recolors": null,
+      "zPos": 8,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "quiver/spellcast/quiver.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt"
+      ]
+    },
+    {
+      "itemId": "hair_relm_ponytail",
+      "name": "Relm w/Ponytail (blonde)",
+      "variant": "",
+      "recolors": {
+        "hair": "blonde"
+      },
+      "zPos": 9,
+      "layerNum": 2,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "hair/relm_ponytail/adult/bg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "body",
+      "name": "Body Color (light)",
+      "variant": "",
+      "recolors": {
+        "body": "light"
+      },
+      "zPos": 10,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "body/bodies/female/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "legs_shorts",
+      "name": "Shorts (green)",
+      "variant": "",
+      "recolors": {
+        "legs": "green"
+      },
+      "zPos": 20,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "legs/shorts/shorts/thin/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "feet_boots_revised",
+      "name": "Revised Boots (leather)",
+      "variant": "",
+      "recolors": {
+        "shoes": "leather"
+      },
+      "zPos": 25,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "feet/boots/revised/thin/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "torso_clothes_longsleeve",
+      "name": "Longsleeve (slate)",
+      "variant": "",
+      "recolors": {
+        "clothes": "slate"
+      },
+      "zPos": 35,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "torso/clothes/longsleeve/longsleeve/female/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "bauldron",
+      "name": "Bauldron (walnut)",
+      "variant": "",
+      "recolors": {
+        "bauldron": "walnut"
+      },
+      "zPos": 65,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "shoulders/bauldron/thin/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run"
+      ]
+    },
+    {
+      "itemId": "belt_leather",
+      "name": "Leather Belt (charcoal)",
+      "variant": "charcoal",
+      "recolors": null,
+      "zPos": 70,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "torso/waist/belt_leather/female/spellcast/charcoal.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt"
+      ]
+    },
+    {
+      "itemId": "wrists_cuffs",
+      "name": "Cuffs (charcoal)",
+      "variant": "",
+      "recolors": {
+        "wrists": "charcoal"
+      },
+      "zPos": 70,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "arms/wrists/cuffs/thin/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run"
+      ]
+    },
+    {
+      "itemId": "cape_solid",
+      "name": "Solid (walnut)",
+      "variant": "",
+      "recolors": {
+        "cape": "walnut"
+      },
+      "zPos": 85,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "cape/solid/fg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle"
+      ]
+    },
+    {
+      "itemId": "cape_trim",
+      "name": "Cape Trim (brown)",
+      "variant": "",
+      "recolors": {
+        "cape_trim": "brown"
+      },
+      "zPos": 90,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "cape/trim/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle"
+      ]
+    },
+    {
+      "itemId": "heads_human_female",
+      "name": "Human Female (light)",
+      "variant": "",
+      "recolors": {
+        "head": "light"
+      },
+      "zPos": 100,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "head/heads/human/female/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "face_neutral",
+      "name": "Neutral (light)",
+      "variant": "",
+      "recolors": {
+        "expression": "light"
+      },
+      "zPos": 101,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "head/faces/female/neutral/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "hair_relm_ponytail",
+      "name": "Relm w/Ponytail (blonde)",
+      "variant": "",
+      "recolors": {
+        "hair": "blonde"
+      },
+      "zPos": 120,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "hair/relm_ponytail/adult/mg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "head_ears_elven",
+      "name": "Elven ears (light)",
+      "variant": "",
+      "recolors": {
+        "ears": "light"
+      },
+      "zPos": 126,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "head/ears/elven/adult/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "weapon_ranged_bow_great",
+      "name": "Great (light)",
+      "variant": "light",
+      "recolors": null,
+      "zPos": 140,
+      "layerNum": 2,
+      "yPos": 512,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "weapon/ranged/bow/great/universal/foreground/walk/light.png"
+      },
+      "supportedAnimations": [
+        "walk",
+        "shoot",
+        "hurt"
+      ]
+    },
+    {
+      "itemId": "hair_relm_ponytail",
+      "name": "Relm w/Ponytail (blonde)",
+      "variant": "",
+      "recolors": {
+        "hair": "blonde"
+      },
+      "zPos": 145,
+      "layerNum": 3,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "hair/relm_ponytail/adult/fg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "weapon_ranged_bow_arrow",
+      "name": "Ammo (arrow)",
+      "variant": "arrow",
+      "recolors": null,
+      "zPos": 150,
+      "layerNum": 1,
+      "yPos": 1024,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "weapon/ranged/bow/arrow/shoot/arrow.png"
+      },
+      "supportedAnimations": [
+        "shoot"
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "fileName": "body/bodies/female/walk.png",
+      "file": "body/bodies/female",
+      "notes": "see details at https://opengameart.org/content/lpc-character-bases",
+      "authors": [
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16",
+        "TheraHedwig",
+        "Evert",
+        "MuffinElZangano",
+        "Durrani",
+        "Pierre Vigier (pvigier)",
+        "ElizaWy",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-be-seated",
+        "https://opengameart.org/content/lpc-revised-character-basics",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle"
+      ]
+    },
+    {
+      "fileName": "head/heads/human/female/walk.png",
+      "file": "head/heads/human/female",
+      "notes": "original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16",
+      "authors": [
+        "bluecarrot16",
+        "Benjamin K. Smith (BenCreating)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    {
+      "fileName": "head/faces/female/neutral/walk.png",
+      "file": "head/faces",
+      "notes": "Original by Redshrike, Expressions by ElizaWy, mapped to all frames by JaidynReiman",
+      "authors": [
+        "JaidynReiman",
+        "ElizaWy",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Head",
+        "https://opengameart.org/content/ulpc-expanded-expressions"
+      ]
+    },
+    {
+      "fileName": "shadow/adult/walk.png",
+      "file": "shadow",
+      "notes": "Original by Dr. Jamgo, jump/sit/emote/run/revised combat by JaidynReiman",
+      "authors": [
+        "drjamgo@hotmail.com",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "CC0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/shadow-for-lpc-sprite"
+      ]
+    },
+    {
+      "fileName": "head/ears/elven/adult/walk.png",
+      "file": "head/ears/elven",
+      "notes": "adapted to v3 base by bluecarrot16; expanded to other animations and child by JaidynReiman",
+      "authors": [
+        "JaidynReiman",
+        "bluecarrot16",
+        "Thane Brimhall (pennomi)",
+        "laetissima",
+        "Matthew Krohn (makrohn)",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "GPL 3.0",
+        "CC-BY-SA 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-base-character-expressions",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ]
+    },
+    {
+      "fileName": "weapon/ranged/bow/arrow/shoot/arrow.png",
+      "file": "weapon/ranged/bow/arrow",
+      "notes": "",
+      "authors": [
+        "Johannes Sjölund (wulax)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ]
+    },
+    {
+      "fileName": "weapon/ranged/bow/great/universal/background/walk/light.png",
+      "file": "weapon/ranged/bow/great",
+      "notes": "modified by daneeklu, from \"normal\" bow by wulax; walk animations by pvigier; split into layers and tweaked for v3 character bases by bluecarrot16",
+      "authors": [
+        "Daniel Eddeland (daneeklu)",
+        "gr3yh47",
+        "Johannes Sjölund (wulax)",
+        "Pierre Vigier (pvigier)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-weapons-two-bows-a-spear-and-a-trident",
+        "https://opengameart.org/content/lpc-walk-animations-for-bows"
+      ]
+    },
+    {
+      "fileName": "hair/relm_ponytail/adult/mg/walk.png",
+      "file": "hair/relm_ponytail",
+      "notes": "",
+      "authors": [
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0+",
+        "CC-BY 3.0+",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-relm-hair-xlong-ponytail",
+        "https://opengameart.org/content/lpc-expanded-xlong-hair"
+      ]
+    },
+    {
+      "fileName": "torso/clothes/longsleeve/longsleeve/female/walk.png",
+      "file": "torso/clothes/longsleeve/longsleeve/female",
+      "notes": "original by ElizaWy, edited to v3 bases by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman",
+      "authors": [
+        "bluecarrot16",
+        "ElizaWy",
+        "JaidynReiman",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "http://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-revised-character-basics",
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-simple-shirts"
+      ]
+    },
+    {
+      "fileName": "cape/solid/fg/walk.png",
+      "file": "cape/solid/fg",
+      "notes": "",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "https://opengameart.org/content/lpc-roman-armor",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ]
+    },
+    {
+      "fileName": "cape/solid/bg/walk.png",
+      "file": "cape/solid/bg",
+      "notes": "",
+      "authors": [
+        "Nila122",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "https://opengameart.org/content/lpc-roman-armor"
+      ]
+    },
+    {
+      "fileName": "cape/trim/walk.png",
+      "file": "cape/trim",
+      "notes": "isolated stripe from cape_trimmed, adapted to v3 bases by bluecarrot16",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ]
+    },
+    {
+      "fileName": "quiver/walk/quiver.png",
+      "file": "quiver",
+      "notes": "",
+      "authors": [
+        "Johannes Sjölund (wulax)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ]
+    },
+    {
+      "fileName": "legs/shorts/shorts/thin/walk.png",
+      "file": "legs/shorts/shorts",
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, original shorts by ElizaWy, climb/jump/run/sit/emotes/revised combat by JaidynReiman",
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ]
+    },
+    {
+      "fileName": "torso/waist/belt_leather/female/walk/charcoal.png",
+      "file": "torso/waist/belt_leather",
+      "notes": "",
+      "authors": [
+        "bluecarrot16",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-combat-armor-for-women",
+        "https://opengameart.org/content/lpc-pirates"
+      ]
+    },
+    {
+      "fileName": "shoulders/bauldron/thin/walk.png",
+      "file": "shoulders/bauldron",
+      "notes": "Original by Nila122, climb/jump/sit/emote/run by JaidynReiman",
+      "authors": [
+        "Nila122",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "GPL 2.0",
+        "GPL 3.0",
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/more-lpc-clothes-and-hair"
+      ]
+    },
+    {
+      "fileName": "arms/wrists/cuffs/thin/walk.png",
+      "file": "arms/wrists/cuffs",
+      "notes": "Original by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ]
+    },
+    {
+      "fileName": "feet/boots/revised/thin/walk.png",
+      "file": "feet/boots/revised",
+      "notes": "original by ElizaWy, remaining frames by JaidynReiman",
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-socks-shoes"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpefs0p1mujsv"]
 
 [ext_resource type="Script" uid="uid://dniliknmeybg5" path="res://scripts/enemies/regular mobs/enemy_test_dummy.gd" id="1_7mfyv"]
-[ext_resource type="PackedScene" uid="uid://b6citd36snblj" path="res://scenes/battle/goblin_battle.tscn" id="2_d8gye"]
+[ext_resource type="PackedScene" path="res://scenes/battle/enemy_battle.tscn" id="2_d8gye"]
 [ext_resource type="SpriteFrames" uid="uid://b84837gmiodtn" path="res://resources/mobs/Goblin.tres" id="2_l0j4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3m5i"]

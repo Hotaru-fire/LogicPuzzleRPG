@@ -22,17 +22,17 @@ var player_moving_right := false
 
 @onready var symbol_labels = $PuzzleUI/SequenceDisplay/SymbolLabels
 
-@onready var button1 = $PuzzleUI/AnswerArea/Button1
-@onready var button2 = $PuzzleUI/AnswerArea/Button2
-@onready var button3 = $PuzzleUI/AnswerArea/Button3
-@onready var button4 = $PuzzleUI/AnswerArea/Button4
-@onready var button5 = $PuzzleUI/AnswerArea/Button5
+@onready var button1 = $PuzzleUI/AnswerCard/AnswerArea/Button1
+@onready var button2 = $PuzzleUI/AnswerCard/AnswerArea/Button2
+@onready var button3 = $PuzzleUI/AnswerCard/AnswerArea/Button3
+@onready var button4 = $PuzzleUI/AnswerCard/AnswerArea/Button4
+@onready var button5 = $PuzzleUI/AnswerCard/AnswerArea/Button5
 
-@onready var answer_area = $PuzzleUI/AnswerArea
+@onready var answer_area = $PuzzleUI/AnswerCard/AnswerArea
 @onready var result_label = $PuzzleUI/ResultLabel
 
-@onready var timer_bar = $PuzzleUI/TimerBar
-@onready var time_label = $PuzzleUI/TimeLabel
+@onready var timer_bar = $PuzzleUI/PanelContainer/MarginContainer/VBoxContainer/TimerBar
+@onready var time_label = $PuzzleUI/PanelContainer/MarginContainer/VBoxContainer/TimeLabel
 @onready var puzzle_timer: Timer = $PuzzleTimer
 
 @onready var player: Node2D = $player
@@ -40,6 +40,11 @@ var player_moving_right := false
 
 
 func _ready():
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$PuzzleUI.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$PlayerPanel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$PlayerPanel/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	puzzle_timer.wait_time = puzzle_time
 	puzzle_timer.one_shot = true
 

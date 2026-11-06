@@ -42,29 +42,64 @@ head/heads/human/female/walk.png
 		- https://opengameart.org/content/
 		- https://opengameart.org/content/lpc-character-bases
 
-hair/relm_xlong/adult/fg/walk.png
+head/faces/female/neutral/walk.png
+	- Note: Original by Redshrike, Expressions by ElizaWy, mapped to all frames by JaidynReiman
 	- Licenses:
-		- OGA-BY 3.0+
-		- CC-BY 3.0+
-		- GPL 3.0
+		- OGA-BY 3.0
 	- Authors:
 		- JaidynReiman
+		- ElizaWy
+		- Stephen Challener (Redshrike)
 	- Links:
-		- https://opengameart.org/content/lpc-expanded-xlong-hair
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Head
+		- https://opengameart.org/content/ulpc-expanded-expressions
 
-hat/magic/celestial/adult/walk/lavender.png
-	- Note: Original by Tracy, Adapted to ULPC by Big Bear Games, reduced colors by Napsio
+head/nose/button/adult/walk.png
 	- Licenses:
+		- GPL 3.0
+		- CC-BY-SA 3.0
+	- Authors:
+		- Thane Brimhall (pennomi)
+		- laetissima
+		- Matthew Krohn (makrohn)
+	- Links:
+		- https://opengameart.org/content/lpc-base-character-expressions
+
+weapon/magic/diamond/universal/foreground/walk/light.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
+weapon/magic/crystal/universal/foreground/walk/red.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- GPL 3.0
+		- CC-BY 4.0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-more-weapons
+
+hair/sara/adult/fg/walk.png
+	- Licenses:
+		- OGA-BY 3.0
 		- CC-BY 3.0
 	- Authors:
-		- Napsio (Vitruvian Studio)
-		- Michael Whitlock (bigbeargames)
-		- Tracy
+		- Stephen Challener (Redshrike)
+		- William.Thompsonj
+		- Mandi Paugh
+		- bluecarrot16
 	- Links:
-		- https://opengameart.org/content/lpc-celestial-wizard-hats
-		- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+		- https://opengameart.org/content/lpc-sara
+		- https://opengameart.org/content/lpc-hair
+		- https://opengameart.org/content/lpc-expanded-xlong-hair
 
-dress/sash/female/walk/lavender.png
+dress/sash/female/walk/blue.png
 	- Note: adapted to v3 bases and recolored by bluecarrot16
 	- Licenses:
 		- CC-BY-SA 3.0
@@ -77,106 +112,40 @@ dress/sash/female/walk/lavender.png
 	- Links:
 		- https://opengameart.org/content/lpc-2-characters
 
-cape/solid/fg/walk.png
+feet/boots/basic/thin/walk.png
+	- Note: original by Nila122, edited for male and v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
 	- Licenses:
 		- OGA-BY 3.0
 		- CC-BY-SA 3.0
+		- GPL 2.0
 		- GPL 3.0
 	- Authors:
-		- bluecarrot16
 		- JaidynReiman
-	- Links:
-		- https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
-		- https://opengameart.org/content/lpc-roman-armor
-		- http://opengameart.org/content/lpc-clothing-updates
-
-cape/solid/bg/walk.png
-	- Licenses:
-		- OGA-BY 3.0
-		- CC-BY-SA 3.0
-		- GPL 3.0
-	- Authors:
+		- bluecarrot16
 		- Nila122
-		- JaidynReiman
 	- Links:
-		- https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
-		- https://opengameart.org/content/lpc-roman-armor
-
-cape/trim/walk.png
-	- Note: isolated stripe from cape_trimmed, adapted to v3 bases by bluecarrot16
-	- Licenses:
-		- OGA-BY 3.0
-		- CC-BY-SA 3.0
-		- GPL 3.0
-	- Authors:
-		- bluecarrot16
-		- JaidynReiman
-	- Links:
-		- https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
-		- http://opengameart.org/content/lpc-clothing-updates
-
-legs/shorts/short_shorts/thin/walk.png
-	- Note: Original bases by Redshrike, thrust/shoot bases by Wulax, original shorts by ElizaWy, climb/jump/run/sit/emotes/revised combat by JaidynReiman
-	- Licenses:
-		- OGA-BY 3.0
-	- Authors:
-		- ElizaWy
-		- JaidynReiman
-		- Johannes Sjölund (wulax)
-		- Stephen Challener (Redshrike)
-	- Links:
-		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
-		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
-		- https://opengameart.org/content/lpc-expanded-pants
-
-feet/boots/fold/thin/walk.png
-	- Licenses:
-		- OGA-BY 3.0+
-		- CC-BY 3.0+
-		- GPL 3.0
-	- Authors:
-		- JaidynReiman
-	- Links:
-		- https://opengameart.org/content/lpc-kimono-relm
+		- https://opengameart.org/content/lpc-clothes-and-hair
 		- https://opengameart.org/content/lpc-expanded-socks-shoes
 
-weapon/magic/diamond/universal/foreground/walk/gold.png
+hat/magic/celestial/adult/walk/blue.png
+	- Note: Original by Tracy, Adapted to ULPC by Big Bear Games, reduced colors by Napsio
 	- Licenses:
-		- OGA-BY 3.0+
-		- GPL 3.0
-		- CC-BY 4.0
+		- CC-BY 3.0
 	- Authors:
-		- bluecarrot16
+		- Napsio (Vitruvian Studio)
+		- Michael Whitlock (bigbeargames)
+		- Tracy
 	- Links:
-		- https://opengameart.org/content/lpc-more-weapons
+		- https://opengameart.org/content/lpc-celestial-wizard-hats
+		- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
 
-weapon/magic/crystal/universal/foreground/walk/blue.png
+shadow/adult/walk.png
+	- Note: Original by Dr. Jamgo, jump/sit/emote/run/revised combat by JaidynReiman
 	- Licenses:
-		- OGA-BY 3.0+
-		- GPL 3.0
-		- CC-BY 4.0
+		- CC0
 	- Authors:
-		- bluecarrot16
+		- drjamgo@hotmail.com
+		- JaidynReiman
 	- Links:
-		- https://opengameart.org/content/lpc-more-weapons
-
-eyes/eyebrows/thin/adult/walk.png
-	- Licenses:
-		- OGA-BY 3.0
-	- Authors:
-		- ElizaWy
-	- Links:
-		- https://github.com/ElizaWy/LPC/tree/main/Characters/Hair
-		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
-
-head/nose/button/adult/walk.png
-	- Licenses:
-		- GPL 3.0
-		- CC-BY-SA 3.0
-	- Authors:
-		- Thane Brimhall (pennomi)
-		- laetissima
-		- Matthew Krohn (makrohn)
-	- Links:
-		- https://opengameart.org/content/lpc-base-character-expressions
+		- https://opengameart.org/content/shadow-for-lpc-sprite
 

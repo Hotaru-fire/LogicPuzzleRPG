@@ -1,5 +1,5 @@
 {
-  "exportTimestamp": "2026-10-16T05-06-44",
+  "exportTimestamp": "2026-11-04T10-47-40",
   "bodyType": "female",
   "frameSize": 64,
   "structure": {
@@ -281,19 +281,19 @@
   "note": "Individual animation frames organized by standard/custom > animation > direction > frame number",
   "performance": {
     "exportKind": "individualFrames",
-    "totalMs": 16062.6,
+    "totalMs": 1038.5,
     "phasesMs": {
-      "render_composite_extractAnimationFromCanvas": 1.3,
-      "render_composite_extractFramesFromAnimation": 1654.9,
-      "render_composite_sliceCanvasForCustomAnim": 42.7,
-      "render_composite_extractFramesFromCustomAnimation": 98.6,
-      "pngEncode": 14238.8,
-      "zipFile": 23.6,
-      "staticFiles": 1.4
+      "render_composite_extractAnimationFromCanvas": 0.8,
+      "render_composite_extractFramesFromAnimation": 382.8,
+      "render_composite_sliceCanvasForCustomAnim": 14.6,
+      "render_composite_extractFramesFromCustomAnimation": 22.9,
+      "pngEncode": 606,
+      "zipFile": 7.3,
+      "staticFiles": 3.5
     },
     "counters": {
       "pngEncodeCount": 472,
-      "totalPngBytes": 1223202,
+      "totalPngBytes": 1349889,
       "drawAndSliceCount": 0,
       "zipFileEntryCount": 472,
       "renderExtractAnimationFromCanvasCalls": 17,
@@ -302,6 +302,6 @@
       "extractFramesFromAnimationBatchCount": 17,
       "renderSliceCanvasForCustomAnimCalls": 1
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
   }
 }

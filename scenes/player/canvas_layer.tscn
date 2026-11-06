@@ -60,6 +60,69 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7xy3"]
+bg_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1qq1"]
+bg_color = Color(0.6627451, 0.5372549, 0.3137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw8da"]
+bg_color = Color(0.8509804, 0.7411765, 0.5294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94509804, 0.89411765, 0.77254903, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opoc0"]
+bg_color = Color(0.50980395, 0.47058824, 0.34509805, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6392157, 0.5921569, 0.47058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gb51"]
+bg_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=2026103625]
 process_mode = 3
 
@@ -350,43 +413,67 @@ text = "Bosses Defeated"
 layout_mode = 2
 text = "0"
 
-[node name="PauseMenu" type="Panel" parent="." unique_id=1074780976]
+[node name="PauseMenu" type="PanelContainer" parent="." unique_id=1989148584]
 process_mode = 3
 visible = false
+custom_minimum_size = Vector2(200, 89)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -51.0
-offset_right = 51.0
+offset_left = -100.0
+offset_top = -44.5
+offset_right = 100.0
+offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 script = ExtResource("3_y6yk7")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu" unique_id=2068402848]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -101.0
-offset_right = 175.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=1967223312]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7xy3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v1qq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tw8da")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=1855455817]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7xy3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v1qq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tw8da")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
 text = "Settings"
 
 [node name="SaveQuitButton" type="Button" parent="PauseMenu/VBoxContainer2" unique_id=779128420]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7xy3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v1qq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tw8da")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
 text = "Save & Quit"
 
 [node name="SettingsPanel" type="Panel" parent="." unique_id=1067861833]

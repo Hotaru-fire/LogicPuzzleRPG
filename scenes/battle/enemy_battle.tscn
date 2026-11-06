@@ -1,0 +1,311 @@
+[gd_scene format=3 uid="uid://b3jrs5373sbx0"]
+
+[ext_resource type="Script" uid="uid://bmbmqmyc2vxux" path="res://scripts/enemies/enemy_battle.gd" id="1_cofk1"]
+[ext_resource type="SpriteFrames" uid="uid://juo88sjisghb" path="res://resources/mobs/orc.tres" id="2_ihyit"]
+[ext_resource type="Texture2D" uid="uid://b0n7q42qa6g13" path="res://assets/background/battle background/OldDungeon320X180.png" id="4_vdr03"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="5_x5lu0"]
+[ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="20_q4cpj"]
+[ext_resource type="PackedScene" uid="uid://xq30w1pjo3kk" path="res://scenes/battle/dodge_battle.tscn" id="34_8ha52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6yk7"]
+bg_color = Color(0.28627452, 0.1882353, 0.23529412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnaqn"]
+bg_color = Color(0.65882355, 0.19607843, 0.27450982, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f30u2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdr03"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5lu0"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54lvs"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fre0k"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="EnemyBattle" type="Node2D" unique_id=1885786285]
+script = ExtResource("1_cofk1")
+
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=1251106604]
+position = Vector2(12, 28)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy" unique_id=147290924]
+position = Vector2(954, 317.99997)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("2_ihyit")
+animation = &"hurt"
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
+position = Vector2(-1, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=601845667]
+position = Vector2(183, 346)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("20_q4cpj")
+animation = &"idle_right"
+
+[node name="BackgroundUI" type="CanvasLayer" parent="." unique_id=873359073]
+layer = -1
+
+[node name="Background" type="Control" parent="BackgroundUI" unique_id=1575790595]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerPanel" type="PanelContainer" parent="BackgroundUI/Background" unique_id=574935724]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundUI/Background/PlayerPanel" unique_id=64599996]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundUI/Background" unique_id=938928896]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -199.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_vdr03")
+
+[node name="scenery" type="ColorRect" parent="BackgroundUI/Background" unique_id=1596585729]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4627451, 0.1764706, 0.23921569, 0.3137255)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=215328875]
+
+[node name="MarginContainerBoss" type="MarginContainer" parent="CanvasLayer" unique_id=915394144]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -382.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BossUI" type="VBoxContainer" parent="CanvasLayer/MarginContainerBoss" unique_id=1451549274]
+layout_mode = 2
+
+[node name="BossHPBar" type="ProgressBar" parent="CanvasLayer/MarginContainerBoss/BossUI" unique_id=2136670167]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_y6yk7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tnaqn")
+max_value = 500.0
+value = 500.0
+show_percentage = false
+
+[node name="BossNameLabel" type="Label" parent="CanvasLayer/MarginContainerBoss/BossUI" unique_id=1202555182]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+text = "MINOTAUR"
+horizontal_alignment = 2
+
+[node name="MarginContainerPlayer" type="MarginContainer" parent="CanvasLayer" unique_id=166987519]
+offset_right = 382.0
+offset_bottom = 25.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerUI" type="VBoxContainer" parent="CanvasLayer/MarginContainerPlayer" unique_id=695587697]
+layout_mode = 2
+
+[node name="PlayerHPBar" type="ProgressBar" parent="CanvasLayer/MarginContainerPlayer/PlayerUI" unique_id=1154104448]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_y6yk7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tnaqn")
+max_value = 200.0
+value = 200.0
+show_percentage = false
+
+[node name="PlayerNameLabel" type="Label" parent="CanvasLayer/MarginContainerPlayer/PlayerUI" unique_id=161163423]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+text = "Name"
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer" unique_id=218934118]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.5
+offset_top = 10.0
+offset_right = 78.5
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+text = "PLAYER TURN"
+
+[node name="Actions" type="PanelContainer" parent="CanvasLayer" unique_id=2130446611]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -133.0
+offset_right = 84.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f30u2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Actions" unique_id=1484903545]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/Actions/HBoxContainer" unique_id=1977223433]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdr03")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x5lu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_54lvs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fre0k")
+text = "ATTACK"
+
+[node name="ItemButton" type="Button" parent="CanvasLayer/Actions/HBoxContainer" unique_id=772886799]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdr03")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x5lu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_54lvs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fre0k")
+text = "ITEM"
+
+[node name="RunButton" type="Button" parent="CanvasLayer/Actions/HBoxContainer" unique_id=1732645907]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("5_x5lu0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdr03")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x5lu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_54lvs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fre0k")
+text = "RUN"
+
+[node name="DodgePopup" type="Control" parent="CanvasLayer" unique_id=1310809196]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DodgeBattle" parent="CanvasLayer/DodgePopup" unique_id=1145142569 instance=ExtResource("34_8ha52")]
+layout_mode = 1
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=1304847233]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/Actions/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]

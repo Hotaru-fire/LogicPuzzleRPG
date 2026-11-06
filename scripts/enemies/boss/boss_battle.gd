@@ -23,18 +23,18 @@ var battle_ended := false
 var player_hit_effect_running := false
 var boss_hit_effect_running := false
 
-@onready var boss_hp_bar = $CanvasLayer/BossUI/BossHPBar
-@onready var player_hp_bar = $CanvasLayer/PlayerUI/PlayerHPBar
+@onready var boss_hp_bar = $CanvasLayer/MarginContainerBoss/BossUI/BossHPBar
+@onready var player_hp_bar = $CanvasLayer/MarginContainerPlayer/PlayerUI/PlayerHPBar
 @onready var turn_label = $CanvasLayer/TurnLabel
-@onready var attack_button = $CanvasLayer/Actions/AttackButton
+@onready var attack_button = $CanvasLayer/Actions/HBoxContainer/AttackButton
 
 @onready var boss_sprite: AnimatedSprite2D = $Boss/AnimatedSprite2D
 @onready var player_sprite: AnimatedSprite2D = $player/AnimatedSprite2D
 
-@onready var player_name_label: Label = $CanvasLayer/PlayerUI/PlayerNameLabel
+@onready var player_name_label: Label = $CanvasLayer/MarginContainerPlayer/PlayerUI/PlayerNameLabel
 
-@onready var boss_ui = $CanvasLayer/BossUI
-@onready var player_ui = $CanvasLayer/PlayerUI
+@onready var boss_ui = $CanvasLayer/MarginContainerBoss/BossUI
+@onready var player_ui = $CanvasLayer/MarginContainerPlayer/PlayerUI
 @onready var actions = $CanvasLayer/Actions
 
 @onready var dodge_popup = $CanvasLayer/DodgePopup

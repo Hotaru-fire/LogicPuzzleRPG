@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cihus3sx034ng" path="res://scripts/enemies/regular mobs/orc.gd" id="1_obyuh"]
 [ext_resource type="SpriteFrames" uid="uid://juo88sjisghb" path="res://resources/mobs/orc.tres" id="1_pbxb4"]
-[ext_resource type="PackedScene" path="res://scenes/battle/orc_battle.tscn" id="2_orc_battle"]
+[ext_resource type="PackedScene" path="res://scenes/battle/enemy_battle.tscn" id="2_orc_battle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_up0of"]
 size = Vector2(28, 36)

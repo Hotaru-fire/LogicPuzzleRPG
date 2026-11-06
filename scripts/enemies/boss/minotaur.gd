@@ -29,10 +29,20 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	battle_started = true
 	print("Player detected! Starting boss battle!")
 
+	BattleData.enemy = self
+	BattleData.enemy_name = name
+	BattleData.enemy_type = "boss"
+	BattleData.enemy_sprite_frames = boss_sprite.sprite_frames
+	BattleData.enemy_sprite_frames_type = BattleData.enemy_type
+	BattleData.enemy_hp = 500
+	BattleData.enemy_damage = 10
+	BattleData.enemy_defeated = false
+	BattleData.kill_counted = false
+	BattleData.enemy_is_dungeon = false
 	BattleData.return_position = body.global_position
 	BattleData.return_scene = get_tree().current_scene.scene_file_path
 
 	get_tree().call_deferred(
 		"change_scene_to_file",
-		"res://scenes/battle/boss_battle.tscn"
+		"res://scenes/battle/enemy_battle.tscn"
 	)

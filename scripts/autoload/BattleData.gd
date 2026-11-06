@@ -2,6 +2,9 @@ extends Node
 
 var enemy = null
 var enemy_name := ""
+var enemy_type := ""
+var enemy_sprite_frames: SpriteFrames
+var enemy_sprite_frames_type := ""
 
 var enemy_hp := 20
 var enemy_damage := 10

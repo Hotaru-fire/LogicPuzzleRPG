@@ -2,7 +2,261 @@
 
 [ext_resource type="Script" uid="uid://b7igse3a6y67o" path="res://scripts/puzzles/memory_puzzle.gd" id="1_p527o"]
 [ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="2_ehpii"]
-[ext_resource type="Texture2D" uid="uid://b64tdjx51dvq" path="res://assets/background/dark fantasy/dark-fantasy-dungeon-loop-sampler-1-v1.0/PNG/960x540/01_torchlit_stone_corridor_960x540.png" id="3_i2qmc"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="2_i2qmc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehpii"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2qmc"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xn8k6"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sl4nh"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyjv2"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcuhl"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2ddk"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05d6n"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gwjn"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwlrm"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tak44"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dasd5"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8gse"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_woyp5"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1aut"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm0jc"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnwag"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdr03"]
+bg_color = Color(0.23137255, 0.078431375, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6509804, 0.41960785, 0.34117648, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5lu0"]
+bg_color = Color(0.14901961, 0.050980393, 0.09803922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3137255, 0.24705882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54lvs"]
+bg_color = Color(0.34901962, 0.1254902, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fre0k"]
+bg_color = Color(0.20784314, 0.14509805, 0.16862746, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34901962, 0.2627451, 0.2901961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn2lb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8392157, 0.6039216, 0.4627451, 1)
 
 [node name="MemoryPuzzle" type="Control" unique_id=663025662]
 layout_mode = 3
@@ -13,18 +267,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p527o")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1432440334]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 401.0
-offset_right = 1150.0
-offset_bottom = 647.0
-color = Color(0, 0, 0, 1)
-
 [node name="PuzzleUI" type="Control" parent="." unique_id=1847548320]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TitleLabel" type="Label" parent="PuzzleUI" unique_id=1990040414]
 layout_mode = 0
@@ -32,70 +281,126 @@ offset_left = 530.0
 offset_top = 12.0
 offset_right = 698.0
 offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("2_i2qmc")
 text = "MEMORY CHALLENGE"
 
 [node name="InstructionLabel" type="Label" parent="PuzzleUI" unique_id=1671871431]
 layout_mode = 0
-offset_left = 518.0
-offset_top = 423.0
-offset_right = 708.0
-offset_bottom = 446.0
+offset_left = 510.0
+offset_top = 450.0
+offset_right = 700.0
+offset_bottom = 473.0
+theme_override_fonts/font = ExtResource("2_i2qmc")
 text = "Memorize the sequence!"
 
 [node name="SequenceDisplay" type="HBoxContainer" parent="PuzzleUI" unique_id=125958122]
-layout_mode = 0
-offset_left = 502.99997
-offset_top = 433.00003
-offset_right = 577.0
-offset_bottom = 473.00003
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.00003
+offset_top = -151.0
+offset_right = -43.0
+offset_bottom = -111.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(2.9476626, 2.4955091)
 
 [node name="SymbolLabels" type="Label" parent="PuzzleUI/SequenceDisplay" unique_id=2009962587]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_font_sizes/font_size = 24
 text = "SYMBOLS"
 
-[node name="AnswerArea" type="HBoxContainer" parent="PuzzleUI" unique_id=953031890]
-layout_mode = 0
-offset_left = 462.0
-offset_top = 530.0
-offset_right = 604.0
-offset_bottom = 570.0
-scale = Vector2(2, 2)
+[node name="AnswerCard" type="PanelContainer" parent="PuzzleUI" unique_id=290229449]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = 203.0
+offset_right = 64.5
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ehpii")
 
-[node name="Button1" type="Button" parent="PuzzleUI/AnswerArea" unique_id=108488706]
+[node name="AnswerArea" type="HBoxContainer" parent="PuzzleUI/AnswerCard" unique_id=953031890]
 layout_mode = 2
+
+[node name="Button1" type="Button" parent="PuzzleUI/AnswerCard/AnswerArea" unique_id=108488706]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i2qmc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xn8k6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sl4nh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_iyjv2")
 text = "S1"
 
-[node name="Button2" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1207058575]
+[node name="Button2" type="Button" parent="PuzzleUI/AnswerCard/AnswerArea" unique_id=1207058575]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lcuhl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k2ddk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_05d6n")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6gwjn")
 text = "s2"
 
-[node name="Button3" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1014809249]
+[node name="Button3" type="Button" parent="PuzzleUI/AnswerCard/AnswerArea" unique_id=1014809249]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gwlrm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tak44")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dasd5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_f8gse")
 text = "s3"
 
-[node name="Button4" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1131711948]
+[node name="Button4" type="Button" parent="PuzzleUI/AnswerCard/AnswerArea" unique_id=1131711948]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_woyp5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c1aut")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cm0jc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_lnwag")
 text = "s4"
 
-[node name="Button5" type="Button" parent="PuzzleUI/AnswerArea" unique_id=1635634626]
+[node name="Button5" type="Button" parent="PuzzleUI/AnswerCard/AnswerArea" unique_id=1635634626]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)
+theme_override_colors/font_pressed_color = Color(0.8352941, 0.64705884, 0.5529412, 1)
+theme_override_colors/font_hover_color = Color(1, 0.8862745, 0.77254903, 1)
+theme_override_colors/font_disabled_color = Color(0.5686275, 0.5019608, 0.5294118, 1)
+theme_override_fonts/font = ExtResource("2_i2qmc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdr03")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x5lu0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_54lvs")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fre0k")
 text = "s5"
-
-[node name="TimerBar" type="ProgressBar" parent="PuzzleUI" unique_id=617010598]
-layout_mode = 0
-offset_left = 881.0
-offset_top = 43.0
-offset_right = 885.0
-offset_bottom = 70.0
-
-[node name="TimeLabel" type="Label" parent="PuzzleUI" unique_id=1764818264]
-layout_mode = 0
-offset_left = 872.0
-offset_top = 14.0
-offset_right = 942.0
-offset_bottom = 37.0
-text = "Time: 4.2"
 
 [node name="ResultLabel" type="Label" parent="PuzzleUI" unique_id=2087219779]
 layout_mode = 0
@@ -104,7 +409,33 @@ offset_top = 40.0
 offset_right = 631.0
 offset_bottom = 63.0
 scale = Vector2(1.3839802, 1.5588433)
+theme_override_fonts/font = ExtResource("2_i2qmc")
 text = "CORRECT!"
+
+[node name="PanelContainer" type="PanelContainer" parent="PuzzleUI" unique_id=2134575817]
+layout_mode = 1
+offset_right = 70.0
+offset_bottom = 54.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="MarginContainer" type="MarginContainer" parent="PuzzleUI/PanelContainer" unique_id=319336139]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PuzzleUI/PanelContainer/MarginContainer" unique_id=2029766030]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TimeLabel" type="Label" parent="PuzzleUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1764818264]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_i2qmc")
+text = "Time: 4.2"
+
+[node name="TimerBar" type="ProgressBar" parent="PuzzleUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=617010598]
+layout_mode = 2
 
 [node name="PuzzleTimer" type="Timer" parent="." unique_id=29257182]
 wait_time = 0.1
@@ -119,10 +450,19 @@ sprite_frames = ExtResource("2_ehpii")
 animation = &"channel"
 frame_progress = 0.9278123
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1790916734]
+[node name="PlayerPanel" type="PanelContainer" parent="." unique_id=434043219]
 z_index = -1
-layout_mode = 0
-offset_top = -1.0
-offset_right = 1151.0
-offset_bottom = 539.0
-texture = ExtResource("3_i2qmc")
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nn2lb")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerPanel" unique_id=121677796]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+color = Color(0.14901961, 0.050980393, 0.09803922, 1)

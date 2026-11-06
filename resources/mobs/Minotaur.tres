@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://hgqib4iohlkb" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/3.png" id="9_rutp3"]
 [ext_resource type="Texture2D" uid="uid://df4c7hw82r02" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/4.png" id="10_nwlft"]
 [ext_resource type="Texture2D" uid="uid://dci4umbac40ej" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/5.png" id="11_g0lhx"]
-[ext_resource type="Texture2D" uid="uid://dsfr5vsl6agbe" path="res://assets/Characters/enemies/minotaur/new/standard/hurt/up/6.png" id="12_2gof4"]
 [ext_resource type="Texture2D" uid="uid://d1rax2vw5dw1i" path="res://assets/Characters/enemies/minotaur/new/standard/idle/left/1.png" id="13_k02sm"]
 [ext_resource type="Texture2D" uid="uid://qw26xt85ir7" path="res://assets/Characters/enemies/minotaur/new/standard/idle/left/2.png" id="14_mbl76"]
 
@@ -55,11 +54,8 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_g0lhx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_2gof4")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"hurt",
 "speed": 5.0
 }, {

@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://be8cni5n0h32j" path="res://assets/Characters/enemies/goblin/standard/thrust/left/6.png" id="6_htrrw"]
 [ext_resource type="Texture2D" uid="uid://c67ta71foaxc8" path="res://assets/Characters/enemies/goblin/standard/thrust/left/7.png" id="7_6uhum"]
 [ext_resource type="Texture2D" uid="uid://b3fio6wmjo4q5" path="res://assets/Characters/enemies/goblin/standard/hurt/up/5.png" id="7_vu03l"]
-[ext_resource type="Texture2D" uid="uid://beicl2pqqq5as" path="res://assets/Characters/enemies/goblin/standard/hurt/up/6.png" id="8_4d7st"]
 [ext_resource type="Texture2D" uid="uid://bplae8rg68l02" path="res://assets/Characters/enemies/goblin/standard/thrust/left/8.png" id="8_uxdsk"]
 [ext_resource type="Texture2D" uid="uid://cipj0fgr3qxja" path="res://assets/Characters/enemies/goblin/standard/idle/left/1.png" id="9_medxn"]
 [ext_resource type="Texture2D" uid="uid://dao8thlnjrjep" path="res://assets/Characters/enemies/goblin/standard/idle/left/2.png" id="10_xk7a2"]
@@ -116,9 +115,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_vu03l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_4d7st")
 }],
 "loop": 0,
 "name": &"hurt",

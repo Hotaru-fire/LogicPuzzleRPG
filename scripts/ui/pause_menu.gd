@@ -1,7 +1,11 @@
 extends Control
 
 func _input(event):
-	if event.is_action_pressed("pause_game"):
+	if (
+		event.is_action_pressed("pause_game")
+		and not event.is_echo()
+		and not SceneTransition.transition_in_progress
+	):
 		get_tree().paused = !get_tree().paused
 		visible = get_tree().paused
 
@@ -57,4 +61,5 @@ func _on_save_quit_button_pressed():
 
 
 func _on_resume_button_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().paused = false
+	visible = false
