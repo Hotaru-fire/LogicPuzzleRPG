@@ -367,7 +367,7 @@ try {
 
         $existing_stmt = $pdo->prepare(
             "SELECT
-                character_class, level, exp, gold, score, mobs_defeated,
+                character_class, level, dungeon_level, exp, gold, score, mobs_defeated,
                 dungeon_enemies_defeated, bosses_killed, playtime_seconds,
                 hp, max_hp, attack, defense, current_scene, boss_completed,
                 inventory, equipment, player_position_x, player_position_y,
@@ -383,6 +383,7 @@ try {
 
         $integer_fields = [
             "level",
+            "dungeon_level",
             "exp",
             "gold",
             "score",
@@ -400,6 +401,7 @@ try {
 
         $integer_defaults = [
             "level" => 1,
+            "dungeon_level" => 1,
             "exp" => 0,
             "gold" => 0,
             "score" => 0,
@@ -426,7 +428,9 @@ try {
                 FILTER_VALIDATE_INT
             );
 
-            $maximum = in_array($field, [
+            $maximum = $field === "dungeon_level"
+                ? 20
+                : (in_array($field, [
                 "level",
                 "mobs_defeated",
                 "total_deaths",
@@ -440,12 +444,13 @@ try {
                     "max_hp",
                     "attack",
                     "defense"
-                ], true) ? 2147483647 : PHP_INT_MAX);
+                ], true) ? 2147483647 : PHP_INT_MAX));
 
             if (
                 $value === false ||
                 $value === null ||
                 $value < 0 ||
+                ($field === "dungeon_level" && $value < 1) ||
                 $value > $maximum
             ) {
                 respond(false, "Invalid value for " . $field . ".");
@@ -579,7 +584,7 @@ try {
 
         $stmt = $pdo->prepare(
             "INSERT INTO player_saves (
-                user_id, character_class, level, exp, gold, score,
+                user_id, character_class, level, dungeon_level, exp, gold, score,
                 mobs_defeated, dungeon_enemies_defeated, bosses_killed,
                 playtime_seconds, hp, max_hp, attack, defense,
                 current_scene, boss_completed, inventory, equipment,
@@ -589,11 +594,12 @@ try {
                 first_puzzle_clear_time, cleared_spawns, tutorial_done
             ) VALUES (
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
             ON DUPLICATE KEY UPDATE
                 character_class = VALUES(character_class),
                 level = VALUES(level),
+                dungeon_level = VALUES(dungeon_level),
                 exp = VALUES(exp),
                 gold = VALUES(gold),
                 score = VALUES(score),
@@ -632,6 +638,7 @@ try {
             $user_id,
             $character,
             $values["level"],
+            $values["dungeon_level"],
             $values["exp"],
             $values["gold"],
             $values["score"],
@@ -674,7 +681,7 @@ try {
     if ($action === "load_save") {
         $stmt = $pdo->prepare(
             "SELECT
-                character_class, level, exp, gold, score,
+                character_class, level, dungeon_level, exp, gold, score,
                 mobs_defeated, dungeon_enemies_defeated, bosses_killed,
                 playtime_seconds, hp, max_hp, attack, defense,
                 current_scene, boss_completed, inventory, equipment,

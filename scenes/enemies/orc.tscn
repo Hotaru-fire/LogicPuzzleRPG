@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cihus3sx034ng" path="res://scripts/enemies/regular mobs/orc.gd" id="1_obyuh"]
 [ext_resource type="SpriteFrames" uid="uid://juo88sjisghb" path="res://resources/mobs/orc.tres" id="1_pbxb4"]
-[ext_resource type="PackedScene" path="res://scenes/battle/enemy_battle.tscn" id="2_orc_battle"]
+[ext_resource type="PackedScene" uid="uid://b3jrs5373sbx0" path="res://scenes/battle/enemy_battle.tscn" id="2_orc_battle"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_up0of"]
-size = Vector2(28, 36)
+[sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pjcyd"]
 radius = 65.333435
@@ -22,14 +21,14 @@ sprite_frames = ExtResource("1_pbxb4")
 animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=976197458]
-visible = false
-position = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_up0of")
+position = Vector2(-1, 23)
+shape = SubResource("CircleShape2D_p47bc")
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1917834746]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=403643229]
+visible = false
 scale = Vector2(0.995013, 1)
 shape = SubResource("CircleShape2D_pjcyd")
 
@@ -37,6 +36,7 @@ shape = SubResource("CircleShape2D_pjcyd")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1808780201]
+visible = false
 position = Vector2(7.1525574e-07, 6.5)
 scale = Vector2(1.512622, 2.053234)
 shape = SubResource("RectangleShape2D_dbf72")

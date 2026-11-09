@@ -32,6 +32,7 @@ func start(lines: Array) -> void:
 	_lines = lines
 	_index = 0
 	_active = true
+	show()
 	panel.show()
 	get_tree().paused = true
 	_show_line()

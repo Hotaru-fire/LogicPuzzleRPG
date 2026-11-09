@@ -32,6 +32,7 @@ CREATE TABLE `player_saves` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `character_class` varchar(30) NOT NULL DEFAULT '',
   `level` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `dungeon_level` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `exp` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `gold` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `score` bigint(20) UNSIGNED NOT NULL DEFAULT 0,

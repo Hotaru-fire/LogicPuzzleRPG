@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://cem4ovfufwulr"]
+
+[ext_resource type="Script" uid="uid://0fjcjvjfen00" path="res://scripts/puzzles/missing_rune_puzzle.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="2_sylsl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mrt5"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sylsl"]
+bg_color = Color(0.8392157, 0.8, 0.49411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqshy"]
+bg_color = Color(0.6627451, 0.5372549, 0.3137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olgxo"]
+bg_color = Color(0.8509804, 0.7411765, 0.5294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94509804, 0.89411765, 0.77254903, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rofey"]
+bg_color = Color(0.50980395, 0.47058824, 0.34509805, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6392157, 0.5921569, 0.47058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kypb"]
+bg_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MissingRunePuzzle" type="Control" unique_id=656097972]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1431071921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=222558329]
+custom_minimum_size = Vector2(800, 430)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -215.0
+offset_right = 400.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3mrt5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1557570637]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1983163429]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("2_sylsl")
+text = "RUNE GLOW TRIAL"
+horizontal_alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1705765316]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("2_sylsl")
+text = "Watch all six runes glow, then repeat the pattern."
+horizontal_alignment = 1
+
+[node name="SequenceContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=278459719]
+layout_mode = 2
+alignment = 1
+
+[node name="Rune1" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=473811065]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rune2" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=788841553]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rune3" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=50095198]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rune4" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=2015917774]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rune5" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=1006643088]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rune6" type="TextureRect" parent="PanelContainer/VBoxContainer/SequenceContainer" unique_id=2147043462]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AnswerContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=28614781]
+layout_mode = 2
+alignment = 1
+
+[node name="RuneButton1" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=626667399]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="RuneButton2" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=676249812]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="RuneButton3" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=1492183377]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="RuneButton4" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=897868473]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="RuneButton5" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=1934702110]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="RuneButton6" type="Button" parent="PanelContainer/VBoxContainer/AnswerContainer" unique_id=1192439868]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="FeedbackLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1892736106]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1989067386]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_sylsl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqshy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_olgxo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rofey")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3kypb")
+text = "Close"

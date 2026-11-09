@@ -115,6 +115,7 @@ func _resolve_checkpoint_scene_path(scene_path: String) -> String:
 		resolved_scene_path = PlayerData.saved_current_scene
 	if resolved_scene_path.is_empty():
 		resolved_scene_path = "res://scenes/maps/world.tscn"
+	resolved_scene_path = PlayerData.normalize_scene_path(resolved_scene_path)
 	if resolved_scene_path == "res://scenes/world.tscn":
 		resolved_scene_path = "res://scenes/maps/world.tscn"
 	if not resolved_scene_path.begins_with("res://") or not ResourceLoader.exists(
@@ -131,6 +132,7 @@ func create_progress_snapshot() -> Dictionary:
 	var save_position: Vector2 = PlayerData.saved_position
 	var current_scene := get_tree().current_scene
 	var current_scene_path := ""
+	var active_dungeon_scene := ""
 
 	if current_scene != null:
 		current_scene_path = current_scene.scene_file_path
@@ -144,7 +146,10 @@ func create_progress_snapshot() -> Dictionary:
 			push_error("SAVE: Battle scene has no recorded return scene.")
 			return {}
 
-		scene_path = BattleData.return_scene
+		scene_path = PlayerData.normalize_scene_path(BattleData.return_scene)
+		active_dungeon_scene = _get_active_dungeon_scene_path()
+		if not active_dungeon_scene.is_empty():
+			scene_path = active_dungeon_scene
 		save_position = BattleData.return_position
 		PlayerData.saved_max_hp = maxi(
 			int(
@@ -176,6 +181,9 @@ func create_progress_snapshot() -> Dictionary:
 		print("SAVE: Player node path: ", player.get_path())
 		print("SAVE: Player global position: ", player.global_position)
 		save_position = player.global_position
+		active_dungeon_scene = _get_active_dungeon_scene_path()
+		if not active_dungeon_scene.is_empty():
+			scene_path = active_dungeon_scene
 
 		PlayerData.saved_hp = int(
 			_get_property(player, "hp", PlayerData.saved_hp)
@@ -211,6 +219,7 @@ func create_progress_snapshot() -> Dictionary:
 	var snapshot := {
 		"character_class": character_class,
 		"level": level_value,
+		"dungeon_level": Session.dungeon_level,
 		"exp": Session.player_exp,
 		"gold": Session.gold,
 		"score": Session.score,
@@ -244,6 +253,29 @@ func create_progress_snapshot() -> Dictionary:
 	print("SAVE: Final payload player_position_x = ", snapshot["player_position_x"])
 	print("SAVE: Final payload player_position_y = ", snapshot["player_position_y"])
 	return snapshot
+
+
+func _get_active_dungeon_scene_path() -> String:
+	var current_scene := get_tree().current_scene
+	if current_scene == null:
+		return ""
+
+	var current_scene_path := current_scene.scene_file_path
+	if current_scene_path.contains("/battle/"):
+		if (
+			PlayerData.normalize_scene_path(BattleData.return_scene)
+			!= PlayerData.DUNGEON_MAIN_SCENE
+		):
+			return ""
+	elif get_tree().get_first_node_in_group("dungeon_manager") == null:
+		return ""
+
+	var active_floor_path := PlayerData.normalize_scene_path(
+		BattleData.current_floor_path
+	)
+	if PlayerData.is_dungeon_floor_scene(active_floor_path):
+		return active_floor_path
+	return ""
 
 
 func record_score(final_score: int) -> bool:

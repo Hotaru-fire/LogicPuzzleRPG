@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://dere56sq0ttng"]
+
+[ext_resource type="Script" uid="uid://dhudu5ku15k8o" path="res://scripts/dungeon/dungeon_manager.gd" id="1_ol0f7"]
+[ext_resource type="PackedScene" uid="uid://cpefs0p1mujsv" path="res://scenes/enemies/enemy_test_dummy.tscn" id="2_y172s"]
+[ext_resource type="PackedScene" uid="uid://btk4gwjs1k35f" path="res://scenes/player/player.tscn" id="3_6mdau"]
+[ext_resource type="PackedScene" uid="uid://bxvtryatcs7nw" path="res://scenes/player/canvas_layer.tscn" id="4_wsu5j"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="5_e1p1w"]
+[ext_resource type="PackedScene" uid="uid://dl585sv2hink7" path="res://scenes/NPC/Priestess.tscn" id="5_t04vq"]
+[ext_resource type="FontFile" uid="uid://cyxjm36ca8e7y" path="res://assets/fonts/Nunito/Nunito-VariableFont_wght.ttf" id="6_r6lkc"]
+[ext_resource type="PackedScene" uid="uid://d2vqebc8wg7vg" path="res://scenes/dialogue/DialogueBox.tscn" id="8_r6lkc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Dungeon1" type="Node2D" unique_id=1561035224]
+y_sort_enabled = true
+
+[node name="CurrentFloor" type="Node2D" parent="." unique_id=719505041]
+
+[node name="DungeonManager" type="Node" parent="." unique_id=729425470 groups=["dungeon_manager"]]
+script = ExtResource("1_ol0f7")
+enemy_scene = ExtResource("2_y172s")
+
+[node name="player" parent="." unique_id=1523946503 instance=ExtResource("3_6mdau")]
+position = Vector2(220, 121)
+
+[node name="Knight" parent="player" index="4" unique_id=905762716]
+animation = &"attack_left"
+
+[node name="CanvasLayer" parent="." unique_id=2026103625 instance=ExtResource("4_wsu5j")]
+
+[node name="MinotaurTrialsLayer" type="CanvasLayer" parent="." unique_id=1186390486]
+
+[node name="DungeonLevelLabel" type="Label" parent="MinotaurTrialsLayer" unique_id=1935033117]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 189.0
+offset_right = -10.0
+offset_bottom = 221.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e1p1w")
+text = "Dungeon Level: 1 / 20"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MinotaurTrialsLayer" unique_id=2004531586]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 157.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MinotaurTrialsPanel" type="PanelContainer" parent="MinotaurTrialsLayer/MarginContainer" unique_id=1189549839]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel" unique_id=1024907156]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel/VBoxContainer" unique_id=2025736531]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e1p1w")
+text = "Objective: Complete Minotaur's 3 Trials"
+autowrap_mode = 2
+
+[node name="Trial1Label" type="Label" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel/VBoxContainer" unique_id=592833323]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("6_r6lkc")
+text = "[ ] Trial 1: Room A"
+
+[node name="Trial2Label" type="Label" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel/VBoxContainer" unique_id=559059489]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("6_r6lkc")
+text = "[ ] Trial 2: Room B"
+
+[node name="Trial3Label" type="Label" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel/VBoxContainer" unique_id=1219861601]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("6_r6lkc")
+text = "[ ] Trial 3: Room C"
+
+[node name="ProgressLabel" type="Label" parent="MinotaurTrialsLayer/MarginContainer/MinotaurTrialsPanel/VBoxContainer" unique_id=2099373109]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e1p1w")
+text = "Progress: 0 / 3"
+
+[node name="Priestess" parent="." unique_id=1074553048 instance=ExtResource("5_t04vq")]
+position = Vector2(253, 119)
+
+[node name="DialogueBox" parent="." unique_id=737193392 instance=ExtResource("8_r6lkc")]
+
+[editable path="player"]
+[editable path="CanvasLayer"]

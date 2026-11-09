@@ -1,0 +1,605 @@
+{
+  "version": 2,
+  "bodyType": "muscular",
+  "selections": {
+    "body": {
+      "itemId": "body",
+      "subId": null,
+      "variant": "",
+      "recolor": "bright_green",
+      "name": "Body Color (bright_green)"
+    },
+    "head": {
+      "itemId": "heads_orc_male",
+      "subId": null,
+      "variant": "",
+      "recolor": "bright_green",
+      "name": "Orc male (bright_green)"
+    },
+    "expression": {
+      "itemId": "face_angry",
+      "subId": null,
+      "variant": "",
+      "recolor": "bright_green",
+      "name": "Angry (bright_green)"
+    },
+    "shadow": {
+      "itemId": "shadow",
+      "subId": null,
+      "variant": "",
+      "recolor": "brown",
+      "name": "Shadow (brown)"
+    },
+    "wrists": {
+      "itemId": "wrists_cuffs",
+      "subId": null,
+      "variant": "",
+      "recolor": "brown",
+      "name": "Cuffs (brown)"
+    },
+    "ring": {
+      "itemId": "arms_hands_ring_stud",
+      "subId": null,
+      "variant": "",
+      "recolor": "yellow",
+      "name": "Stud Ring (yellow)"
+    },
+    "cape": {
+      "itemId": "cape_tattered",
+      "subId": null,
+      "variant": "",
+      "recolor": "leather",
+      "name": "Tattered (leather)"
+    },
+    "weapon": {
+      "itemId": "weapon_magic_s",
+      "subId": null,
+      "variant": "dark",
+      "recolor": "",
+      "name": "S staff (dark)"
+    },
+    "legs": {
+      "itemId": "legs_skirts_legion",
+      "subId": null,
+      "variant": "",
+      "recolor": "leather",
+      "name": "Legion skirt (leather)"
+    }
+  },
+  "selectedAnimation": "walk",
+  "showTransparencyGrid": true,
+  "applyTransparencyMask": false,
+  "matchBodyColorEnabled": true,
+  "compactDisplay": false,
+  "enabledLicenses": {
+    "CC0": true,
+    "CC-BY-SA": true,
+    "CC-BY": true,
+    "OGA-BY": true,
+    "GPL": true
+  },
+  "enabledAnimations": {
+    "spellcast": false,
+    "thrust": false,
+    "walk": false,
+    "slash": false,
+    "shoot": false,
+    "hurt": false,
+    "climb": false,
+    "idle": false,
+    "jump": false,
+    "sit": false,
+    "emote": false,
+    "run": false,
+    "watering": false,
+    "combat": false,
+    "1h_slash": false,
+    "1h_backslash": false,
+    "1h_halfslash": false
+  },
+  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#sex=muscular&body=Body_Color_bright_green&head=Orc_male_bright_green&expression=Angry_bright_green&shadow=Shadow_brown&wrists=Cuffs_brown&ring=Stud_Ring_yellow&cape=Tattered_leather&weapon=S_staff_dark&legs=Legion_skirt_leather",
+  "layers": [
+    {
+      "itemId": "shadow",
+      "name": "Shadow (brown)",
+      "variant": "",
+      "recolors": {
+        "shadow": "brown"
+      },
+      "zPos": 0,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "shadow/adult/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "cape_tattered",
+      "name": "Tattered (leather)",
+      "variant": "",
+      "recolors": {
+        "cape": "leather"
+      },
+      "zPos": 5,
+      "layerNum": 2,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "cape/tattered/bg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle"
+      ]
+    },
+    {
+      "itemId": "weapon_magic_s",
+      "name": "S staff (dark)",
+      "variant": "dark",
+      "recolors": null,
+      "zPos": 9,
+      "layerNum": 2,
+      "yPos": 512,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "weapon/magic/s/universal/background/walk/dark.png"
+      },
+      "supportedAnimations": [
+        "walk",
+        "hurt"
+      ]
+    },
+    {
+      "itemId": "body",
+      "name": "Body Color (bright_green)",
+      "variant": "",
+      "recolors": {
+        "body": "bright_green"
+      },
+      "zPos": 10,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "body/bodies/muscular/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "legs_skirts_legion",
+      "name": "Legion skirt (leather)",
+      "variant": "",
+      "recolors": {
+        "legs": "leather"
+      },
+      "zPos": 20,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "legs/skirts/legion/male/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run"
+      ]
+    },
+    {
+      "itemId": "wrists_cuffs",
+      "name": "Cuffs (brown)",
+      "variant": "",
+      "recolors": {
+        "wrists": "brown"
+      },
+      "zPos": 70,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "arms/wrists/cuffs/male/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run"
+      ]
+    },
+    {
+      "itemId": "arms_hands_ring_stud",
+      "name": "Stud Ring (yellow)",
+      "variant": "",
+      "recolors": {
+        "ring": "yellow"
+      },
+      "zPos": 75,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "arms/hands/ring/stud/male/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run"
+      ]
+    },
+    {
+      "itemId": "cape_tattered",
+      "name": "Tattered (leather)",
+      "variant": "",
+      "recolors": {
+        "cape": "leather"
+      },
+      "zPos": 85,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "cape/tattered/fg/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle"
+      ]
+    },
+    {
+      "itemId": "heads_orc_male",
+      "name": "Orc male (bright_green)",
+      "variant": "",
+      "recolors": {
+        "head": "bright_green"
+      },
+      "zPos": 100,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "head/heads/orc/male/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "hurt",
+        "climb",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "face_angry",
+      "name": "Angry (bright_green)",
+      "variant": "",
+      "recolors": {
+        "expression": "bright_green"
+      },
+      "zPos": 101,
+      "layerNum": 1,
+      "yPos": 0,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "head/faces/${head}/anger/spellcast.png"
+      },
+      "supportedAnimations": [
+        "spellcast",
+        "thrust",
+        "walk",
+        "slash",
+        "shoot",
+        "idle",
+        "jump",
+        "sit",
+        "emote",
+        "run",
+        "combat_idle",
+        "backslash",
+        "halfslash"
+      ]
+    },
+    {
+      "itemId": "weapon_magic_s",
+      "name": "S staff (dark)",
+      "variant": "dark",
+      "recolors": null,
+      "zPos": 140,
+      "layerNum": 1,
+      "yPos": 512,
+      "needsRecolor": false,
+      "source": {
+        "kind": "catalog",
+        "spritePath": "weapon/magic/s/universal/foreground/walk/dark.png"
+      },
+      "supportedAnimations": [
+        "walk",
+        "hurt"
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "fileName": "body/bodies/muscular/walk.png",
+      "file": "body/bodies/muscular",
+      "notes": "see details at https://opengameart.org/content/lpc-character-bases",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman",
+        "Evert",
+        "TheraHedwig",
+        "MuffinElZangano",
+        "Durrani",
+        "Sander Frenken (castelonia)",
+        "Benjamin K. Smith (BenCreating)",
+        "Eliza Wyatt (ElizaWy)",
+        "dalonedrau",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-barbarian-sprite-base",
+        "https://opengameart.org/content/lpc-muscular-swing-animation",
+        "https://opengameart.org/content/lpc-muscular-hurt-animation",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-revised-character-basics",
+        "https://opengameart.org/content/lpc-be-seated",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani"
+      ]
+    },
+    {
+      "fileName": "head/heads/orc/male/walk.png",
+      "file": "head/heads/orc/male",
+      "notes": "Sinbad the ogre design by Zi Ye, original 4-direction sprite by Redshrike, additional hurt/cast animations by makrohn, headless version by bluecarrot16",
+      "authors": [
+        "bluecarrot16",
+        "Matthew Krohn (makrohn)",
+        "Stephen Challener (Redshrike)",
+        "Zi Ye"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/four-characters-my-lpc-entries",
+        "https://opengameart.org/content/sinbad-the-ogre",
+        "https://opengameart.org/content/lpc-male-sheets",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    {
+      "fileName": "head/faces/${head}/anger/walk.png",
+      "file": "head/faces",
+      "notes": "Original by Redshrike, Expressions by ElizaWy, mapped to all frames by JaidynReiman",
+      "authors": [
+        "JaidynReiman",
+        "ElizaWy",
+        "Stephen Challener (Redshrike)"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Head",
+        "https://opengameart.org/content/ulpc-expanded-expressions"
+      ]
+    },
+    {
+      "fileName": "shadow/adult/walk.png",
+      "file": "shadow",
+      "notes": "Original by Dr. Jamgo, jump/sit/emote/run/revised combat by JaidynReiman",
+      "authors": [
+        "drjamgo@hotmail.com",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "CC0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/shadow-for-lpc-sprite"
+      ]
+    },
+    {
+      "fileName": "arms/wrists/cuffs/male/walk.png",
+      "file": "arms/wrists/cuffs",
+      "notes": "Original by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ]
+    },
+    {
+      "fileName": "arms/hands/ring/stud/male/walk.png",
+      "file": "arms/hands/ring/stud",
+      "notes": "original by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman",
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "CC0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-jewelry"
+      ]
+    },
+    {
+      "fileName": "cape/tattered/fg/walk.png",
+      "file": "cape/tattered/fg",
+      "notes": "",
+      "authors": [
+        "Nila122",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "https://opengameart.org/content/lpc-roman-armor"
+      ]
+    },
+    {
+      "fileName": "cape/tattered/bg/walk.png",
+      "file": "cape/tattered/bg",
+      "notes": "",
+      "authors": [
+        "Nila122",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "https://opengameart.org/content/lpc-roman-armor"
+      ]
+    },
+    {
+      "fileName": "weapon/magic/s/universal/foreground/walk/dark.png",
+      "file": "weapon/magic/s",
+      "notes": "Wooden staff by LordNeo, first adapted to LPC by bigbeargames; re-drawn and walk animations added by bluecarrot16",
+      "authors": [
+        "LordNeo",
+        "Michael Whitlock (bigbeargames)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/staff-64-x64",
+        "https://opengameart.org/content/lpc-magic-staff"
+      ]
+    },
+    {
+      "fileName": "legs/skirts/legion/male/walk.png",
+      "file": "legs/skirts/legion",
+      "notes": "original by Nila122 to legion, adapted to v3 bases by bluecarrot16, climb/jump/sit/run by JaidynReiman",
+      "authors": [
+        "bluecarrot16",
+        "Nila122",
+        "JaidynReiman"
+      ],
+      "licenses": [
+        "OGA-BY 3.0",
+        "CC-BY-SA 3.0",
+        "GPL 2.0",
+        "GPL 3.0"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-roman-armor",
+        "http://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-expanded-armour"
+      ]
+    }
+  ]
+}

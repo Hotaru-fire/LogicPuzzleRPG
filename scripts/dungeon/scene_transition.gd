@@ -1,6 +1,6 @@
 extends Control
 
-const DUNGEON_1_SCENE := "res://scenes/maps/dungeon_1.tscn"
+const DUNGEON_1_SCENE := "res://scenes/maps/levels/Floor 1/current_level.tscn"
 const DUNGEON_1_LOAD_DELAY := 5.0
 
 @onready var animation_player = $AnimationPlayer

@@ -35,6 +35,8 @@ var boss_hit_effect_running := false
 @onready var turn_label: Label = $CanvasLayer/TurnLabel
 @onready var attack_button: Button = \
 	$CanvasLayer/Actions/HBoxContainer/AttackButton
+@onready var run_button: Button = \
+	$CanvasLayer/Actions/HBoxContainer/RunButton
 @onready var enemy_sprite: AnimatedSprite2D = $Enemy/AnimatedSprite2D
 @onready var player_sprite: AnimatedSprite2D = $player/AnimatedSprite2D
 @onready var enemy_name_label: Label = \
@@ -58,6 +60,8 @@ func _ready() -> void:
 		dodge_battle.player_hit.connect(_on_dodge_player_hit)
 	if not PlayerData.health_changed.is_connected(_on_player_health_changed):
 		PlayerData.health_changed.connect(_on_player_health_changed)
+	if not run_button.pressed.is_connected(_on_run_button_pressed):
+		run_button.pressed.connect(_on_run_button_pressed)
 
 	enemy_hp = maxi(BattleData.enemy_hp, 1)
 	enemy_damage = maxi(BattleData.enemy_damage, 0)
@@ -80,6 +84,11 @@ func _ready() -> void:
 				if not BattleData.enemy_name.is_empty()
 				else enemy_type.to_upper()
 			)
+	enemy_name_label.text += "  LV. %d" % clampi(
+		BattleData.enemy_level,
+		1,
+		Session.MAX_DUNGEON_LEVEL
+	)
 
 	_on_player_health_changed(player_hp, player_max_hp)
 	player_name_label.text = Session.username
@@ -184,9 +193,37 @@ func update_turn_ui() -> void:
 	if player_turn:
 		turn_label.text = "PLAYER TURN"
 		attack_button.disabled = false
+		run_button.disabled = false
 	else:
 		turn_label.text = "ENEMY TURN" if enemy_type != "boss" else "BOSS TURN"
 		attack_button.disabled = true
+		run_button.disabled = true
+
+
+func _on_run_button_pressed() -> void:
+	if not player_turn or battle_ended:
+		return
+
+	battle_ended = true
+	BattleData.enemy_defeated = false
+	turn_label.text = "YOU ESCAPED!"
+	attack_button.disabled = true
+	run_button.disabled = true
+	actions.hide()
+
+	await get_tree().create_timer(1.0).timeout
+	if not is_instance_valid(self):
+		return
+	if BattleData.return_scene.is_empty():
+		push_error("Cannot escape battle: BattleData.return_scene is empty.")
+		return
+
+	var error := get_tree().change_scene_to_file(BattleData.return_scene)
+	if error != OK:
+		push_error(
+			"Could not return from battle to '%s'. Error: %s"
+			% [BattleData.return_scene, error]
+		)
 
 
 func _on_attack_button_pressed() -> void:
@@ -340,7 +377,7 @@ func _on_dodge_player_hit() -> void:
 		await player_hit_effect()
 
 	if player_hp <= 0:
-		await player_defeated()
+		player_defeated()
 	elif Session.is_logged_in() and not GameAPI.save_progress():
 		push_error("Could not start saving player HP after an enemy attack.")
 

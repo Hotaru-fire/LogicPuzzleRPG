@@ -7,6 +7,8 @@ const EXP_REQUIREMENT_PER_LEVEL := 50
 const MAX_SAVED_INT := 9223372036854775807
 const MAX_COUNTER := 4294967295
 const MAX_SIGNED_COUNTER := 2147483647
+const MAX_DUNGEON_LEVEL := 20
+const DUNGEON_STAT_INCREASE_PER_LEVEL := 0.1
 
 # Balance rewards here; level N requires 100 + 50 * (N - 1) EXP.
 const NORMAL_MOB_EXP := 25
@@ -30,6 +32,7 @@ var auth_token: String = ""
 
 var selected_character: String = ""
 var level: int = 1
+var dungeon_level: int = 1
 var player_exp: int = 0
 var gold: int = 0
 
@@ -38,6 +41,7 @@ var mobs_defeated: int = 0
 var dungeon_enemies_defeated: int = 0
 var bosses_killed: int = 0
 var cleared_spawns: Array[String] = []
+var floor1_trials_completed: Array[StringName] = []
 var tutorial_done := false
 
 var total_deaths: int = 0
@@ -77,7 +81,7 @@ func _process(_delta: float) -> void:
 	):
 		_add_unsaved_playtime(elapsed_msec)
 		var display_seconds := playtime_seconds + int(
-			_unsaved_playtime_msec / 1000
+			floori(float(_unsaved_playtime_msec) / 1000.0)
 		)
 		if display_seconds != _last_displayed_playtime_seconds:
 			_last_displayed_playtime_seconds = display_seconds
@@ -96,7 +100,7 @@ func stop_gameplay_time() -> void:
 
 func get_playtime_snapshot() -> Dictionary:
 	_update_playtime_clock()
-	var unsaved_seconds := int(_unsaved_playtime_msec / 1000)
+	var unsaved_seconds := floori(float(_unsaved_playtime_msec) / 1000.0)
 	var additional_seconds := mini(
 		unsaved_seconds,
 		MAX_SAVED_INT - playtime_seconds
@@ -200,9 +204,13 @@ func transition_from_death_screen(scene_path: String) -> Error:
 	if not ResourceLoader.exists(scene_path):
 		return ERR_FILE_NOT_FOUND
 
+	var scene_to_load := scene_path
+	if PlayerData.is_dungeon_floor_scene(scene_path):
+		scene_to_load = PlayerData.DUNGEON_MAIN_SCENE
+
 	var tree := get_tree()
 	tree.paused = false
-	var error := tree.change_scene_to_file(scene_path)
+	var error := tree.change_scene_to_file(scene_to_load)
 	tree.paused = true
 	if error != OK:
 		return error
@@ -255,7 +263,9 @@ func validate_checkpoint(data: Dictionary) -> bool:
 	if not ["Knight", "Mage", "Thief", "Archer"].has(character_class):
 		return false
 
-	var scene_path := str(data.get("current_scene", ""))
+	var scene_path := PlayerData.normalize_scene_path(
+		str(data.get("current_scene", ""))
+	)
 	if scene_path == "res://scenes/world.tscn":
 		scene_path = "res://scenes/maps/world.tscn"
 	if not scene_path.begins_with("res://") or not ResourceLoader.exists(scene_path):
@@ -366,7 +376,9 @@ func restore_checkpoint(data: Dictionary) -> bool:
 			PlayerData.selected_character = 4
 		_:
 			PlayerData.selected_character = 0
-	PlayerData.saved_current_scene = str(data["current_scene"])
+	PlayerData.saved_current_scene = PlayerData.normalize_scene_path(
+		str(data["current_scene"])
+	)
 	if PlayerData.saved_current_scene == "res://scenes/world.tscn":
 		PlayerData.saved_current_scene = "res://scenes/maps/world.tscn"
 	PlayerData.saved_position = Vector2(
@@ -482,6 +494,12 @@ func record_cleared_spawn(spawn_id: String) -> bool:
 	return true
 
 
+func scale_dungeon_stat(base_value: int, target_level: int, minimum: int = 0) -> int:
+	var safe_level := clampi(target_level, 1, MAX_DUNGEON_LEVEL)
+	var multiplier := 1.0 + DUNGEON_STAT_INCREASE_PER_LEVEL * float(safe_level - 1)
+	return maxi(ceili(float(base_value) * multiplier), minimum)
+
+
 func record_dungeon_enemy_kill(
 	exp_reward: int = DUNGEON_ENEMY_EXP,
 	gold_reward: int = DUNGEON_ENEMY_GOLD,
@@ -573,6 +591,14 @@ func clear_session() -> void:
 
 
 func load_analytics(data: Dictionary) -> void:
+	dungeon_level = clampi(
+		int(data.get("dungeon_level", 1)),
+		1,
+		MAX_DUNGEON_LEVEL
+	)
+	cleared_spawns.clear()
+	floor1_trials_completed.clear()
+
 	if data.has("tutorial_done"):
 		tutorial_done = bool(data["tutorial_done"])
 
@@ -581,7 +607,6 @@ func load_analytics(data: Dictionary) -> void:
 		if not (saved_spawns is Array):
 			push_error("Loaded cleared_spawns data is not an array.")
 		else:
-			cleared_spawns.clear()
 			for value in saved_spawns:
 				if not (value is String) or value.is_empty():
 					push_error(
@@ -590,6 +615,10 @@ func load_analytics(data: Dictionary) -> void:
 					continue
 				if not cleared_spawns.has(value):
 					cleared_spawns.append(value)
+
+	for trial_id in [&"room_a", &"room_b", &"room_c"]:
+		if cleared_spawns.has("floor1_trial_" + str(trial_id)):
+			floor1_trials_completed.append(trial_id)
 
 	total_deaths = clampi(int(data.get("total_deaths", 0)), 0, MAX_COUNTER)
 	puzzle_clear_time = maxf(float(data.get("puzzle_clear_time", 0.0)), 0.0)
@@ -614,6 +643,7 @@ func load_analytics(data: Dictionary) -> void:
 
 func reset_game_progress() -> void:
 	level = 1
+	dungeon_level = 1
 	player_exp = 0
 	gold = 0
 	score = 0
@@ -621,6 +651,7 @@ func reset_game_progress() -> void:
 	dungeon_enemies_defeated = 0
 	bosses_killed = 0
 	cleared_spawns.clear()
+	floor1_trials_completed.clear()
 	tutorial_done = false
 	total_deaths = 0
 	puzzle_clear_time = 0.0

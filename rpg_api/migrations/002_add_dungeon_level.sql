@@ -1,0 +1,2 @@
+ALTER TABLE player_saves
+    ADD COLUMN dungeon_level INT UNSIGNED NOT NULL DEFAULT 1 AFTER level;

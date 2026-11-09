@@ -1135,11 +1135,12 @@ theme_override_fonts/font = ExtResource("3_s7053")
 text = "Message"
 autowrap_mode = 3
 
-[node name="Buttons" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=896723581]
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1887168609]
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="SubmitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons" unique_id=1331021826]
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
 theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
@@ -1154,6 +1155,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_3w8e4")
 text = "Login"
 
 [node name="SwitchModeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Buttons" unique_id=791127426]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
 theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)

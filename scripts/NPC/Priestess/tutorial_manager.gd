@@ -180,7 +180,7 @@ func _restore_after_battle() -> void:
 	if returning_from_tutorial_orc:
 		BattleData.remove_meta("enemy_spawn_id")
 		call_deferred("_introduce_companion")
-	elif Session.cleared_spawns.has("tutorial_orc"):
+	elif Session.tutorial_done or Session.cleared_spawns.has("tutorial_orc"):
 		priestess.call_deferred("become_companion", player, dialogue_box)
 
 	if is_instance_valid(enemy_spawn):

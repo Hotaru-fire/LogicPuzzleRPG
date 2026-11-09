@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var hp := 20
+@export var hp := 20
 
 @export var speed := 50.0
 @export var return_speed := 70.0
@@ -29,8 +29,21 @@ var attack_timer := 0.0
 
 var home_position := Vector2.ZERO
 var returning_home := false
+var dungeon_level := 1
+var _base_hp := -1
+var _base_damage := -1
 
 var facing_direction := Vector2.DOWN
+
+
+func set_dungeon_level(level: int) -> void:
+	dungeon_level = clampi(level, 1, Session.MAX_DUNGEON_LEVEL)
+	if _base_hp < 0:
+		_base_hp = hp
+	if _base_damage < 0:
+		_base_damage = damage
+	hp = Session.scale_dungeon_stat(_base_hp, level, 1)
+	damage = Session.scale_dungeon_stat(_base_damage, level)
 
 
 func _ready():
@@ -170,6 +183,8 @@ func start_battle():
 
 	if battle_started:
 		return
+	if Time.get_ticks_msec() < BattleData.battle_return_grace_until_msec:
+		return
 
 	battle_started = true
 	BattleData.enemy_defeated = false
@@ -180,6 +195,10 @@ func start_battle():
 	BattleData.enemy_is_dungeon = (
 		get_tree().get_first_node_in_group("dungeon_manager") != null
 	)
+	BattleData.returning_from_battle = BattleData.enemy_is_dungeon
+	if BattleData.enemy_is_dungeon:
+		var dungeon_manager := get_tree().get_first_node_in_group("dungeon_manager")
+		dungeon_manager.call("capture_room_enemies_for_battle", self)
 
 	print("Starting battle with ", name)
 
@@ -189,6 +208,7 @@ func start_battle():
 	BattleData.enemy = self
 	BattleData.set_meta("enemy_spawn_id", get_meta("spawn_id", ""))
 	BattleData.enemy_name = name
+	BattleData.enemy_level = dungeon_level
 	BattleData.enemy_hp = hp
 	BattleData.enemy_damage = damage
 	BattleData.enemy_exp_reward = exp_reward

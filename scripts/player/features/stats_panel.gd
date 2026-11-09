@@ -80,7 +80,7 @@ func update_stats() -> void:
 
 
 func _format_playtime(total_seconds: int) -> String:
-	var hours := int(total_seconds / 3600)
-	var minutes := int((total_seconds % 3600) / 60)
+	var hours := floori(float(total_seconds) / 3600.0)
+	var minutes := floori(float(total_seconds % 3600) / 60.0)
 	var seconds := total_seconds % 60
 	return "%02d:%02d:%02d" % [hours, minutes, seconds]

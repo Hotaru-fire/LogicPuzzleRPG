@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://cpefs0p1mujsv"]
 
 [ext_resource type="Script" uid="uid://dniliknmeybg5" path="res://scripts/enemies/regular mobs/enemy_test_dummy.gd" id="1_7mfyv"]
-[ext_resource type="PackedScene" path="res://scenes/battle/enemy_battle.tscn" id="2_d8gye"]
+[ext_resource type="PackedScene" uid="uid://b3jrs5373sbx0" path="res://scenes/battle/enemy_battle.tscn" id="2_d8gye"]
 [ext_resource type="SpriteFrames" uid="uid://b84837gmiodtn" path="res://resources/mobs/Goblin.tres" id="2_l0j4o"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3m5i"]
-size = Vector2(28, 36)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gici0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnaqn"]
 radius = 65.333435
@@ -24,11 +23,12 @@ sprite_frames = ExtResource("2_l0j4o")
 animation = &"walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=883507679]
-visible = false
-position = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_f3m5i")
+position = Vector2(0, 23)
+scale = Vector2(1.4000018, -0.93684334)
+shape = SubResource("CircleShape2D_gici0")
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1957866765]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1505757348]
@@ -36,6 +36,7 @@ scale = Vector2(0.995013, 1)
 shape = SubResource("CircleShape2D_tnaqn")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=120618685]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1972337733]

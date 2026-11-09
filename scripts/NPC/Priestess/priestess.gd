@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 signal walk_completed
 
-@export var follow_speed: float = 100.0
+const MAIN_MENU_SCENE := "res://scenes/main/MainMenu.tscn"
+
+@export var follow_speed: float = 200.0
 @export var follow_distance: float = 220.0
 @export var companion_follow_distance: float = 48.0
 @export var interaction_distance: float = 60.0
@@ -23,6 +25,7 @@ var _walk_target := Vector2.ZERO
 var _follower: Node2D
 var _following_player := false
 var _persistent_dialogue_layer: CanvasLayer
+var _scene_change_generation := 0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -45,6 +48,32 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if _following_player:
+		var current_scene := get_tree().current_scene
+		var in_battle_scene := (
+			current_scene != null
+			and current_scene.scene_file_path.contains("/battle/")
+		)
+		if not in_battle_scene:
+			var active_player := get_tree().get_first_node_in_group("player") as Node2D
+			if (
+				active_player != null
+				and active_player.is_inside_tree()
+				and active_player != player
+			):
+				sync_with_player(active_player)
+
+	if _following_player and (
+		not is_instance_valid(player)
+		or not player.is_inside_tree()
+	):
+		player = get_tree().get_first_node_in_group("player") as Node2D
+		if not is_instance_valid(player) or not player.is_inside_tree():
+			visible = false
+			velocity = Vector2.ZERO
+			return
+		show()
+
+	if _following_player:
 		if not is_instance_valid(player) or dialogue_open:
 			velocity = Vector2.ZERO
 			play_idle_animation()
@@ -55,6 +84,9 @@ func _physics_process(_delta: float) -> void:
 			interaction_distance
 		)
 		var follow_direction := player.global_position - global_position
+		if follow_direction.length() > follow_distance:
+			global_position = player.global_position + Vector2(-32.0, 0.0)
+			follow_direction = player.global_position - global_position
 		if follow_direction.length() <= companion_follow_distance:
 			velocity = Vector2.ZERO
 			play_idle_animation()
@@ -121,14 +153,12 @@ func become_companion(follower: Node2D, active_dialogue_box: Control) -> void:
 		push_error("Priestess.become_companion requires a valid player.")
 		return
 
-	player = follower
 	dialogue_box = active_dialogue_box
-	global_position = player.global_position + Vector2(-32.0, 0.0)
-	show()
+	_connect_dialogue_finished()
 	is_companion = true
-	_following_player = true
 	_walking_to_target = false
 	add_to_group("priestess_companion")
+	sync_with_player(follower)
 	_make_dialogue_persistent()
 
 	var tree := get_tree()
@@ -137,8 +167,33 @@ func become_companion(follower: Node2D, active_dialogue_box: Control) -> void:
 		tree.scene_changed.connect(scene_changed_callback)
 
 	if get_parent() != tree.root:
-		reparent(tree.root, true)
+		call_deferred("_reparent_to_root")
+
+
+func _reparent_to_root() -> void:
+	if not is_inside_tree():
+		return
+
+	var root := get_tree().root
+	if get_parent() != root:
+		reparent(root, true)
 		owner = null
+
+
+func sync_with_player(follower: Node2D) -> void:
+	if not is_instance_valid(follower):
+		push_error("Priestess.sync_with_player requires a valid player.")
+		return
+	if not is_companion:
+		return
+
+	player = follower
+	velocity = Vector2.ZERO
+	dialogue_open = false
+	global_position = player.global_position + Vector2(-32.0, 0.0)
+	show()
+	_following_player = true
+	face_toward(player.global_position)
 
 
 func _make_dialogue_persistent() -> void:
@@ -155,29 +210,49 @@ func _make_dialogue_persistent() -> void:
 		_persistent_dialogue_layer.name = "PriestessDialogueLayer"
 		_persistent_dialogue_layer.process_mode = Node.PROCESS_MODE_ALWAYS
 		root.add_child(_persistent_dialogue_layer)
+	_persistent_dialogue_layer.layer = 10
+	_persistent_dialogue_layer.show()
+
+	call_deferred("_reparent_dialogue_box")
+
+
+func _reparent_dialogue_box() -> void:
+	if (
+		not is_instance_valid(dialogue_box)
+		or not is_instance_valid(_persistent_dialogue_layer)
+	):
+		return
 
 	if dialogue_box.get_parent() != _persistent_dialogue_layer:
 		dialogue_box.reparent(_persistent_dialogue_layer)
 		dialogue_box.owner = null
+	dialogue_box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	dialogue_box.position = Vector2.ZERO
+	dialogue_box.show()
 
 
 func _on_scene_changed() -> void:
-	await get_tree().process_frame
-	if not is_inside_tree():
+	_scene_change_generation += 1
+	var generation := _scene_change_generation
+	var current_scene := get_tree().current_scene
+	if current_scene != null and current_scene.scene_file_path == MAIN_MENU_SCENE:
+		if is_instance_valid(_persistent_dialogue_layer):
+			_persistent_dialogue_layer.queue_free()
+		queue_free()
 		return
 
-	var current_player := get_tree().get_first_node_in_group("player") as Node2D
-	if current_player == null:
-		player = null
-		visible = false
-		velocity = Vector2.ZERO
-		return
+	for _attempt in range(10):
+		await get_tree().process_frame
+		if not is_inside_tree() or generation != _scene_change_generation:
+			return
 
-	player = current_player
-	global_position = player.global_position + Vector2(-32.0, 0.0)
-	show()
-	_following_player = true
-	face_toward(player.global_position)
+		var current_player := get_tree().get_first_node_in_group("player") as Node2D
+		if current_player != null and current_player.is_inside_tree():
+			sync_with_player(current_player)
+			return
+
+	player = null
+	velocity = Vector2.ZERO
 
 
 func face_toward(pos: Vector2) -> void:
@@ -201,6 +276,11 @@ func update_facing_from_direction(direction: Vector2) -> void:
 
 
 func play_idle_animation() -> void:
+	if not is_instance_valid(sprite):
+		sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if not is_instance_valid(sprite):
+		return
+
 	var animation_name := "idle_" + facing_direction
 	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(
 		animation_name
@@ -210,6 +290,11 @@ func play_idle_animation() -> void:
 
 
 func play_walk_animation() -> void:
+	if not is_instance_valid(sprite):
+		sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if not is_instance_valid(sprite):
+		return
+
 	var animation_name := "walk_" + facing_direction
 	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(
 		animation_name
@@ -232,7 +317,7 @@ func _on_dialogue_box_finished() -> void:
 
 
 func open_dialogue() -> void:
-	if not is_companion or dialogue_open:
+	if not is_companion or dialogue_open or _player_at_door():
 		return
 
 	dialogue_open = true
@@ -271,7 +356,7 @@ func open_dialogue() -> void:
 	name_label.text = "Priestess"
 	dialogue_box.call("start", [{"speaker": "Priestess", "text": message}])
 	await Signal(dialogue_box, "dialogue_finished")
-
+	dialogue_open = false
 
 func _input(event: InputEvent) -> void:
 	if (
@@ -279,5 +364,34 @@ func _input(event: InputEvent) -> void:
 		and player_nearby
 		and is_companion
 		and not dialogue_open
+		and not _player_at_door()
+		and not _trial_interaction_has_priority()
 	):
 		open_dialogue()
+
+
+func _player_at_door() -> bool:
+	for door in get_tree().get_nodes_in_group("room_door"):
+		if door.get("player_nearby"):
+			return true
+	return false
+
+
+func _trial_interaction_has_priority() -> bool:
+	for trial_npc in get_tree().get_nodes_in_group("minotaur_trial"):
+		if (
+			trial_npc.has_method("should_prioritize_interaction")
+			and trial_npc.call("should_prioritize_interaction")
+		):
+			return true
+	return false
+
+
+func _connect_dialogue_finished() -> void:
+	if not is_instance_valid(dialogue_box):
+		return
+	if not dialogue_box.has_signal("dialogue_finished"):
+		return
+	var finished_callback := Callable(self, "_on_dialogue_box_finished")
+	if not dialogue_box.is_connected("dialogue_finished", finished_callback):
+		dialogue_box.connect("dialogue_finished", finished_callback)

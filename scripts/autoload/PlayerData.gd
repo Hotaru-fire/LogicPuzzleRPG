@@ -3,6 +3,10 @@ extends Node
 signal health_changed(current_hp: int, maximum_hp: int)
 
 const DEFAULT_MAX_HP := 200
+const LEGACY_DUNGEON_MAIN_SCENE := "res://scenes/maps/levels/dungeon_1.tscn"
+const DUNGEON_MAIN_SCENE := "res://scenes/maps/levels/Floor 1/current_level.tscn"
+const DUNGEON_FLOOR_SCENE := "res://scenes/maps/levels/Floor 1/dungeon_1_floor.tscn"
+const DUNGEON_ROOM_DIRECTORY := "res://scenes/maps/levels/Floor 1/rooms/"
 
 var player_name: String = ""
 var selected_character: int = 0
@@ -23,6 +27,24 @@ var saved_boss_completed: bool = false
 
 var saved_inventory: String = "[]"
 var saved_equipment: String = "{}"
+
+
+func normalize_scene_path(scene_path: String) -> String:
+	if scene_path == LEGACY_DUNGEON_MAIN_SCENE:
+		return DUNGEON_MAIN_SCENE
+	return scene_path
+
+
+func is_dungeon_floor_scene(scene_path: String) -> bool:
+	var normalized_path := normalize_scene_path(scene_path)
+	if normalized_path == DUNGEON_FLOOR_SCENE:
+		return true
+	return (
+		normalized_path.begins_with(DUNGEON_ROOM_DIRECTORY)
+		and normalized_path.ends_with(".tscn")
+		and not normalized_path.contains("..")
+		and ResourceLoader.exists(normalized_path)
+	)
 
 
 func set_health(value: int, maximum: int) -> void:

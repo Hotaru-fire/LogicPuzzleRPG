@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://30c5okyrogww"]
+
+[ext_resource type="PackedScene" uid="uid://by0aq6evrjfw2" path="res://scenes/maps/tile_maps.tscn" id="1_tile_maps"]
+[ext_resource type="Script" uid="uid://cqmbpmsuvpr2w" path="res://scripts/dungeon/room_door.gd" id="2_room_door"]
+[ext_resource type="PackedScene" uid="uid://dnrlr7p8lj1vn" path="res://scenes/NPC/PuzzleNPC.tscn" id="3_puzzle_npc"]
+[ext_resource type="Texture2D" uid="uid://cx1w42o648apo" path="res://assets/Characters/Minotaur's Trial NPC/NPC-human/standard/idle/down/1.png" id="4_vcejy"]
+[ext_resource type="PackedScene" uid="uid://d2vqebc8wg7vg" path="res://scenes/dialogue/DialogueBox.tscn" id="4_xa4e8"]
+[ext_resource type="Texture2D" uid="uid://drk0ts77r54j" path="res://assets/Characters/Minotaur's Trial NPC/NPC-human/standard/idle/down/2.png" id="5_2ts1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_RoomExit"]
+size = Vector2(36, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e5oij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vcejy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2ts1w")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[node name="RoomC" type="Node2D" unique_id=1205031192]
+y_sort_enabled = true
+
+[node name="TileMaps" parent="." unique_id=1787135960 instance=ExtResource("1_tile_maps")]
+
+[node name="RoomEntry" type="Marker2D" parent="." unique_id=712251644]
+position = Vector2(220, 121)
+
+[node name="DungeonSpawn" type="Marker2D" parent="." unique_id=1622047008]
+position = Vector2(220, 121)
+
+[node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=1147858013]
+
+[node name="EnemySpawnPoint1" type="Marker2D" parent="EnemySpawnPoints" unique_id=199077792]
+position = Vector2(350, 200)
+
+[node name="EnemySpawnPoint2" type="Marker2D" parent="EnemySpawnPoints" unique_id=1531652012]
+position = Vector2(450, 300)
+
+[node name="BossSpawnPoints" type="Node2D" parent="." unique_id=1628221942]
+
+[node name="BossSpawnPoint" type="Marker2D" parent="BossSpawnPoints" unique_id=1829348153]
+position = Vector2(900, 325)
+
+[node name="ReturnToFloor1" type="Area2D" parent="." unique_id=32261819]
+position = Vector2(262, 85)
+collision_layer = 0
+script = ExtResource("2_room_door")
+target_room_path = "res://scenes/maps/levels/Floor 1/dungeon_1_floor.tscn"
+target_spawn_marker = NodePath("RoomCReturn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnToFloor1" unique_id=221291582]
+shape = SubResource("RectangleShape2D_RoomExit")
+
+[node name="DoorMarker" type="Polygon2D" parent="ReturnToFloor1" unique_id=137725045]
+color = Color(1, 0.8, 0.2, 0.8)
+polygon = PackedVector2Array(-14, -20, 14, -20, 14, 20, -14, 20)
+
+[node name="Label" type="Label" parent="ReturnToFloor1" unique_id=1788457757]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Press F to return."
+
+[node name="PuzzleNPC" parent="." unique_id=1577571498 instance=ExtResource("3_puzzle_npc")]
+position = Vector2(960, 268)
+trial_id = &"room_c"
+
+[node name="AnimatedSprite2D" parent="PuzzleNPC" index="0" unique_id=1224817887]
+sprite_frames = SubResource("SpriteFrames_e5oij")
+
+[node name="DialogueBox" parent="." unique_id=737193392 instance=ExtResource("4_xa4e8")]
+
+[editable path="PuzzleNPC"]
+[editable path="PuzzleNPC/CanvasLayer/DialogueBox"]

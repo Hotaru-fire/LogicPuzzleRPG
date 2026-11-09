@@ -1163,20 +1163,6 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
 text = "Load Game"
 
-[node name="SettingsButton" type="Button" parent="MenuButtons" unique_id=737137823]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
-theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
-theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
-theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
-theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_e7xy3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_v1qq1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_tw8da")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
-theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
-text = "Settings"
-
 [node name="LeaderBoardButton" type="Button" parent="MenuButtons" unique_id=361621552]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
@@ -1626,7 +1612,6 @@ text = "Cancel"
 
 [connection signal="pressed" from="MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuButtons/LoadgameButton" to="." method="_on_loadgame_button_pressed"]
-[connection signal="pressed" from="MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuButtons/LeaderBoardButton" to="." method="_on_leader_board_button_pressed"]
 [connection signal="pressed" from="MenuButtons/SaveQuitButton" to="." method="_on_save_quit_button_pressed"]
 [connection signal="pressed" from="PlayPanel/StartButton" to="." method="_on_start_button_pressed"]

@@ -3,6 +3,7 @@ extends Node
 var enemy = null
 var enemy_name := ""
 var enemy_type := ""
+var enemy_level := 1
 var enemy_sprite_frames: SpriteFrames
 var enemy_sprite_frames_type := ""
 
@@ -18,3 +19,8 @@ var enemy_is_dungeon := false
 
 var return_position := Vector2.ZERO
 var return_scene := ""
+var current_floor_path := ""
+var returning_from_battle := false
+var enemy_instance_id := 0
+var room_enemy_snapshot: Array[Dictionary] = []
+var battle_return_grace_until_msec := 0

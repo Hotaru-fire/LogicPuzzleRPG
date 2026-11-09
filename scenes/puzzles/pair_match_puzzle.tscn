@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://g1o7fp0c5g33"]
+
+[ext_resource type="Script" uid="uid://brm3u4m7bla1q" path="res://scripts/puzzles/pair_match_puzzle.gd" id="1_td3mt"]
+[ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="2_3yk1i"]
+[ext_resource type="FontFile" uid="uid://dces18xkkeklk" path="res://assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf" id="3_tad84"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xhln"]
+bg_color = Color(0.98039216, 0.8745098, 0.6784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95686275, 0.6431373, 0.3764706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7xy3"]
+bg_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1qq1"]
+bg_color = Color(0.6627451, 0.5372549, 0.3137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7764706, 0.6509804, 0.41960785, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw8da"]
+bg_color = Color(0.8509804, 0.7411765, 0.5294118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94509804, 0.89411765, 0.77254903, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opoc0"]
+bg_color = Color(0.50980395, 0.47058824, 0.34509805, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6392157, 0.5921569, 0.47058824, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gb51"]
+bg_color = Color(0.9098039, 0.8392157, 0.6784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="PairMatchPuzzle" type="Control" unique_id=1692989853]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_td3mt")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1629474687]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27450982)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=851790966]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -37.0
+offset_right = 34.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1205639790]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3xhln")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=252954548]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=418545972]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="InstructionLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=1815226648]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 40)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_3yk1i")
+text = "INSTRUCTIONS"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CardGrid" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=254507948]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 188)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 4
+
+[node name="FeedbackLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1367822621]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5882353)
+theme_override_fonts/font = ExtResource("3_tad84")
+text = "FEEDBACK"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=969026569]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_focus_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_pressed_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
+theme_override_colors/font_hover_color = Color(0.14901961, 0.23137255, 0.21176471, 1)
+theme_override_colors/font_disabled_color = Color(0.84705883, 0.7882353, 0.654902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7xy3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v1qq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tw8da")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opoc0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6gb51")
+text = "Close"

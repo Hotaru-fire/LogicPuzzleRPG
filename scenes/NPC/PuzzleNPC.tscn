@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dnrlr7p8lj1vn"]
+
+[ext_resource type="Script" path="res://scripts/NPC/PuzzleNPC/puzzle_npc.gd" id="1_puzzle_npc"]
+[ext_resource type="PackedScene" uid="uid://d2vqebc8wg7vg" path="res://scenes/dialogue/DialogueBox.tscn" id="1_kjj45"]
+[ext_resource type="PackedScene" path="res://scenes/puzzles/MissingRunePuzzle.tscn" id="2_rune_puzzle"]
+[ext_resource type="SpriteFrames" uid="uid://2ihdqb8kugum" path="res://resources/NPC/Priestess.tres" id="3_priestess"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npc"]
+size = Vector2(16, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaction"]
+radius = 56.0
+
+[node name="PuzzleNpc" type="StaticBody2D" unique_id=756844155]
+script = ExtResource("1_puzzle_npc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1224817887]
+sprite_frames = ExtResource("3_priestess")
+animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=653390275]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_npc")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=960984042]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1957620462]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="InteractionButton" type="Button" parent="." unique_id=952187967]
+offset_left = -20.0
+offset_top = -48.0
+offset_right = 20.0
+offset_bottom = -18.0
+text = "F"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1527839420]
+layer = 10
+
+[node name="DialogueBox" parent="CanvasLayer" unique_id=737193392 instance=ExtResource("1_kjj45")]
+
+[node name="MissingRunePuzzle" parent="CanvasLayer" instance=ExtResource("2_rune_puzzle")]
+
+[editable path="CanvasLayer/DialogueBox"]

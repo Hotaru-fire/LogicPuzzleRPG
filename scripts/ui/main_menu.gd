@@ -94,16 +94,6 @@ func _on_play_button_pressed() -> void:
 	_open_character_selection()
 
 
-func _on_settings_button_pressed() -> void:
-	if waiting_for_new_game_flow:
-		return
-
-	menu_buttons.hide()
-	play_panel.hide()
-	settings_panel.show()
-	title.hide()
-
-
 func _on_back_button_pressed() -> void:
 	_return_to_main_menu()
 
@@ -577,7 +567,10 @@ func _on_game_api_response_received(
 
 			# Validate the saved scene before loading it.
 			
-			var saved_scene: String = PlayerData.saved_current_scene
+			var saved_scene := PlayerData.normalize_scene_path(
+				PlayerData.saved_current_scene
+			)
+			PlayerData.saved_current_scene = saved_scene
 
 			# Fix the old saved world scene path.
 			if saved_scene == "res://scenes/world.tscn":
@@ -588,6 +581,10 @@ func _on_game_api_response_received(
 				PlayerData.has_save_data = false
 				print("Saved scene does not exist: ", saved_scene)
 				return
+
+			var scene_to_load := saved_scene
+			if PlayerData.is_dungeon_floor_scene(saved_scene):
+				scene_to_load = PlayerData.DUNGEON_MAIN_SCENE
 
 			Session.start_gameplay_time()
 
@@ -606,7 +603,7 @@ func _on_game_api_response_received(
 			BattleData.return_position = Vector2.ZERO
 
 			var error: Error = get_tree().change_scene_to_file(
-				saved_scene
+				scene_to_load
 			)
 
 			if error != OK:
