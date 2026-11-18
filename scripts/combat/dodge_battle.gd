@@ -9,8 +9,40 @@ var attacks := []
 
 var dodge_timer := 0.0
 
+var dodge_active := false
+var hit_cooldown := false
+
+
+func clear_attacks() -> void:
+	for a in attacks:
+		if is_instance_valid(a):
+			a.queue_free()
+	attacks.clear()
+
+
+func finish_dodge():
+	dodge_active = false
+	clear_attacks()
+
+	$TimeLabel.text = "0.0"
+	print("DODGE BATTLE FINISHED!")
+	visible = false
+	dodge_finished.emit()
+
+
+func _on_attack_body_entered(body):
+	if not dodge_active or hit_cooldown:
+		return
+	if body.name == "Player":
+		print("HEART HIT!")
+		hit_cooldown = true
+		player_hit.emit()
+		await get_tree().create_timer(0.8).timeout
+		hit_cooldown = false
 
 func start_goblin_dodge():
+	clear_attacks()
+	dodge_active = true
 	dodge_timer = dodge_duration
 	visible = true
 
@@ -30,15 +62,6 @@ func start_goblin_dodge():
 		
 	finish_dodge()
 
-
-func finish_dodge():
-	$TimeLabel.text = "0.0"
-
-	print("DODGE BATTLE FINISHED!")
-
-	visible = false
-
-	dodge_finished.emit()
 
 func spawn_attack(start_position: Vector2, direction: Vector2, speed := 200.0):
 	var attack = Area2D.new()
@@ -84,12 +107,6 @@ func _physics_process(delta):
 			var direction = attack.get_meta("direction")
 			var speed = attack.get_meta("speed", 200.0)
 			attack.position += direction * speed * delta
-
-
-func _on_attack_body_entered(body):
-	if body.name == "Player":
-		print("HEART HIT!")
-		player_hit.emit()
 
 
 func pattern_horizontal():

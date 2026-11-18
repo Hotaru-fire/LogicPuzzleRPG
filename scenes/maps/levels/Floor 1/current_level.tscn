@@ -110,10 +110,11 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_e1p1w")
 text = "Progress: 0 / 3"
 
-[node name="Priestess" parent="." unique_id=1074553048 instance=ExtResource("5_t04vq")]
-position = Vector2(253, 119)
-
 [node name="DialogueBox" parent="." unique_id=737193392 instance=ExtResource("8_r6lkc")]
+
+[node name="Priestess" parent="." unique_id=1074553048 instance=ExtResource("5_t04vq")]
+z_index = 100
+position = Vector2(259, 120)
 
 [editable path="player"]
 [editable path="CanvasLayer"]

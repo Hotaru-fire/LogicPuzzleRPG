@@ -35,6 +35,8 @@ func _ready() -> void:
 	if player == null:
 		push_error("Priestess could not find a player in the 'player' group.")
 
+	_update_scene_visibility()
+
 	if dialogue_box != null and dialogue_box.has_signal("dialogue_finished"):
 		var finished_callback := Callable(self, "_on_dialogue_box_finished")
 		if not dialogue_box.is_connected(
@@ -46,21 +48,33 @@ func _ready() -> void:
 	play_idle_animation()
 
 
+func _is_battle_scene() -> bool:
+	var current_scene := get_tree().current_scene
+	return (
+		current_scene != null
+		and current_scene.scene_file_path.contains("/battle/")
+	)
+
+
+func _update_scene_visibility() -> void:
+	visible = not _is_battle_scene()
+
+
 func _physics_process(_delta: float) -> void:
+	_update_scene_visibility()
+
+	if _is_battle_scene():
+		velocity = Vector2.ZERO
+		return
+
 	if _following_player:
-		var current_scene := get_tree().current_scene
-		var in_battle_scene := (
-			current_scene != null
-			and current_scene.scene_file_path.contains("/battle/")
-		)
-		if not in_battle_scene:
-			var active_player := get_tree().get_first_node_in_group("player") as Node2D
-			if (
-				active_player != null
-				and active_player.is_inside_tree()
-				and active_player != player
-			):
-				sync_with_player(active_player)
+		var active_player := get_tree().get_first_node_in_group("player") as Node2D
+		if (
+			active_player != null
+			and active_player.is_inside_tree()
+			and active_player != player
+		):
+			sync_with_player(active_player)
 
 	if _following_player and (
 		not is_instance_valid(player)
@@ -68,10 +82,8 @@ func _physics_process(_delta: float) -> void:
 	):
 		player = get_tree().get_first_node_in_group("player") as Node2D
 		if not is_instance_valid(player) or not player.is_inside_tree():
-			visible = false
 			velocity = Vector2.ZERO
 			return
-		show()
 
 	if _following_player:
 		if not is_instance_valid(player) or dialogue_open:
@@ -191,7 +203,7 @@ func sync_with_player(follower: Node2D) -> void:
 	velocity = Vector2.ZERO
 	dialogue_open = false
 	global_position = player.global_position + Vector2(-32.0, 0.0)
-	show()
+	_update_scene_visibility()
 	_following_player = true
 	face_toward(player.global_position)
 
@@ -241,18 +253,29 @@ func _on_scene_changed() -> void:
 		queue_free()
 		return
 
-	for _attempt in range(10):
-		await get_tree().process_frame
-		if not is_inside_tree() or generation != _scene_change_generation:
-			return
+	_update_scene_visibility()
+	if _is_battle_scene():
+		return
 
+	var is_battle_return := (
+		current_scene != null
+		and current_scene.scene_file_path == BattleData.return_scene
+	)
+	var attempts := 0
+	while is_inside_tree() and generation == _scene_change_generation:
 		var current_player := get_tree().get_first_node_in_group("player") as Node2D
 		if current_player != null and current_player.is_inside_tree():
 			sync_with_player(current_player)
 			return
 
-	player = null
-	velocity = Vector2.ZERO
+		if not is_battle_return and attempts >= 10:
+			break
+		attempts += 1
+		await get_tree().process_frame
+
+	if is_inside_tree() and generation == _scene_change_generation:
+		player = null
+		velocity = Vector2.ZERO
 
 
 func face_toward(pos: Vector2) -> void:
@@ -319,7 +342,9 @@ func _on_dialogue_box_finished() -> void:
 func open_dialogue() -> void:
 	if not is_companion or dialogue_open or _player_at_door():
 		return
-
+	if not _player_facing_priestess():
+		return
+	
 	dialogue_open = true
 	velocity = Vector2.ZERO
 	face_player()
@@ -358,12 +383,14 @@ func open_dialogue() -> void:
 	await Signal(dialogue_box, "dialogue_finished")
 	dialogue_open = false
 
+
 func _input(event: InputEvent) -> void:
 	if (
 		event.is_action_pressed("interact")
 		and player_nearby
 		and is_companion
 		and not dialogue_open
+		and _player_facing_priestess()
 		and not _player_at_door()
 		and not _trial_interaction_has_priority()
 	):
@@ -395,3 +422,38 @@ func _connect_dialogue_finished() -> void:
 	var finished_callback := Callable(self, "_on_dialogue_box_finished")
 	if not dialogue_box.is_connected("dialogue_finished", finished_callback):
 		dialogue_box.connect("dialogue_finished", finished_callback)
+
+
+const PLAYER_FACING_PROPERTIES := ["facing_direction", "facing", "last_direction", "last_dir"]
+const FACING_DOT_THRESHOLD := 0.5  # 0.5 = within ~60 degrees of looking at her
+
+func _get_player_facing_vector() -> Vector2:
+	if not is_instance_valid(player):
+		return Vector2.ZERO
+
+	for prop in PLAYER_FACING_PROPERTIES:
+		if prop in player:
+			var value = player.get(prop)
+			if value is Vector2:
+				return (value as Vector2).normalized()
+			if value is String:
+				match value:
+					"up": return Vector2.UP
+					"down": return Vector2.DOWN
+					"left": return Vector2.LEFT
+					"right": return Vector2.RIGHT
+
+	return Vector2.ZERO
+
+
+func _player_facing_priestess() -> bool:
+	if not is_instance_valid(player):
+		return false
+
+	var facing := _get_player_facing_vector()
+	if facing == Vector2.ZERO:
+		push_warning("Priestess could not read the player's facing direction.")
+		return false
+
+	var to_priestess := (global_position - player.global_position).normalized()
+	return facing.dot(to_priestess) >= FACING_DOT_THRESHOLD
