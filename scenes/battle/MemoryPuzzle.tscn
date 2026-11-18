@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cuee6q5gpxd0a"]
 
 [ext_resource type="Script" uid="uid://b7igse3a6y67o" path="res://scripts/puzzles/memory_puzzle.gd" id="1_p527o"]
-[ext_resource type="SpriteFrames" uid="uid://t14vs6r1qqte" path="res://resources/player characters/Mage.tres" id="2_ehpii"]
 [ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="2_i2qmc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehpii"]
@@ -439,16 +438,6 @@ layout_mode = 2
 
 [node name="PuzzleTimer" type="Timer" parent="." unique_id=29257182]
 wait_time = 0.1
-
-[node name="player" type="CharacterBody2D" parent="." unique_id=1441969134]
-position = Vector2(428, -37)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=1817796654]
-position = Vector2(-138, 344)
-scale = Vector2(3, 3)
-sprite_frames = ExtResource("2_ehpii")
-animation = &"channel"
-frame_progress = 0.9278123
 
 [node name="PlayerPanel" type="PanelContainer" parent="." unique_id=434043219]
 z_index = -1

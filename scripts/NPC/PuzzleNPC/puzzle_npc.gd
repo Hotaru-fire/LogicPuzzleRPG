@@ -17,6 +17,11 @@ signal trial_completed(trial_id: StringName)
 	"Did the runes frighten you? Come back when you grow a spine.",
 	"Haha bubu."
 ]
+@export var after_lines: Array[String] = [
+	"Hmph. So you solved it. Lucky guess, I'd bet.",
+	"Don't expect me to cheer. I'd have smashed the runes and been done with it.",
+	"Go on, hero. Go face my master. See if I care."
+]
 
 @export var puzzle_scene: PackedScene
 var player: Node2D
@@ -89,7 +94,6 @@ func _update_interaction_button() -> void:
 	if (
 		player_nearby
 		and not interaction_active
-		and not _trial_completed
 		and not _player_at_door()
 	):
 		interaction_button.show()
@@ -110,12 +114,7 @@ func _on_interaction_area_body_exited(body: Node2D) -> void:
 
 
 func _begin_interaction() -> void:
-	if (
-		interaction_active
-		or _trial_completed
-		or not player_nearby
-		or _player_at_door()
-	):
+	if interaction_active or not player_nearby or _player_at_door():
 		_update_interaction_button()
 		return
 	if (
@@ -124,6 +123,11 @@ func _begin_interaction() -> void:
 	):
 		push_error("PuzzleNPC DialogueBox does not expose the existing dialogue API.")
 		return
+
+	if _trial_completed:
+		await _play_after_trial_dialogue()
+		return
+
 	if (
 		not rune_puzzle.has_method("start_puzzle")
 		or not rune_puzzle.has_signal("puzzle_closed")
@@ -135,7 +139,7 @@ func _begin_interaction() -> void:
 	interaction_button.hide()
 	_set_portrait_hidden(true)
 	dialogue_box.call("start", _make_lines(intro_lines))
-	
+
 	await Signal(dialogue_box, "dialogue_finished")
 	_set_portrait_hidden(false)
 	if not is_inside_tree():
@@ -143,7 +147,21 @@ func _begin_interaction() -> void:
 
 	rune_puzzle.call("start_puzzle")
 	await Signal(rune_puzzle, "puzzle_closed")
-	
+
+	if is_inside_tree():
+		interaction_active = false
+		_update_interaction_button()
+
+
+func _play_after_trial_dialogue() -> void:
+	interaction_active = true
+	interaction_button.hide()
+	_set_portrait_hidden(true)
+	dialogue_box.call("start", _make_lines(after_lines))
+
+	await Signal(dialogue_box, "dialogue_finished")
+	_set_portrait_hidden(false)
+
 	if is_inside_tree():
 		interaction_active = false
 		_update_interaction_button()
@@ -165,7 +183,7 @@ func set_trial_completed(completed: bool) -> void:
 
 
 func should_prioritize_interaction() -> bool:
-	return player_nearby and not interaction_active and not _trial_completed
+	return player_nearby and not interaction_active
 
 
 func _set_portrait_hidden(should_hide: bool) -> void:
@@ -197,6 +215,10 @@ const NPC_PROFILES := {
 			"The cards are patient, hero. Your memory is not.",
 			"How graceful, to stumble over simple symbols.",
 			"Breathe, little hero. Then try not to embarrass yourself again."
+		],
+		"after": [
+			"You did it! I knew your memory was stronger than you believed.",
+			"Whatever waits ahead, you carry my faith. Walk gently, friend."
 		]
 	},
 	&"room_c": {
@@ -212,6 +234,10 @@ const NPC_PROFILES := {
 			"Is that all? And you plan to fight a Minotaur?",
 			"Wrong again. Maybe stick to swinging that sword.",
 			"Come on, hero. My grandmother could do this half asleep."
+		],
+		"after": [
+			"Look at you, sharp as your sword! Not many get through that one.",
+			"Go give that Minotaur what for. We're all rooting for you."
 		]
 	}
 }
@@ -226,6 +252,8 @@ func _apply_trial_profile() -> void:
 	intro_lines.assign(profile["intro"])
 	mock_lines.assign(profile["mock"])
 	var path: String = profile["puzzle"]
+	if profile.has("after"):
+		after_lines.assign(profile["after"])
 	if ResourceLoader.exists(path):
 		puzzle_scene = load(path) as PackedScene
 	else:

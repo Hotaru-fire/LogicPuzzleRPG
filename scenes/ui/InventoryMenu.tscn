@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://cgrsufwm0rre0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhndg"]
+bg_color = Color(0.9607843, 0.9137255, 0.8117647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7882353, 0.5882353, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4vrl"]
+bg_color = Color(0.91764706, 0.8509804, 0.70980394, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7882353, 0.5882353, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cq3to"]
+bg_color = Color(0.9843137, 0.90588236, 0.6509804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7882353, 0.5882353, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aq2cf"]
+bg_color = Color(0.9490196, 0.8901961, 0.7490196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7882353, 0.5882353, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1sbf"]
+bg_color = Color(0.33333334, 0.3372549, 0.30980393, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7882353, 0.5882353, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6l3un"]
+bg_color = Color(0.2901961, 0.47058824, 0.7607843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b3fm"]
+bg_color = Color(0.22745098, 0.38431373, 0.6392157, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70we1"]
+bg_color = Color(0.36862746, 0.56078434, 0.84705883, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlgtq"]
+bg_color = Color(0.8117647, 0.7764706, 0.6901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="InventoryMenu" type="Control" unique_id=1723505375]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1531678129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.16470589, 0.26666668, 0.4627451)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1185430928]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -60.0
+offset_right = 110.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhndg")
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=1863495154]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Columns" type="HBoxContainer" parent="Panel/Margin" unique_id=1773503898]
+layout_mode = 2
+
+[node name="EquipmentColumn" type="VBoxContainer" parent="Panel/Margin/Columns" unique_id=414895881]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EquipmentTitle" type="Label" parent="Panel/Margin/Columns/EquipmentColumn" unique_id=2032213989]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23137255, 0.35686275, 0.64705884, 1)
+text = "Equipment"
+
+[node name="WeaponSlot" type="Button" parent="Panel/Margin/Columns/EquipmentColumn" unique_id=436541385]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2901961, 0.20784314, 0.14117648, 1)
+theme_override_colors/font_pressed_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4vrl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cq3to")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aq2cf")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_l1sbf")
+text = "Weapon Slot"
+
+[node name="ArmorSlot" type="Button" parent="Panel/Margin/Columns/EquipmentColumn" unique_id=1020073423]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2901961, 0.20784314, 0.14117648, 1)
+theme_override_colors/font_pressed_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4vrl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cq3to")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aq2cf")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_l1sbf")
+text = "Armor Slot"
+
+[node name="AccesorrySlot" type="Button" parent="Panel/Margin/Columns/EquipmentColumn" unique_id=871173677]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2901961, 0.20784314, 0.14117648, 1)
+theme_override_colors/font_pressed_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_i4vrl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cq3to")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aq2cf")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_l1sbf")
+text = "Accessory Slot"
+
+[node name="StatsLabel" type="Label" parent="Panel/Margin/Columns/EquipmentColumn" unique_id=801331311]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23137255, 0.35686275, 0.64705884, 1)
+text = "Stats"
+
+[node name="InventoryColumn" type="VBoxContainer" parent="Panel/Margin/Columns" unique_id=768499323]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryTitle" type="Label" parent="Panel/Margin/Columns/InventoryColumn" unique_id=330878399]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23137255, 0.35686275, 0.64705884, 1)
+text = "Inventory"
+
+[node name="ItemList" type="ItemList" parent="Panel/Margin/Columns/InventoryColumn" unique_id=1217188293]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailsColumn" type="VBoxContainer" parent="Panel/Margin/Columns" unique_id=248237242]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemNameLabel" type="Label" parent="Panel/Margin/Columns/DetailsColumn" unique_id=909442965]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23137255, 0.35686275, 0.64705884, 1)
+text = "Item Name"
+
+[node name="DescLabel" type="Label" parent="Panel/Margin/Columns/DetailsColumn" unique_id=313760480]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.23137255, 0.35686275, 0.64705884, 1)
+text = "Description"
+autowrap_mode = 3
+
+[node name="ActionButton" type="Button" parent="Panel/Margin/Columns/DetailsColumn" unique_id=767936545]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_6l3un")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5b3fm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_70we1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tlgtq")
+text = "Equip"
+
+[node name="CloseButton" type="Button" parent="Panel/Margin/Columns/DetailsColumn" unique_id=676321293]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.57254905, 0.4862745, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_6l3un")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5b3fm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_70we1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tlgtq")
+text = "Close"

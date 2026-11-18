@@ -100,7 +100,7 @@ position = Vector2(12, 28)
 position = Vector2(954, 317.99997)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_ihyit")
-animation = &"hurt"
+animation = &"attack"
 
 [node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
 position = Vector2(-1, 0)
@@ -109,7 +109,10 @@ position = Vector2(-1, 0)
 position = Vector2(183, 346)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("20_q4cpj")
-animation = &"idle_right"
+animation = &"walk_right"
+
+[node name="ProjectileSpawn" type="Marker2D" parent="player" unique_id=1297068865]
+position = Vector2(280, 350)
 
 [node name="BackgroundUI" type="CanvasLayer" parent="." unique_id=873359073]
 layer = -1

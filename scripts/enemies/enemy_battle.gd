@@ -7,11 +7,45 @@ const ENEMY_SPRITE_FRAMES: Dictionary[String, SpriteFrames] = {
 	"boss": preload("res://resources/mobs/Minotaur.tres")
 }
 
+const MELEE_CHARACTERS := [1]  # 1 = Knight
+const DASH_SPEED := 600.0
+const PROJECTILE_RELEASE_FRAME := {2: 3, 3: 3, 4: 3}
+const PROJECTILE_SCENES := {
+	2: preload("res://scenes/battle/MageProjectile.tscn"),
+	3: preload("res://scenes/battle/MageProjectile.tscn"),  # Rogue placeholder
+	4: preload("res://scenes/battle/ArrowProjectile.tscn"),
+}
+
+# How far left of the enemy sprite's center the Knight stops / projectiles land.
+@export var melee_stop_offset := 200.0
+@export var projectile_hit_offset := 60.0
+
+# true = enemy dashes to the player, false = enemy fires a projectile
+const ENEMY_IS_MELEE := {
+	"goblin": true,
+	"orc": true,
+	"boss": false,
+}
+
+const ENEMY_PROJECTILE_SCENE := preload("res://scenes/battle/MageProjectile.tscn")  # placeholder
+const ENEMY_DASH_SPEED := 1000.0
+
+# How far right of the player the enemy stops / projectiles land
+@export var enemy_stop_offset := 200.0
+@export var enemy_projectile_hit_offset := 40.0
+# Where the projectile leaves the enemy, relative to its sprite
+@export var enemy_projectile_origin := Vector2(-80, -20)
+
+var enemy_attacking := false
+
+@onready var player_node: Node2D = $player
+@onready var projectile_spawn: Marker2D = $player/ProjectileSpawn
+
 var current_puzzle = null
 var enemy_hp := 20
 var enemy_damage := 10
 var enemy_type := ""
-
+var puzzle_turn := 0
 var player_max_hp: int:
 	get:
 		return PlayerData.current_max_hp
@@ -98,7 +132,6 @@ func _ready() -> void:
 	enemy_sprite.frame = 0
 	enemy_sprite.frame_progress = 0.0
 	if enemy_type in ["goblin", "orc"]:
-		enemy_sprite.position = Vector2(975, 270)
 		enemy_sprite.scale = Vector2(3, 3)
 	_play_enemy_idle()
 	player_sprite.play("idle_right")
@@ -164,20 +197,6 @@ func _play_enemy_idle() -> void:
 	enemy_sprite.stop()
 
 
-func _play_enemy_attack() -> void:
-	if (
-		enemy_sprite.sprite_frames == null
-		or not enemy_sprite.sprite_frames.has_animation("attack")
-	):
-		_play_enemy_idle()
-		return
-
-	enemy_sprite.play("attack")
-	await enemy_sprite.animation_finished
-	if not battle_ended:
-		_play_enemy_idle()
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F6 and not battle_ended:
@@ -236,8 +255,10 @@ func _on_attack_button_pressed() -> void:
 	player_ui.visible = false
 	turn_label.visible = false
 	actions.visible = false
-
+	puzzle_turn += 1
+	
 	current_puzzle = MEMORY_PUZZLE_SCENE.instantiate()
+	current_puzzle.turn_number = puzzle_turn
 	$CanvasLayer.add_child(current_puzzle)
 	current_puzzle.puzzle_finished.connect(_on_puzzle_finished)
 
@@ -256,16 +277,9 @@ func _on_puzzle_finished(success: bool) -> void:
 		if battle_ended:
 			return
 
-		player_sprite.play("attack_right")
-		await player_sprite.animation_finished
+		await player_attack()
 		if battle_ended:
 			return
-
-		player_sprite.play("idle_right")
-		if enemy_type == "boss":
-			damage_boss(30)
-		else:
-			await damage_boss(30)
 	else:
 		print("Puzzle failed! ", enemy_type.capitalize(), " takes no damage.")
 
@@ -357,16 +371,22 @@ func start_dodge_phase() -> void:
 
 
 func _on_dodge_player_hit() -> void:
-	if battle_ended:
+	print("1. hit received, attacking=", enemy_attacking, " ended=", battle_ended)
+	if battle_ended or enemy_attacking:
 		return
+	enemy_attacking = true
 
 	print(enemy_type.capitalize(), " attack hit the player!")
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
+	print("2. starting enemy_attack")
 	if battle_ended:
+		enemy_attacking = false
 		return
 
-	await _play_enemy_attack()
+	print("3. enemy_attack finished")
+	await enemy_attack()
 	if battle_ended:
+		enemy_attacking = false
 		return
 
 	player_hp = maxi(player_hp - enemy_damage, 0)
@@ -375,6 +395,8 @@ func _on_dodge_player_hit() -> void:
 		player_hit_effect()
 	else:
 		await player_hit_effect()
+
+	enemy_attacking = false
 
 	if player_hp <= 0:
 		player_defeated()
@@ -544,3 +566,167 @@ func load_selected_character() -> void:
 			player_sprite.sprite_frames = preload(
 				"res://resources/player characters/Mage.tres"
 			)
+
+
+func player_attack() -> void:
+	if PlayerData.selected_character in MELEE_CHARACTERS:
+		await _melee_attack()
+	else:
+		await _ranged_attack()
+
+
+func _melee_attack() -> void:
+	var start_pos := player_node.global_position
+	var target_pos := Vector2(
+		enemy_sprite.global_position.x - melee_stop_offset,
+		start_pos.y
+	)
+	var travel_time := start_pos.distance_to(target_pos) / DASH_SPEED
+
+	# Dash in
+	player_sprite.flip_h = false
+	player_sprite.play("walk_right")
+	var dash := create_tween()
+	dash.tween_property(player_node, "global_position", target_pos, travel_time)
+	await dash.finished
+	if not is_inside_tree():
+		return
+
+	# Strike
+	player_sprite.play("attack_right")
+	await player_sprite.animation_finished
+	if not is_inside_tree() or battle_ended:
+		return
+
+	# Not awaited, so the return dash isn't delayed. Lethal hits set
+	# battle_ended synchronously, which the caller checks afterwards.
+	damage_boss(30)
+
+	# Dash back (no walk_left, so flip walk_right)
+	player_sprite.flip_h = true
+	player_sprite.play("walk_right")
+	var back := create_tween()
+	back.tween_property(player_node, "global_position", start_pos, travel_time)
+	await back.finished
+	if not is_inside_tree():
+		return
+
+	player_sprite.flip_h = false
+	player_sprite.play("idle_right")
+
+
+func _ranged_attack() -> void:
+	var char_id: int = PlayerData.selected_character
+	var frames := player_sprite.sprite_frames
+	var release_frame: int = mini(
+		PROJECTILE_RELEASE_FRAME.get(char_id, 3),
+		frames.get_frame_count("attack_right") - 1
+	)
+
+	player_sprite.play("attack_right")
+	while (
+		player_sprite.animation == "attack_right"
+		and player_sprite.frame < release_frame
+	):
+		await player_sprite.frame_changed
+
+	var projectile = PROJECTILE_SCENES.get(
+		char_id, PROJECTILE_SCENES[2]
+	).instantiate()
+	add_child(projectile)
+	projectile.z_index = 10
+	projectile.global_position = projectile_spawn.global_position
+	projectile.launch(
+		enemy_sprite.global_position + Vector2(-projectile_hit_offset, 0)
+	)
+
+	await player_sprite.animation_finished
+	if is_inside_tree():
+		player_sprite.play("idle_right")
+
+	if is_instance_valid(projectile) and not projectile.has_hit:
+		await projectile.hit
+
+	if not is_inside_tree() or battle_ended:
+		return
+	damage_boss(30)
+
+
+func enemy_attack() -> void:
+	if ENEMY_IS_MELEE.get(enemy_type, false):
+		await _enemy_melee_attack()
+	else:
+		await _enemy_ranged_attack()
+
+
+func _play_enemy_anim(anim: StringName) -> bool:
+	var frames := enemy_sprite.sprite_frames
+	if frames != null and frames.has_animation(anim):
+		if anim == &"attack":
+			frames.set_animation_loop(anim, false)
+		enemy_sprite.play(anim)
+		return true
+	return false
+
+
+func _enemy_melee_attack() -> void:
+	var start_pos := enemy_sprite.global_position
+	var target_pos := Vector2(
+		player_node.global_position.x + enemy_stop_offset,
+		start_pos.y
+	)
+	var travel_time := start_pos.distance_to(target_pos) / ENEMY_DASH_SPEED
+
+	# Dash in
+	_play_enemy_anim(&"walk")
+	var dash := create_tween()
+	dash.tween_property(enemy_sprite, "global_position", target_pos, travel_time)
+	await dash.finished
+	if not is_inside_tree() or battle_ended:
+		return
+
+	# Strike (returns at the end of the animation, which is the moment of impact)
+	if _play_enemy_anim(&"attack"):
+		await enemy_sprite.animation_finished
+	if not is_inside_tree():
+		return
+
+	# Return dash runs in the background so damage isn't delayed
+	_enemy_return(start_pos, travel_time)
+
+
+func _enemy_return(start_pos: Vector2, travel_time: float) -> void:
+	_play_enemy_anim(&"walk")
+	var back := create_tween()
+	back.tween_property(enemy_sprite, "global_position", start_pos, travel_time)
+	await back.finished
+	if is_inside_tree() and not battle_ended:
+		_play_enemy_idle()
+
+
+func _enemy_ranged_attack() -> void:
+	var frames := enemy_sprite.sprite_frames
+	var has_attack := frames != null and frames.has_animation("attack")
+
+	if has_attack:
+		enemy_sprite.play("attack")
+		# Release the projectile halfway through the animation
+		var release_frame: int = frames.get_frame_count("attack") / 2
+		while enemy_sprite.animation == "attack" and enemy_sprite.frame < release_frame:
+			await enemy_sprite.frame_changed
+
+	var projectile = ENEMY_PROJECTILE_SCENE.instantiate()
+	add_child(projectile)
+	projectile.z_index = 10
+	projectile.global_position = enemy_sprite.global_position + enemy_projectile_origin
+	projectile.launch(
+		player_sprite.global_position + Vector2(enemy_projectile_hit_offset, 0)
+	)
+
+	if has_attack:
+		await enemy_sprite.animation_finished
+	if is_inside_tree() and not battle_ended:
+		_play_enemy_idle()
+
+	if is_instance_valid(projectile) and not projectile.has_hit:
+		await projectile.hit

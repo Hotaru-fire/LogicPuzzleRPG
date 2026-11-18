@@ -2,23 +2,32 @@ extends Control
 
 signal puzzle_finished(success: bool)
 
+# --- Difficulty settings (change these to tune it) ---
+const SEQUENCE_LENGTH_BY_TURN := [3, 4, 4, 4, 5]       # how many buttons light up (3 = easy, 4-5 = harder)
+const ALLOW_REPEATS := false      # true = the same button can light up twice
+const LIGHT_TIME := 0.6           # how long each button stays lit
+const GAP_TIME := 0.3             # pause between lit buttons
+const START_DELAY := 0.8          # pause before the sequence starts
+const LIGHT_COLOR := Color(2.0, 2.0, 0.6)  # glow color (values above 1 = bright)
+
 var puzzle_success := false
 var puzzle_active := false
+var turn_number := 1   # set by the battle script before the puzzle starts
+var accepting_input := false
 
 var symbols = ["★", "◆", "●", "▲", "■"]
-var sequence = []
-var player_answer = []
+var sequence: Array[int] = []        # button indexes, in the order they light up
+var player_answer: Array[int] = []
 
-var puzzle_time := 10.0
-var time_left := 10.0
+var puzzle_time := 15.0
+var time_left := 15.0
+
 # Puzzle analytics
 var puzzle_started_msec: int = 0
 var puzzle_elapsed_seconds: float = 0.0
 var puzzle_clear_recorded: bool = false
 
-@export var player_move_speed: float = 200.0
-
-var player_moving_right := false
+var buttons: Array[Button] = []
 
 @onready var symbol_labels = $PuzzleUI/SequenceDisplay/SymbolLabels
 
@@ -35,15 +44,15 @@ var player_moving_right := false
 @onready var time_label = $PuzzleUI/PanelContainer/MarginContainer/VBoxContainer/TimeLabel
 @onready var puzzle_timer: Timer = $PuzzleTimer
 
-@onready var player: Node2D = $player
-@onready var player_sprite: AnimatedSprite2D = $player/AnimatedSprite2D
-
 
 func _ready():
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$PuzzleUI.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$PlayerPanel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$PlayerPanel/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	buttons = [button1, button2, button3, button4, button5]
+	setup_buttons()
 
 	puzzle_timer.wait_time = puzzle_time
 	puzzle_timer.one_shot = true
@@ -54,155 +63,121 @@ func _ready():
 	start_puzzle()
 
 
-func _process(delta: float) -> void:
-	# Update the timer while the player is answering.
+func _process(_delta: float) -> void:
 	if puzzle_active and not puzzle_timer.is_stopped():
 		time_left = puzzle_timer.time_left
 		timer_bar.value = time_left
 		time_label.text = "Time: " + str(ceili(time_left))
 
-	# Move the player only after a correct answer.
-	if player_moving_right:
-		player.position.x += player_move_speed * delta
-
-		# Calculate the sprite's displayed width.
-		var sprite_width := 0.0
-
-		if player_sprite.sprite_frames != null:
-			if player_sprite.sprite_frames.has_animation(player_sprite.animation):
-				var texture = player_sprite.sprite_frames.get_frame_texture(
-					player_sprite.animation,
-					player_sprite.frame
-				)
-
-				if texture != null:
-					sprite_width = texture.get_size().x * absf(player_sprite.scale.x)
-
-		# Wait until the entire player has passed the right edge.
-		var right_edge := get_viewport_rect().size.x
-
-		if player.position.x > right_edge + sprite_width:
-			player_moving_right = false
-			player.visible = false
-
-			# Record analytics only once per successful puzzle.
-			if not puzzle_clear_recorded:
-				puzzle_clear_recorded = true
-
-				Session.record_puzzle_clear(
-					puzzle_elapsed_seconds
-				)
-
-				if Session.is_logged_in():
-					GameAPI.save_progress()
-
-			# Tell BossBattle the successful puzzle is finished.
-			puzzle_finished.emit(true)
-
 
 func start_puzzle():
 	puzzle_success = false
 	puzzle_active = true
-	player_moving_right = false
+	accepting_input = false
 	player_answer.clear()
 	puzzle_started_msec = 0
 	puzzle_elapsed_seconds = 0.0
 	puzzle_clear_recorded = false
-	result_label.text = ""
 
-	# Keep the position set in MemoryPuzzle.tscn.
-	player.visible = true
+	# The old "memorize the symbols" display is no longer used.
+	symbol_labels.text = ""
+	symbol_labels.visible = false
 
-	# Play the channel animation without moving.
-	if player_sprite.sprite_frames != null:
-		if player_sprite.sprite_frames.has_animation("channel"):
-			player_sprite.play("channel")
-		else:
-			push_warning("No animation named 'channel' was found.")
+	# Buttons are visible the whole time, but ignore input while lighting up.
+	answer_area.visible = true
+	time_label.text = "Time: " + str(int(puzzle_time))
+	timer_bar.max_value = puzzle_time
+	timer_bar.value = puzzle_time
 
 	create_random_sequence()
-	show_sequence()
-
-	answer_area.visible = false
-
-	# Display the sequence for two seconds.
-	await get_tree().create_timer(2.0).timeout
+	await play_sequence()
 
 	if not is_inside_tree() or not puzzle_active:
 		return
 
-	hide_sequence()
-	answer_area.visible = true
-
-	setup_buttons()
+	result_label.text = "Your turn!"
+	accepting_input = true
 	start_countdown()
 
 
+func get_sequence_length() -> int:
+	var i := clampi(turn_number - 1, 0, SEQUENCE_LENGTH_BY_TURN.size() - 1)
+	return mini(SEQUENCE_LENGTH_BY_TURN[i], buttons.size())
+
+
 func create_random_sequence():
-	var available_symbols = symbols.duplicate()
-	available_symbols.shuffle()
+	sequence.clear()
+	var length := get_sequence_length()
 
-	# Choose four different symbols.
-	sequence = available_symbols.slice(0, 4)
+	if ALLOW_REPEATS:
+		for i in length:
+			sequence.append(randi_range(0, buttons.size() - 1))
+	else:
+		var indexes: Array[int] = []
+		for i in buttons.size():
+			indexes.append(i)
+		indexes.shuffle()
+		sequence = indexes.slice(0, length)
 
-	print("New sequence: ", sequence)
-
-
-func show_sequence():
-	symbol_labels.text = " ".join(sequence)
-	symbol_labels.visible = true
-
-
-func hide_sequence():
-	symbol_labels.text = ""
-	symbol_labels.visible = false
+	print("Turn ", turn_number, " sequence (button indexes): ", sequence)
 
 
+func play_sequence():
+	result_label.text = "Turn %d: Watch..." % turn_number
+
+	await get_tree().create_timer(START_DELAY).timeout
+
+	for index in sequence:
+		if not is_inside_tree() or not puzzle_active:
+			return
+
+		light_button(index, LIGHT_TIME)
+		await get_tree().create_timer(LIGHT_TIME + GAP_TIME).timeout
+
+
+# Makes a button glow for a short time, then return to normal.
+func light_button(index: int, duration: float) -> void:
+	var button := buttons[index]
+	button.modulate = LIGHT_COLOR
+
+	await get_tree().create_timer(duration).timeout
+
+	if is_instance_valid(button):
+		button.modulate = Color.WHITE
+
+
+# Buttons keep the same symbol the whole puzzle, so the player can see which one lit up.
 func setup_buttons():
-	var buttons = [
-		button1,
-		button2,
-		button3,
-		button4,
-		button5
-	]
-
-	var randomized_symbols = symbols.duplicate()
-	randomized_symbols.shuffle()
-
-	for i in range(buttons.size()):
-		buttons[i].text = randomized_symbols[i]
-
-		# Remove existing connections to prevent duplicate callbacks.
-		for connection in buttons[i].pressed.get_connections():
-			buttons[i].pressed.disconnect(connection.callable)
-
-		buttons[i].pressed.connect(
-			_on_symbol_pressed.bind(randomized_symbols[i])
-		)
-
+	for i in buttons.size():
+		buttons[i].text = symbols[i]
 		buttons[i].disabled = false
+		buttons[i].modulate = Color.WHITE
+
+		if not buttons[i].pressed.is_connected(_on_button_pressed.bind(i)):
+			buttons[i].pressed.connect(_on_button_pressed.bind(i))
 
 
-func _on_symbol_pressed(symbol: String):
-	if not puzzle_active:
+func _on_button_pressed(index: int):
+	if not puzzle_active or not accepting_input:
 		return
 
 	if player_answer.size() >= sequence.size():
 		return
 
-	player_answer.append(symbol)
+	player_answer.append(index)
+	print("Player selected: ", symbols[index])
 
-	print("Player selected: ", symbol)
+	# Quick flash so the player sees their click register.
+	light_button(index, 0.2)
 
 	var current_index = player_answer.size() - 1
 
-	# Fail immediately if the selected symbol is incorrect.
+	# Fail immediately if the pressed button is incorrect.
 	if player_answer[current_index] != sequence[current_index]:
 		puzzle_failed()
 		return
 
-	# All symbols correct: start the player's movement.
+	# All buttons correct.
 	if player_answer.size() == sequence.size():
 		puzzle_solved()
 
@@ -212,30 +187,33 @@ func puzzle_solved():
 		return
 
 	puzzle_success = true
+	puzzle_active = false
+	accepting_input = false
+	puzzle_timer.stop()
 
 	puzzle_elapsed_seconds = (
 		float(Time.get_ticks_msec() - puzzle_started_msec) / 1000.0
 	)
-
 	print("PUZZLE ANSWER TIME: ", puzzle_elapsed_seconds, " seconds")
 
-	puzzle_active = false
-
-	puzzle_timer.stop()
-
 	result_label.text = "SUCCESS!"
-
-	print("Puzzle solved!")
-	print("Correct sequence: ", sequence)
-
 	disable_buttons()
 
-	# Keep the player visible and the channel animation running.
-	player.visible = true
-	player_moving_right = true
+	# Record analytics only once per successful puzzle.
+	if not puzzle_clear_recorded:
+		puzzle_clear_recorded = true
+		Session.record_puzzle_clear(puzzle_elapsed_seconds)
 
-	# Do not emit puzzle_finished(true) here.
-	# It will be emitted after the player leaves the screen.
+		if Session.is_logged_in():
+			GameAPI.save_progress()
+
+	# Brief pause so "SUCCESS!" is visible before the battle continues.
+	await get_tree().create_timer(0.8).timeout
+
+	if not is_inside_tree():
+		return
+
+	puzzle_finished.emit(true)
 
 
 func puzzle_failed():
@@ -244,13 +222,9 @@ func puzzle_failed():
 
 	puzzle_success = false
 	puzzle_active = false
+	accepting_input = false
 
 	puzzle_timer.stop()
-
-	# Hide the player immediately on failure.
-	player_moving_right = false
-	player.visible = false
-	player_sprite.stop()
 
 	time_left = 0.0
 	timer_bar.value = 0.0
@@ -263,16 +237,18 @@ func puzzle_failed():
 
 	disable_buttons()
 
-	# Notify BossBattle immediately about failure.
+	# Short pause so "FAILED!" is visible, then notify the battle.
+	await get_tree().create_timer(0.8).timeout
+
+	if not is_inside_tree():
+		return
+
 	puzzle_finished.emit(false)
 
 
 func disable_buttons():
-	button1.disabled = true
-	button2.disabled = true
-	button3.disabled = true
-	button4.disabled = true
-	button5.disabled = true
+	for b in buttons:
+		b.disabled = true
 
 
 func start_countdown():
@@ -284,7 +260,6 @@ func start_countdown():
 	timer_bar.value = time_left
 
 	time_label.text = "Time: " + str(int(time_left))
-	puzzle_started_msec = Time.get_ticks_msec()
 
 	puzzle_timer.start()
 
