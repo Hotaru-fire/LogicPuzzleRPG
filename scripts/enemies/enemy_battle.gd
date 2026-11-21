@@ -1,5 +1,9 @@
 extends Node2D
 
+@export var boss_battle_scale := Vector2(6, 6)
+@export var boss_battle_position := Vector2(924, 182)
+
+var _base_enemy_scale := Vector2.ONE
 const MEMORY_PUZZLE_SCENE = preload("res://scenes/battle/MemoryPuzzle.tscn")
 const ENEMY_SPRITE_FRAMES: Dictionary[String, SpriteFrames] = {
 	"goblin": preload("res://resources/mobs/Goblin.tres"),
@@ -17,7 +21,8 @@ const PROJECTILE_SCENES := {
 }
 
 # How far left of the enemy sprite's center the Knight stops / projectiles land.
-@export var melee_stop_offset := 200.0
+# Empty space left between the Knight and the enemy when he stops.
+@export var melee_gap := 20.0
 @export var projectile_hit_offset := 60.0
 
 # true = enemy dashes to the player, false = enemy fires a projectile
@@ -107,6 +112,7 @@ func _ready() -> void:
 		enemy_hp = 500
 	boss_hp_bar.max_value = enemy_hp
 	boss_hp_bar.value = enemy_hp
+	var display_enemy_name := BattleData.enemy_name.strip_edges()
 	match enemy_type:
 		"goblin":
 			enemy_name_label.text = "GOBLIN"
@@ -114,8 +120,8 @@ func _ready() -> void:
 			enemy_name_label.text = "ORC"
 		_:
 			enemy_name_label.text = (
-				BattleData.enemy_name.to_upper()
-				if not BattleData.enemy_name.is_empty()
+				display_enemy_name
+				if not display_enemy_name.is_empty()
 				else enemy_type.to_upper()
 			)
 	enemy_name_label.text += "  LV. %d" % clampi(
@@ -133,6 +139,18 @@ func _ready() -> void:
 	enemy_sprite.frame_progress = 0.0
 	if enemy_type in ["goblin", "orc"]:
 		enemy_sprite.scale = Vector2(3, 3)
+	_base_enemy_scale = enemy_sprite.scale
+	if enemy_type == "boss":
+		enemy_sprite.scale = (
+			BattleData.boss_battle_scale
+			if BattleData.boss_battle_scale != Vector2.ZERO
+			else boss_battle_scale
+		)
+		enemy_sprite.position = (
+			BattleData.boss_battle_position
+			if BattleData.boss_battle_position != Vector2.ZERO
+			else boss_battle_position
+		)
 	_play_enemy_idle()
 	player_sprite.play("idle_right")
 	dodge_popup.visible = false
@@ -198,11 +216,14 @@ func _play_enemy_idle() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F6 and not battle_ended:
-			print("CHEAT ACTIVATED: INSTANT KILL!")
-			await damage_boss(enemy_hp)
+	if not (event is InputEventKey) or not event.pressed:
+		return
 
+	# Instant-kill cheat (ignore key repeat)
+	if event.keycode == KEY_F6 and not event.echo and not battle_ended:
+		print("CHEAT ACTIVATED: INSTANT KILL!")
+		await damage_boss(enemy_hp)
+		return
 
 func update_turn_ui() -> void:
 	if battle_ended:
@@ -505,7 +526,8 @@ func boss_defeated() -> void:
 	attack_button.disabled = true
 	actions.visible = false
 
-	PlayerData.saved_boss_completed = true
+	if BattleData.boss_id == "minotaur":
+		PlayerData.saved_boss_completed = true
 	PlayerData.saved_hp = player_hp
 	PlayerData.saved_current_scene = BattleData.return_scene
 	PlayerData.saved_position = BattleData.return_position
@@ -577,8 +599,16 @@ func player_attack() -> void:
 
 func _melee_attack() -> void:
 	var start_pos := player_node.global_position
+
+	var enemy_left_edge := (
+		enemy_sprite.global_position.x - _sprite_half_width(enemy_sprite)
+	)
+	var player_half := _sprite_half_width(player_sprite)
+	# The sprite may sit off-center from the player node, so account for that.
+	var sprite_offset := player_sprite.global_position.x - player_node.global_position.x
+
 	var target_pos := Vector2(
-		enemy_sprite.global_position.x - melee_stop_offset,
+		enemy_left_edge - melee_gap - player_half - sprite_offset,
 		start_pos.y
 	)
 	var travel_time := start_pos.distance_to(target_pos) / DASH_SPEED
@@ -718,7 +748,10 @@ func _enemy_ranged_attack() -> void:
 	var projectile = ENEMY_PROJECTILE_SCENE.instantiate()
 	add_child(projectile)
 	projectile.z_index = 10
-	projectile.global_position = enemy_sprite.global_position + enemy_projectile_origin
+	projectile.global_position = (
+		enemy_sprite.global_position
+		+ enemy_projectile_origin * _enemy_scale_ratio()
+	)
 	projectile.launch(
 		player_sprite.global_position + Vector2(enemy_projectile_hit_offset, 0)
 	)
@@ -730,3 +763,17 @@ func _enemy_ranged_attack() -> void:
 
 	if is_instance_valid(projectile) and not projectile.has_hit:
 		await projectile.hit
+
+
+func _sprite_half_width(sprite: AnimatedSprite2D) -> float:
+	var frames := sprite.sprite_frames
+	if frames == null or not frames.has_animation(sprite.animation):
+		return 32.0
+	var tex := frames.get_frame_texture(sprite.animation, sprite.frame)
+	if tex == null:
+		return 32.0
+	return tex.get_size().x * absf(sprite.global_scale.x) / 2.0
+
+
+func _enemy_scale_ratio() -> Vector2:
+	return enemy_sprite.scale / _base_enemy_scale

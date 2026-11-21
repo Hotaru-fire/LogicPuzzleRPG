@@ -26,6 +26,7 @@ var _follower: Node2D
 var _following_player := false
 var _persistent_dialogue_layer: CanvasLayer
 var _scene_change_generation := 0
+var _follow_moving := false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -88,6 +89,7 @@ func _physics_process(_delta: float) -> void:
 	if _following_player:
 		if not is_instance_valid(player) or dialogue_open:
 			velocity = Vector2.ZERO
+			_follow_moving = false
 			play_idle_animation()
 			move_and_slide()
 			return
@@ -99,7 +101,16 @@ func _physics_process(_delta: float) -> void:
 		if follow_direction.length() > follow_distance:
 			global_position = player.global_position + Vector2(-32.0, 0.0)
 			follow_direction = player.global_position - global_position
-		if follow_direction.length() <= companion_follow_distance:
+
+		# Hysteresis: start walking at a larger gap than where she stops,
+		# so she doesn't flicker between walk and idle.
+		var dist := follow_direction.length()
+		if _follow_moving and dist <= companion_follow_distance:
+			_follow_moving = false
+		elif not _follow_moving and dist > companion_follow_distance + 24.0:
+			_follow_moving = true
+
+		if not _follow_moving:
 			velocity = Vector2.ZERO
 			play_idle_animation()
 		else:
@@ -200,6 +211,7 @@ func sync_with_player(follower: Node2D) -> void:
 		return
 
 	player = follower
+	z_index = player.z_index + 1
 	velocity = Vector2.ZERO
 	dialogue_open = false
 	global_position = player.global_position + Vector2(-32.0, 0.0)

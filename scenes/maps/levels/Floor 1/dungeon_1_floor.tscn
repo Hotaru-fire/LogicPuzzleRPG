@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cqmbpmsuvpr2w" path="res://scripts/dungeon/room_door.gd" id="3_room_door"]
 [ext_resource type="Texture2D" uid="uid://c6fdh07o370c2" path="res://assets/map tileset/dungeon/decorative.png" id="4_s2y6y"]
 [ext_resource type="Texture2D" uid="uid://c53tyc6i5ja5q" path="res://assets/map tileset/dungeon/torch_4.png" id="5_cr3nh"]
+[ext_resource type="Script" uid="uid://1iho3o0p7xn" path="res://scripts/dungeon/floor_exit.gd" id="7_55naf"]
 [ext_resource type="PackedScene" uid="uid://d2vqebc8wg7vg" path="res://scenes/dialogue/DialogueBox.tscn" id="7_nlybu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhv1u"]
@@ -1414,6 +1415,7 @@ text = "Press F to enter."
 visible = false
 position = Vector2(1073, 388)
 collision_layer = 0
+script = ExtResource("7_55naf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2Entrance2" unique_id=1939847624]
 shape = SubResource("RectangleShape2D_RoomDoor")

@@ -5,7 +5,6 @@ signal dialogue_finished
 const CHARS_PER_SECOND := 40.0
 
 @onready var panel: Control = %PanelContainer
-@onready var portrait: TextureRect = %Portrait
 @onready var name_label: Label = %NameLabel
 @onready var text_label = %DialogueText   # works for Label or RichTextLabel
 @onready var continue_label: Button = %ContinueButton
@@ -41,9 +40,6 @@ func start(lines: Array) -> void:
 func _show_line() -> void:
 	var line: Dictionary = _lines[_index]
 	name_label.text = line.get("speaker", "")
-
-	if line.has("portrait"):
-		portrait.texture = load(line["portrait"])
 
 	var text: String = line.get("text", "")
 	text_label.text = text

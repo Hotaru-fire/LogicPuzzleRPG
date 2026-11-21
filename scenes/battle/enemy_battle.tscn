@@ -94,19 +94,19 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_cofk1")
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=1251106604]
-position = Vector2(12, 28)
+position = Vector2(12, 27)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy" unique_id=147290924]
-position = Vector2(954, 317.99997)
+position = Vector2(954, 271.99994)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_ihyit")
 animation = &"attack"
 
 [node name="player" type="CharacterBody2D" parent="." unique_id=567510903]
-position = Vector2(-1, 0)
+position = Vector2(-1, -49)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player" unique_id=601845667]
-position = Vector2(183, 346)
+position = Vector2(183, 348)
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("20_q4cpj")
 animation = &"walk_right"
@@ -131,7 +131,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -200.0
+offset_top = -250.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
@@ -147,7 +147,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -199.0
+offset_bottom = -251.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_vdr03")
@@ -268,7 +268,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_54lvs")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_fre0k")
 text = "ATTACK"
 
-[node name="ItemButton" type="Button" parent="CanvasLayer/Actions/HBoxContainer" unique_id=772886799]
+[node name="HealButton" type="Button" parent="CanvasLayer/Actions/HBoxContainer" unique_id=772886799]
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9411765, 0.84313726, 0.77254903, 1)

@@ -9,6 +9,9 @@ const MAX_COUNTER := 4294967295
 const MAX_SIGNED_COUNTER := 2147483647
 const MAX_DUNGEON_LEVEL := 20
 const DUNGEON_STAT_INCREASE_PER_LEVEL := 0.1
+const PLAYER_MAX_HP_PER_LEVEL := 20
+const PLAYER_ATTACK_PER_LEVEL := 5
+const PLAYER_DEFENSE_PER_LEVEL := 2
 
 # Balance rewards here; level N requires 100 + 50 * (N - 1) EXP.
 const NORMAL_MOB_EXP := 25
@@ -442,16 +445,51 @@ func award_exp(amount: int) -> int:
 	player_exp += gained
 	print("EXP gained: ", gained, " (", player_exp, " toward next level)")
 
+	var levels_gained := 0
 	while level < MAX_COUNTER:
 		var requirement := exp_required_for_next_level(level)
 		if player_exp < requirement:
 			break
 		player_exp -= requirement
 		level += 1
+		_apply_player_level_up_stats()
+		levels_gained += 1
 		print("LEVEL UP! Current level: ", level)
+
+	if levels_gained > 0 and is_logged_in():
+		if not GameAPI.save_progress():
+			push_error("Could not start saving player stats after leveling up.")
 
 	stats_changed.emit()
 	return gained
+
+
+func _apply_player_level_up_stats() -> void:
+	var previous_max_hp := PlayerData.current_max_hp
+	var next_max_hp := mini(
+		previous_max_hp + PLAYER_MAX_HP_PER_LEVEL,
+		MAX_SIGNED_COUNTER
+	)
+	var max_hp_gain := next_max_hp - previous_max_hp
+	PlayerData.set_health(
+		mini(PlayerData.current_hp + max_hp_gain, next_max_hp),
+		next_max_hp
+	)
+	PlayerData.saved_attack = mini(
+		PlayerData.saved_attack + PLAYER_ATTACK_PER_LEVEL,
+		MAX_SIGNED_COUNTER
+	)
+	PlayerData.saved_defense = mini(
+		PlayerData.saved_defense + PLAYER_DEFENSE_PER_LEVEL,
+		MAX_SIGNED_COUNTER
+	)
+
+	var player := get_tree().get_first_node_in_group("player")
+	if player != null:
+		if "attack" in player:
+			player.set("attack", PlayerData.saved_attack)
+		if "defense" in player:
+			player.set("defense", PlayerData.saved_defense)
 
 
 func award_gold(amount: int) -> int:

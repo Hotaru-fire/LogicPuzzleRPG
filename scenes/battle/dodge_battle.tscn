@@ -36,12 +36,12 @@ grow_vertical = 2
 script = ExtResource("1_k5oij")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=743108150]
-custom_minimum_size = Vector2(0, 250)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -250.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ulmbm")

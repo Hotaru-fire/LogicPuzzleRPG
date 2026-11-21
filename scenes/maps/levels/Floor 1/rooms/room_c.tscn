@@ -49,6 +49,7 @@ position = Vector2(450, 300)
 position = Vector2(900, 325)
 
 [node name="ReturnToFloor1" type="Area2D" parent="." unique_id=32261819]
+visible = false
 position = Vector2(262, 85)
 collision_layer = 0
 script = ExtResource("2_room_door")

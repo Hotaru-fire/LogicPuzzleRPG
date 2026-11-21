@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://860trlwqrbom"]
 
-[ext_resource type="Script" uid="uid://e5wtfnrtmcit" path="res://scripts/enemies/boss/minotaur.gd" id="1_or4ms"]
+[ext_resource type="Script" uid="uid://e5wtfnrtmcit" path="res://scripts/enemies/boss/boss.gd" id="1_or4ms"]
 [ext_resource type="SpriteFrames" uid="uid://dr2yr0scrgn8y" path="res://resources/mobs/Minotaur.tres" id="2_h7qcg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1diop"]

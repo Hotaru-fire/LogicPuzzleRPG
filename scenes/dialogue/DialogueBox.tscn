@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://0h5dgbopxovh" path="res://scripts/Dialogue Box/dialogue_box.gd" id="1_qtmnj"]
 [ext_resource type="Texture2D" uid="uid://bptb4q66cfssx" path="res://assets/dialogue assets/ui/x4/panels/dialogue_box.png" id="1_wc62f"]
-[ext_resource type="Texture2D" uid="uid://dpuc0t1yfb7ux" path="res://assets/npc/full-npc/Emma(F).png" id="2_jj3q6"]
 [ext_resource type="FontFile" uid="uid://bari5mxb664nv" path="res://assets/fonts/Nunito/static/Nunito-Black.ttf" id="3_gbb6a"]
 [ext_resource type="FontFile" uid="uid://cyxjm36ca8e7y" path="res://assets/fonts/Nunito/Nunito-VariableFont_wght.ttf" id="3_jj3q6"]
 
@@ -60,17 +59,8 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=960044832]
 layout_mode = 2
-theme_override_constants/margin_left = 14
+theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 19
-
-[node name="Portrait" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1609293019]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("2_jj3q6")
-expand_mode = 5
-stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1442752309]
 layout_mode = 2

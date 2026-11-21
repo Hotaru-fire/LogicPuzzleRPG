@@ -2,10 +2,15 @@ extends Node
 
 @export var enemy_scene: PackedScene
 
+
 const MINOTAUR_SCENE = preload("res://scenes/enemies/minotaur.tscn")
 const PLAYER_SPAWN_GUARD = preload("res://scripts/dungeon/player_spawn_guard.gd")
 const DIALOGUE_BOX_SCENE = preload("res://scenes/dialogue/DialogueBox.tscn")
 const FIRST_FLOOR := "res://scenes/maps/levels/Floor 1/dungeon_1_floor.tscn"
+const BOSS_FLOOR := "res://scenes/maps/levels/Floor 2/dungeon_2_floor.tscn"
+const INTRO_WALK_SPEED := 80.0
+const PRIESTESS_APPROACH_SPEED := 40.0
+
 const MINOTAUR_TRIAL_IDS: Array[StringName] = [
 	&"room_a",
 	&"room_b",
@@ -25,6 +30,7 @@ var current_floor: Node2D
 var boss_spawn_point: Marker2D
 var enemy_spawn_points: Node
 var _loading_floor := false
+var _boss_intro_running := false
 
 @onready var floor_holder: Node2D = $"../CurrentFloor"
 @onready var dungeon_level_label: Label = $"../MinotaurTrialsLayer/DungeonLevelLabel"
@@ -180,6 +186,8 @@ func load_floor(
 	_loading_floor = false
 	if move_player:
 		_spawn_room_encounters()
+		if _is_boss_floor() and minotaur_spawned:
+			_play_boss_intro()
 
 
 func _sync_priestess_companion(player: Node2D) -> void:
@@ -234,8 +242,9 @@ func _spawn_room_encounters() -> void:
 		print("Boss already completed. No Minotaur will be spawned.")
 		return
 
-	if _all_trials_completed():
-		spawn_minotaur()
+	if _is_boss_floor():
+		if _all_trials_completed():
+			spawn_minotaur()
 		return
 
 	if enemy_spawn_points == null:
@@ -273,6 +282,9 @@ func _save_dungeon_entry_checkpoint() -> void:
 
 func spawn_minotaur() -> void:
 	if minotaur_spawned or PlayerData.saved_boss_completed:
+		return
+
+	if not _is_boss_floor():
 		return
 
 	if not _all_trials_completed():
@@ -542,3 +554,157 @@ func _refresh_floor_gate() -> void:
 	gate.collision_mask = 0
 	for collision_shape in gate.find_children("*", "CollisionShape2D", true, false):
 		collision_shape.set_deferred("disabled", true)
+
+
+func _is_boss_floor() -> bool:
+	return BattleData.current_floor_path == BOSS_FLOOR
+
+
+func _start_boss_battle(minotaur: Node) -> void:
+	var player := get_parent().get_node_or_null("player") as Node2D
+	if player == null or not is_instance_valid(minotaur):
+		return
+	_set_minotaur_passive(minotaur, false)
+	minotaur.call("start_battle", player)
+
+
+func _play_boss_intro() -> void:
+	if _boss_intro_running or not is_instance_valid(minotaur_instance):
+		return
+	var player := get_parent().get_node_or_null("player") as Node2D
+	if player == null:
+		push_error("Boss intro: player not found.")
+		return
+
+	_boss_intro_running = true
+	_set_player_controllable(player, false)
+	_set_minotaur_passive(minotaur_instance, true)
+
+	var sprite := player.get_node_or_null("Knight") as AnimatedSprite2D
+	var stop_pos := minotaur_instance.global_position + Vector2(-128, 0)
+	var direction := stop_pos - player.global_position
+	var facing := _direction_name(direction)
+
+	if sprite != null:
+		_play_player_anim(sprite, "walk_" + facing)
+
+	var walk_time := player.global_position.distance_to(stop_pos) / INTRO_WALK_SPEED
+
+	# Priestess: match the player's pace, then ease down to a slow walk
+	var priestess := get_tree().get_first_node_in_group("priestess_companion")
+	var priestess_speed := 0.0
+	var priestess_follow_distance := 0.0
+	if priestess != null:
+		priestess_speed = priestess.follow_speed
+		priestess_follow_distance = priestess.follow_distance
+		priestess.follow_speed = INTRO_WALK_SPEED
+		# Stops her from teleporting to the player when she lags behind
+		priestess.follow_distance = 600.0
+		var slow_tween := create_tween()
+		slow_tween.tween_property(
+			priestess, "follow_speed", PRIESTESS_APPROACH_SPEED, walk_time
+		)
+
+	var tween := create_tween()
+	tween.tween_property(player, "global_position", stop_pos, walk_time)
+	await tween.finished
+
+	# Player stops: face the Minotaur and idle immediately
+	var face_boss := _direction_name(
+		minotaur_instance.global_position - player.global_position
+	)
+	if player.has_method("face_toward"):
+		player.call("face_toward", minotaur_instance.global_position)
+	elif sprite != null:
+		_play_player_anim(sprite, "idle_" + face_boss)
+
+	# Let the Priestess catch up, then restore her values and face the boss
+	await get_tree().create_timer(1.0).timeout
+	if is_instance_valid(priestess):
+		priestess.follow_speed = priestess_speed
+		priestess.follow_distance = priestess_follow_distance
+		if priestess.has_method("face_toward"):
+			priestess.call("face_toward", minotaur_instance.global_position)
+
+	await _run_boss_dialogue()
+
+	_boss_intro_running = false
+	_set_player_controllable(player, true)
+	_start_boss_battle(minotaur_instance)
+
+
+func _direction_name(direction: Vector2) -> String:
+	if absf(direction.x) > absf(direction.y):
+		return "right" if direction.x > 0.0 else "left"
+	return "down" if direction.y > 0.0 else "up"
+
+
+func _play_player_anim(sprite: AnimatedSprite2D, anim: String) -> void:
+	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(anim):
+		sprite.play(anim)
+	else:
+		push_warning("Boss intro: player has no animation '%s'." % anim)
+
+
+func _set_player_controllable(player: Node, enabled: bool) -> void:
+	player.set_physics_process(enabled)
+	player.set_process_unhandled_input(enabled)
+
+
+func _set_minotaur_passive(minotaur: Node, passive: bool) -> void:
+	if is_instance_valid(minotaur) and minotaur.has_method("set_passive"):
+		minotaur.call("set_passive", passive)
+
+
+func _run_boss_dialogue() -> void:
+	var box := _get_boss_dialogue_box()
+	if (
+		box == null
+		or not box.has_method("start")
+		or not box.has_signal("dialogue_finished")
+	):
+		push_error("Boss intro: no usable DialogueBox found.")
+		await get_tree().create_timer(1.0).timeout
+		return
+
+	# This declaration was missing in the previous version.
+	var name_label := box.get_node_or_null("%NameLabel") as Label
+
+	var speaker := "Boss"
+	var lines: Array = []
+	if is_instance_valid(minotaur_instance):
+		speaker = str(minotaur_instance.get("boss_name"))
+		if minotaur_instance.has_method("get_intro_lines"):
+			for line in minotaur_instance.call("get_intro_lines"):
+				lines.append({"speaker": speaker, "text": line})
+
+	if lines.is_empty():
+		push_warning("Boss intro: no intro lines found; skipping dialogue.")
+		return
+
+	if name_label != null:
+		name_label.text = speaker
+
+	box.call("start", lines)
+	await Signal(box, "dialogue_finished")
+
+
+func _get_boss_dialogue_box() -> Control:
+	var companion := get_tree().get_first_node_in_group("priestess_companion")
+	if companion != null:
+		var box = companion.get("dialogue_box")
+		if is_instance_valid(box):
+			return box as Control
+	return null
+
+
+func go_to_boss_floor() -> void:
+	if _loading_floor:
+		return
+	if not _all_trials_completed():
+		print("Boss floor locked: finish all trials first.")
+		return
+	if not ResourceLoader.exists(BOSS_FLOOR):
+		push_error("Boss floor scene not found: " + BOSS_FLOOR)
+		return
+	load_floor(BOSS_FLOOR)

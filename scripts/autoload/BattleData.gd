@@ -3,6 +3,9 @@ extends Node
 var enemy = null
 var enemy_name := ""
 var enemy_type := ""
+var boss_id := ""
+var boss_battle_scale := Vector2.ZERO
+var boss_battle_position := Vector2.ZERO
 var enemy_level := 1
 var enemy_sprite_frames: SpriteFrames
 var enemy_sprite_frames_type := ""

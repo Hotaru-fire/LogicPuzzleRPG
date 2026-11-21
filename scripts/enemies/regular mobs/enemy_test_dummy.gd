@@ -254,6 +254,9 @@ func start_battle():
 	BattleData.enemy_type = battle_enemy_type.strip_edges().to_lower()
 	BattleData.enemy_sprite_frames = animated_sprite.sprite_frames
 	BattleData.enemy_sprite_frames_type = BattleData.enemy_type
+	BattleData.boss_id = ""
+	BattleData.boss_battle_scale = Vector2.ZERO
+	BattleData.boss_battle_position = Vector2.ZERO
 	BattleData.enemy_is_dungeon = (
 		get_tree().get_first_node_in_group("dungeon_manager") != null
 	)
